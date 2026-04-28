@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Football Edge Lab</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true">
+            <span></span>
+          </div>
+          <div>
+            <h1>Football Edge Lab</h1>
+            <p>Football prediction and analysis</p>
+          </div>
+        </div>
+        <div class="header-meta">
+          <span class="live-dot" aria-hidden="true"></span>
+          <span id="headerMatchCount">0 matches</span>
+        </div>
+      </header>
+
+      <nav class="top-nav" aria-label="Match filters">
+        <button class="nav-tab active" type="button" data-view="today">Today</button>
+        <button class="nav-tab" type="button" data-view="live">Live</button>
+        <button class="nav-tab" type="button" data-view="upcoming">Upcoming</button>
+        <button class="nav-tab" type="button" data-view="finished">Finished</button>
+      </nav>
+
+      <section id="homeView" class="home-view">
+        <div class="board-toolbar">
+          <div class="date-control">
+            <button id="prevDateButton" class="icon-button" type="button" aria-label="Previous day">&lt;</button>
+            <input id="dateInput" type="date" aria-label="Select date" />
+            <button id="nextDateButton" class="icon-button" type="button" aria-label="Next day">&gt;</button>
+          </div>
+          <label class="search-field" for="searchInput">
+            <span aria-hidden="true">Search</span>
+            <input id="searchInput" type="search" placeholder="Search team or league" />
+          </label>
+        </div>
+
+        <section class="board-layout">
+          <div class="fixture-board">
+            <div id="loadingState" class="loading-list" hidden>
+              <div class="skeleton-card"></div>
+              <div class="skeleton-card"></div>
+              <div class="skeleton-card"></div>
+            </div>
+
+            <div id="emptyState" class="empty-state" hidden>
+              <strong>No matches found</strong>
+              <span>Try another date, view, or search.</span>
+            </div>
+
+            <div id="matchGroups" class="match-groups"></div>
+          </div>
+
+          <aside class="side-panel">
+            <section class="mini-panel">
+              <span class="section-kicker">Model</span>
+              <h2>Prediction engine</h2>
+              <div class="model-list">
+                <span>Last 5 form</span>
+                <span>Goals for and against</span>
+                <span>Clean sheets</span>
+                <span>Head-to-head</span>
+                <span>Home advantage</span>
+              </div>
+            </section>
+
+            <section class="mini-panel accent-panel">
+              <span class="section-kicker">Fixture snapshot</span>
+              <p id="fixtureSourceText">Schedule data is a local snapshot updated on 28 Apr 2026. Connect a live API later for automatic changes.</p>
+            </section>
+
+            <section class="mini-panel data-source-panel">
+              <span class="section-kicker">Data source</span>
+              <h2>Refresh fixtures</h2>
+
+              <label class="source-label" for="fixtureJsonFile">Local JSON</label>
+              <input id="fixtureJsonFile" type="file" accept=".json,application/json" />
+
+              <label class="source-label" for="fixtureUrlInput">Remote JSON URL</label>
+              <div class="source-url-row">
+                <input id="fixtureUrlInput" type="url" placeholder="https://example.com/fixtures.json" />
+                <button id="loadFixtureUrlButton" class="source-button" type="button">Load</button>
+              </div>
+
+              <div class="source-actions">
+                <button id="exportFixturesButton" class="source-button" type="button">Export current</button>
+                <button id="resetFixturesButton" class="source-button muted" type="button">Reset</button>
+              </div>
+
+              <p class="source-note">JSON imports stay in this browser. Remote URLs must allow browser access.</p>
+              <p id="fixtureImportStatus" class="source-status" aria-live="polite"></p>
+            </section>
+
+            <section class="mini-panel accent-panel">
+              <span class="section-kicker">Analysis only</span>
+              <p>Predictions are for analysis only. No result is guaranteed.</p>
+            </section>
+          </aside>
+        </section>
+      </section>
+
+      <section id="detailView" class="detail-view" hidden>
+        <div class="detail-toolbar">
+          <button id="backButton" class="back-button" type="button">Back to matches</button>
+          <span id="detailStatus" class="status-chip upcoming">Upcoming</span>
+        </div>
+
+        <section class="detail-hero">
+          <div>
+            <span id="detailLeague" class="section-kicker">Premier League</span>
+            <h2 id="detailTitle">Manchester United vs Chelsea</h2>
+            <p id="detailMeta">Today, 20:00 - Old Trafford</p>
+          </div>
+          <div class="score-prediction">
+            <span>Predicted score</span>
+            <strong id="predictedScore">1-1</strong>
+          </div>
+        </section>
+
+        <nav class="detail-tabs" aria-label="Match detail sections">
+          <button class="detail-tab active" type="button" data-tab="overview">Overview</button>
+          <button class="detail-tab" type="button" data-tab="form">Form</button>
+          <button class="detail-tab" type="button" data-tab="stats">Stats</button>
+          <button class="detail-tab" type="button" data-tab="h2h">H2H</button>
+        </nav>
+
+        <section id="overviewTab" class="detail-tab-page active">
+          <div class="detail-grid">
+            <section class="panel-card probability-panel">
+              <div class="panel-title">
+                <span>Winning probability</span>
+                <strong id="confidenceLevel">Medium confidence</strong>
+              </div>
+              <div id="probabilityCards" class="probability-cards"></div>
+            </section>
+
+            <section class="panel-card">
+              <div class="panel-title">
+                <span>Match overview</span>
+              </div>
+              <div id="overviewRows" class="stat-rows"></div>
+            </section>
+          </div>
+
+          <section class="panel-card">
+            <div class="panel-title">
+              <span>Extra predictions</span>
+              <strong id="mostLikelyResult">Home win</strong>
+            </div>
+            <div id="extraPredictions" class="market-grid"></div>
+          </section>
+        </section>
+
+        <section id="formTab" class="detail-tab-page">
+          <div id="formGrid" class="two-column-grid"></div>
+        </section>
+
+        <section id="statsTab" class="detail-tab-page">
+          <div class="two-column-grid">
+            <section class="panel-card">
+              <div class="panel-title">
+                <span>Attacking stats</span>
+              </div>
+              <div id="attackingStats" class="comparison-table"></div>
+            </section>
+            <section class="panel-card">
+              <div class="panel-title">
+                <span>Defensive stats</span>
+              </div>
+              <div id="defensiveStats" class="comparison-table"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="h2hTab" class="detail-tab-page">
+          <section class="panel-card">
+            <div class="panel-title">
+              <span>Head-to-head</span>
+              <strong id="h2hSummary">Recent meetings</strong>
+            </div>
+            <div id="h2hRows" class="h2h-list"></div>
+          </section>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
