@@ -10,8 +10,8 @@ if (!token) {
   throw new Error("Missing FOOTBALL_DATA_TOKEN secret.");
 }
 
-const from = formatDateKey(addDays(new Date(), -3));
-const to = formatDateKey(addDays(new Date(), 30));
+const from = formatDateKey(addDays(new Date(), -1));
+const to = formatDateKey(addDays(new Date(), 8));
 const params = new URLSearchParams({
   competitions: COMPETITIONS.join(","),
   dateFrom: from,
@@ -85,6 +85,8 @@ function convertMatch(match, index, teams) {
     time: hasKickoff ? formatClockTime(kickoff) : "00:00",
     homeTeamId: homeTeam.id,
     awayTeamId: awayTeam.id,
+    homeTeam: homeTeam.name,
+    awayTeam: awayTeam.name,
     status: normalizeStatus(match.status),
     venue: match.venue || "",
     stage: formatStage(match),
