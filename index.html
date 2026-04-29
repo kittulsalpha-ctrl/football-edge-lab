@@ -92,18 +92,14 @@
                 <button id="loadFixtureUrlButton" class="source-button" type="button">Load</button>
               </div>
 
-              <label class="source-label" for="footballDataTokenInput">football-data.org token</label>
-              <div class="source-url-row live-api-row">
-                <input id="footballDataTokenInput" type="password" autocomplete="off" placeholder="Free API token" />
-                <button id="refreshFootballDataButton" class="source-button" type="button">Refresh</button>
-              </div>
-
+              <label class="source-label" for="loadLiveFeedButton">Live feed</label>
               <div class="source-actions">
+                <button id="loadLiveFeedButton" class="source-button" type="button">Load live feed</button>
                 <button id="exportFixturesButton" class="source-button" type="button">Export current</button>
                 <button id="resetFixturesButton" class="source-button muted" type="button">Reset</button>
               </div>
 
-              <p class="source-note">Live fixtures use the free football-data.org API. Tokens stay in this browser.</p>
+              <p class="source-note">Live fixtures load from a GitHub-hosted JSON file refreshed by GitHub Actions.</p>
               <p id="fixtureImportStatus" class="source-status" aria-live="polite"></p>
             </section>
 
