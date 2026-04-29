@@ -12,8 +12,8 @@ Open `index.html` in a browser. No install step is required.
 - Date selector and team or league search.
 - Compact fixture cards with home win, draw, and away win prediction percentages.
 - Match detail pages with overview, winning probability, last five form, attacking stats, defensive stats, head-to-head, and extra goal-market predictions.
-- Fixture snapshot updated on 28 Apr 2026 with corrected upcoming EPL and UEFA Champions League examples. Connect a live API later for automatic fixture updates.
-- Local JSON import, remote JSON URL import, browser storage, export current fixtures, and reset to the built-in snapshot.
+- Built-in demo fixture snapshot for offline use.
+- football-data.org live fixture refresh, local JSON import, remote JSON URL import, browser storage, export current fixtures, and reset to the built-in snapshot.
 
 ## Service functions
 
@@ -30,16 +30,20 @@ importFixtureData(payload)
 resetFixtureData()
 getFixtureDataExport()
 loadFixtureDataFromUrl(url)
+refreshFootballDataFixtures()
 ```
 
 ## Refresh fixtures without editing code
 
 Use the Data source panel in the app:
 
+- Enter a free football-data.org API token and click Refresh. The app loads real fixtures and scores for Premier League, La Liga, Serie A, Bundesliga, and UEFA Champions League.
 - Import a local `.json` file. This works even when opening `index.html` directly from `file://`.
 - Load a remote JSON URL. This works when the URL allows browser access with CORS.
 - Export the current fixture set as JSON.
 - Reset to the built-in fixture snapshot.
+
+The football-data.org token is stored only in the current browser's local storage. Do not commit API tokens to the repository.
 
 See `fixtures.sample.json` for the supported shape. The simplest format is:
 
