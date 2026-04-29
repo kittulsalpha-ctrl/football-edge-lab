@@ -1,8 +1,9 @@
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 
 const API_BASE = "https://api.football-data.org/v4";
 const COMPETITIONS = ["PL", "PD", "SA", "BL1", "CL"];
 const OUT_FILE = "fixtures.live.json";
+const DISPLAY_TIME_ZONE = process.env.FIXTURE_TIME_ZONE || "Asia/Kolkata";
 
 const token = process.env.FOOTBALL_DATA_TOKEN;
 
@@ -36,19 +37,31 @@ if (!response.ok) {
   throw new Error(`football-data.org request failed: ${message}`);
 }
 
-const converted = convertFootballData(payload, from, to);
+const existingFeed = await loadExistingFeed();
+const converted = convertFootballData(payload, from, to, existingFeed);
 await writeFile(OUT_FILE, `${JSON.stringify(converted, null, 2)}\n`);
 console.log(`Wrote ${converted.matches.length} fixtures to ${OUT_FILE}.`);
 
-function convertFootballData(payload, fromDate, toDate) {
+async function loadExistingFeed() {
+  try {
+    return JSON.parse(await readFile(OUT_FILE, "utf8"));
+  } catch {
+    return null;
+  }
+}
+
+function convertFootballData(payload, fromDate, toDate, existingFeed) {
   const apiMatches = Array.isArray(payload?.matches) ? payload.matches : [];
   const teams = new Map();
+  const existingTeams = new Map((existingFeed?.teams || []).map((team) => [team.id, team]));
   const matches = apiMatches
     .map((match, index) => convertMatch(match, index, teams))
     .filter(Boolean)
-    .sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
+    .sort(sortMatches);
 
-  if (!matches.length) {
+  const mergedMatches = mergeRecentFinishedMatches(matches, existingFeed?.matches || [], fromDate, teams, existingTeams);
+
+  if (!mergedMatches.length) {
     throw new Error("football-data.org returned no supported fixtures for the configured date range.");
   }
 
@@ -56,11 +69,28 @@ function convertFootballData(payload, fromDate, toDate) {
     meta: {
       source: "football-data.org live feed",
       updatedAt: new Date().toISOString().slice(0, 10),
-      note: `Real fixtures and scores for ${fromDate} to ${toDate}.`
+      note: `Real fixtures and scores for ${fromDate} to ${toDate}. Times shown in ${DISPLAY_TIME_ZONE}.`
     },
     teams: [...teams.values()].sort((a, b) => a.name.localeCompare(b.name)),
-    matches
+    matches: mergedMatches
   };
+}
+
+function mergeRecentFinishedMatches(newMatches, oldMatches, fromDate, teams, existingTeams) {
+  const merged = new Map(newMatches.map((match) => [match.id, match]));
+
+  oldMatches
+    .filter((match) => match.status === "finished" && match.date >= fromDate)
+    .forEach((match) => {
+      if (merged.has(match.id)) return;
+      merged.set(match.id, match);
+      [match.homeTeamId, match.awayTeamId].forEach((teamId) => {
+        const team = existingTeams.get(teamId);
+        if (team) teams.set(team.id, team);
+      });
+    });
+
+  return [...merged.values()].sort(sortMatches);
 }
 
 function convertMatch(match, index, teams) {
@@ -81,8 +111,8 @@ function convertMatch(match, index, teams) {
   return {
     id,
     league,
-    date: hasKickoff ? formatDateKey(kickoff) : formatDateKey(new Date()),
-    time: hasKickoff ? formatClockTime(kickoff) : "00:00",
+    date: hasKickoff ? formatDateInTimeZone(kickoff) : formatDateInTimeZone(new Date()),
+    time: hasKickoff ? formatClockTimeInTimeZone(kickoff) : "00:00",
     homeTeamId: homeTeam.id,
     awayTeamId: awayTeam.id,
     homeTeam: homeTeam.name,
@@ -169,12 +199,42 @@ function formatDateKey(date) {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 }
 
-function formatClockTime(date) {
-  return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
+function formatDateInTimeZone(date) {
+  const parts = getDateTimeParts(date);
+  return `${parts.year}-${parts.month}-${parts.day}`;
+}
+
+function formatClockTimeInTimeZone(date) {
+  const parts = getDateTimeParts(date);
+  return `${parts.hour}:${parts.minute}`;
+}
+
+function getDateTimeParts(date) {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: DISPLAY_TIME_ZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return {
+    year: values.year,
+    month: values.month,
+    day: values.day,
+    hour: values.hour === "24" ? "00" : values.hour,
+    minute: values.minute
+  };
 }
 
 function addDays(date, days) {
   const copy = new Date(date);
   copy.setDate(copy.getDate() + days);
   return copy;
+}
+
+function sortMatches(a, b) {
+  return a.date.localeCompare(b.date) || a.time.localeCompare(b.time);
 }
