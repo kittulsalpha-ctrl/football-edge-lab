@@ -1,4 +1,4 @@
-const FIXTURE_STORAGE_KEY = "football-edge-lab-fixture-data";
+const FIXTURE_STORAGE_KEY = "goaliq-fixture-data";
 const LIVE_FIXTURE_FEED_URL = "fixtures.live.json";
 
 const leagueProfiles = {
@@ -520,11 +520,14 @@ const selectors = {
   detailLeague: document.querySelector("#detailLeague"),
   detailTitle: document.querySelector("#detailTitle"),
   detailMeta: document.querySelector("#detailMeta"),
+  scorePredictionLabel: document.querySelector("#scorePredictionLabel"),
   predictedScore: document.querySelector("#predictedScore"),
+  probabilityPanelTitle: document.querySelector("#probabilityPanelTitle"),
   confidenceLevel: document.querySelector("#confidenceLevel"),
   probabilityCards: document.querySelector("#probabilityCards"),
   overviewRows: document.querySelector("#overviewRows"),
   extraPredictions: document.querySelector("#extraPredictions"),
+  extraPredictionsTitle: document.querySelector("#extraPredictionsTitle"),
   mostLikelyResult: document.querySelector("#mostLikelyResult"),
   formGrid: document.querySelector("#formGrid"),
   attackingStats: document.querySelector("#attackingStats"),
@@ -662,6 +665,13 @@ function getUpcomingMatches() {
   return matches
     .filter((match) => match.status === "upcoming" && match.date >= state.selectedDate)
     .sort(sortMatches);
+}
+
+function getFinishedMatches() {
+  const finishedMatches = matches.filter((match) => match.status === "finished");
+  const finishedUpToSelectedDate = finishedMatches.filter((match) => match.date <= state.selectedDate);
+  const visibleFinished = finishedUpToSelectedDate.length ? finishedUpToSelectedDate : finishedMatches;
+  return visibleFinished.sort(sortMatchesReverse);
 }
 
 function getMatchDetails(matchId) {
@@ -1238,11 +1248,7 @@ function renderBoard() {
 function getMatchesForActiveView() {
   if (state.activeView === "live") return getLiveMatches();
   if (state.activeView === "upcoming") return getUpcomingMatches();
-  if (state.activeView === "finished") {
-    return matches
-      .filter((match) => match.status === "finished" && match.date === state.selectedDate)
-      .sort(sortMatches);
-  }
+  if (state.activeView === "finished") return getFinishedMatches();
   return getMatchesByDate(state.selectedDate);
 }
 
@@ -1354,13 +1360,18 @@ function renderDetail() {
   if (!details) return;
 
   const prediction = calculatePrediction(details);
+  const scoreDisplay = getDetailScoreDisplay(details, prediction);
+  const isFinished = details.status === "finished";
   selectors.detailStatus.textContent = statusLabels[details.status];
   selectors.detailStatus.className = `status-chip ${details.status}`;
   selectors.detailLeague.textContent = details.leagueProfile.name;
   selectors.detailTitle.textContent = `${details.homeTeam.name} vs ${details.awayTeam.name}`;
   selectors.detailMeta.textContent = `${formatLongDate(details.date)} - ${details.time} - ${details.stage ? `${details.stage} - ` : ""}${details.venue}`;
-  selectors.predictedScore.textContent = prediction.predictedScore;
-  selectors.confidenceLevel.textContent = `${prediction.confidence} confidence`;
+  selectors.scorePredictionLabel.textContent = scoreDisplay.label;
+  selectors.predictedScore.textContent = scoreDisplay.value;
+  selectors.probabilityPanelTitle.textContent = isFinished ? "Pre-match probability" : "Winning probability";
+  selectors.confidenceLevel.textContent = isFinished ? "Finished result" : `${prediction.confidence} confidence`;
+  selectors.extraPredictionsTitle.textContent = isFinished ? "Archived predictions" : "Extra predictions";
   selectors.mostLikelyResult.textContent = prediction.mostLikelyResult;
 
   selectors.probabilityCards.innerHTML = [
@@ -1378,6 +1389,7 @@ function renderDetail() {
     ["Kickoff", details.time],
     ["Venue", details.venue],
     ["Status", statusLabels[details.status]],
+    ...(details.score ? [[scoreDisplay.label, `${details.homeTeam.shortName} ${details.score.home} - ${details.score.away} ${details.awayTeam.shortName}`]] : []),
     ["Expected goals", `${formatNumber(prediction.expectedGoals.home)} - ${formatNumber(prediction.expectedGoals.away)}`]
   ]);
 
@@ -1415,6 +1427,20 @@ function renderDetail() {
   selectors.h2hSummary.textContent = `${prediction.h2h.homeWins}-${prediction.h2h.draws}-${prediction.h2h.awayWins}`;
   selectors.h2hRows.innerHTML = renderH2H(details, prediction.h2h);
   renderDetailTabState();
+}
+
+function getDetailScoreDisplay(match, prediction) {
+  if (match.score) {
+    return {
+      label: match.status === "finished" ? "Final score" : "Current score",
+      value: `${match.score.home}-${match.score.away}`
+    };
+  }
+
+  return {
+    label: "Predicted score",
+    value: prediction.predictedScore
+  };
 }
 
 function renderProbabilityCard(label, probability) {
@@ -1665,7 +1691,7 @@ function exportFixtureJson() {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = `football-edge-fixtures-${formatDateKey(new Date())}.json`;
+  link.download = `goaliq-fixtures-${formatDateKey(new Date())}.json`;
   document.body.appendChild(link);
   link.click();
   link.remove();
@@ -1777,6 +1803,10 @@ function sortMatches(a, b) {
   return a.date.localeCompare(b.date) || a.time.localeCompare(b.time);
 }
 
+function sortMatchesReverse(a, b) {
+  return b.date.localeCompare(a.date) || b.time.localeCompare(a.time);
+}
+
 function pairKey(firstId, secondId) {
   return [firstId, secondId].sort().join("_");
 }
@@ -1859,10 +1889,11 @@ function escapeHtml(value) {
     .replace(/'/g, "&#039;");
 }
 
-window.FootballEdgeServices = {
+window.GoalIQServices = {
   getMatchesByDate,
   getLiveMatches,
   getUpcomingMatches,
+  getFinishedMatches,
   getMatchDetails,
   getTeamLastFiveMatches,
   calculatePrediction,
@@ -1872,5 +1903,6 @@ window.FootballEdgeServices = {
   loadFixtureDataFromUrl,
   loadLiveFixtureFeed
 };
+window.FootballEdgeServices = window.GoalIQServices;
 
 init();
