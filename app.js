@@ -1,7 +1,5 @@
 const FIXTURE_STORAGE_KEY = "football-edge-lab-fixture-data";
-const FOOTBALL_DATA_TOKEN_KEY = "football-edge-lab-football-data-token";
-const FOOTBALL_DATA_API_BASE = "https://api.football-data.org/v4";
-const FOOTBALL_DATA_COMPETITIONS = ["PL", "PD", "SA", "BL1", "CL"];
+const LIVE_FIXTURE_FEED_URL = "fixtures.live.json";
 
 const leagueProfiles = {
   EPL: {
@@ -509,8 +507,7 @@ const selectors = {
   fixtureJsonFile: document.querySelector("#fixtureJsonFile"),
   fixtureUrlInput: document.querySelector("#fixtureUrlInput"),
   loadFixtureUrlButton: document.querySelector("#loadFixtureUrlButton"),
-  footballDataTokenInput: document.querySelector("#footballDataTokenInput"),
-  refreshFootballDataButton: document.querySelector("#refreshFootballDataButton"),
+  loadLiveFeedButton: document.querySelector("#loadLiveFeedButton"),
   exportFixturesButton: document.querySelector("#exportFixturesButton"),
   resetFixturesButton: document.querySelector("#resetFixturesButton"),
   fixtureImportStatus: document.querySelector("#fixtureImportStatus"),
@@ -737,151 +734,28 @@ async function loadFixtureDataFromUrl(url) {
   return importFixtureData(payload, { source: cleanUrl });
 }
 
-async function refreshFootballDataFixtures() {
-  const token = selectors.footballDataTokenInput.value.trim();
-  if (!token) {
-    throw new Error("Enter your free football-data.org API token first.");
-  }
-
-  localStorage.setItem(FOOTBALL_DATA_TOKEN_KEY, token);
-  const from = formatDateKey(addDays(parseDateKey(state.selectedDate), -2));
-  const to = formatDateKey(addDays(parseDateKey(state.selectedDate), 21));
-  const params = new URLSearchParams({
-    competitions: FOOTBALL_DATA_COMPETITIONS.join(","),
-    dateFrom: from,
-    dateTo: to
-  });
-  const response = await fetch(`${FOOTBALL_DATA_API_BASE}/matches?${params.toString()}`, {
-    cache: "no-store",
-    headers: {
-      "X-Auth-Token": token
-    }
-  });
-
-  let payload = null;
-  try {
-    payload = await response.json();
-  } catch {
-    payload = null;
-  }
-
+async function loadLiveFixtureFeed(options = {}) {
+  const response = await fetch(`${LIVE_FIXTURE_FEED_URL}?v=${Date.now()}`, { cache: "no-store" });
   if (!response.ok) {
-    const message = payload?.message || payload?.error || `HTTP ${response.status}`;
-    throw new Error(`football-data.org refresh failed: ${message}`);
+    if (response.status === 404) {
+      throw new Error("Live feed is not published yet. Add the GitHub secret and run the fixture updater.");
+    }
+    throw new Error(`Could not load live feed: HTTP ${response.status}`);
   }
-
-  const fixturePayload = footballDataToFixturePayload(payload, from, to);
-  const imported = importFixtureData(fixturePayload, { source: "football-data.org" });
-  setImportStatus(`Loaded ${imported.matches.length} live fixtures from football-data.org.`);
+  const payload = await response.json();
+  const imported = importFixtureData(payload, {
+    source: LIVE_FIXTURE_FEED_URL,
+    persist: options.persist
+  });
+  if (!options.silent) setImportStatus(`Loaded ${imported.matches.length} fixtures from the live feed.`);
   return imported;
-}
-
-function footballDataToFixturePayload(payload, from, to) {
-  const apiMatches = Array.isArray(payload?.matches) ? payload.matches : [];
-  if (!apiMatches.length) {
-    throw new Error("football-data.org returned no fixtures for the selected date range.");
-  }
-
-  const importedTeams = new Map();
-  const importedMatches = apiMatches
-    .map((match, index) => footballDataMatchToFixture(match, index, importedTeams))
-    .filter(Boolean);
-
-  if (!importedMatches.length) {
-    throw new Error("football-data.org returned fixtures, but none matched the supported competitions.");
-  }
-
-  return {
-    meta: {
-      source: "football-data.org live API",
-      updatedAt: new Date().toISOString().slice(0, 10),
-      note: `Real fixtures and scores for ${from} to ${to}.`
-    },
-    teams: [...importedTeams.values()],
-    matches: importedMatches
-  };
-}
-
-function footballDataMatchToFixture(match, index, importedTeams) {
-  const league = footballDataLeague(match.competition);
-  if (!leagueProfiles[league]) return null;
-
-  const homeTeam = footballDataTeam(match.homeTeam, league);
-  const awayTeam = footballDataTeam(match.awayTeam, league);
-  if (!homeTeam || !awayTeam || homeTeam.id === awayTeam.id) return null;
-
-  importedTeams.set(homeTeam.id, homeTeam);
-  importedTeams.set(awayTeam.id, awayTeam);
-
-  const kickoff = match.utcDate ? new Date(match.utcDate) : null;
-  const date = kickoff && !Number.isNaN(kickoff.getTime()) ? formatDateKey(kickoff) : todayKey;
-  const time = kickoff && !Number.isNaN(kickoff.getTime()) ? formatClockTime(kickoff) : "00:00";
-
-  return {
-    id: `fd-${match.id || `${league}-${date}-${homeTeam.id}-${awayTeam.id}-${index}`}`,
-    league,
-    date,
-    time,
-    homeTeamId: homeTeam.id,
-    awayTeamId: awayTeam.id,
-    homeTeam: homeTeam.name,
-    awayTeam: awayTeam.name,
-    status: footballDataStatus(match.status),
-    venue: match.venue || homeTeam.venue || "",
-    stage: footballDataStage(match),
-    minute: Number(match.minute) || null,
-    score: footballDataScore(match.score)
-  };
-}
-
-function footballDataTeam(team, league) {
-  const name = String(team?.shortName || team?.name || "").trim();
-  if (!name) return null;
-  const id = team?.id ? `FD${team.id}` : createTeamId(name, league);
-  return {
-    id,
-    name,
-    shortName: String(team?.tla || makeShortName(name)).slice(0, 4).toUpperCase(),
-    rating: teams[id]?.rating || 1600,
-    venue: ""
-  };
-}
-
-function footballDataLeague(competition) {
-  return normalizeLeague(competition?.code || competition?.name || "");
-}
-
-function footballDataStatus(status) {
-  const clean = String(status || "").toUpperCase();
-  if (clean === "IN_PLAY" || clean === "LIVE") return "live";
-  if (clean === "PAUSED") return "halftime";
-  if (clean === "FINISHED" || clean === "AWARDED") return "finished";
-  return "upcoming";
-}
-
-function footballDataStage(match) {
-  return String(match.stage || match.group || (match.matchday ? `Matchday ${match.matchday}` : "") || "")
-    .replace(/_/g, " ")
-    .toLowerCase()
-    .replace(/\b\w/g, (letter) => letter.toUpperCase());
-}
-
-function footballDataScore(score) {
-  if (!score || typeof score !== "object") return null;
-  const candidates = [score.fullTime, score.regularTime, score.halfTime, score];
-  for (const candidate of candidates) {
-    const home = Number(candidate?.home ?? candidate?.homeTeam);
-    const away = Number(candidate?.away ?? candidate?.awayTeam);
-    if (Number.isFinite(home) && Number.isFinite(away)) return { home, away };
-  }
-  return null;
 }
 
 function loadStoredFixtureData() {
   const raw = localStorage.getItem(FIXTURE_STORAGE_KEY);
   if (!raw) {
     renderFixtureSource();
-    return;
+    return false;
   }
 
   try {
@@ -889,10 +763,12 @@ function loadStoredFixtureData() {
     matches.splice(0, matches.length, ...normalized.matches.map(cloneMatch));
     fixtureMeta = normalized.meta;
     renderFixtureSource();
+    return true;
   } catch {
     localStorage.removeItem(FIXTURE_STORAGE_KEY);
     fixtureMeta = { ...seedFixtureMeta };
     renderFixtureSource();
+    return false;
   }
 }
 
@@ -1745,16 +1621,16 @@ function bindEvents() {
     }
   });
 
-  selectors.refreshFootballDataButton.addEventListener("click", async () => {
-    selectors.refreshFootballDataButton.disabled = true;
-    setImportStatus("Refreshing football-data.org fixtures...");
+  selectors.loadLiveFeedButton.addEventListener("click", async () => {
+    selectors.loadLiveFeedButton.disabled = true;
+    setImportStatus("Loading GitHub live fixture feed...");
 
     try {
-      await refreshFootballDataFixtures();
+      await loadLiveFixtureFeed();
     } catch (error) {
-      setImportStatus(error.message || "Could not refresh football-data.org fixtures.", true);
+      setImportStatus(error.message || "Could not load the live fixture feed.", true);
     } finally {
-      selectors.refreshFootballDataButton.disabled = false;
+      selectors.loadLiveFeedButton.disabled = false;
     }
   });
 
@@ -1764,10 +1640,14 @@ function bindEvents() {
 
 function init() {
   selectors.dateInput.value = state.selectedDate;
-  selectors.footballDataTokenInput.value = localStorage.getItem(FOOTBALL_DATA_TOKEN_KEY) || "";
-  loadStoredFixtureData();
+  const restoredStoredFixtures = loadStoredFixtureData();
   bindEvents();
   renderBoardWithLoading();
+  if (!restoredStoredFixtures) {
+    loadLiveFixtureFeed({ persist: false, silent: true }).catch(() => {
+      setImportStatus("Live feed is not ready yet. Using the built-in demo snapshot.");
+    });
+  }
 }
 
 function renderFixtureSource() {
@@ -1990,7 +1870,7 @@ window.FootballEdgeServices = {
   resetFixtureData,
   getFixtureDataExport,
   loadFixtureDataFromUrl,
-  refreshFootballDataFixtures
+  loadLiveFixtureFeed
 };
 
 init();
