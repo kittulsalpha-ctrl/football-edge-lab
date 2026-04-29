@@ -1,4 +1,4 @@
-# Football Edge Lab
+# GoalIQ
 
 A zero-cost static football prediction and analysis app for EPL, La Liga, Serie A, Bundesliga, and UEFA Champions League matches.
 
@@ -17,12 +17,13 @@ Open `index.html` in a browser. No install step is required.
 
 ## Service functions
 
-The browser app exposes these functions on `window.FootballEdgeServices` so a real data API can be connected later:
+The browser app exposes these functions on `window.GoalIQServices` so a real data API can be connected later. `window.FootballEdgeServices` remains available as a compatibility alias.
 
 ```js
 getMatchesByDate(date)
 getLiveMatches()
 getUpcomingMatches()
+getFinishedMatches()
 getMatchDetails(matchId)
 getTeamLastFiveMatches(teamId)
 calculatePrediction(matchData)
