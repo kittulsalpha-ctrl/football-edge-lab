@@ -1,4 +1,7 @@
 const FIXTURE_STORAGE_KEY = "football-edge-lab-fixture-data";
+const FOOTBALL_DATA_TOKEN_KEY = "football-edge-lab-football-data-token";
+const FOOTBALL_DATA_API_BASE = "https://api.football-data.org/v4";
+const FOOTBALL_DATA_COMPETITIONS = ["PL", "PD", "SA", "BL1", "CL"];
 
 const leagueProfiles = {
   EPL: {
@@ -48,9 +51,9 @@ const statusLabels = {
 const todayKey = formatDateKey(new Date());
 
 const seedFixtureMeta = {
-  source: "Built-in fixture snapshot",
-  updatedAt: "2026-04-28",
-  note: "Local snapshot. Import JSON to refresh without editing code."
+  source: "Built-in demo fixture snapshot",
+  updatedAt: "2026-04-29",
+  note: "Sample today, live, finished, and upcoming fixtures. Import JSON to replace with a real schedule."
 };
 
 const teams = {
@@ -367,6 +370,12 @@ const teams = {
 };
 
 const matches = [
+  makeMatch("today-epl-mun-che", 0, "EPL", "18:30", "MUN", "CHE", "live", "Old Trafford", { home: 1, away: 1, minute: 67 }),
+  makeMatch("today-epl-ars-liv", 0, "EPL", "20:45", "ARS", "LIV", "upcoming", "Emirates Stadium"),
+  makeMatch("today-laliga-rma-bar", 0, "LALIGA", "16:00", "RMA", "BAR", "finished", "Santiago Bernabeu", { home: 2, away: 1 }),
+  makeMatch("today-seriea-int-juv", 0, "SERIEA", "17:15", "INT", "JUV", "halftime", "San Siro", { home: 0, away: 0, minute: 45 }),
+  makeMatch("today-bundesliga-bay-bvb", 0, "BUNDESLIGA", "15:30", "BAY", "BVB", "finished", "Allianz Arena", { home: 3, away: 2 }),
+  makeMatch("today-ucl-psg-atm", 0, "UCL", "22:00", "PSG", "ATM", "upcoming", "Parc des Princes", null, "Semi-final watchlist"),
   makeMatch("ucl-psg-bay-1", 1, "UCL", "00:30", "PSG", "BAY", "upcoming", "Parc des Princes", null, "Semi-final - Leg 1 of 2"),
   makeMatch("ucl-atm-ars-1", 2, "UCL", "00:30", "ATM", "ARS", "upcoming", "Metropolitano Stadium", null, "Semi-final - Leg 1 of 2"),
   makeMatch("epl-lee-bur", 4, "EPL", "00:30", "LEE", "BUR", "upcoming", "Elland Road"),
@@ -500,6 +509,8 @@ const selectors = {
   fixtureJsonFile: document.querySelector("#fixtureJsonFile"),
   fixtureUrlInput: document.querySelector("#fixtureUrlInput"),
   loadFixtureUrlButton: document.querySelector("#loadFixtureUrlButton"),
+  footballDataTokenInput: document.querySelector("#footballDataTokenInput"),
+  refreshFootballDataButton: document.querySelector("#refreshFootballDataButton"),
   exportFixturesButton: document.querySelector("#exportFixturesButton"),
   resetFixturesButton: document.querySelector("#resetFixturesButton"),
   fixtureImportStatus: document.querySelector("#fixtureImportStatus"),
@@ -726,6 +737,146 @@ async function loadFixtureDataFromUrl(url) {
   return importFixtureData(payload, { source: cleanUrl });
 }
 
+async function refreshFootballDataFixtures() {
+  const token = selectors.footballDataTokenInput.value.trim();
+  if (!token) {
+    throw new Error("Enter your free football-data.org API token first.");
+  }
+
+  localStorage.setItem(FOOTBALL_DATA_TOKEN_KEY, token);
+  const from = formatDateKey(addDays(parseDateKey(state.selectedDate), -2));
+  const to = formatDateKey(addDays(parseDateKey(state.selectedDate), 21));
+  const params = new URLSearchParams({
+    competitions: FOOTBALL_DATA_COMPETITIONS.join(","),
+    dateFrom: from,
+    dateTo: to
+  });
+  const response = await fetch(`${FOOTBALL_DATA_API_BASE}/matches?${params.toString()}`, {
+    cache: "no-store",
+    headers: {
+      "X-Auth-Token": token
+    }
+  });
+
+  let payload = null;
+  try {
+    payload = await response.json();
+  } catch {
+    payload = null;
+  }
+
+  if (!response.ok) {
+    const message = payload?.message || payload?.error || `HTTP ${response.status}`;
+    throw new Error(`football-data.org refresh failed: ${message}`);
+  }
+
+  const fixturePayload = footballDataToFixturePayload(payload, from, to);
+  const imported = importFixtureData(fixturePayload, { source: "football-data.org" });
+  setImportStatus(`Loaded ${imported.matches.length} live fixtures from football-data.org.`);
+  return imported;
+}
+
+function footballDataToFixturePayload(payload, from, to) {
+  const apiMatches = Array.isArray(payload?.matches) ? payload.matches : [];
+  if (!apiMatches.length) {
+    throw new Error("football-data.org returned no fixtures for the selected date range.");
+  }
+
+  const importedTeams = new Map();
+  const importedMatches = apiMatches
+    .map((match, index) => footballDataMatchToFixture(match, index, importedTeams))
+    .filter(Boolean);
+
+  if (!importedMatches.length) {
+    throw new Error("football-data.org returned fixtures, but none matched the supported competitions.");
+  }
+
+  return {
+    meta: {
+      source: "football-data.org live API",
+      updatedAt: new Date().toISOString().slice(0, 10),
+      note: `Real fixtures and scores for ${from} to ${to}.`
+    },
+    teams: [...importedTeams.values()],
+    matches: importedMatches
+  };
+}
+
+function footballDataMatchToFixture(match, index, importedTeams) {
+  const league = footballDataLeague(match.competition);
+  if (!leagueProfiles[league]) return null;
+
+  const homeTeam = footballDataTeam(match.homeTeam, league);
+  const awayTeam = footballDataTeam(match.awayTeam, league);
+  if (!homeTeam || !awayTeam || homeTeam.id === awayTeam.id) return null;
+
+  importedTeams.set(homeTeam.id, homeTeam);
+  importedTeams.set(awayTeam.id, awayTeam);
+
+  const kickoff = match.utcDate ? new Date(match.utcDate) : null;
+  const date = kickoff && !Number.isNaN(kickoff.getTime()) ? formatDateKey(kickoff) : todayKey;
+  const time = kickoff && !Number.isNaN(kickoff.getTime()) ? formatClockTime(kickoff) : "00:00";
+
+  return {
+    id: `fd-${match.id || `${league}-${date}-${homeTeam.id}-${awayTeam.id}-${index}`}`,
+    league,
+    date,
+    time,
+    homeTeamId: homeTeam.id,
+    awayTeamId: awayTeam.id,
+    homeTeam: homeTeam.name,
+    awayTeam: awayTeam.name,
+    status: footballDataStatus(match.status),
+    venue: match.venue || homeTeam.venue || "",
+    stage: footballDataStage(match),
+    minute: Number(match.minute) || null,
+    score: footballDataScore(match.score)
+  };
+}
+
+function footballDataTeam(team, league) {
+  const name = String(team?.shortName || team?.name || "").trim();
+  if (!name) return null;
+  const id = team?.id ? `FD${team.id}` : createTeamId(name, league);
+  return {
+    id,
+    name,
+    shortName: String(team?.tla || makeShortName(name)).slice(0, 4).toUpperCase(),
+    rating: teams[id]?.rating || 1600,
+    venue: ""
+  };
+}
+
+function footballDataLeague(competition) {
+  return normalizeLeague(competition?.code || competition?.name || "");
+}
+
+function footballDataStatus(status) {
+  const clean = String(status || "").toUpperCase();
+  if (clean === "IN_PLAY" || clean === "LIVE") return "live";
+  if (clean === "PAUSED") return "halftime";
+  if (clean === "FINISHED" || clean === "AWARDED") return "finished";
+  return "upcoming";
+}
+
+function footballDataStage(match) {
+  return String(match.stage || match.group || (match.matchday ? `Matchday ${match.matchday}` : "") || "")
+    .replace(/_/g, " ")
+    .toLowerCase()
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+function footballDataScore(score) {
+  if (!score || typeof score !== "object") return null;
+  const candidates = [score.fullTime, score.regularTime, score.halfTime, score];
+  for (const candidate of candidates) {
+    const home = Number(candidate?.home ?? candidate?.homeTeam);
+    const away = Number(candidate?.away ?? candidate?.awayTeam);
+    if (Number.isFinite(home) && Number.isFinite(away)) return { home, away };
+  }
+  return null;
+}
+
 function loadStoredFixtureData() {
   const raw = localStorage.getItem(FIXTURE_STORAGE_KEY);
   if (!raw) {
@@ -856,14 +1007,21 @@ function normalizeLeague(value) {
   const aliases = {
     "premier league": "EPL",
     epl: "EPL",
+    pl: "EPL",
     "english premier league": "EPL",
     "la liga": "LALIGA",
     laliga: "LALIGA",
+    pd: "LALIGA",
+    "primera division": "LALIGA",
     "serie a": "SERIEA",
     "seria a": "SERIEA",
+    sa: "SERIEA",
     bundesliga: "BUNDESLIGA",
+    bl1: "BUNDESLIGA",
+    "1 bundesliga": "BUNDESLIGA",
     "uefa champions league": "UCL",
     "champions league": "UCL",
+    cl: "UCL",
     ucl: "UCL"
   };
   return aliases[clean] || raw.toUpperCase();
@@ -880,8 +1038,8 @@ function normalizeStatus(status, date, score) {
 
 function normalizeScore(score) {
   if (!score || typeof score !== "object") return null;
-  const home = Number(score.home ?? score.homeGoals ?? score.fullTime?.home ?? score.fulltime?.home);
-  const away = Number(score.away ?? score.awayGoals ?? score.fullTime?.away ?? score.fulltime?.away);
+  const home = Number(score.home ?? score.homeGoals ?? score.homeTeam ?? score.fullTime?.home ?? score.fullTime?.homeTeam ?? score.fulltime?.home);
+  const away = Number(score.away ?? score.awayGoals ?? score.awayTeam ?? score.fullTime?.away ?? score.fullTime?.awayTeam ?? score.fulltime?.away);
   if (!Number.isFinite(home) || !Number.isFinite(away)) return null;
   return { home, away };
 }
@@ -1587,12 +1745,26 @@ function bindEvents() {
     }
   });
 
+  selectors.refreshFootballDataButton.addEventListener("click", async () => {
+    selectors.refreshFootballDataButton.disabled = true;
+    setImportStatus("Refreshing football-data.org fixtures...");
+
+    try {
+      await refreshFootballDataFixtures();
+    } catch (error) {
+      setImportStatus(error.message || "Could not refresh football-data.org fixtures.", true);
+    } finally {
+      selectors.refreshFootballDataButton.disabled = false;
+    }
+  });
+
   selectors.exportFixturesButton.addEventListener("click", exportFixtureJson);
   selectors.resetFixturesButton.addEventListener("click", resetFixtureData);
 }
 
 function init() {
   selectors.dateInput.value = state.selectedDate;
+  selectors.footballDataTokenInput.value = localStorage.getItem(FOOTBALL_DATA_TOKEN_KEY) || "";
   loadStoredFixtureData();
   bindEvents();
   renderBoardWithLoading();
@@ -1817,7 +1989,8 @@ window.FootballEdgeServices = {
   importFixtureData,
   resetFixtureData,
   getFixtureDataExport,
-  loadFixtureDataFromUrl
+  loadFixtureDataFromUrl,
+  refreshFootballDataFixtures
 };
 
 init();
