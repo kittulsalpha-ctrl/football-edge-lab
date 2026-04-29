@@ -35,7 +35,7 @@
       "shortName": "ARS",
       "rating": 1600,
       "venue": "",
-      "league": "UCL"
+      "league": "EPL"
     },
     {
       "id": "FD58",
@@ -67,7 +67,7 @@
       "shortName": "ATL",
       "rating": 1600,
       "venue": "",
-      "league": "UCL"
+      "league": "LALIGA"
     },
     {
       "id": "FD16",
@@ -657,20 +657,6 @@
       }
     },
     {
-      "id": "fd-552093",
-      "league": "UCL",
-      "date": "2026-04-30",
-      "time": "00:30",
-      "homeTeamId": "FD78",
-      "awayTeamId": "FD57",
-      "homeTeam": "Atleti",
-      "awayTeam": "Arsenal",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Semi Finals",
-      "score": null
-    },
-    {
       "id": "fd-537161",
       "league": "SERIEA",
       "date": "2026-05-02",
@@ -741,20 +727,6 @@
       "score": null
     },
     {
-      "id": "fd-540693",
-      "league": "BUNDESLIGA",
-      "date": "2026-05-02",
-      "time": "19:00",
-      "homeTeamId": "FD19",
-      "awayTeamId": "FD7",
-      "homeTeam": "Frankfurt",
-      "awayTeam": "HSV",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-540691",
       "league": "BUNDESLIGA",
       "date": "2026-05-02",
@@ -763,6 +735,20 @@
       "awayTeamId": "FD44",
       "homeTeam": "Bayern",
       "awayTeam": "Heidenheim",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-540693",
+      "league": "BUNDESLIGA",
+      "date": "2026-05-02",
+      "time": "19:00",
+      "homeTeamId": "FD19",
+      "awayTeamId": "FD7",
+      "homeTeam": "Frankfurt",
+      "awayTeam": "HSV",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -881,6 +867,20 @@
       "score": null
     },
     {
+      "id": "fd-538127",
+      "league": "EPL",
+      "date": "2026-05-02",
+      "time": "22:00",
+      "homeTeamId": "FD57",
+      "awayTeamId": "FD63",
+      "homeTeam": "Arsenal",
+      "awayTeam": "Fulham",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
       "id": "fd-540687",
       "league": "BUNDESLIGA",
       "date": "2026-05-02",
@@ -903,20 +903,6 @@
       "awayTeamId": "FD77",
       "homeTeam": "Alavés",
       "awayTeam": "Athletic",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-538127",
-      "league": "EPL",
-      "date": "2026-05-02",
-      "time": "22:00",
-      "homeTeamId": "FD57",
-      "awayTeamId": "FD63",
-      "homeTeam": "Arsenal",
-      "awayTeam": "Fulham",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -1214,34 +1200,6 @@
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-552095",
-      "league": "UCL",
-      "date": "2026-05-06",
-      "time": "00:30",
-      "homeTeamId": "FD57",
-      "awayTeamId": "FD78",
-      "homeTeam": "Arsenal",
-      "awayTeam": "Atleti",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Semi Finals",
-      "score": null
-    },
-    {
-      "id": "fd-552094",
-      "league": "UCL",
-      "date": "2026-05-07",
-      "time": "00:30",
-      "homeTeamId": "FD5",
-      "awayTeamId": "FD524",
-      "homeTeam": "Bayern",
-      "awayTeam": "PSG",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Semi Finals",
       "score": null
     }
   ]
