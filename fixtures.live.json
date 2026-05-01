@@ -91,7 +91,7 @@
       "shortName": "FCB",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "UCL"
     },
     {
       "id": "FD103",
@@ -454,6 +454,14 @@
       "league": "SERIEA"
     },
     {
+      "id": "FD524",
+      "name": "PSG",
+      "shortName": "PSG",
+      "rating": 1600,
+      "venue": "",
+      "league": "UCL"
+    },
+    {
       "id": "FD87",
       "name": "Rayo Vallecano",
       "shortName": "RAY",
@@ -789,14 +797,14 @@
       "score": null
     },
     {
-      "id": "fd-538133",
+      "id": "fd-538128",
       "league": "EPL",
       "date": "2026-05-02",
       "time": "19:30",
-      "homeTeamId": "FD67",
-      "awayTeamId": "FD397",
-      "homeTeam": "Newcastle",
-      "awayTeam": "Brighton Hove",
+      "homeTeamId": "FD402",
+      "awayTeamId": "FD563",
+      "homeTeam": "Brentford",
+      "awayTeam": "West Ham",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -817,14 +825,14 @@
       "score": null
     },
     {
-      "id": "fd-538128",
+      "id": "fd-538133",
       "league": "EPL",
       "date": "2026-05-02",
       "time": "19:30",
-      "homeTeamId": "FD402",
-      "awayTeamId": "FD563",
-      "homeTeam": "Brentford",
-      "awayTeam": "West Ham",
+      "homeTeamId": "FD67",
+      "awayTeamId": "FD397",
+      "homeTeam": "Newcastle",
+      "awayTeam": "Brighton Hove",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -1192,6 +1200,34 @@
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-552095",
+      "league": "UCL",
+      "date": "2026-05-06",
+      "time": "00:30",
+      "homeTeamId": "FD57",
+      "awayTeamId": "FD78",
+      "homeTeam": "Arsenal",
+      "awayTeam": "Atleti",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Semi Finals",
+      "score": null
+    },
+    {
+      "id": "fd-552094",
+      "league": "UCL",
+      "date": "2026-05-07",
+      "time": "00:30",
+      "homeTeamId": "FD5",
+      "awayTeamId": "FD524",
+      "homeTeam": "Bayern",
+      "awayTeam": "PSG",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Semi Finals",
       "score": null
     },
     {
