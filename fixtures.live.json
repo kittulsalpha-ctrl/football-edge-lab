@@ -742,11 +742,11 @@
       "awayTeamId": "FD77",
       "homeTeam": "Espanyol",
       "awayTeam": "Athletic",
-      "status": "live",
+      "status": "finished",
       "venue": "",
       "stage": "Regular Season",
       "score": {
-        "home": 0,
+        "home": 2,
         "away": 0
       }
     },
@@ -759,12 +759,12 @@
       "awayTeamId": "FD559",
       "homeTeam": "Villarreal",
       "awayTeam": "Sevilla FC",
-      "status": "live",
+      "status": "finished",
       "venue": "",
       "stage": "Regular Season",
       "score": {
         "home": 2,
-        "away": 2
+        "away": 3
       }
     },
     {
@@ -776,10 +776,13 @@
       "awayTeamId": "FD354",
       "homeTeam": "Man City",
       "awayTeam": "Crystal Palace",
-      "status": "upcoming",
+      "status": "finished",
       "venue": "",
       "stage": "Regular Season",
-      "score": null
+      "score": {
+        "home": 3,
+        "away": 0
+      }
     },
     {
       "id": "fd-544564",
@@ -790,10 +793,13 @@
       "awayTeamId": "FD89",
       "homeTeam": "Getafe",
       "awayTeam": "Mallorca",
-      "status": "upcoming",
+      "status": "finished",
       "venue": "",
       "stage": "Regular Season",
-      "score": null
+      "score": {
+        "home": 3,
+        "away": 1
+      }
     },
     {
       "id": "fd-544561",
@@ -804,10 +810,13 @@
       "awayTeamId": "FD81",
       "homeTeam": "Alavés",
       "awayTeam": "Barça",
-      "status": "upcoming",
+      "status": "finished",
       "venue": "",
       "stage": "Regular Season",
-      "score": null
+      "score": {
+        "home": 1,
+        "away": 0
+      }
     },
     {
       "id": "fd-544568",
@@ -866,6 +875,20 @@
       "score": null
     },
     {
+      "id": "fd-540708",
+      "league": "BUNDESLIGA",
+      "date": "2026-05-16",
+      "time": "19:00",
+      "homeTeamId": "FD28",
+      "awayTeamId": "FD16",
+      "homeTeam": "Union Berlin",
+      "awayTeam": "Augsburg",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
       "id": "fd-540704",
       "league": "BUNDESLIGA",
       "date": "2026-05-16",
@@ -908,14 +931,28 @@
       "score": null
     },
     {
-      "id": "fd-540708",
+      "id": "fd-540707",
       "league": "BUNDESLIGA",
       "date": "2026-05-16",
       "time": "19:00",
-      "homeTeamId": "FD28",
-      "awayTeamId": "FD16",
-      "homeTeam": "Union Berlin",
-      "awayTeam": "Augsburg",
+      "homeTeamId": "FD20",
+      "awayTeamId": "FD11",
+      "homeTeam": "St. Pauli",
+      "awayTeam": "Wolfsburg",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-540703",
+      "league": "BUNDESLIGA",
+      "date": "2026-05-16",
+      "time": "19:00",
+      "homeTeamId": "FD12",
+      "awayTeamId": "FD4",
+      "homeTeam": "Bremen",
+      "awayTeam": "Dortmund",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -964,34 +1001,6 @@
       "score": null
     },
     {
-      "id": "fd-540707",
-      "league": "BUNDESLIGA",
-      "date": "2026-05-16",
-      "time": "19:00",
-      "homeTeamId": "FD20",
-      "awayTeamId": "FD11",
-      "homeTeam": "St. Pauli",
-      "awayTeam": "Wolfsburg",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-540703",
-      "league": "BUNDESLIGA",
-      "date": "2026-05-16",
-      "time": "19:00",
-      "homeTeamId": "FD12",
-      "awayTeamId": "FD4",
-      "homeTeam": "Bremen",
-      "awayTeam": "Dortmund",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-537175",
       "league": "SERIEA",
       "date": "2026-05-17",
@@ -1006,20 +1015,6 @@
       "score": null
     },
     {
-      "id": "fd-537181",
-      "league": "SERIEA",
-      "date": "2026-05-17",
-      "time": "16:00",
-      "homeTeamId": "FD109",
-      "awayTeamId": "FD99",
-      "homeTeam": "Juventus",
-      "awayTeam": "Fiorentina",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-537179",
       "league": "SERIEA",
       "date": "2026-05-17",
@@ -1028,6 +1023,20 @@
       "awayTeamId": "FD112",
       "homeTeam": "Como 1907",
       "awayTeam": "Parma",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-537181",
+      "league": "SERIEA",
+      "date": "2026-05-17",
+      "time": "16:00",
+      "homeTeamId": "FD109",
+      "awayTeamId": "FD99",
+      "homeTeam": "Juventus",
+      "awayTeam": "Fiorentina",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -1090,6 +1099,34 @@
       "score": null
     },
     {
+      "id": "fd-538151",
+      "league": "EPL",
+      "date": "2026-05-17",
+      "time": "19:30",
+      "homeTeamId": "FD341",
+      "awayTeamId": "FD397",
+      "homeTeam": "Leeds United",
+      "awayTeam": "Brighton Hove",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-538150",
+      "league": "EPL",
+      "date": "2026-05-17",
+      "time": "19:30",
+      "homeTeamId": "FD62",
+      "awayTeamId": "FD71",
+      "homeTeam": "Everton",
+      "awayTeam": "Sunderland",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
       "id": "fd-538148",
       "league": "EPL",
       "date": "2026-05-17",
@@ -1118,34 +1155,6 @@
       "score": null
     },
     {
-      "id": "fd-538150",
-      "league": "EPL",
-      "date": "2026-05-17",
-      "time": "19:30",
-      "homeTeamId": "FD62",
-      "awayTeamId": "FD71",
-      "homeTeam": "Everton",
-      "awayTeam": "Sunderland",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-538151",
-      "league": "EPL",
-      "date": "2026-05-17",
-      "time": "19:30",
-      "homeTeamId": "FD341",
-      "awayTeamId": "FD397",
-      "homeTeam": "Leeds United",
-      "awayTeam": "Brighton Hove",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-537176",
       "league": "SERIEA",
       "date": "2026-05-17",
@@ -1168,6 +1177,20 @@
       "awayTeamId": "FD563",
       "homeTeam": "Newcastle",
       "awayTeam": "West Ham",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-544572",
+      "league": "LALIGA",
+      "date": "2026-05-17",
+      "time": "22:30",
+      "homeTeamId": "FD78",
+      "awayTeamId": "FD298",
+      "homeTeam": "Atleti",
+      "awayTeam": "Girona",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -1230,14 +1253,28 @@
       "score": null
     },
     {
-      "id": "fd-544572",
+      "id": "fd-544571",
       "league": "LALIGA",
       "date": "2026-05-17",
       "time": "22:30",
-      "homeTeamId": "FD78",
-      "awayTeamId": "FD298",
-      "homeTeam": "Atleti",
-      "awayTeam": "Girona",
+      "homeTeamId": "FD77",
+      "awayTeamId": "FD558",
+      "homeTeam": "Athletic",
+      "awayTeam": "Celta",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-544577",
+      "league": "LALIGA",
+      "date": "2026-05-17",
+      "time": "22:30",
+      "homeTeamId": "FD92",
+      "awayTeamId": "FD95",
+      "homeTeam": "Real Sociedad",
+      "awayTeam": "Valencia",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -1280,34 +1317,6 @@
       "awayTeamId": "FD89",
       "homeTeam": "Levante",
       "awayTeam": "Mallorca",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-544571",
-      "league": "LALIGA",
-      "date": "2026-05-17",
-      "time": "22:30",
-      "homeTeamId": "FD77",
-      "awayTeamId": "FD558",
-      "homeTeam": "Athletic",
-      "awayTeam": "Celta",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-544577",
-      "league": "LALIGA",
-      "date": "2026-05-17",
-      "time": "22:30",
-      "homeTeamId": "FD92",
-      "awayTeamId": "FD95",
-      "homeTeam": "Real Sociedad",
-      "awayTeam": "Valencia",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
