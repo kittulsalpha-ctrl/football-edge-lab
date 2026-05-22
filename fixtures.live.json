@@ -1,8 +1,8 @@
 {
   "meta": {
     "source": "football-data.org live feed",
-    "updatedAt": "2026-05-21",
-    "note": "Real fixtures and scores for 2026-05-20 to 2026-05-29. Times shown in Asia/Kolkata."
+    "updatedAt": "2026-05-22",
+    "note": "Real fixtures and scores for 2026-05-21 to 2026-05-30. Times shown in Asia/Kolkata."
   },
   "teams": [
     {
@@ -487,40 +487,6 @@
     }
   ],
   "matches": [
-    {
-      "id": "fd-538145",
-      "league": "EPL",
-      "date": "2026-05-20",
-      "time": "00:00",
-      "homeTeamId": "FD1044",
-      "awayTeamId": "FD65",
-      "homeTeam": "Bournemouth",
-      "awayTeam": "Man City",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-538149",
-      "league": "EPL",
-      "date": "2026-05-20",
-      "time": "00:45",
-      "homeTeamId": "FD61",
-      "awayTeamId": "FD73",
-      "homeTeam": "Chelsea",
-      "awayTeam": "Tottenham",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 2,
-        "away": 1
-      }
-    },
     {
       "id": "fd-537185",
       "league": "SERIEA",
