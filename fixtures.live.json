@@ -1,8 +1,8 @@
 {
   "meta": {
     "source": "football-data.org live feed",
-    "updatedAt": "2026-05-24",
-    "note": "Real fixtures and scores for 2026-05-23 to 2026-06-01. Times shown in Asia/Kolkata."
+    "updatedAt": "2026-05-25",
+    "note": "Real fixtures and scores for 2026-05-24 to 2026-06-02. Times shown in Asia/Kolkata."
   },
   "teams": [
     {
@@ -38,14 +38,6 @@
       "league": "EPL"
     },
     {
-      "id": "FD102",
-      "name": "Atalanta",
-      "shortName": "ATA",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
       "id": "FD77",
       "name": "Athletic",
       "shortName": "ATH",
@@ -68,14 +60,6 @@
       "rating": 1600,
       "venue": "",
       "league": "LALIGA"
-    },
-    {
-      "id": "FD103",
-      "name": "Bologna",
-      "shortName": "BOL",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
     },
     {
       "id": "FD1044",
@@ -182,14 +166,6 @@
       "league": "EPL"
     },
     {
-      "id": "FD99",
-      "name": "Fiorentina",
-      "shortName": "FIO",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
       "id": "FD63",
       "name": "Fulham",
       "shortName": "FUL",
@@ -220,14 +196,6 @@
       "rating": 1600,
       "venue": "",
       "league": "LALIGA"
-    },
-    {
-      "id": "FD108",
-      "name": "Inter",
-      "shortName": "INT",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
     },
     {
       "id": "FD109",
@@ -496,40 +464,6 @@
   ],
   "matches": [
     {
-      "id": "fd-537185",
-      "league": "SERIEA",
-      "date": "2026-05-23",
-      "time": "00:15",
-      "homeTeamId": "FD99",
-      "awayTeamId": "FD102",
-      "homeTeam": "Fiorentina",
-      "awayTeam": "Atalanta",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-537187",
-      "league": "SERIEA",
-      "date": "2026-05-23",
-      "time": "21:30",
-      "homeTeamId": "FD103",
-      "awayTeamId": "FD108",
-      "homeTeam": "Bologna",
-      "awayTeam": "Inter",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 3,
-        "away": 3
-      }
-    },
-    {
       "id": "fd-537190",
       "league": "SERIEA",
       "date": "2026-05-24",
@@ -717,91 +651,6 @@
       }
     },
     {
-      "id": "fd-538157",
-      "league": "EPL",
-      "date": "2026-05-24",
-      "time": "20:30",
-      "homeTeamId": "FD354",
-      "awayTeamId": "FD57",
-      "homeTeam": "Crystal Palace",
-      "awayTeam": "Arsenal",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 2
-      }
-    },
-    {
-      "id": "fd-538155",
-      "league": "EPL",
-      "date": "2026-05-24",
-      "time": "20:30",
-      "homeTeamId": "FD71",
-      "awayTeamId": "FD61",
-      "homeTeam": "Sunderland",
-      "awayTeam": "Chelsea",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 2,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-538161",
-      "league": "EPL",
-      "date": "2026-05-24",
-      "time": "20:30",
-      "homeTeamId": "FD65",
-      "awayTeamId": "FD58",
-      "homeTeam": "Man City",
-      "awayTeam": "Aston Villa",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 2,
-        "away": 2
-      }
-    },
-    {
-      "id": "fd-538163",
-      "league": "EPL",
-      "date": "2026-05-24",
-      "time": "20:30",
-      "homeTeamId": "FD73",
-      "awayTeamId": "FD62",
-      "homeTeam": "Tottenham",
-      "awayTeam": "Everton",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 0
-      }
-    },
-    {
-      "id": "fd-538159",
-      "league": "EPL",
-      "date": "2026-05-24",
-      "time": "20:30",
-      "homeTeamId": "FD63",
-      "awayTeamId": "FD67",
-      "homeTeam": "Fulham",
-      "awayTeam": "Newcastle",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 2,
-        "away": 0
-      }
-    },
-    {
       "id": "fd-538156",
       "league": "EPL",
       "date": "2026-05-24",
@@ -819,14 +668,14 @@
       }
     },
     {
-      "id": "fd-538158",
+      "id": "fd-538162",
       "league": "EPL",
       "date": "2026-05-24",
       "time": "20:30",
-      "homeTeamId": "FD328",
-      "awayTeamId": "FD76",
-      "homeTeam": "Burnley",
-      "awayTeam": "Wolverhampton",
+      "homeTeamId": "FD351",
+      "awayTeamId": "FD1044",
+      "homeTeam": "Nottingham",
+      "awayTeam": "Bournemouth",
       "status": "finished",
       "venue": "",
       "stage": "Regular Season",
@@ -836,14 +685,14 @@
       }
     },
     {
-      "id": "fd-538162",
+      "id": "fd-538158",
       "league": "EPL",
       "date": "2026-05-24",
       "time": "20:30",
-      "homeTeamId": "FD351",
-      "awayTeamId": "FD1044",
-      "homeTeam": "Nottingham",
-      "awayTeam": "Bournemouth",
+      "homeTeamId": "FD328",
+      "awayTeamId": "FD76",
+      "homeTeam": "Burnley",
+      "awayTeam": "Wolverhampton",
       "status": "finished",
       "venue": "",
       "stage": "Regular Season",
@@ -887,6 +736,91 @@
       }
     },
     {
+      "id": "fd-538161",
+      "league": "EPL",
+      "date": "2026-05-24",
+      "time": "20:30",
+      "homeTeamId": "FD65",
+      "awayTeamId": "FD58",
+      "homeTeam": "Man City",
+      "awayTeam": "Aston Villa",
+      "status": "finished",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": {
+        "home": 2,
+        "away": 2
+      }
+    },
+    {
+      "id": "fd-538157",
+      "league": "EPL",
+      "date": "2026-05-24",
+      "time": "20:30",
+      "homeTeamId": "FD354",
+      "awayTeamId": "FD57",
+      "homeTeam": "Crystal Palace",
+      "awayTeam": "Arsenal",
+      "status": "finished",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": {
+        "home": 1,
+        "away": 2
+      }
+    },
+    {
+      "id": "fd-538163",
+      "league": "EPL",
+      "date": "2026-05-24",
+      "time": "20:30",
+      "homeTeamId": "FD73",
+      "awayTeamId": "FD62",
+      "homeTeam": "Tottenham",
+      "awayTeam": "Everton",
+      "status": "finished",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": {
+        "home": 1,
+        "away": 0
+      }
+    },
+    {
+      "id": "fd-538159",
+      "league": "EPL",
+      "date": "2026-05-24",
+      "time": "20:30",
+      "homeTeamId": "FD63",
+      "awayTeamId": "FD67",
+      "homeTeam": "Fulham",
+      "awayTeam": "Newcastle",
+      "status": "finished",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": {
+        "home": 2,
+        "away": 0
+      }
+    },
+    {
+      "id": "fd-538155",
+      "league": "EPL",
+      "date": "2026-05-24",
+      "time": "20:30",
+      "homeTeamId": "FD71",
+      "awayTeamId": "FD61",
+      "homeTeam": "Sunderland",
+      "awayTeam": "Chelsea",
+      "status": "finished",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
       "id": "fd-537192",
       "league": "SERIEA",
       "date": "2026-05-24",
@@ -901,40 +835,6 @@
       "score": {
         "home": 1,
         "away": 0
-      }
-    },
-    {
-      "id": "fd-537193",
-      "league": "SERIEA",
-      "date": "2026-05-25",
-      "time": "00:15",
-      "homeTeamId": "FD457",
-      "awayTeamId": "FD7397",
-      "homeTeam": "Cremonese",
-      "awayTeam": "Como 1907",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 4
-      }
-    },
-    {
-      "id": "fd-537189",
-      "league": "SERIEA",
-      "date": "2026-05-25",
-      "time": "00:15",
-      "homeTeamId": "FD450",
-      "awayTeamId": "FD100",
-      "homeTeam": "Verona",
-      "awayTeam": "Roma",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 0,
-        "away": 2
       }
     },
     {
@@ -972,6 +872,40 @@
       }
     },
     {
+      "id": "fd-537189",
+      "league": "SERIEA",
+      "date": "2026-05-25",
+      "time": "00:15",
+      "homeTeamId": "FD450",
+      "awayTeamId": "FD100",
+      "homeTeam": "Verona",
+      "awayTeam": "Roma",
+      "status": "finished",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": {
+        "home": 0,
+        "away": 2
+      }
+    },
+    {
+      "id": "fd-537193",
+      "league": "SERIEA",
+      "date": "2026-05-25",
+      "time": "00:15",
+      "homeTeamId": "FD457",
+      "awayTeamId": "FD7397",
+      "homeTeam": "Cremonese",
+      "awayTeam": "Como 1907",
+      "status": "finished",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": {
+        "home": 1,
+        "away": 4
+      }
+    },
+    {
       "id": "fd-544588",
       "league": "LALIGA",
       "date": "2026-05-25",
@@ -997,12 +931,12 @@
       "awayTeamId": "FD109",
       "homeTeam": "Torino",
       "awayTeam": "Juventus",
-      "status": "live",
+      "status": "finished",
       "venue": "",
       "stage": "Regular Season",
       "score": {
-        "home": 0,
-        "away": 1
+        "home": 2,
+        "away": 2
       }
     },
     {
