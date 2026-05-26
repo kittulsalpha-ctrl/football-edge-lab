@@ -1,26 +1,10 @@
 {
   "meta": {
     "source": "football-data.org live feed",
-    "updatedAt": "2026-05-25",
-    "note": "Real fixtures and scores for 2026-05-24 to 2026-06-02. Times shown in Asia/Kolkata."
+    "updatedAt": "2026-05-26",
+    "note": "Real fixtures and scores for 2026-05-25 to 2026-06-03. Times shown in Asia/Kolkata."
   },
   "teams": [
-    {
-      "id": "FD487",
-      "name": "AC Pisa",
-      "shortName": "PIS",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD263",
-      "name": "Alavés",
-      "shortName": "ALA",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
     {
       "id": "FD57",
       "name": "Arsenal",
@@ -28,22 +12,6 @@
       "rating": 1600,
       "venue": "",
       "league": "UCL"
-    },
-    {
-      "id": "FD58",
-      "name": "Aston Villa",
-      "shortName": "AVL",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
-      "id": "FD77",
-      "name": "Athletic",
-      "shortName": "ATH",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
     },
     {
       "id": "FD78",
@@ -54,68 +22,12 @@
       "league": "LALIGA"
     },
     {
-      "id": "FD81",
-      "name": "Barça",
-      "shortName": "FCB",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
-    {
-      "id": "FD1044",
-      "name": "Bournemouth",
-      "shortName": "BOU",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
-      "id": "FD402",
-      "name": "Brentford",
-      "shortName": "BRE",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
-      "id": "FD397",
-      "name": "Brighton Hove",
-      "shortName": "BHA",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
-      "id": "FD328",
-      "name": "Burnley",
-      "shortName": "BUR",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
       "id": "FD104",
       "name": "Cagliari",
       "shortName": "CAG",
       "rating": 1600,
       "venue": "",
       "league": "SERIEA"
-    },
-    {
-      "id": "FD558",
-      "name": "Celta",
-      "shortName": "CEL",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
-    {
-      "id": "FD61",
-      "name": "Chelsea",
-      "shortName": "CHE",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
     },
     {
       "id": "FD7397",
@@ -134,46 +46,6 @@
       "league": "SERIEA"
     },
     {
-      "id": "FD354",
-      "name": "Crystal Palace",
-      "shortName": "CRY",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
-      "id": "FD285",
-      "name": "Elche",
-      "shortName": "ELC",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
-    {
-      "id": "FD80",
-      "name": "Espanyol",
-      "shortName": "ESP",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
-    {
-      "id": "FD62",
-      "name": "Everton",
-      "shortName": "EVE",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
-      "id": "FD63",
-      "name": "Fulham",
-      "shortName": "FUL",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
       "id": "FD107",
       "name": "Genoa",
       "shortName": "GEN",
@@ -182,33 +54,9 @@
       "league": "SERIEA"
     },
     {
-      "id": "FD82",
-      "name": "Getafe",
-      "shortName": "GET",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
-    {
-      "id": "FD298",
-      "name": "Girona",
-      "shortName": "GIR",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
-    {
       "id": "FD109",
       "name": "Juventus",
       "shortName": "JUV",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD110",
-      "name": "Lazio",
-      "shortName": "LAZ",
       "rating": 1600,
       "venue": "",
       "league": "SERIEA"
@@ -222,97 +70,9 @@
       "league": "SERIEA"
     },
     {
-      "id": "FD341",
-      "name": "Leeds United",
-      "shortName": "LEE",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
-      "id": "FD88",
-      "name": "Levante",
-      "shortName": "LEV",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
-    {
-      "id": "FD64",
-      "name": "Liverpool",
-      "shortName": "LIV",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
-      "id": "FD89",
-      "name": "Mallorca",
-      "shortName": "MAL",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
-    {
-      "id": "FD65",
-      "name": "Man City",
-      "shortName": "MCI",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
-      "id": "FD66",
-      "name": "Man United",
-      "shortName": "MUN",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
       "id": "FD98",
       "name": "Milan",
       "shortName": "MIL",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD113",
-      "name": "Napoli",
-      "shortName": "NAP",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD67",
-      "name": "Newcastle",
-      "shortName": "NEW",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
-      "id": "FD351",
-      "name": "Nottingham",
-      "shortName": "NOT",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
-      "id": "FD79",
-      "name": "Osasuna",
-      "shortName": "OSA",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
-    {
-      "id": "FD112",
-      "name": "Parma",
-      "shortName": "PAR",
       "rating": 1600,
       "venue": "",
       "league": "SERIEA"
@@ -326,46 +86,6 @@
       "league": "UCL"
     },
     {
-      "id": "FD87",
-      "name": "Rayo Vallecano",
-      "shortName": "RAY",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
-    {
-      "id": "FD90",
-      "name": "Real Betis",
-      "shortName": "BET",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
-    {
-      "id": "FD86",
-      "name": "Real Madrid",
-      "shortName": "RMA",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
-    {
-      "id": "FD1048",
-      "name": "Real Oviedo",
-      "shortName": "OVI",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
-    {
-      "id": "FD92",
-      "name": "Real Sociedad",
-      "shortName": "RSO",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
-    {
       "id": "FD100",
       "name": "Roma",
       "shortName": "ROM",
@@ -374,60 +94,12 @@
       "league": "SERIEA"
     },
     {
-      "id": "FD471",
-      "name": "Sassuolo",
-      "shortName": "SAS",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD559",
-      "name": "Sevilla FC",
-      "shortName": "SEV",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
-    {
-      "id": "FD71",
-      "name": "Sunderland",
-      "shortName": "SUN",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
       "id": "FD586",
       "name": "Torino",
       "shortName": "TOR",
       "rating": 1600,
       "venue": "",
       "league": "SERIEA"
-    },
-    {
-      "id": "FD73",
-      "name": "Tottenham",
-      "shortName": "TOT",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
-      "id": "FD115",
-      "name": "Udinese",
-      "shortName": "UDI",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD95",
-      "name": "Valencia",
-      "shortName": "VAL",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
     },
     {
       "id": "FD450",
@@ -444,399 +116,9 @@
       "rating": 1600,
       "venue": "",
       "league": "LALIGA"
-    },
-    {
-      "id": "FD563",
-      "name": "West Ham",
-      "shortName": "WHU",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
-    },
-    {
-      "id": "FD76",
-      "name": "Wolverhampton",
-      "shortName": "WOL",
-      "rating": 1600,
-      "venue": "",
-      "league": "EPL"
     }
   ],
   "matches": [
-    {
-      "id": "fd-537190",
-      "league": "SERIEA",
-      "date": "2026-05-24",
-      "time": "00:15",
-      "homeTeamId": "FD110",
-      "awayTeamId": "FD487",
-      "homeTeam": "Lazio",
-      "awayTeam": "AC Pisa",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 2,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-544589",
-      "league": "LALIGA",
-      "date": "2026-05-24",
-      "time": "00:30",
-      "homeTeamId": "FD95",
-      "awayTeamId": "FD81",
-      "homeTeam": "Valencia",
-      "awayTeam": "Barça",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 3,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-544585",
-      "league": "LALIGA",
-      "date": "2026-05-24",
-      "time": "00:30",
-      "homeTeamId": "FD82",
-      "awayTeamId": "FD79",
-      "homeTeam": "Getafe",
-      "awayTeam": "Osasuna",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 0
-      }
-    },
-    {
-      "id": "fd-544587",
-      "league": "LALIGA",
-      "date": "2026-05-24",
-      "time": "00:30",
-      "homeTeamId": "FD86",
-      "awayTeamId": "FD77",
-      "homeTeam": "Real Madrid",
-      "awayTeam": "Athletic",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 4,
-        "away": 2
-      }
-    },
-    {
-      "id": "fd-544582",
-      "league": "LALIGA",
-      "date": "2026-05-24",
-      "time": "00:30",
-      "homeTeamId": "FD90",
-      "awayTeamId": "FD88",
-      "homeTeam": "Real Betis",
-      "awayTeam": "Levante",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 2,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-544584",
-      "league": "LALIGA",
-      "date": "2026-05-24",
-      "time": "00:30",
-      "homeTeamId": "FD80",
-      "awayTeamId": "FD92",
-      "homeTeam": "Espanyol",
-      "awayTeam": "Real Sociedad",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-544590",
-      "league": "LALIGA",
-      "date": "2026-05-24",
-      "time": "00:30",
-      "homeTeamId": "FD298",
-      "awayTeamId": "FD285",
-      "homeTeam": "Girona",
-      "awayTeam": "Elche",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-544586",
-      "league": "LALIGA",
-      "date": "2026-05-24",
-      "time": "00:30",
-      "homeTeamId": "FD89",
-      "awayTeamId": "FD1048",
-      "homeTeam": "Mallorca",
-      "awayTeam": "Real Oviedo",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 3,
-        "away": 0
-      }
-    },
-    {
-      "id": "fd-544581",
-      "league": "LALIGA",
-      "date": "2026-05-24",
-      "time": "00:30",
-      "homeTeamId": "FD263",
-      "awayTeamId": "FD87",
-      "homeTeam": "Alavés",
-      "awayTeam": "Rayo Vallecano",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 2
-      }
-    },
-    {
-      "id": "fd-544583",
-      "league": "LALIGA",
-      "date": "2026-05-24",
-      "time": "00:30",
-      "homeTeamId": "FD558",
-      "awayTeamId": "FD559",
-      "homeTeam": "Celta",
-      "awayTeam": "Sevilla FC",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 0
-      }
-    },
-    {
-      "id": "fd-537191",
-      "league": "SERIEA",
-      "date": "2026-05-24",
-      "time": "18:30",
-      "homeTeamId": "FD112",
-      "awayTeamId": "FD471",
-      "homeTeam": "Parma",
-      "awayTeam": "Sassuolo",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 0
-      }
-    },
-    {
-      "id": "fd-538155",
-      "league": "EPL",
-      "date": "2026-05-24",
-      "time": "20:30",
-      "homeTeamId": "FD71",
-      "awayTeamId": "FD61",
-      "homeTeam": "Sunderland",
-      "awayTeam": "Chelsea",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 2,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-538163",
-      "league": "EPL",
-      "date": "2026-05-24",
-      "time": "20:30",
-      "homeTeamId": "FD73",
-      "awayTeamId": "FD62",
-      "homeTeam": "Tottenham",
-      "awayTeam": "Everton",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 0
-      }
-    },
-    {
-      "id": "fd-538159",
-      "league": "EPL",
-      "date": "2026-05-24",
-      "time": "20:30",
-      "homeTeamId": "FD63",
-      "awayTeamId": "FD67",
-      "homeTeam": "Fulham",
-      "awayTeam": "Newcastle",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 2,
-        "away": 0
-      }
-    },
-    {
-      "id": "fd-538161",
-      "league": "EPL",
-      "date": "2026-05-24",
-      "time": "20:30",
-      "homeTeamId": "FD65",
-      "awayTeamId": "FD58",
-      "homeTeam": "Man City",
-      "awayTeam": "Aston Villa",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 2
-      }
-    },
-    {
-      "id": "fd-538157",
-      "league": "EPL",
-      "date": "2026-05-24",
-      "time": "20:30",
-      "homeTeamId": "FD354",
-      "awayTeamId": "FD57",
-      "homeTeam": "Crystal Palace",
-      "awayTeam": "Arsenal",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 2
-      }
-    },
-    {
-      "id": "fd-538156",
-      "league": "EPL",
-      "date": "2026-05-24",
-      "time": "20:30",
-      "homeTeamId": "FD397",
-      "awayTeamId": "FD66",
-      "homeTeam": "Brighton Hove",
-      "awayTeam": "Man United",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 0,
-        "away": 3
-      }
-    },
-    {
-      "id": "fd-538164",
-      "league": "EPL",
-      "date": "2026-05-24",
-      "time": "20:30",
-      "homeTeamId": "FD563",
-      "awayTeamId": "FD341",
-      "homeTeam": "West Ham",
-      "awayTeam": "Leeds United",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 3,
-        "away": 0
-      }
-    },
-    {
-      "id": "fd-538160",
-      "league": "EPL",
-      "date": "2026-05-24",
-      "time": "20:30",
-      "homeTeamId": "FD64",
-      "awayTeamId": "FD402",
-      "homeTeam": "Liverpool",
-      "awayTeam": "Brentford",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-538162",
-      "league": "EPL",
-      "date": "2026-05-24",
-      "time": "20:30",
-      "homeTeamId": "FD351",
-      "awayTeamId": "FD1044",
-      "homeTeam": "Nottingham",
-      "awayTeam": "Bournemouth",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-538158",
-      "league": "EPL",
-      "date": "2026-05-24",
-      "time": "20:30",
-      "homeTeamId": "FD328",
-      "awayTeamId": "FD76",
-      "homeTeam": "Burnley",
-      "awayTeam": "Wolverhampton",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-537192",
-      "league": "SERIEA",
-      "date": "2026-05-24",
-      "time": "21:30",
-      "homeTeamId": "FD113",
-      "awayTeamId": "FD115",
-      "homeTeam": "Napoli",
-      "awayTeam": "Udinese",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 0
-      }
-    },
     {
       "id": "fd-537193",
       "league": "SERIEA",
