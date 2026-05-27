@@ -1,8 +1,8 @@
 {
   "meta": {
     "source": "football-data.org live feed",
-    "updatedAt": "2026-05-26",
-    "note": "Real fixtures and scores for 2026-05-25 to 2026-06-03. Times shown in Asia/Kolkata."
+    "updatedAt": "2026-05-27",
+    "note": "Real fixtures and scores for 2026-05-26 to 2026-06-04. Times shown in Asia/Kolkata."
   },
   "teams": [
     {
@@ -14,213 +14,15 @@
       "league": "UCL"
     },
     {
-      "id": "FD78",
-      "name": "Atleti",
-      "shortName": "ATL",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
-    },
-    {
-      "id": "FD104",
-      "name": "Cagliari",
-      "shortName": "CAG",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD7397",
-      "name": "Como 1907",
-      "shortName": "COM",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD457",
-      "name": "Cremonese",
-      "shortName": "CRE",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD107",
-      "name": "Genoa",
-      "shortName": "GEN",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD109",
-      "name": "Juventus",
-      "shortName": "JUV",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD5890",
-      "name": "Lecce",
-      "shortName": "USL",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD98",
-      "name": "Milan",
-      "shortName": "MIL",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
       "id": "FD524",
       "name": "PSG",
       "shortName": "PSG",
       "rating": 1600,
       "venue": "",
       "league": "UCL"
-    },
-    {
-      "id": "FD100",
-      "name": "Roma",
-      "shortName": "ROM",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD586",
-      "name": "Torino",
-      "shortName": "TOR",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD450",
-      "name": "Verona",
-      "shortName": "HVE",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD94",
-      "name": "Villarreal",
-      "shortName": "VIL",
-      "rating": 1600,
-      "venue": "",
-      "league": "LALIGA"
     }
   ],
   "matches": [
-    {
-      "id": "fd-537193",
-      "league": "SERIEA",
-      "date": "2026-05-25",
-      "time": "00:15",
-      "homeTeamId": "FD457",
-      "awayTeamId": "FD7397",
-      "homeTeam": "Cremonese",
-      "awayTeam": "Como 1907",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 4
-      }
-    },
-    {
-      "id": "fd-537186",
-      "league": "SERIEA",
-      "date": "2026-05-25",
-      "time": "00:15",
-      "homeTeamId": "FD98",
-      "awayTeamId": "FD104",
-      "homeTeam": "Milan",
-      "awayTeam": "Cagliari",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 2
-      }
-    },
-    {
-      "id": "fd-537194",
-      "league": "SERIEA",
-      "date": "2026-05-25",
-      "time": "00:15",
-      "homeTeamId": "FD5890",
-      "awayTeamId": "FD107",
-      "homeTeam": "Lecce",
-      "awayTeam": "Genoa",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 1,
-        "away": 0
-      }
-    },
-    {
-      "id": "fd-537189",
-      "league": "SERIEA",
-      "date": "2026-05-25",
-      "time": "00:15",
-      "homeTeamId": "FD450",
-      "awayTeamId": "FD100",
-      "homeTeam": "Verona",
-      "awayTeam": "Roma",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 0,
-        "away": 2
-      }
-    },
-    {
-      "id": "fd-544588",
-      "league": "LALIGA",
-      "date": "2026-05-25",
-      "time": "00:30",
-      "homeTeamId": "FD94",
-      "awayTeamId": "FD78",
-      "homeTeam": "Villarreal",
-      "awayTeam": "Atleti",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 5,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-537188",
-      "league": "SERIEA",
-      "date": "2026-05-25",
-      "time": "01:15",
-      "homeTeamId": "FD586",
-      "awayTeamId": "FD109",
-      "homeTeam": "Torino",
-      "awayTeam": "Juventus",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 2,
-        "away": 2
-      }
-    },
     {
       "id": "fd-552096",
       "league": "UCL",
