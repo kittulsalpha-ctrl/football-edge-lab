@@ -32,10 +32,13 @@
       "awayTeamId": "FD57",
       "homeTeam": "PSG",
       "awayTeam": "Arsenal",
-      "status": "upcoming",
+      "status": "live",
       "venue": "",
       "stage": "Final",
-      "score": null
+      "score": {
+        "home": 0,
+        "away": 1
+      }
     }
   ]
 }
