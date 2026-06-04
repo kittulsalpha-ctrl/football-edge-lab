@@ -4,41 +4,23 @@ const API_BASE = "https://api.football-data.org/v4";
 const COMPETITIONS = ["PL", "PD", "SA", "BL1", "CL", "WC"];
 const OUT_FILE = "fixtures.live.json";
 const DISPLAY_TIME_ZONE = process.env.FIXTURE_TIME_ZONE || "Asia/Kolkata";
+const MAX_WINDOW_DAYS = 10;
 
 const token = process.env.FOOTBALL_DATA_TOKEN;
 if (!token) {
   throw new Error("Missing FOOTBALL_DATA_TOKEN secret.");
 }
 
-const from = formatDateKey(addDays(new Date(), -1));
-const to = formatDateKey(addDays(new Date(), 60));
+const fromDate = addDays(new Date(), -1);
+const toDate = addDays(new Date(), 60);
 
-const params = new URLSearchParams({
-  competitions: COMPETITIONS.join(","),
-  dateFrom: from,
-  dateTo: to,
-});
+const from = formatDateKey(fromDate);
+const to = formatDateKey(toDate);
 
-const response = await fetch(`${API_BASE}/matches?${params.toString()}`, {
-  headers: {
-    "X-Auth-Token": token,
-  },
-});
-
-let payload = null;
-try {
-  payload = await response.json();
-} catch {
-  payload = null;
-}
-
-if (!response.ok) {
-  const message = payload?.message || payload?.error || `HTTP ${response.status}`;
-  throw new Error(`football-data.org request failed: ${message}`);
-}
+const apiMatches = await fetchMatchesInWindows(fromDate, toDate);
 
 const existingFeed = await loadExistingFeed();
-const converted = convertFootballData(payload, from, to, existingFeed);
+const converted = convertFootballData({ matches: apiMatches }, from, to, existingFeed);
 if (!converted) {
   console.log("football-data.org returned no supported fixtures for the configured date range; skipping update.");
   process.exit(0);
@@ -46,6 +28,47 @@ if (!converted) {
 
 await writeFile(OUT_FILE, `${JSON.stringify(converted, null, 2)}\n`);
 console.log(`Wrote ${converted.matches.length} fixtures to ${OUT_FILE}.`);
+
+async function fetchMatchesInWindows(fromDate, toDate) {
+  const matches = [];
+  let start = fromDate;
+
+  while (start <= toDate) {
+    const windowEnd = addDays(start, MAX_WINDOW_DAYS - 1);
+    const end = windowEnd > toDate ? toDate : windowEnd;
+
+    const params = new URLSearchParams({
+      competitions: COMPETITIONS.join(","),
+      dateFrom: formatDateKey(start),
+      dateTo: formatDateKey(end),
+    });
+
+    const response = await fetch(`${API_BASE}/matches?${params.toString()}`, {
+      headers: {
+        "X-Auth-Token": token,
+      },
+    });
+
+    let payload = null;
+    try {
+      payload = await response.json();
+    } catch {
+      payload = null;
+    }
+
+    if (!response.ok) {
+      const message = payload?.message || payload?.error || `HTTP ${response.status}`;
+      throw new Error(`football-data.org request failed: ${message}`);
+    }
+
+    const windowMatches = Array.isArray(payload?.matches) ? payload.matches : [];
+    matches.push(...windowMatches);
+
+    start = addDays(end, 1);
+  }
+
+  return matches;
+}
 
 async function loadExistingFeed() {
   try {
