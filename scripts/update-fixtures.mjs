@@ -11,7 +11,7 @@ if (!token) {
 }
 
 const from = formatDateKey(addDays(new Date(), -1));
-const to = formatDateKey(addDays(new Date(), 8));
+const to = formatDateKey(addDays(new Date(), 60));
 
 const params = new URLSearchParams({
   competitions: COMPETITIONS.join(","),
