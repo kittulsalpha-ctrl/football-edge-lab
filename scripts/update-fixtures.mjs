@@ -1,28 +1,28 @@
 import { readFile, writeFile } from "node:fs/promises";
 
 const API_BASE = "https://api.football-data.org/v4";
-const COMPETITIONS = ["PL", "PD", "SA", "BL1", "CL"];
+const COMPETITIONS = ["PL", "PD", "SA", "BL1", "CL", "WC"];
 const OUT_FILE = "fixtures.live.json";
 const DISPLAY_TIME_ZONE = process.env.FIXTURE_TIME_ZONE || "Asia/Kolkata";
 
 const token = process.env.FOOTBALL_DATA_TOKEN;
-
 if (!token) {
   throw new Error("Missing FOOTBALL_DATA_TOKEN secret.");
 }
 
 const from = formatDateKey(addDays(new Date(), -1));
 const to = formatDateKey(addDays(new Date(), 8));
+
 const params = new URLSearchParams({
   competitions: COMPETITIONS.join(","),
   dateFrom: from,
-  dateTo: to
+  dateTo: to,
 });
 
 const response = await fetch(`${API_BASE}/matches?${params.toString()}`, {
   headers: {
-    "X-Auth-Token": token
-  }
+    "X-Auth-Token": token,
+  },
 });
 
 let payload = null;
@@ -39,6 +39,11 @@ if (!response.ok) {
 
 const existingFeed = await loadExistingFeed();
 const converted = convertFootballData(payload, from, to, existingFeed);
+if (!converted) {
+  console.log("football-data.org returned no supported fixtures for the configured date range; skipping update.");
+  process.exit(0);
+}
+
 await writeFile(OUT_FILE, `${JSON.stringify(converted, null, 2)}\n`);
 console.log(`Wrote ${converted.matches.length} fixtures to ${OUT_FILE}.`);
 
@@ -52,27 +57,36 @@ async function loadExistingFeed() {
 
 function convertFootballData(payload, fromDate, toDate, existingFeed) {
   const apiMatches = Array.isArray(payload?.matches) ? payload.matches : [];
+
   const teams = new Map();
   const existingTeams = new Map((existingFeed?.teams || []).map((team) => [team.id, team]));
+
   const matches = apiMatches
     .map((match, index) => convertMatch(match, index, teams))
     .filter(Boolean)
     .sort(sortMatches);
 
-  const mergedMatches = mergeRecentFinishedMatches(matches, existingFeed?.matches || [], fromDate, teams, existingTeams);
+  const mergedMatches = mergeRecentFinishedMatches(
+    matches,
+    existingFeed?.matches || [],
+    fromDate,
+    teams,
+    existingTeams
+  );
 
   if (!mergedMatches.length) {
-    throw new Error("football-data.org returned no supported fixtures for the configured date range.");
+    return null;
   }
 
   return {
     meta: {
       source: "football-data.org live feed",
       updatedAt: new Date().toISOString().slice(0, 10),
-      note: `Real fixtures and scores for ${fromDate} to ${toDate}. Times shown in ${DISPLAY_TIME_ZONE}.`
+      note: `Real fixtures and scores for ${fromDate} to ${toDate}.
+Times shown in ${DISPLAY_TIME_ZONE}.`,
     },
     teams: [...teams.values()].sort((a, b) => a.name.localeCompare(b.name)),
-    matches: mergedMatches
+    matches: mergedMatches,
   };
 }
 
@@ -84,6 +98,7 @@ function mergeRecentFinishedMatches(newMatches, oldMatches, fromDate, teams, exi
     .forEach((match) => {
       if (merged.has(match.id)) return;
       merged.set(match.id, match);
+
       [match.homeTeamId, match.awayTeamId].forEach((teamId) => {
         const team = existingTeams.get(teamId);
         if (team) teams.set(team.id, team);
@@ -106,6 +121,7 @@ function convertMatch(match, index, teams) {
 
   const kickoff = match.utcDate ? new Date(match.utcDate) : null;
   const hasKickoff = kickoff && !Number.isNaN(kickoff.getTime());
+
   const id = `fd-${match.id || `${league}-${homeTeam.id}-${awayTeam.id}-${index}`}`;
 
   return {
@@ -120,7 +136,7 @@ function convertMatch(match, index, teams) {
     status: normalizeStatus(match.status),
     venue: match.venue || "",
     stage: formatStage(match),
-    score: normalizeScore(match.score)
+    score: normalizeScore(match.score),
   };
 }
 
@@ -134,7 +150,7 @@ function convertTeam(team, league) {
     shortName: String(team?.tla || makeShortName(name)).slice(0, 4).toUpperCase(),
     rating: 1600,
     venue: "",
-    league
+    league,
   };
 }
 
@@ -144,8 +160,10 @@ function normalizeLeague(value) {
     PD: "LALIGA",
     SA: "SERIEA",
     BL1: "BUNDESLIGA",
-    CL: "UCL"
+    CL: "UCL",
+    WC: "WC",
   };
+
   return aliases[String(value || "").toUpperCase()] || "";
 }
 
@@ -154,17 +172,20 @@ function normalizeStatus(status) {
   if (clean === "IN_PLAY" || clean === "LIVE") return "live";
   if (clean === "PAUSED") return "halftime";
   if (clean === "FINISHED" || clean === "AWARDED") return "finished";
+
   return "upcoming";
 }
 
 function normalizeScore(score) {
   if (!score || typeof score !== "object") return null;
+
   const candidates = [score.fullTime, score.regularTime, score.halfTime, score];
   for (const candidate of candidates) {
     const home = Number(candidate?.home ?? candidate?.homeTeam);
     const away = Number(candidate?.away ?? candidate?.awayTeam);
     if (Number.isFinite(home) && Number.isFinite(away)) return { home, away };
   }
+
   return null;
 }
 
@@ -182,6 +203,7 @@ function createTeamId(name, league) {
     .toUpperCase()
     .replace(/[^A-Z0-9]/g, "")
     .slice(0, 10);
+
   return `${league}_${stem || "TEAM"}`;
 }
 
@@ -217,15 +239,17 @@ function getDateTimeParts(date) {
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
-    hour12: false
+    hour12: false,
   }).formatToParts(date);
+
   const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+
   return {
     year: values.year,
     month: values.month,
     day: values.day,
     hour: values.hour === "24" ? "00" : values.hour,
-    minute: values.minute
+    minute: values.minute,
   };
 }
 
