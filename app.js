@@ -1314,6 +1314,7 @@ function renderMatchCard(match) {
   const prediction = calculatePrediction(details);
   const status = statusLabels[match.status];
   const scoreLabel = match.score ? `${match.score.home}-${match.score.away}` : "vs";
+    const contextLabel = formatMatchContext(match, details);
 
   return `
     <button class="match-card" type="button" data-match-id="${match.id}">
@@ -1338,14 +1339,20 @@ function renderMatchCard(match) {
         ${renderPick("Draw", prediction.probabilities.draw)}
         ${renderPick("Away", prediction.probabilities.away)}
       </div>
-      <div class="card-footer">
-        <span>${escapeHtml(details.stage || dateLabel(match.date))}</span>
+              <span>${escapeHtml(contextLabel)}</span>
+        
         <strong>${scoreLabel}</strong>
       </div>
     </button>
   `;
 }
 
+
+function formatMatchContext(match, details) {
+    const stage = String(details.stage || "").trim();
+    const date = match.date ? dateLabel(match.date) : "Date TBC";
+    return stage ? `${stage} - ${date}` : date;
+}
 function renderPick(label, probability) {
   return `
     <span class="pick-card">
