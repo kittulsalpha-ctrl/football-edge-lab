@@ -104,7 +104,7 @@
     {
       "id": "FD9460",
       "name": "Curaçao",
-      "shortName": "CUR",
+      "shortName": "CUW",
       "rating": 1600,
       "venue": "",
       "league": "WC"
@@ -1008,20 +1008,6 @@
       "score": null
     },
     {
-      "id": "fd-537337",
-      "league": "WC",
-      "date": "2026-06-25",
-      "time": "00:30",
-      "homeTeamId": "FD788",
-      "awayTeamId": "FD828",
-      "homeTeam": "Switzerland",
-      "awayTeam": "Canada",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": null
-    },
-    {
       "id": "fd-537338",
       "league": "WC",
       "date": "2026-06-25",
@@ -1036,14 +1022,14 @@
       "score": null
     },
     {
-      "id": "fd-537343",
+      "id": "fd-537337",
       "league": "WC",
       "date": "2026-06-25",
-      "time": "03:30",
-      "homeTeamId": "FD8873",
-      "awayTeamId": "FD764",
-      "homeTeam": "Scotland",
-      "awayTeam": "Brazil",
+      "time": "00:30",
+      "homeTeamId": "FD788",
+      "awayTeamId": "FD828",
+      "homeTeam": "Switzerland",
+      "awayTeam": "Canada",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
@@ -1058,6 +1044,20 @@
       "awayTeamId": "FD836",
       "homeTeam": "Morocco",
       "awayTeam": "Haiti",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Group Stage",
+      "score": null
+    },
+    {
+      "id": "fd-537343",
+      "league": "WC",
+      "date": "2026-06-25",
+      "time": "03:30",
+      "homeTeamId": "FD8873",
+      "awayTeamId": "FD764",
+      "homeTeam": "Scotland",
+      "awayTeam": "Brazil",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
