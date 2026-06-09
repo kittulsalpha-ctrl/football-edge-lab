@@ -1218,20 +1218,6 @@
       "score": null
     },
     {
-      "id": "fd-537402",
-      "league": "WC",
-      "date": "2026-06-28",
-      "time": "07:30",
-      "homeTeamId": "FD778",
-      "awayTeamId": "FD816",
-      "homeTeam": "Algeria",
-      "awayTeam": "Austria",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": null
-    },
-    {
       "id": "fd-537401",
       "league": "WC",
       "date": "2026-06-28",
@@ -1240,6 +1226,20 @@
       "awayTeamId": "FD762",
       "homeTeam": "Jordan",
       "awayTeam": "Argentina",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Group Stage",
+      "score": null
+    },
+    {
+      "id": "fd-537402",
+      "league": "WC",
+      "date": "2026-06-28",
+      "time": "07:30",
+      "homeTeamId": "FD778",
+      "awayTeamId": "FD816",
+      "homeTeam": "Algeria",
+      "awayTeam": "Austria",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
