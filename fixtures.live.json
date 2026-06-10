@@ -1260,20 +1260,6 @@
       "score": null
     },
     {
-      "id": "fd-537413",
-      "league": "WC",
-      "date": "2026-06-28",
-      "time": "02:30",
-      "homeTeamId": "FD1836",
-      "awayTeamId": "FD770",
-      "homeTeam": "Panama",
-      "awayTeam": "England",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": null
-    },
-    {
       "id": "fd-537414",
       "league": "WC",
       "date": "2026-06-28",
@@ -1282,6 +1268,20 @@
       "awayTeamId": "FD763",
       "homeTeam": "Croatia",
       "awayTeam": "Ghana",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Group Stage",
+      "score": null
+    },
+    {
+      "id": "fd-537413",
+      "league": "WC",
+      "date": "2026-06-28",
+      "time": "02:30",
+      "homeTeamId": "FD1836",
+      "awayTeamId": "FD770",
+      "homeTeam": "Panama",
+      "awayTeam": "England",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
