@@ -36,6 +36,13 @@ const leagueProfiles = {
     avgGoals: 2.96,
     homeAdvantage: 0.08,
     order: 5
+  },
+  WC: {
+    name: "FIFA World Cup 2026",
+    shortName: "WC",
+    avgGoals: 2.65,
+    homeAdvantage: 0.04,
+    order: 0
   }
 };
 
@@ -45,6 +52,126 @@ const statusLabels = {
   halftime: "Halftime",
   finished: "Finished"
 };
+
+const WORLD_CUP_PICK_STORAGE_KEY = "goaliq-worldcup-picks";
+
+const worldCupGroups = [
+  worldCupGroup("A", [
+    worldCupTeam("MEX", "Mexico", 1780),
+    worldCupTeam("RSA", "South Africa", 1640),
+    worldCupTeam("KOR", "South Korea", 1742),
+    worldCupTeam("CZE", "Czechia", 1698)
+  ]),
+  worldCupGroup("B", [
+    worldCupTeam("CAN", "Canada", 1710),
+    worldCupTeam("BIH", "Bosnia and Herzegovina", 1660),
+    worldCupTeam("QAT", "Qatar", 1654),
+    worldCupTeam("SUI", "Switzerland", 1810)
+  ]),
+  worldCupGroup("C", [
+    worldCupTeam("BRA", "Brazil", 1905),
+    worldCupTeam("MAR", "Morocco", 1825),
+    worldCupTeam("HAI", "Haiti", 1585),
+    worldCupTeam("SCO", "Scotland", 1725)
+  ]),
+  worldCupGroup("D", [
+    worldCupTeam("USA", "United States", 1775),
+    worldCupTeam("PAR", "Paraguay", 1705),
+    worldCupTeam("AUS", "Australia", 1712),
+    worldCupTeam("TUR", "Turkey", 1768)
+  ]),
+  worldCupGroup("E", [
+    worldCupTeam("GER", "Germany", 1880),
+    worldCupTeam("CUR", "Curacao", 1580),
+    worldCupTeam("CIV", "Ivory Coast", 1718),
+    worldCupTeam("ECU", "Ecuador", 1788)
+  ]),
+  worldCupGroup("F", [
+    worldCupTeam("NED", "Netherlands", 1868),
+    worldCupTeam("JPN", "Japan", 1790),
+    worldCupTeam("SWE", "Sweden", 1722),
+    worldCupTeam("TUN", "Tunisia", 1688)
+  ]),
+  worldCupGroup("G", [
+    worldCupTeam("BEL", "Belgium", 1848),
+    worldCupTeam("EGY", "Egypt", 1715),
+    worldCupTeam("IRN", "Iran", 1735),
+    worldCupTeam("NZL", "New Zealand", 1568)
+  ]),
+  worldCupGroup("H", [
+    worldCupTeam("ESP", "Spain", 1930),
+    worldCupTeam("CPV", "Cape Verde", 1604),
+    worldCupTeam("KSA", "Saudi Arabia", 1648),
+    worldCupTeam("URU", "Uruguay", 1835)
+  ]),
+  worldCupGroup("I", [
+    worldCupTeam("FRA", "France", 1915),
+    worldCupTeam("SEN", "Senegal", 1772),
+    worldCupTeam("IRQ", "Iraq", 1638),
+    worldCupTeam("NOR", "Norway", 1758)
+  ]),
+  worldCupGroup("J", [
+    worldCupTeam("ARG", "Argentina", 1920),
+    worldCupTeam("ALG", "Algeria", 1710),
+    worldCupTeam("AUT", "Austria", 1765),
+    worldCupTeam("JOR", "Jordan", 1588)
+  ]),
+  worldCupGroup("K", [
+    worldCupTeam("POR", "Portugal", 1888),
+    worldCupTeam("COD", "DR Congo", 1658),
+    worldCupTeam("UZB", "Uzbekistan", 1646),
+    worldCupTeam("COL", "Colombia", 1805)
+  ]),
+  worldCupGroup("L", [
+    worldCupTeam("ENG", "England", 1900),
+    worldCupTeam("CRO", "Croatia", 1830),
+    worldCupTeam("GHA", "Ghana", 1664),
+    worldCupTeam("PAN", "Panama", 1622)
+  ])
+];
+
+const worldCupRoundOf32 = [
+  wcMatch("M73", "Round of 32", "2026-06-28", "Los Angeles", wcSeed("A", 2), wcSeed("B", 2)),
+  wcMatch("M74", "Round of 32", "2026-06-28", "Houston", wcSeed("C", 1), wcSeed("F", 2)),
+  wcMatch("M75", "Round of 32", "2026-06-29", "Dallas", wcSeed("E", 1), wcThird(["A", "B", "C", "D", "F"])),
+  wcMatch("M76", "Round of 32", "2026-06-29", "Mexico City", wcSeed("F", 1), wcSeed("C", 2)),
+  wcMatch("M77", "Round of 32", "2026-06-30", "New York New Jersey", wcSeed("E", 2), wcSeed("I", 2)),
+  wcMatch("M78", "Round of 32", "2026-06-30", "Atlanta", wcSeed("I", 1), wcThird(["C", "D", "F", "G", "H"])),
+  wcMatch("M79", "Round of 32", "2026-07-01", "Monterrey", wcSeed("A", 1), wcThird(["C", "E", "F", "H", "I"])),
+  wcMatch("M80", "Round of 32", "2026-07-01", "Vancouver", wcSeed("L", 1), wcThird(["E", "H", "I", "J", "K"])),
+  wcMatch("M81", "Round of 32", "2026-07-02", "Seattle", wcSeed("G", 1), wcThird(["A", "E", "H", "I", "J"])),
+  wcMatch("M82", "Round of 32", "2026-07-02", "Kansas City", wcSeed("D", 1), wcThird(["B", "E", "F", "I", "J"])),
+  wcMatch("M83", "Round of 32", "2026-07-03", "Miami", wcSeed("H", 1), wcSeed("J", 2)),
+  wcMatch("M84", "Round of 32", "2026-07-03", "Boston", wcSeed("K", 2), wcSeed("L", 2)),
+  wcMatch("M85", "Round of 32", "2026-07-03", "Toronto", wcSeed("B", 1), wcThird(["E", "F", "G", "I", "J"])),
+  wcMatch("M86", "Round of 32", "2026-07-03", "San Francisco Bay Area", wcSeed("D", 2), wcSeed("G", 2)),
+  wcMatch("M87", "Round of 32", "2026-07-03", "Philadelphia", wcSeed("J", 1), wcSeed("H", 2)),
+  wcMatch("M88", "Round of 32", "2026-07-03", "Dallas", wcSeed("K", 1), wcThird(["D", "E", "I", "J", "L"]))
+];
+
+const worldCupLaterRounds = [
+  wcRound("round16", "Round of 16", [
+    ["M89", "2026-07-04", "Philadelphia", "M73", "M75"],
+    ["M90", "2026-07-04", "Houston", "M74", "M77"],
+    ["M91", "2026-07-05", "New York New Jersey", "M76", "M78"],
+    ["M92", "2026-07-05", "Mexico City", "M79", "M80"],
+    ["M93", "2026-07-06", "Dallas", "M83", "M84"],
+    ["M94", "2026-07-06", "Seattle", "M81", "M82"],
+    ["M95", "2026-07-07", "Atlanta", "M86", "M88"],
+    ["M96", "2026-07-07", "Vancouver", "M85", "M87"]
+  ]),
+  wcRound("quarterfinals", "Quarter-finals", [
+    ["M97", "2026-07-09", "Boston", "M89", "M90"],
+    ["M98", "2026-07-10", "Los Angeles", "M93", "M94"],
+    ["M99", "2026-07-11", "Miami", "M91", "M92"],
+    ["M100", "2026-07-11", "Kansas City", "M95", "M96"]
+  ]),
+  wcRound("semifinals", "Semi-finals", [
+    ["M101", "2026-07-14", "Dallas", "M97", "M98"],
+    ["M102", "2026-07-15", "Atlanta", "M99", "M100"]
+  ]),
+  wcRound("final", "Final", [["M104", "2026-07-19", "New York New Jersey", "M101", "M102"]])
+];
 
 const todayKey = formatDateKey(new Date());
 
@@ -515,6 +642,8 @@ const selectors = {
   emptyState: document.querySelector("#emptyState"),
   matchGroups: document.querySelector("#matchGroups"),
   homeView: document.querySelector("#homeView"),
+  bracketView: document.querySelector("#bracketView"),
+  bracketContent: document.querySelector("#bracketContent"),
   detailView: document.querySelector("#detailView"),
   detailStatus: document.querySelector("#detailStatus"),
   detailLeague: document.querySelector("#detailLeague"),
@@ -541,6 +670,8 @@ const state = {
   selectedDate: todayKey,
   search: "",
   selectedMatchId: null,
+  selectedBracketMatchId: null,
+  bracketUserPicks: loadWorldCupPicks(),
   detailTab: "overview",
   renderTimer: null
 };
@@ -702,9 +833,10 @@ function importFixtureData(payload, options = {}) {
 
   state.selectedMatchId = null;
   selectors.detailView.hidden = true;
+  selectors.bracketView.hidden = true;
   selectors.homeView.hidden = false;
   renderFixtureSource();
-  renderBoardWithLoading();
+  renderActiveView();
   setImportStatus(`Loaded ${matches.length} fixtures from ${fixtureMeta.source}.`);
   return getFixtureDataExport();
 }
@@ -717,9 +849,10 @@ function resetFixtureData() {
   if (selectors.fixtureUrlInput) selectors.fixtureUrlInput.value = "";
   state.selectedMatchId = null;
   selectors.detailView.hidden = true;
+  selectors.bracketView.hidden = true;
   selectors.homeView.hidden = false;
   renderFixtureSource();
-  renderBoardWithLoading();
+  renderActiveView();
   setImportStatus("Restored the built-in fixture snapshot.");
 }
 
@@ -759,6 +892,10 @@ async function loadLiveFixtureFeed(options = {}) {
   });
   if (!options.silent) setImportStatus(`Loaded ${imported.matches.length} fixtures from the live feed.`);
   return imported;
+}
+
+function getWorldCupBracket() {
+  return buildWorldCupBracket({ userPicks: state.bracketUserPicks });
 }
 
 function loadStoredFixtureData() {
@@ -908,7 +1045,11 @@ function normalizeLeague(value) {
     "uefa champions league": "UCL",
     "champions league": "UCL",
     cl: "UCL",
-    ucl: "UCL"
+    ucl: "UCL",
+    "fifa world cup": "WC",
+    "fifa world cup 2026": "WC",
+    "world cup": "WC",
+    wc: "WC"
   };
   return aliases[clean] || raw.toUpperCase();
 }
@@ -1218,6 +1359,9 @@ function resultFor(goalsFor, goalsAgainst) {
 }
 
 function renderBoardWithLoading() {
+  selectors.homeView.hidden = false;
+  selectors.bracketView.hidden = true;
+  selectors.detailView.hidden = true;
   selectors.loadingState.hidden = false;
   selectors.matchGroups.hidden = true;
   selectors.emptyState.hidden = true;
@@ -1227,6 +1371,14 @@ function renderBoardWithLoading() {
     selectors.loadingState.hidden = true;
     selectors.matchGroups.hidden = false;
   }, 140);
+}
+
+function renderActiveView() {
+  if (state.activeView === "worldcup") {
+    renderWorldCupView();
+    return;
+  }
+  renderBoardWithLoading();
 }
 
 function renderBoard() {
@@ -1278,7 +1430,7 @@ function groupByLeague(list) {
   });
 
   return [...groups.entries()]
-    .sort((a, b) => leagueProfiles[a[0]].order - leagueProfiles[b[0]].order)
+    .sort((a, b) => ensureLeagueProfile(a[0]).order - ensureLeagueProfile(b[0]).order)
     .map(([league, leagueMatches]) => ({
       league,
       matches: leagueMatches.sort(sortMatches)
@@ -1286,7 +1438,7 @@ function groupByLeague(list) {
 }
 
 function renderLeagueGroup(group) {
-  const profile = leagueProfiles[group.league];
+  const profile = ensureLeagueProfile(group.league);
   return `
     <section class="league-group">
       <header class="league-header">
@@ -1366,6 +1518,7 @@ function openMatchDetail(matchId) {
   state.selectedMatchId = matchId;
   state.detailTab = "overview";
   selectors.homeView.hidden = true;
+  selectors.bracketView.hidden = true;
   selectors.detailView.hidden = false;
   renderDetail();
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1374,8 +1527,12 @@ function openMatchDetail(matchId) {
 function closeMatchDetail() {
   state.selectedMatchId = null;
   selectors.detailView.hidden = true;
-  selectors.homeView.hidden = false;
-  renderBoardWithLoading();
+  if (state.activeView === "worldcup") {
+    renderWorldCupView();
+  } else {
+    selectors.homeView.hidden = false;
+    renderBoardWithLoading();
+  }
 }
 
 function renderDetail() {
@@ -1573,6 +1730,461 @@ function renderH2H(details, summary) {
   `;
 }
 
+function renderWorldCupView() {
+  clearTimeout(state.renderTimer);
+  const bracket = buildWorldCupBracket({ userPicks: state.bracketUserPicks });
+  const modelBracket = buildWorldCupBracket({ userPicks: {} });
+  const selectedMatch = bracket.matchesById.get(state.selectedBracketMatchId) || bracket.rounds[0]?.matches[0] || null;
+  if (selectedMatch && !state.selectedBracketMatchId) state.selectedBracketMatchId = selectedMatch.id;
+
+  selectors.homeView.hidden = true;
+  selectors.detailView.hidden = true;
+  selectors.bracketView.hidden = false;
+  selectors.headerMatchCount.textContent = "World Cup 2026";
+  selectors.bracketContent.innerHTML = `
+    ${renderWorldCupHero(modelBracket, bracket)}
+    <div class="worldcup-layout">
+      <section class="worldcup-section">
+        <div class="panel-title">
+          <span>Group stage</span>
+          <strong>12 groups of 4</strong>
+        </div>
+        <div class="worldcup-groups">
+          ${bracket.standings.map(renderWorldCupGroup).join("")}
+        </div>
+      </section>
+      <section class="worldcup-section bracket-section">
+        <div class="panel-title">
+          <span>Prediction bracket</span>
+          <strong>Round of 32 to final</strong>
+        </div>
+        <div class="bracket-scroll" aria-label="FIFA World Cup 2026 prediction bracket">
+          <div class="bracket-grid">
+            ${bracket.rounds.map(renderWorldCupRound).join("")}
+          </div>
+        </div>
+      </section>
+      ${renderWorldCupMatchDrawer(selectedMatch, modelBracket.matchesById.get(selectedMatch?.id))}
+    </div>
+  `;
+}
+
+function renderWorldCupHero(modelBracket, userBracket) {
+  const modelChampion = modelBracket.champion;
+  const userChampion = userBracket.champion;
+  const pickCount = Object.keys(state.bracketUserPicks).length;
+  return `
+    <section class="worldcup-hero">
+      <div>
+        <span class="section-kicker">FIFA World Cup 2026</span>
+        <h2>GoalIQ prediction bracket</h2>
+        <p>Group tables use live World Cup fixture scores when they exist, then the bracket advances from actual results, your picks, or the model favorite.</p>
+      </div>
+      <div class="champion-card">
+        <span>Model champion</span>
+        <strong>${escapeHtml(modelChampion?.name || "TBD")}</strong>
+        <small>${pickCount ? `${pickCount} saved pick${pickCount === 1 ? "" : "s"}` : "No user picks yet"}${userChampion ? ` - Your path: ${escapeHtml(userChampion.name)}` : ""}</small>
+      </div>
+    </section>
+  `;
+}
+
+function renderWorldCupGroup(groupStanding) {
+  return `
+    <article class="worldcup-group-card">
+      <header>
+        <span>Group ${escapeHtml(groupStanding.group)}</span>
+        <strong>${groupStanding.table.filter((row) => row.played > 0).length ? "Live table" : "Model seed"}</strong>
+      </header>
+      <div class="worldcup-table">
+        ${groupStanding.table
+          .map(
+            (row, index) => `
+              <div class="worldcup-table-row ${index < 2 ? "qualifier" : index === 2 ? "third-place" : ""}">
+                <span>${index + 1}</span>
+                <strong>${escapeHtml(row.team.name)}</strong>
+                <small>${row.points} pts</small>
+                <small>${row.goalDifference >= 0 ? "+" : ""}${row.goalDifference}</small>
+              </div>
+            `
+          )
+          .join("")}
+      </div>
+    </article>
+  `;
+}
+
+function renderWorldCupRound(round) {
+  return `
+    <div class="bracket-round">
+      <h3>${escapeHtml(round.label)}</h3>
+      <div class="bracket-round-matches">
+        ${round.matches.map(renderWorldCupMatchCard).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderWorldCupMatchCard(match) {
+  const difference = match.userPick && match.modelWinner && match.userPick !== match.modelWinner.code;
+  const hasResult = Boolean(match.result);
+  return `
+    <button class="bracket-match ${state.selectedBracketMatchId === match.id ? "active" : ""} ${difference ? "pick-diff" : ""} ${hasResult ? "settled" : ""}" type="button" data-bracket-match-id="${escapeHtml(match.id)}">
+      <span class="bracket-match-meta">${escapeHtml(match.id)} - ${escapeHtml(formatShortDate(match.date))}</span>
+      ${renderWorldCupTeamSlot(match.home, match)}
+      ${renderWorldCupTeamSlot(match.away, match)}
+    </button>
+  `;
+}
+
+function renderWorldCupTeamSlot(teamEntry, match) {
+  const isWinner = teamEntry && match.winner?.code === teamEntry.code;
+  const isUserPick = teamEntry && match.userPick === teamEntry.code;
+  const opponent = getOpponentForSlot(teamEntry, match);
+  const probability = teamEntry && opponent ? formatPercent(getWorldCupWinProbability(teamEntry, opponent)) : "TBD";
+  return `
+    <div class="bracket-team ${isWinner ? "winner" : ""} ${isUserPick ? "user-pick" : ""}">
+      <span>${escapeHtml(teamEntry?.shortName || "TBD")}</span>
+      <strong>${escapeHtml(teamEntry?.name || "To be decided")}</strong>
+      <small>${probability}</small>
+    </div>
+  `;
+}
+
+function renderWorldCupMatchDrawer(match, modelMatch) {
+  if (!match) {
+    return `<section class="worldcup-drawer empty-state inline"><strong>No bracket match selected</strong><span>Select a match to inspect the prediction.</span></section>`;
+  }
+
+  const modelPick = modelMatch?.modelWinner || match.modelWinner;
+  const prediction = getWorldCupMatchPrediction(match.home, match.away);
+  const canPick = match.home && match.away && !match.result;
+  return `
+    <section class="worldcup-drawer">
+      <div class="panel-title">
+        <span>${escapeHtml(match.label)}</span>
+        <strong>${escapeHtml(match.id)}</strong>
+      </div>
+      <div class="drawer-headline">
+        <strong>${escapeHtml(match.home?.name || "TBD")} vs ${escapeHtml(match.away?.name || "TBD")}</strong>
+        <span>${escapeHtml(formatLongDate(match.date))} - ${escapeHtml(match.venue)}</span>
+      </div>
+      <div class="drawer-grid">
+        <div><span>Model pick</span><strong>${escapeHtml(modelPick?.name || "TBD")}</strong></div>
+        <div><span>Expected goals</span><strong>${prediction.expectedGoals}</strong></div>
+        <div><span>Result source</span><strong>${match.result ? "Fixture feed" : match.userPick ? "Your pick" : "GoalIQ model"}</strong></div>
+        <div><span>Score</span><strong>${match.result ? `${match.result.home}-${match.result.away}` : "Pending"}</strong></div>
+      </div>
+      <div class="pick-actions">
+        ${[match.home, match.away]
+          .filter(Boolean)
+          .map(
+            (teamEntry) => `
+              <button class="user-pick-button ${match.userPick === teamEntry.code ? "active" : ""}" type="button" data-bracket-pick="${escapeHtml(match.id)}" data-team-code="${escapeHtml(teamEntry.code)}" ${canPick ? "" : "disabled"}>
+                ${escapeHtml(teamEntry.shortName)}
+              </button>
+            `
+          )
+          .join("")}
+        <button class="user-pick-button muted" type="button" data-bracket-clear="${escapeHtml(match.id)}" ${match.userPick ? "" : "disabled"}>Clear</button>
+      </div>
+      <p class="source-note">Predictions are for analysis only. No result is guaranteed.</p>
+    </section>
+  `;
+}
+
+function buildWorldCupBracket({ userPicks = {} } = {}) {
+  const standings = getWorldCupStandings();
+  const slots = getWorldCupSeedSlots(standings);
+  const usedThirdGroups = new Set();
+  const byId = new Map();
+  const rounds = [
+    {
+      key: "round32",
+      label: "Round of 32",
+      matches: worldCupRoundOf32.map((template) => {
+        const home = resolveWorldCupSeed(template.home, slots, usedThirdGroups);
+        const away = resolveWorldCupSeed(template.away, slots, usedThirdGroups);
+        const match = createWorldCupKnockoutMatch(template, home, away, userPicks);
+        byId.set(match.id, match);
+        return match;
+      })
+    }
+  ];
+
+  worldCupLaterRounds.forEach((round) => {
+    const roundMatches = round.matches.map(([id, date, venue, homeSource, awaySource]) => {
+      const template = wcMatch(id, round.label, date, venue, wcPrevious(homeSource), wcPrevious(awaySource));
+      const home = byId.get(homeSource)?.winner || null;
+      const away = byId.get(awaySource)?.winner || null;
+      const match = createWorldCupKnockoutMatch(template, home, away, userPicks);
+      byId.set(match.id, match);
+      return match;
+    });
+    rounds.push({ key: round.key, label: round.label, matches: roundMatches });
+  });
+
+  return {
+    standings,
+    rounds,
+    matchesById: byId,
+    champion: byId.get("M104")?.winner || null
+  };
+}
+
+function getWorldCupStandings() {
+  return worldCupGroups.map((groupData) => ({
+    group: groupData.name,
+    table: rankWorldCupGroup(groupData, getWorldCupGroupFixtures(groupData))
+  }));
+}
+
+function rankWorldCupGroup(groupData, fixtures) {
+  const rows = groupData.teams.map((teamEntry) => ({
+    team: teamEntry,
+    played: 0,
+    wins: 0,
+    draws: 0,
+    losses: 0,
+    goalsFor: 0,
+    goalsAgainst: 0,
+    goalDifference: 0,
+    points: 0
+  }));
+  const table = new Map(rows.map((row) => [normalizeWorldCupName(row.team.name), row]));
+
+  fixtures.forEach((fixture) => {
+    const home = table.get(normalizeWorldCupName(getFixtureTeamName(fixture, "home")));
+    const away = table.get(normalizeWorldCupName(getFixtureTeamName(fixture, "away")));
+    if (!home || !away || !fixture.score) return;
+    applyWorldCupGroupScore(home, fixture.score.home, fixture.score.away);
+    applyWorldCupGroupScore(away, fixture.score.away, fixture.score.home);
+  });
+
+  return rows.sort((a, b) => {
+    return (
+      b.points - a.points ||
+      b.goalDifference - a.goalDifference ||
+      b.goalsFor - a.goalsFor ||
+      b.team.rating - a.team.rating ||
+      a.team.name.localeCompare(b.team.name)
+    );
+  });
+}
+
+function getWorldCupSeedSlots(standings) {
+  const slots = {};
+  const thirdRows = [];
+  standings.forEach((groupStanding) => {
+    slots[`${groupStanding.group}1`] = groupStanding.table[0]?.team || null;
+    slots[`${groupStanding.group}2`] = groupStanding.table[1]?.team || null;
+    if (groupStanding.table[2]) thirdRows.push({ ...groupStanding.table[2], group: groupStanding.group });
+  });
+
+  thirdRows
+    .sort((a, b) => {
+      return (
+        b.points - a.points ||
+        b.goalDifference - a.goalDifference ||
+        b.goalsFor - a.goalsFor ||
+        b.team.rating - a.team.rating ||
+        a.team.name.localeCompare(b.team.name)
+      );
+    })
+    .slice(0, 8)
+    .forEach((row) => {
+      slots[`${row.group}3`] = row.team;
+    });
+
+  return slots;
+}
+
+function resolveWorldCupSeed(seed, slots, usedThirdGroups) {
+  if (seed.type === "group") return slots[`${seed.group}${seed.rank}`] || null;
+  if (seed.type === "third") {
+    const groupName = seed.groups.find((candidate) => slots[`${candidate}3`] && !usedThirdGroups.has(candidate));
+    if (!groupName) return null;
+    usedThirdGroups.add(groupName);
+    return slots[`${groupName}3`];
+  }
+  return null;
+}
+
+function createWorldCupKnockoutMatch(template, home, away, userPicks) {
+  const fixture = findWorldCupFixtureBetween(home, away, template.date);
+  const result = fixture?.score ? orientWorldCupScore(fixture, home, away) : null;
+  const userPick = userPicks[template.id] || null;
+  const modelWinner = getWorldCupModelWinner(home, away);
+  return {
+    id: template.id,
+    label: template.label,
+    date: fixture?.date || template.date,
+    venue: fixture?.venue || template.venue,
+    home,
+    away,
+    result,
+    userPick,
+    modelWinner,
+    winner: getWorldCupWinner(home, away, result, userPick),
+    source: fixture || template
+  };
+}
+
+function getWorldCupWinner(home, away, result, userPick) {
+  if (!home || !away) return null;
+  if (result) {
+    if (result.home > result.away) return home;
+    if (result.away > result.home) return away;
+  }
+  if (userPick === home.code) return home;
+  if (userPick === away.code) return away;
+  return getWorldCupModelWinner(home, away);
+}
+
+function getWorldCupModelWinner(home, away) {
+  if (!home || !away) return null;
+  return home.rating >= away.rating ? home : away;
+}
+
+function getWorldCupMatchPrediction(home, away) {
+  if (!home || !away) return { expectedGoals: "TBD" };
+  const edge = clamp((home.rating - away.rating) / 500, -0.8, 0.8);
+  const homeGoals = clamp(1.35 + edge * 0.75, 0.55, 2.75);
+  const awayGoals = clamp(1.2 - edge * 0.62, 0.45, 2.6);
+  return {
+    expectedGoals: `${formatNumber(homeGoals)} - ${formatNumber(awayGoals)}`
+  };
+}
+
+function getWorldCupWinProbability(teamEntry, opponent) {
+  if (!teamEntry || !opponent) return 0;
+  return clamp(1 / (1 + Math.pow(10, (opponent.rating - teamEntry.rating) / 420)), 0.12, 0.88);
+}
+
+function getOpponentForSlot(teamEntry, match) {
+  if (!teamEntry) return null;
+  return match.home?.code === teamEntry.code ? match.away : match.home;
+}
+
+function getWorldCupGroupFixtures(groupData) {
+  const groupNames = new Set(groupData.teams.map((teamEntry) => normalizeWorldCupName(teamEntry.name)));
+  return getWorldCupFixtures().filter((fixture) => {
+    const home = normalizeWorldCupName(getFixtureTeamName(fixture, "home"));
+    const away = normalizeWorldCupName(getFixtureTeamName(fixture, "away"));
+    return groupNames.has(home) && groupNames.has(away);
+  });
+}
+
+function getWorldCupFixtures() {
+  return matches.filter((match) => normalizeLeague(match.league) === "WC");
+}
+
+function findWorldCupFixtureBetween(home, away, fallbackDate) {
+  if (!home || !away) return null;
+  const homeName = normalizeWorldCupName(home.name);
+  const awayName = normalizeWorldCupName(away.name);
+  return (
+    getWorldCupFixtures().find((fixture) => {
+      const fixtureHome = normalizeWorldCupName(getFixtureTeamName(fixture, "home"));
+      const fixtureAway = normalizeWorldCupName(getFixtureTeamName(fixture, "away"));
+      const samePair =
+        (fixtureHome === homeName && fixtureAway === awayName) ||
+        (fixtureHome === awayName && fixtureAway === homeName);
+      return samePair && fixture.date >= "2026-06-28";
+    }) || {
+      date: fallbackDate,
+      venue: ""
+    }
+  );
+}
+
+function orientWorldCupScore(fixture, home, away) {
+  const fixtureHome = normalizeWorldCupName(getFixtureTeamName(fixture, "home"));
+  const bracketHome = normalizeWorldCupName(home?.name);
+  if (fixtureHome === bracketHome) return fixture.score;
+  return { home: fixture.score.away, away: fixture.score.home };
+}
+
+function applyWorldCupGroupScore(row, goalsFor, goalsAgainst) {
+  row.played += 1;
+  row.goalsFor += goalsFor;
+  row.goalsAgainst += goalsAgainst;
+  row.goalDifference = row.goalsFor - row.goalsAgainst;
+  if (goalsFor > goalsAgainst) {
+    row.wins += 1;
+    row.points += 3;
+  } else if (goalsFor === goalsAgainst) {
+    row.draws += 1;
+    row.points += 1;
+  } else {
+    row.losses += 1;
+  }
+}
+
+function getFixtureTeamName(fixture, side) {
+  const teamId = side === "home" ? fixture.homeTeamId : fixture.awayTeamId;
+  return teams[teamId]?.name || teamId;
+}
+
+function normalizeWorldCupName(value) {
+  const clean = String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+  const aliases = {
+    "bosnia h": "bosnia and herzegovina",
+    "bosnia herz": "bosnia and herzegovina",
+    "usa": "united states",
+    "united states of america": "united states",
+    "cote d ivoire": "ivory coast"
+  };
+  return aliases[clean] || clean;
+}
+
+function loadWorldCupPicks() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(WORLD_CUP_PICK_STORAGE_KEY) || "{}");
+    return stored && typeof stored === "object" ? stored : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveWorldCupPicks() {
+  localStorage.setItem(WORLD_CUP_PICK_STORAGE_KEY, JSON.stringify(state.bracketUserPicks));
+}
+
+function worldCupGroup(name, groupTeams) {
+  return { name, teams: groupTeams.map((teamEntry, index) => ({ ...teamEntry, group: name, position: index + 1 })) };
+}
+
+function worldCupTeam(code, name, rating) {
+  return { code, name, shortName: code, rating };
+}
+
+function wcSeed(groupName, rank) {
+  return { type: "group", group: groupName, rank };
+}
+
+function wcThird(groups) {
+  return { type: "third", groups };
+}
+
+function wcPrevious(matchId) {
+  return { type: "previous", matchId };
+}
+
+function wcMatch(id, label, date, venue, home, away) {
+  return { id, label, date, venue, home, away };
+}
+
+function wcRound(key, label, roundMatches) {
+  return { key, label, matches: roundMatches };
+}
+
 function renderStatRows(rows) {
   return rows
     .map(
@@ -1601,39 +2213,61 @@ function renderDetailTabState() {
 function bindEvents() {
   document.querySelectorAll(".nav-tab").forEach((button) => {
     button.addEventListener("click", () => {
-      state.activeView = button.dataset.view;
-      document.querySelectorAll(".nav-tab").forEach((tab) => tab.classList.toggle("active", tab === button));
-      if (state.selectedMatchId) closeMatchDetail();
-      renderBoardWithLoading();
+      setActiveView(button.dataset.view);
     });
   });
 
   selectors.dateInput.addEventListener("change", () => {
     state.selectedDate = selectors.dateInput.value || todayKey;
-    renderBoardWithLoading();
+    renderActiveView();
   });
 
   selectors.searchInput.addEventListener("input", () => {
     state.search = selectors.searchInput.value;
-    renderBoardWithLoading();
+    renderActiveView();
   });
 
   document.querySelector("#prevDateButton").addEventListener("click", () => {
     state.selectedDate = formatDateKey(addDays(parseDateKey(state.selectedDate), -1));
     selectors.dateInput.value = state.selectedDate;
-    renderBoardWithLoading();
+    renderActiveView();
   });
 
   document.querySelector("#nextDateButton").addEventListener("click", () => {
     state.selectedDate = formatDateKey(addDays(parseDateKey(state.selectedDate), 1));
     selectors.dateInput.value = state.selectedDate;
-    renderBoardWithLoading();
+    renderActiveView();
   });
 
   selectors.matchGroups.addEventListener("click", (event) => {
     const card = event.target.closest("[data-match-id]");
     if (!card) return;
     openMatchDetail(card.dataset.matchId);
+  });
+
+  selectors.bracketView.addEventListener("click", (event) => {
+    const pickButton = event.target.closest("[data-bracket-pick]");
+    if (pickButton && !pickButton.disabled) {
+      state.bracketUserPicks[pickButton.dataset.bracketPick] = pickButton.dataset.teamCode;
+      state.selectedBracketMatchId = pickButton.dataset.bracketPick;
+      saveWorldCupPicks();
+      renderWorldCupView();
+      return;
+    }
+
+    const clearButton = event.target.closest("[data-bracket-clear]");
+    if (clearButton && !clearButton.disabled) {
+      delete state.bracketUserPicks[clearButton.dataset.bracketClear];
+      state.selectedBracketMatchId = clearButton.dataset.bracketClear;
+      saveWorldCupPicks();
+      renderWorldCupView();
+      return;
+    }
+
+    const bracketMatch = event.target.closest("[data-bracket-match-id]");
+    if (!bracketMatch) return;
+    state.selectedBracketMatchId = bracketMatch.dataset.bracketMatchId;
+    renderWorldCupView();
   });
 
   document.querySelector("#backButton").addEventListener("click", closeMatchDetail);
@@ -1687,16 +2321,34 @@ function bindEvents() {
   selectors.resetFixturesButton.addEventListener("click", resetFixtureData);
 }
 
+function setActiveView(view, updateUrl = true) {
+  state.activeView = view;
+  document.querySelectorAll(".nav-tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.view === view));
+  state.selectedMatchId = null;
+  selectors.detailView.hidden = true;
+  if (updateUrl) {
+    const nextUrl = view === "worldcup" ? "#worldcup-2026" : `${window.location.pathname}${window.location.search}`;
+    history.replaceState(null, "", nextUrl);
+  }
+  renderActiveView();
+}
+
+function getInitialViewFromLocation() {
+  return ["#worldcup-2026", "#bracket"].includes(window.location.hash) ? "worldcup" : "today";
+}
+
 function init() {
   selectors.dateInput.value = state.selectedDate;
+  state.activeView = getInitialViewFromLocation();
   const restoredStoredFixtures = loadStoredFixtureData();
   bindEvents();
-  renderBoardWithLoading();
-  if (!restoredStoredFixtures) {
-    loadLiveFixtureFeed({ persist: false, silent: true }).catch(() => {
+  document.querySelectorAll(".nav-tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.view === state.activeView));
+  renderActiveView();
+  loadLiveFixtureFeed({ persist: false, silent: true }).catch(() => {
+    if (!restoredStoredFixtures) {
       setImportStatus("Live feed is not ready yet. Using the built-in demo snapshot.");
-    });
-  }
+    }
+  });
 }
 
 function renderFixtureSource() {
@@ -1926,7 +2578,8 @@ window.GoalIQServices = {
   resetFixtureData,
   getFixtureDataExport,
   loadFixtureDataFromUrl,
-  loadLiveFixtureFeed
+  loadLiveFixtureFeed,
+  getWorldCupBracket
 };
 window.FootballEdgeServices = window.GoalIQServices;
 
