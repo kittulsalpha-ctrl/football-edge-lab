@@ -485,11 +485,11 @@
       "awayTeamId": "FD803",
       "homeTeam": "Australia",
       "awayTeam": "Turkey",
-      "status": "halftime",
+      "status": "finished",
       "venue": "",
       "stage": "Group Stage",
       "score": {
-        "home": 1,
+        "home": 2,
         "away": 0
       }
     },
