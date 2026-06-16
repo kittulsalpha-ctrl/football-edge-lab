@@ -104,7 +104,7 @@
     {
       "id": "FD9460",
       "name": "Curaçao",
-      "shortName": "CUR",
+      "shortName": "CUW",
       "rating": 1600,
       "venue": "",
       "league": "WC"
@@ -519,10 +519,13 @@
       "awayTeamId": "FD804",
       "homeTeam": "France",
       "awayTeam": "Senegal",
-      "status": "upcoming",
+      "status": "finished",
       "venue": "",
       "stage": "Group Stage",
-      "score": null
+      "score": {
+        "home": 3,
+        "away": 1
+      }
     },
     {
       "id": "fd-537392",
@@ -533,10 +536,13 @@
       "awayTeamId": "FD8872",
       "homeTeam": "Iraq",
       "awayTeam": "Norway",
-      "status": "upcoming",
+      "status": "live",
       "venue": "",
       "stage": "Group Stage",
-      "score": null
+      "score": {
+        "home": 0,
+        "away": 0
+      }
     },
     {
       "id": "fd-537397",
