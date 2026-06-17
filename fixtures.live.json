@@ -519,7 +519,7 @@
       "awayTeamId": "FD1934",
       "homeTeam": "Portugal",
       "awayTeam": "Congo DR",
-      "status": "live",
+      "status": "finished",
       "venue": "",
       "stage": "Group Stage",
       "score": {
@@ -536,10 +536,13 @@
       "awayTeamId": "FD799",
       "homeTeam": "England",
       "awayTeam": "Croatia",
-      "status": "upcoming",
+      "status": "finished",
       "venue": "",
       "stage": "Group Stage",
-      "score": null
+      "score": {
+        "home": 4,
+        "away": 2
+      }
     },
     {
       "id": "fd-537410",
