@@ -519,10 +519,13 @@
       "awayTeamId": "FD1934",
       "homeTeam": "Portugal",
       "awayTeam": "Congo DR",
-      "status": "upcoming",
+      "status": "live",
       "venue": "",
       "stage": "Group Stage",
-      "score": null
+      "score": {
+        "home": 1,
+        "away": 1
+      }
     },
     {
       "id": "fd-537409",
@@ -903,20 +906,6 @@
       "score": null
     },
     {
-      "id": "fd-537338",
-      "league": "WC",
-      "date": "2026-06-25",
-      "time": "00:30",
-      "homeTeamId": "FD1060",
-      "awayTeamId": "FD8030",
-      "homeTeam": "Bosnia-H.",
-      "awayTeam": "Qatar",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": null
-    },
-    {
       "id": "fd-537337",
       "league": "WC",
       "date": "2026-06-25",
@@ -931,14 +920,14 @@
       "score": null
     },
     {
-      "id": "fd-537344",
+      "id": "fd-537338",
       "league": "WC",
       "date": "2026-06-25",
-      "time": "03:30",
-      "homeTeamId": "FD815",
-      "awayTeamId": "FD836",
-      "homeTeam": "Morocco",
-      "awayTeam": "Haiti",
+      "time": "00:30",
+      "homeTeamId": "FD1060",
+      "awayTeamId": "FD8030",
+      "homeTeam": "Bosnia-H.",
+      "awayTeam": "Qatar",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
@@ -953,6 +942,20 @@
       "awayTeamId": "FD764",
       "homeTeam": "Scotland",
       "awayTeam": "Brazil",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Group Stage",
+      "score": null
+    },
+    {
+      "id": "fd-537344",
+      "league": "WC",
+      "date": "2026-06-25",
+      "time": "03:30",
+      "homeTeamId": "FD815",
+      "awayTeamId": "FD836",
+      "homeTeam": "Morocco",
+      "awayTeam": "Haiti",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
