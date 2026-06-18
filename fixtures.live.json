@@ -368,7 +368,7 @@
     {
       "id": "FD758",
       "name": "Uruguay",
-      "shortName": "URU",
+      "shortName": "URY",
       "rating": 1600,
       "venue": "",
       "league": "WC"
@@ -536,10 +536,13 @@
       "awayTeamId": "FD774",
       "homeTeam": "Czechia",
       "awayTeam": "South Africa",
-      "status": "upcoming",
+      "status": "finished",
       "venue": "",
       "stage": "Group Stage",
-      "score": null
+      "score": {
+        "home": 1,
+        "away": 1
+      }
     },
     {
       "id": "fd-537335",
@@ -976,20 +979,6 @@
       "score": null
     },
     {
-      "id": "fd-537362",
-      "league": "WC",
-      "date": "2026-06-26",
-      "time": "04:30",
-      "homeTeamId": "FD766",
-      "awayTeamId": "FD792",
-      "homeTeam": "Japan",
-      "awayTeam": "Sweden",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": null
-    },
-    {
       "id": "fd-537361",
       "league": "WC",
       "date": "2026-06-26",
@@ -998,6 +987,20 @@
       "awayTeamId": "FD8601",
       "homeTeam": "Tunisia",
       "awayTeam": "Netherlands",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Group Stage",
+      "score": null
+    },
+    {
+      "id": "fd-537362",
+      "league": "WC",
+      "date": "2026-06-26",
+      "time": "04:30",
+      "homeTeamId": "FD766",
+      "awayTeamId": "FD792",
+      "homeTeam": "Japan",
+      "awayTeam": "Sweden",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
