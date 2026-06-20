@@ -104,7 +104,7 @@
     {
       "id": "FD9460",
       "name": "Curaçao",
-      "shortName": "CUR",
+      "shortName": "CUW",
       "rating": 1600,
       "venue": "",
       "league": "WC"
@@ -368,7 +368,7 @@
     {
       "id": "FD758",
       "name": "Uruguay",
-      "shortName": "URY",
+      "shortName": "URU",
       "rating": 1600,
       "venue": "",
       "league": "WC"
@@ -519,12 +519,12 @@
       "awayTeamId": "FD792",
       "homeTeam": "Netherlands",
       "awayTeam": "Sweden",
-      "status": "live",
+      "status": "finished",
       "venue": "",
       "stage": "Group Stage",
       "score": {
-        "home": 2,
-        "away": 0
+        "home": 5,
+        "away": 1
       }
     },
     {
@@ -536,10 +536,13 @@
       "awayTeamId": "FD1935",
       "homeTeam": "Germany",
       "awayTeam": "Ivory Coast",
-      "status": "upcoming",
+      "status": "live",
       "venue": "",
       "stage": "Group Stage",
-      "score": null
+      "score": {
+        "home": 1,
+        "away": 1
+      }
     },
     {
       "id": "fd-537354",
