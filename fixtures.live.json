@@ -368,7 +368,7 @@
     {
       "id": "FD758",
       "name": "Uruguay",
-      "shortName": "URU",
+      "shortName": "URY",
       "rating": 1600,
       "venue": "",
       "league": "WC"
@@ -536,7 +536,7 @@
       "awayTeamId": "FD801",
       "homeTeam": "Spain",
       "awayTeam": "Saudi Arabia",
-      "status": "live",
+      "status": "finished",
       "venue": "",
       "stage": "Group Stage",
       "score": {
@@ -553,10 +553,13 @@
       "awayTeamId": "FD840",
       "homeTeam": "Belgium",
       "awayTeam": "Iran",
-      "status": "upcoming",
+      "status": "finished",
       "venue": "",
       "stage": "Group Stage",
-      "score": null
+      "score": {
+        "home": 0,
+        "away": 0
+      }
     },
     {
       "id": "fd-537372",
