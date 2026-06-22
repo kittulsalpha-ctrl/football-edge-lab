@@ -1,8 +1,8 @@
 {
   "meta": {
     "source": "football-data.org live feed",
-    "updatedAt": "2026-06-21",
-    "note": "Real fixtures and scores for 2026-06-20 to 2026-08-20.\nTimes shown in Asia/Kolkata."
+    "updatedAt": "2026-06-22",
+    "note": "Real fixtures and scores for 2026-06-21 to 2026-08-21.\nTimes shown in Asia/Kolkata."
   },
   "teams": [
     {
@@ -368,7 +368,7 @@
     {
       "id": "FD758",
       "name": "Uruguay",
-      "shortName": "URY",
+      "shortName": "URU",
       "rating": 1600,
       "venue": "",
       "league": "WC"
@@ -391,91 +391,6 @@
     }
   ],
   "matches": [
-    {
-      "id": "fd-537348",
-      "league": "WC",
-      "date": "2026-06-20",
-      "time": "00:30",
-      "homeTeamId": "FD771",
-      "awayTeamId": "FD779",
-      "homeTeam": "USA",
-      "awayTeam": "Australia",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 2,
-        "away": 0
-      }
-    },
-    {
-      "id": "fd-537342",
-      "league": "WC",
-      "date": "2026-06-20",
-      "time": "03:30",
-      "homeTeamId": "FD8873",
-      "awayTeamId": "FD815",
-      "homeTeam": "Scotland",
-      "awayTeam": "Morocco",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 0,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-537341",
-      "league": "WC",
-      "date": "2026-06-20",
-      "time": "06:00",
-      "homeTeamId": "FD764",
-      "awayTeamId": "FD836",
-      "homeTeam": "Brazil",
-      "awayTeam": "Haiti",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 3,
-        "away": 0
-      }
-    },
-    {
-      "id": "fd-537347",
-      "league": "WC",
-      "date": "2026-06-20",
-      "time": "08:30",
-      "homeTeamId": "FD803",
-      "awayTeamId": "FD761",
-      "homeTeam": "Turkey",
-      "awayTeam": "Paraguay",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 0,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-537359",
-      "league": "WC",
-      "date": "2026-06-20",
-      "time": "22:30",
-      "homeTeamId": "FD8601",
-      "awayTeamId": "FD792",
-      "homeTeam": "Netherlands",
-      "awayTeam": "Sweden",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 5,
-        "away": 1
-      }
-    },
     {
       "id": "fd-537353",
       "league": "WC",
@@ -570,10 +485,13 @@
       "awayTeamId": "FD1930",
       "homeTeam": "Uruguay",
       "awayTeam": "Cape Verde",
-      "status": "upcoming",
+      "status": "finished",
       "venue": "",
       "stage": "Group Stage",
-      "score": null
+      "score": {
+        "home": 2,
+        "away": 2
+      }
     },
     {
       "id": "fd-537366",
@@ -584,10 +502,13 @@
       "awayTeamId": "FD825",
       "homeTeam": "New Zealand",
       "awayTeam": "Egypt",
-      "status": "upcoming",
+      "status": "finished",
       "venue": "",
       "stage": "Group Stage",
-      "score": null
+      "score": {
+        "home": 1,
+        "away": 3
+      }
     },
     {
       "id": "fd-537399",
@@ -730,20 +651,6 @@
       "score": null
     },
     {
-      "id": "fd-537344",
-      "league": "WC",
-      "date": "2026-06-25",
-      "time": "03:30",
-      "homeTeamId": "FD815",
-      "awayTeamId": "FD836",
-      "homeTeam": "Morocco",
-      "awayTeam": "Haiti",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": null
-    },
-    {
       "id": "fd-537343",
       "league": "WC",
       "date": "2026-06-25",
@@ -752,6 +659,20 @@
       "awayTeamId": "FD764",
       "homeTeam": "Scotland",
       "awayTeam": "Brazil",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Group Stage",
+      "score": null
+    },
+    {
+      "id": "fd-537344",
+      "league": "WC",
+      "date": "2026-06-25",
+      "time": "03:30",
+      "homeTeamId": "FD815",
+      "awayTeamId": "FD836",
+      "homeTeam": "Morocco",
+      "awayTeam": "Haiti",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
@@ -786,20 +707,6 @@
       "score": null
     },
     {
-      "id": "fd-537355",
-      "league": "WC",
-      "date": "2026-06-26",
-      "time": "01:30",
-      "homeTeamId": "FD791",
-      "awayTeamId": "FD759",
-      "homeTeam": "Ecuador",
-      "awayTeam": "Germany",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": null
-    },
-    {
       "id": "fd-537356",
       "league": "WC",
       "date": "2026-06-26",
@@ -808,6 +715,20 @@
       "awayTeamId": "FD1935",
       "homeTeam": "Curaçao",
       "awayTeam": "Ivory Coast",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Group Stage",
+      "score": null
+    },
+    {
+      "id": "fd-537355",
+      "league": "WC",
+      "date": "2026-06-26",
+      "time": "01:30",
+      "homeTeamId": "FD791",
+      "awayTeamId": "FD759",
+      "homeTeam": "Ecuador",
+      "awayTeam": "Germany",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
