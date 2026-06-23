@@ -535,10 +535,13 @@
       "awayTeamId": "FD8070",
       "homeTeam": "Portugal",
       "awayTeam": "Uzbekistan",
-      "status": "upcoming",
+      "status": "halftime",
       "venue": "",
       "stage": "Group Stage",
-      "score": null
+      "score": {
+        "home": 3,
+        "away": 0
+      }
     },
     {
       "id": "fd-537411",
