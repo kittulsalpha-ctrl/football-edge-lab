@@ -1,8 +1,8 @@
 {
   "meta": {
     "source": "football-data.org live feed",
-    "updatedAt": "2026-06-23",
-    "note": "Real fixtures and scores for 2026-06-22 to 2026-08-22.\nTimes shown in Asia/Kolkata."
+    "updatedAt": "2026-06-24",
+    "note": "Real fixtures and scores for 2026-06-23 to 2026-08-23.\nTimes shown in Asia/Kolkata."
   },
   "teams": [
     {
@@ -62,6 +62,14 @@
       "league": "WC"
     },
     {
+      "id": "FD402",
+      "name": "Brentford",
+      "shortName": "BRE",
+      "rating": 1600,
+      "venue": "",
+      "league": "EPL"
+    },
+    {
       "id": "FD828",
       "name": "Canada",
       "shortName": "CAN",
@@ -100,6 +108,14 @@
       "rating": 1600,
       "venue": "",
       "league": "WC"
+    },
+    {
+      "id": "FD354",
+      "name": "Crystal Palace",
+      "shortName": "CRY",
+      "rating": 1600,
+      "venue": "",
+      "league": "EPL"
     },
     {
       "id": "FD9460",
@@ -142,6 +158,14 @@
       "league": "WC"
     },
     {
+      "id": "FD62",
+      "name": "Everton",
+      "shortName": "EVE",
+      "rating": 1600,
+      "venue": "",
+      "league": "EPL"
+    },
+    {
       "id": "FD773",
       "name": "France",
       "shortName": "FRA",
@@ -172,6 +196,22 @@
       "rating": 1600,
       "venue": "",
       "league": "WC"
+    },
+    {
+      "id": "FD322",
+      "name": "Hull City",
+      "shortName": "HUL",
+      "rating": 1600,
+      "venue": "",
+      "league": "EPL"
+    },
+    {
+      "id": "FD349",
+      "name": "Ipswich Town",
+      "shortName": "IPS",
+      "rating": 1600,
+      "venue": "",
+      "league": "EPL"
     },
     {
       "id": "FD840",
@@ -222,6 +262,22 @@
       "league": "WC"
     },
     {
+      "id": "FD341",
+      "name": "Leeds United",
+      "shortName": "LEE",
+      "rating": 1600,
+      "venue": "",
+      "league": "EPL"
+    },
+    {
+      "id": "FD66",
+      "name": "Man United",
+      "shortName": "MUN",
+      "rating": 1600,
+      "venue": "",
+      "league": "EPL"
+    },
+    {
       "id": "FD769",
       "name": "Mexico",
       "shortName": "MEX",
@@ -260,6 +316,14 @@
       "rating": 1600,
       "venue": "",
       "league": "WC"
+    },
+    {
+      "id": "FD351",
+      "name": "Nottingham",
+      "shortName": "NOT",
+      "rating": 1600,
+      "venue": "",
+      "league": "EPL"
     },
     {
       "id": "FD1836",
@@ -334,6 +398,14 @@
       "league": "WC"
     },
     {
+      "id": "FD71",
+      "name": "Sunderland",
+      "shortName": "SUN",
+      "rating": 1600,
+      "venue": "",
+      "league": "EPL"
+    },
+    {
       "id": "FD792",
       "name": "Sweden",
       "shortName": "SWE",
@@ -348,6 +420,14 @@
       "rating": 1600,
       "venue": "",
       "league": "WC"
+    },
+    {
+      "id": "FD73",
+      "name": "Tottenham",
+      "shortName": "TOT",
+      "rating": 1600,
+      "venue": "",
+      "league": "EPL"
     },
     {
       "id": "FD802",
@@ -391,74 +471,6 @@
     }
   ],
   "matches": [
-    {
-      "id": "fd-537365",
-      "league": "WC",
-      "date": "2026-06-22",
-      "time": "00:30",
-      "homeTeamId": "FD805",
-      "awayTeamId": "FD840",
-      "homeTeam": "Belgium",
-      "awayTeam": "Iran",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 0,
-        "away": 0
-      }
-    },
-    {
-      "id": "fd-537372",
-      "league": "WC",
-      "date": "2026-06-22",
-      "time": "03:30",
-      "homeTeamId": "FD758",
-      "awayTeamId": "FD1930",
-      "homeTeam": "Uruguay",
-      "awayTeam": "Cape Verde",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 2,
-        "away": 2
-      }
-    },
-    {
-      "id": "fd-537366",
-      "league": "WC",
-      "date": "2026-06-22",
-      "time": "06:30",
-      "homeTeamId": "FD783",
-      "awayTeamId": "FD825",
-      "homeTeam": "New Zealand",
-      "awayTeam": "Egypt",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 1,
-        "away": 3
-      }
-    },
-    {
-      "id": "fd-537399",
-      "league": "WC",
-      "date": "2026-06-22",
-      "time": "22:30",
-      "homeTeamId": "FD762",
-      "awayTeamId": "FD816",
-      "homeTeam": "Argentina",
-      "awayTeam": "Austria",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 2,
-        "away": 0
-      }
-    },
     {
       "id": "fd-537393",
       "league": "WC",
@@ -536,7 +548,7 @@
       "awayTeamId": "FD763",
       "homeTeam": "England",
       "awayTeam": "Ghana",
-      "status": "live",
+      "status": "finished",
       "venue": "",
       "stage": "Group Stage",
       "score": {
@@ -553,10 +565,13 @@
       "awayTeamId": "FD799",
       "homeTeam": "Panama",
       "awayTeam": "Croatia",
-      "status": "upcoming",
+      "status": "finished",
       "venue": "",
       "stage": "Group Stage",
-      "score": null
+      "score": {
+        "home": 0,
+        "away": 1
+      }
     },
     {
       "id": "fd-537406",
@@ -567,10 +582,13 @@
       "awayTeamId": "FD1934",
       "homeTeam": "Colombia",
       "awayTeam": "Congo DR",
-      "status": "upcoming",
+      "status": "finished",
       "venue": "",
       "stage": "Group Stage",
-      "score": null
+      "score": {
+        "home": 1,
+        "away": 0
+      }
     },
     {
       "id": "fd-537338",
@@ -769,20 +787,6 @@
       "score": null
     },
     {
-      "id": "fd-537373",
-      "league": "WC",
-      "date": "2026-06-27",
-      "time": "05:30",
-      "homeTeamId": "FD758",
-      "awayTeamId": "FD760",
-      "homeTeam": "Uruguay",
-      "awayTeam": "Spain",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": null
-    },
-    {
       "id": "fd-537374",
       "league": "WC",
       "date": "2026-06-27",
@@ -797,14 +801,14 @@
       "score": null
     },
     {
-      "id": "fd-537367",
+      "id": "fd-537373",
       "league": "WC",
       "date": "2026-06-27",
-      "time": "08:30",
-      "homeTeamId": "FD783",
-      "awayTeamId": "FD805",
-      "homeTeam": "New Zealand",
-      "awayTeam": "Belgium",
+      "time": "05:30",
+      "homeTeamId": "FD758",
+      "awayTeamId": "FD760",
+      "homeTeam": "Uruguay",
+      "awayTeam": "Spain",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
@@ -825,14 +829,14 @@
       "score": null
     },
     {
-      "id": "fd-537413",
+      "id": "fd-537367",
       "league": "WC",
-      "date": "2026-06-28",
-      "time": "02:30",
-      "homeTeamId": "FD1836",
-      "awayTeamId": "FD770",
-      "homeTeam": "Panama",
-      "awayTeam": "England",
+      "date": "2026-06-27",
+      "time": "08:30",
+      "homeTeamId": "FD783",
+      "awayTeamId": "FD805",
+      "homeTeam": "New Zealand",
+      "awayTeam": "Belgium",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
@@ -853,14 +857,14 @@
       "score": null
     },
     {
-      "id": "fd-537407",
+      "id": "fd-537413",
       "league": "WC",
       "date": "2026-06-28",
-      "time": "05:00",
-      "homeTeamId": "FD818",
-      "awayTeamId": "FD765",
-      "homeTeam": "Colombia",
-      "awayTeam": "Portugal",
+      "time": "02:30",
+      "homeTeamId": "FD1836",
+      "awayTeamId": "FD770",
+      "homeTeam": "Panama",
+      "awayTeam": "England",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
@@ -881,14 +885,14 @@
       "score": null
     },
     {
-      "id": "fd-537401",
+      "id": "fd-537407",
       "league": "WC",
       "date": "2026-06-28",
-      "time": "07:30",
-      "homeTeamId": "FD8049",
-      "awayTeamId": "FD762",
-      "homeTeam": "Jordan",
-      "awayTeam": "Argentina",
+      "time": "05:00",
+      "homeTeamId": "FD818",
+      "awayTeamId": "FD765",
+      "homeTeam": "Colombia",
+      "awayTeam": "Portugal",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
@@ -906,6 +910,90 @@
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
+      "score": null
+    },
+    {
+      "id": "fd-537401",
+      "league": "WC",
+      "date": "2026-06-28",
+      "time": "07:30",
+      "homeTeamId": "FD8049",
+      "awayTeamId": "FD762",
+      "homeTeam": "Jordan",
+      "awayTeam": "Argentina",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Group Stage",
+      "score": null
+    },
+    {
+      "id": "fd-560543",
+      "league": "EPL",
+      "date": "2026-08-22",
+      "time": "17:00",
+      "homeTeamId": "FD322",
+      "awayTeamId": "FD66",
+      "homeTeam": "Hull City",
+      "awayTeam": "Man United",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-560544",
+      "league": "EPL",
+      "date": "2026-08-22",
+      "time": "19:30",
+      "homeTeamId": "FD349",
+      "awayTeamId": "FD71",
+      "homeTeam": "Ipswich Town",
+      "awayTeam": "Sunderland",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-560546",
+      "league": "EPL",
+      "date": "2026-08-22",
+      "time": "19:30",
+      "homeTeamId": "FD62",
+      "awayTeamId": "FD354",
+      "homeTeam": "Everton",
+      "awayTeam": "Crystal Palace",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-560545",
+      "league": "EPL",
+      "date": "2026-08-22",
+      "time": "19:30",
+      "homeTeamId": "FD351",
+      "awayTeamId": "FD341",
+      "homeTeam": "Nottingham",
+      "awayTeam": "Leeds United",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-560547",
+      "league": "EPL",
+      "date": "2026-08-22",
+      "time": "22:00",
+      "homeTeamId": "FD402",
+      "awayTeamId": "FD73",
+      "homeTeam": "Brentford",
+      "awayTeam": "Tottenham",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
       "score": null
     }
   ]
