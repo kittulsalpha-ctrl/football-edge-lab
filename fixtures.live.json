@@ -955,20 +955,6 @@
       "score": null
     },
     {
-      "id": "fd-560546",
-      "league": "EPL",
-      "date": "2026-08-22",
-      "time": "19:30",
-      "homeTeamId": "FD62",
-      "awayTeamId": "FD354",
-      "homeTeam": "Everton",
-      "awayTeam": "Crystal Palace",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-560544",
       "league": "EPL",
       "date": "2026-08-22",
@@ -977,6 +963,20 @@
       "awayTeamId": "FD71",
       "homeTeam": "Ipswich Town",
       "awayTeam": "Sunderland",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-560546",
+      "league": "EPL",
+      "date": "2026-08-22",
+      "time": "19:30",
+      "homeTeamId": "FD62",
+      "awayTeamId": "FD354",
+      "homeTeam": "Everton",
+      "awayTeam": "Crystal Palace",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
