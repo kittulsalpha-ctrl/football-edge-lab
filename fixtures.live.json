@@ -30,14 +30,6 @@
       "league": "EPL"
     },
     {
-      "id": "FD102",
-      "name": "Atalanta",
-      "shortName": "ATA",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
       "id": "FD779",
       "name": "Australia",
       "shortName": "AUS",
@@ -62,14 +54,6 @@
       "league": "WC"
     },
     {
-      "id": "FD103",
-      "name": "Bologna",
-      "shortName": "BOL",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
       "id": "FD1060",
       "name": "Bosnia-H.",
       "shortName": "BIH",
@@ -84,14 +68,6 @@
       "rating": 1600,
       "venue": "",
       "league": "WC"
-    },
-    {
-      "id": "FD104",
-      "name": "Cagliari",
-      "shortName": "CAG",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
     },
     {
       "id": "FD828",
@@ -116,14 +92,6 @@
       "rating": 1600,
       "venue": "",
       "league": "WC"
-    },
-    {
-      "id": "FD7397",
-      "name": "Como 1907",
-      "shortName": "COM",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
     },
     {
       "id": "FD1934",
@@ -152,7 +120,7 @@
     {
       "id": "FD9460",
       "name": "Curaçao",
-      "shortName": "CUW",
+      "shortName": "CUR",
       "rating": 1600,
       "venue": "",
       "league": "WC"
@@ -190,36 +158,12 @@
       "league": "WC"
     },
     {
-      "id": "FD99",
-      "name": "Fiorentina",
-      "shortName": "FIO",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
       "id": "FD773",
       "name": "France",
       "shortName": "FRA",
       "rating": 1600,
       "venue": "",
       "league": "WC"
-    },
-    {
-      "id": "FD470",
-      "name": "Frosinone",
-      "shortName": "FRO",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD107",
-      "name": "Genoa",
-      "shortName": "GEN",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
     },
     {
       "id": "FD759",
@@ -244,14 +188,6 @@
       "rating": 1600,
       "venue": "",
       "league": "WC"
-    },
-    {
-      "id": "FD108",
-      "name": "Inter",
-      "shortName": "INT",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
     },
     {
       "id": "FD840",
@@ -294,36 +230,12 @@
       "league": "WC"
     },
     {
-      "id": "FD109",
-      "name": "Juventus",
-      "shortName": "JUV",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
       "id": "FD772",
       "name": "Korea Republic",
       "shortName": "KOR",
       "rating": 1600,
       "venue": "",
       "league": "WC"
-    },
-    {
-      "id": "FD110",
-      "name": "Lazio",
-      "shortName": "LAZ",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD5890",
-      "name": "Lecce",
-      "shortName": "USL",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
     },
     {
       "id": "FD769",
@@ -334,36 +246,12 @@
       "league": "WC"
     },
     {
-      "id": "FD98",
-      "name": "Milan",
-      "shortName": "MIL",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD5911",
-      "name": "Monza",
-      "shortName": "MON",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
       "id": "FD815",
       "name": "Morocco",
       "shortName": "MAR",
       "rating": 1600,
       "venue": "",
       "league": "WC"
-    },
-    {
-      "id": "FD113",
-      "name": "Napoli",
-      "shortName": "NAP",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
     },
     {
       "id": "FD8601",
@@ -406,14 +294,6 @@
       "league": "WC"
     },
     {
-      "id": "FD112",
-      "name": "Parma",
-      "shortName": "PAR",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
       "id": "FD765",
       "name": "Portugal",
       "shortName": "POR",
@@ -428,22 +308,6 @@
       "rating": 1600,
       "venue": "",
       "league": "WC"
-    },
-    {
-      "id": "FD100",
-      "name": "Roma",
-      "shortName": "ROM",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
-      "id": "FD471",
-      "name": "Sassuolo",
-      "shortName": "SAS",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
     },
     {
       "id": "FD801",
@@ -502,14 +366,6 @@
       "league": "WC"
     },
     {
-      "id": "FD586",
-      "name": "Torino",
-      "shortName": "TOR",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
       "id": "FD802",
       "name": "Tunisia",
       "shortName": "TUN",
@@ -526,17 +382,9 @@
       "league": "WC"
     },
     {
-      "id": "FD115",
-      "name": "Udinese",
-      "shortName": "UDI",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
-    },
-    {
       "id": "FD758",
       "name": "Uruguay",
-      "shortName": "URU",
+      "shortName": "URY",
       "rating": 1600,
       "venue": "",
       "league": "WC"
@@ -556,14 +404,6 @@
       "rating": 1600,
       "venue": "",
       "league": "WC"
-    },
-    {
-      "id": "FD454",
-      "name": "Venezia FC",
-      "shortName": "VEN",
-      "rating": 1600,
-      "venue": "",
-      "league": "SERIEA"
     }
   ],
   "matches": [
@@ -619,6 +459,23 @@
       }
     },
     {
+      "id": "fd-537337",
+      "league": "WC",
+      "date": "2026-06-25",
+      "time": "00:30",
+      "homeTeamId": "FD788",
+      "awayTeamId": "FD828",
+      "homeTeam": "Switzerland",
+      "awayTeam": "Canada",
+      "status": "finished",
+      "venue": "",
+      "stage": "Group Stage",
+      "score": {
+        "home": 2,
+        "away": 1
+      }
+    },
+    {
       "id": "fd-537338",
       "league": "WC",
       "date": "2026-06-25",
@@ -636,20 +493,20 @@
       }
     },
     {
-      "id": "fd-537337",
+      "id": "fd-537343",
       "league": "WC",
       "date": "2026-06-25",
-      "time": "00:30",
-      "homeTeamId": "FD788",
-      "awayTeamId": "FD828",
-      "homeTeam": "Switzerland",
-      "awayTeam": "Canada",
+      "time": "03:30",
+      "homeTeamId": "FD8873",
+      "awayTeamId": "FD764",
+      "homeTeam": "Scotland",
+      "awayTeam": "Brazil",
       "status": "finished",
       "venue": "",
       "stage": "Group Stage",
       "score": {
-        "home": 2,
-        "away": 1
+        "home": 0,
+        "away": 3
       }
     },
     {
@@ -670,14 +527,14 @@
       }
     },
     {
-      "id": "fd-537343",
+      "id": "fd-537331",
       "league": "WC",
       "date": "2026-06-25",
-      "time": "03:30",
-      "homeTeamId": "FD8873",
-      "awayTeamId": "FD764",
-      "homeTeam": "Scotland",
-      "awayTeam": "Brazil",
+      "time": "06:30",
+      "homeTeamId": "FD798",
+      "awayTeamId": "FD769",
+      "homeTeam": "Czechia",
+      "awayTeam": "Mexico",
       "status": "finished",
       "venue": "",
       "stage": "Group Stage",
@@ -704,37 +561,6 @@
       }
     },
     {
-      "id": "fd-537331",
-      "league": "WC",
-      "date": "2026-06-25",
-      "time": "06:30",
-      "homeTeamId": "FD798",
-      "awayTeamId": "FD769",
-      "homeTeam": "Czechia",
-      "awayTeam": "Mexico",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 0,
-        "away": 3
-      }
-    },
-    {
-      "id": "fd-537356",
-      "league": "WC",
-      "date": "2026-06-26",
-      "time": "01:30",
-      "homeTeamId": "FD9460",
-      "awayTeamId": "FD1935",
-      "homeTeam": "Curaçao",
-      "awayTeam": "Ivory Coast",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": null
-    },
-    {
       "id": "fd-537355",
       "league": "WC",
       "date": "2026-06-26",
@@ -749,14 +575,14 @@
       "score": null
     },
     {
-      "id": "fd-537362",
+      "id": "fd-537356",
       "league": "WC",
       "date": "2026-06-26",
-      "time": "04:30",
-      "homeTeamId": "FD766",
-      "awayTeamId": "FD792",
-      "homeTeam": "Japan",
-      "awayTeam": "Sweden",
+      "time": "01:30",
+      "homeTeamId": "FD9460",
+      "awayTeamId": "FD1935",
+      "homeTeam": "Curaçao",
+      "awayTeam": "Ivory Coast",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
@@ -777,14 +603,14 @@
       "score": null
     },
     {
-      "id": "fd-537350",
+      "id": "fd-537362",
       "league": "WC",
       "date": "2026-06-26",
-      "time": "07:30",
-      "homeTeamId": "FD761",
-      "awayTeamId": "FD779",
-      "homeTeam": "Paraguay",
-      "awayTeam": "Australia",
+      "time": "04:30",
+      "homeTeamId": "FD766",
+      "awayTeamId": "FD792",
+      "homeTeam": "Japan",
+      "awayTeam": "Sweden",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
@@ -805,14 +631,14 @@
       "score": null
     },
     {
-      "id": "fd-537396",
+      "id": "fd-537350",
       "league": "WC",
-      "date": "2026-06-27",
-      "time": "00:30",
-      "homeTeamId": "FD804",
-      "awayTeamId": "FD8062",
-      "homeTeam": "Senegal",
-      "awayTeam": "Iraq",
+      "date": "2026-06-26",
+      "time": "07:30",
+      "homeTeamId": "FD761",
+      "awayTeamId": "FD779",
+      "homeTeam": "Paraguay",
+      "awayTeam": "Australia",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
@@ -833,14 +659,14 @@
       "score": null
     },
     {
-      "id": "fd-537374",
+      "id": "fd-537396",
       "league": "WC",
       "date": "2026-06-27",
-      "time": "05:30",
-      "homeTeamId": "FD1930",
-      "awayTeamId": "FD801",
-      "homeTeam": "Cape Verde",
-      "awayTeam": "Saudi Arabia",
+      "time": "00:30",
+      "homeTeamId": "FD804",
+      "awayTeamId": "FD8062",
+      "homeTeam": "Senegal",
+      "awayTeam": "Iraq",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
@@ -861,14 +687,14 @@
       "score": null
     },
     {
-      "id": "fd-537368",
+      "id": "fd-537374",
       "league": "WC",
       "date": "2026-06-27",
-      "time": "08:30",
-      "homeTeamId": "FD825",
-      "awayTeamId": "FD840",
-      "homeTeam": "Egypt",
-      "awayTeam": "Iran",
+      "time": "05:30",
+      "homeTeamId": "FD1930",
+      "awayTeamId": "FD801",
+      "homeTeam": "Cape Verde",
+      "awayTeam": "Saudi Arabia",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
@@ -889,14 +715,14 @@
       "score": null
     },
     {
-      "id": "fd-537413",
+      "id": "fd-537368",
       "league": "WC",
-      "date": "2026-06-28",
-      "time": "02:30",
-      "homeTeamId": "FD1836",
-      "awayTeamId": "FD770",
-      "homeTeam": "Panama",
-      "awayTeam": "England",
+      "date": "2026-06-27",
+      "time": "08:30",
+      "homeTeamId": "FD825",
+      "awayTeamId": "FD840",
+      "homeTeam": "Egypt",
+      "awayTeam": "Iran",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
@@ -917,14 +743,14 @@
       "score": null
     },
     {
-      "id": "fd-537407",
+      "id": "fd-537413",
       "league": "WC",
       "date": "2026-06-28",
-      "time": "05:00",
-      "homeTeamId": "FD818",
-      "awayTeamId": "FD765",
-      "homeTeam": "Colombia",
-      "awayTeam": "Portugal",
+      "time": "02:30",
+      "homeTeamId": "FD1836",
+      "awayTeamId": "FD770",
+      "homeTeam": "Panama",
+      "awayTeam": "England",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
@@ -945,14 +771,14 @@
       "score": null
     },
     {
-      "id": "fd-537402",
+      "id": "fd-537407",
       "league": "WC",
       "date": "2026-06-28",
-      "time": "07:30",
-      "homeTeamId": "FD778",
-      "awayTeamId": "FD816",
-      "homeTeam": "Algeria",
-      "awayTeam": "Austria",
+      "time": "05:00",
+      "homeTeamId": "FD818",
+      "awayTeamId": "FD765",
+      "homeTeam": "Colombia",
+      "awayTeam": "Portugal",
       "status": "upcoming",
       "venue": "",
       "stage": "Group Stage",
@@ -973,6 +799,20 @@
       "score": null
     },
     {
+      "id": "fd-537402",
+      "league": "WC",
+      "date": "2026-06-28",
+      "time": "07:30",
+      "homeTeamId": "FD778",
+      "awayTeamId": "FD816",
+      "homeTeam": "Algeria",
+      "awayTeam": "Austria",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Group Stage",
+      "score": null
+    },
+    {
       "id": "fd-560542",
       "league": "EPL",
       "date": "2026-08-22",
@@ -981,146 +821,6 @@
       "awayTeamId": "FD1076",
       "homeTeam": "Arsenal",
       "awayTeam": "Coventry City",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-558634",
-      "league": "SERIEA",
-      "date": "2026-08-24",
-      "time": "00:00",
-      "homeTeamId": "FD586",
-      "awayTeamId": "FD98",
-      "homeTeam": "Torino",
-      "awayTeam": "Milan",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-558630",
-      "league": "SERIEA",
-      "date": "2026-08-24",
-      "time": "00:00",
-      "homeTeamId": "FD103",
-      "awayTeamId": "FD110",
-      "homeTeam": "Bologna",
-      "awayTeam": "Lazio",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-558636",
-      "league": "SERIEA",
-      "date": "2026-08-24",
-      "time": "00:00",
-      "homeTeamId": "FD112",
-      "awayTeamId": "FD104",
-      "homeTeam": "Parma",
-      "awayTeam": "Cagliari",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-558632",
-      "league": "SERIEA",
-      "date": "2026-08-24",
-      "time": "00:00",
-      "homeTeamId": "FD108",
-      "awayTeamId": "FD5911",
-      "homeTeam": "Inter",
-      "awayTeam": "Monza",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-558638",
-      "league": "SERIEA",
-      "date": "2026-08-24",
-      "time": "00:00",
-      "homeTeamId": "FD100",
-      "awayTeamId": "FD99",
-      "homeTeam": "Roma",
-      "awayTeam": "Fiorentina",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-558629",
-      "league": "SERIEA",
-      "date": "2026-08-24",
-      "time": "00:00",
-      "homeTeamId": "FD115",
-      "awayTeamId": "FD7397",
-      "homeTeam": "Udinese",
-      "awayTeam": "Como 1907",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-558635",
-      "league": "SERIEA",
-      "date": "2026-08-24",
-      "time": "00:00",
-      "homeTeamId": "FD470",
-      "awayTeamId": "FD109",
-      "homeTeam": "Frosinone",
-      "awayTeam": "Juventus",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-558631",
-      "league": "SERIEA",
-      "date": "2026-08-24",
-      "time": "00:00",
-      "homeTeamId": "FD107",
-      "awayTeamId": "FD113",
-      "homeTeam": "Genoa",
-      "awayTeam": "Napoli",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-558637",
-      "league": "SERIEA",
-      "date": "2026-08-24",
-      "time": "00:00",
-      "homeTeamId": "FD454",
-      "awayTeamId": "FD5890",
-      "homeTeam": "Venezia FC",
-      "awayTeam": "Lecce",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-558633",
-      "league": "SERIEA",
-      "date": "2026-08-24",
-      "time": "00:00",
-      "homeTeamId": "FD102",
-      "awayTeamId": "FD471",
-      "homeTeam": "Atalanta",
-      "awayTeam": "Sassuolo",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
