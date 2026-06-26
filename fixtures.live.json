@@ -716,10 +716,13 @@
       "awayTeamId": "FD8062",
       "homeTeam": "Senegal",
       "awayTeam": "Iraq",
-      "status": "upcoming",
+      "status": "finished",
       "venue": "",
       "stage": "Group Stage",
-      "score": null
+      "score": {
+        "home": 5,
+        "away": 0
+      }
     },
     {
       "id": "fd-537395",
@@ -730,10 +733,13 @@
       "awayTeamId": "FD773",
       "homeTeam": "Norway",
       "awayTeam": "France",
-      "status": "upcoming",
+      "status": "finished",
       "venue": "",
       "stage": "Group Stage",
-      "score": null
+      "score": {
+        "home": 1,
+        "away": 4
+      }
     },
     {
       "id": "fd-537374",
@@ -960,20 +966,6 @@
       "score": null
     },
     {
-      "id": "fd-560545",
-      "league": "EPL",
-      "date": "2026-08-22",
-      "time": "19:30",
-      "homeTeamId": "FD351",
-      "awayTeamId": "FD341",
-      "homeTeam": "Nottingham",
-      "awayTeam": "Leeds United",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-560546",
       "league": "EPL",
       "date": "2026-08-22",
@@ -996,6 +988,20 @@
       "awayTeamId": "FD71",
       "homeTeam": "Ipswich Town",
       "awayTeam": "Sunderland",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-560545",
+      "league": "EPL",
+      "date": "2026-08-22",
+      "time": "19:30",
+      "homeTeamId": "FD351",
+      "awayTeamId": "FD341",
+      "homeTeam": "Nottingham",
+      "awayTeam": "Leeds United",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
