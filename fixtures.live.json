@@ -676,23 +676,6 @@
       }
     },
     {
-      "id": "fd-537402",
-      "league": "WC",
-      "date": "2026-06-28",
-      "time": "07:30",
-      "homeTeamId": "FD778",
-      "awayTeamId": "FD816",
-      "homeTeam": "Algeria",
-      "awayTeam": "Austria",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 3,
-        "away": 3
-      }
-    },
-    {
       "id": "fd-537401",
       "league": "WC",
       "date": "2026-06-28",
@@ -706,6 +689,23 @@
       "stage": "Group Stage",
       "score": {
         "home": 1,
+        "away": 3
+      }
+    },
+    {
+      "id": "fd-537402",
+      "league": "WC",
+      "date": "2026-06-28",
+      "time": "07:30",
+      "homeTeamId": "FD778",
+      "awayTeamId": "FD816",
+      "homeTeam": "Algeria",
+      "awayTeam": "Austria",
+      "status": "finished",
+      "venue": "",
+      "stage": "Group Stage",
+      "score": {
+        "home": 3,
         "away": 3
       }
     },
@@ -735,11 +735,11 @@
       "awayTeamId": "FD766",
       "homeTeam": "Brazil",
       "awayTeam": "Japan",
-      "status": "live",
+      "status": "finished",
       "venue": "",
       "stage": "Last 32",
       "score": {
-        "home": 0,
+        "home": 2,
         "away": 1
       }
     },
@@ -752,10 +752,13 @@
       "awayTeamId": "FD761",
       "homeTeam": "Germany",
       "awayTeam": "Paraguay",
-      "status": "upcoming",
+      "status": "live",
       "venue": "",
       "stage": "Last 32",
-      "score": null
+      "score": {
+        "home": 0,
+        "away": 1
+      }
     },
     {
       "id": "fd-537418",
@@ -1066,20 +1069,6 @@
       "score": null
     },
     {
-      "id": "fd-558635",
-      "league": "SERIEA",
-      "date": "2026-08-23",
-      "time": "22:00",
-      "homeTeamId": "FD470",
-      "awayTeamId": "FD109",
-      "homeTeam": "Frosinone",
-      "awayTeam": "Juventus",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-558631",
       "league": "SERIEA",
       "date": "2026-08-23",
@@ -1136,14 +1125,14 @@
       "score": null
     },
     {
-      "id": "fd-558630",
+      "id": "fd-558635",
       "league": "SERIEA",
       "date": "2026-08-23",
       "time": "22:00",
-      "homeTeamId": "FD103",
-      "awayTeamId": "FD110",
-      "homeTeam": "Bologna",
-      "awayTeam": "Lazio",
+      "homeTeamId": "FD470",
+      "awayTeamId": "FD109",
+      "homeTeam": "Frosinone",
+      "awayTeam": "Juventus",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -1200,6 +1189,20 @@
       "awayTeamId": "FD98",
       "homeTeam": "Torino",
       "awayTeam": "Milan",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-558630",
+      "league": "SERIEA",
+      "date": "2026-08-23",
+      "time": "22:00",
+      "homeTeamId": "FD103",
+      "awayTeamId": "FD110",
+      "homeTeam": "Bologna",
+      "awayTeam": "Lazio",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
