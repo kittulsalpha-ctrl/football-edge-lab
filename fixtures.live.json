@@ -676,23 +676,6 @@
       }
     },
     {
-      "id": "fd-537401",
-      "league": "WC",
-      "date": "2026-06-28",
-      "time": "07:30",
-      "homeTeamId": "FD8049",
-      "awayTeamId": "FD762",
-      "homeTeam": "Jordan",
-      "awayTeam": "Argentina",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 1,
-        "away": 3
-      }
-    },
-    {
       "id": "fd-537402",
       "league": "WC",
       "date": "2026-06-28",
@@ -706,6 +689,23 @@
       "stage": "Group Stage",
       "score": {
         "home": 3,
+        "away": 3
+      }
+    },
+    {
+      "id": "fd-537401",
+      "league": "WC",
+      "date": "2026-06-28",
+      "time": "07:30",
+      "homeTeamId": "FD8049",
+      "awayTeamId": "FD762",
+      "homeTeam": "Jordan",
+      "awayTeam": "Argentina",
+      "status": "finished",
+      "venue": "",
+      "stage": "Group Stage",
+      "score": {
+        "home": 1,
         "away": 3
       }
     },
@@ -735,10 +735,13 @@
       "awayTeamId": "FD766",
       "homeTeam": "Brazil",
       "awayTeam": "Japan",
-      "status": "upcoming",
+      "status": "live",
       "venue": "",
       "stage": "Last 32",
-      "score": null
+      "score": {
+        "home": 0,
+        "away": 1
+      }
     },
     {
       "id": "fd-537415",
@@ -1063,20 +1066,6 @@
       "score": null
     },
     {
-      "id": "fd-558629",
-      "league": "SERIEA",
-      "date": "2026-08-23",
-      "time": "22:00",
-      "homeTeamId": "FD115",
-      "awayTeamId": "FD7397",
-      "homeTeam": "Udinese",
-      "awayTeam": "Como 1907",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-558635",
       "league": "SERIEA",
       "date": "2026-08-23",
@@ -1133,14 +1122,14 @@
       "score": null
     },
     {
-      "id": "fd-558634",
+      "id": "fd-558629",
       "league": "SERIEA",
       "date": "2026-08-23",
       "time": "22:00",
-      "homeTeamId": "FD586",
-      "awayTeamId": "FD98",
-      "homeTeam": "Torino",
-      "awayTeam": "Milan",
+      "homeTeamId": "FD115",
+      "awayTeamId": "FD7397",
+      "homeTeam": "Udinese",
+      "awayTeam": "Como 1907",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -1197,6 +1186,20 @@
       "awayTeamId": "FD99",
       "homeTeam": "Roma",
       "awayTeam": "Fiorentina",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-558634",
+      "league": "SERIEA",
+      "date": "2026-08-23",
+      "time": "22:00",
+      "homeTeamId": "FD586",
+      "awayTeamId": "FD98",
+      "homeTeam": "Torino",
+      "awayTeam": "Milan",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
