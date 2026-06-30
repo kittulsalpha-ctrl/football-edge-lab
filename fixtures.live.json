@@ -1,8 +1,8 @@
 {
   "meta": {
     "source": "football-data.org live feed",
-    "updatedAt": "2026-06-29",
-    "note": "Real fixtures and scores for 2026-06-28 to 2026-08-28.\nTimes shown in Asia/Kolkata."
+    "updatedAt": "2026-06-30",
+    "note": "Real fixtures and scores for 2026-06-29 to 2026-08-29.\nTimes shown in Asia/Kolkata."
   },
   "teams": [
     {
@@ -326,14 +326,6 @@
       "league": "WC"
     },
     {
-      "id": "FD8049",
-      "name": "Jordan",
-      "shortName": "JOR",
-      "rating": 1600,
-      "venue": "",
-      "league": "WC"
-    },
-    {
       "id": "FD109",
       "name": "Juventus",
       "shortName": "JUV",
@@ -462,14 +454,6 @@
       "league": "EPL"
     },
     {
-      "id": "FD1836",
-      "name": "Panama",
-      "shortName": "PAN",
-      "rating": 1600,
-      "venue": "",
-      "league": "WC"
-    },
-    {
       "id": "FD761",
       "name": "Paraguay",
       "shortName": "PAR",
@@ -590,14 +574,6 @@
       "league": "WC"
     },
     {
-      "id": "FD8070",
-      "name": "Uzbekistan",
-      "shortName": "UZB",
-      "rating": 1600,
-      "venue": "",
-      "league": "WC"
-    },
-    {
       "id": "FD454",
       "name": "Venezia FC",
       "shortName": "VEN",
@@ -607,108 +583,6 @@
     }
   ],
   "matches": [
-    {
-      "id": "fd-537413",
-      "league": "WC",
-      "date": "2026-06-28",
-      "time": "02:30",
-      "homeTeamId": "FD1836",
-      "awayTeamId": "FD770",
-      "homeTeam": "Panama",
-      "awayTeam": "England",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 0,
-        "away": 2
-      }
-    },
-    {
-      "id": "fd-537414",
-      "league": "WC",
-      "date": "2026-06-28",
-      "time": "02:30",
-      "homeTeamId": "FD799",
-      "awayTeamId": "FD763",
-      "homeTeam": "Croatia",
-      "awayTeam": "Ghana",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 2,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-537407",
-      "league": "WC",
-      "date": "2026-06-28",
-      "time": "05:00",
-      "homeTeamId": "FD818",
-      "awayTeamId": "FD765",
-      "homeTeam": "Colombia",
-      "awayTeam": "Portugal",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 0,
-        "away": 0
-      }
-    },
-    {
-      "id": "fd-537408",
-      "league": "WC",
-      "date": "2026-06-28",
-      "time": "05:00",
-      "homeTeamId": "FD1934",
-      "awayTeamId": "FD8070",
-      "homeTeam": "Congo DR",
-      "awayTeam": "Uzbekistan",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 3,
-        "away": 1
-      }
-    },
-    {
-      "id": "fd-537401",
-      "league": "WC",
-      "date": "2026-06-28",
-      "time": "07:30",
-      "homeTeamId": "FD8049",
-      "awayTeamId": "FD762",
-      "homeTeam": "Jordan",
-      "awayTeam": "Argentina",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 1,
-        "away": 3
-      }
-    },
-    {
-      "id": "fd-537402",
-      "league": "WC",
-      "date": "2026-06-28",
-      "time": "07:30",
-      "homeTeamId": "FD778",
-      "awayTeamId": "FD816",
-      "homeTeam": "Algeria",
-      "awayTeam": "Austria",
-      "status": "finished",
-      "venue": "",
-      "stage": "Group Stage",
-      "score": {
-        "home": 3,
-        "away": 3
-      }
-    },
     {
       "id": "fd-537417",
       "league": "WC",
@@ -752,12 +626,12 @@
       "awayTeamId": "FD761",
       "homeTeam": "Germany",
       "awayTeam": "Paraguay",
-      "status": "live",
+      "status": "finished",
       "venue": "",
       "stage": "Last 32",
       "score": {
-        "home": 0,
-        "away": 1
+        "home": 4,
+        "away": 5
       }
     },
     {
@@ -769,10 +643,13 @@
       "awayTeamId": "FD815",
       "homeTeam": "Netherlands",
       "awayTeam": "Morocco",
-      "status": "upcoming",
+      "status": "finished",
       "venue": "",
       "stage": "Last 32",
-      "score": null
+      "score": {
+        "home": 3,
+        "away": 4
+      }
     },
     {
       "id": "fd-537424",
