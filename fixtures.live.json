@@ -11,7 +11,8 @@
       "shortName": "KOE",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD263",
@@ -19,7 +20,8 @@
       "shortName": "ALA",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD762",
@@ -27,7 +29,8 @@
       "shortName": "ARG",
       "rating": 1600,
       "venue": "",
-      "league": "WC"
+      "league": "WC",
+      "form": []
     },
     {
       "id": "FD57",
@@ -35,7 +38,8 @@
       "shortName": "ARS",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD58",
@@ -43,7 +47,8 @@
       "shortName": "AVL",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD102",
@@ -51,7 +56,8 @@
       "shortName": "ATA",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD77",
@@ -59,7 +65,8 @@
       "shortName": "ATH",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD78",
@@ -67,7 +74,8 @@
       "shortName": "ATL",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD16",
@@ -75,7 +83,8 @@
       "shortName": "FCA",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD81",
@@ -83,7 +92,8 @@
       "shortName": "FCB",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD5",
@@ -91,7 +101,8 @@
       "shortName": "FCB",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD805",
@@ -99,7 +110,8 @@
       "shortName": "BEL",
       "rating": 1600,
       "venue": "",
-      "league": "WC"
+      "league": "WC",
+      "form": []
     },
     {
       "id": "FD103",
@@ -107,7 +119,8 @@
       "shortName": "BOL",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD1044",
@@ -115,7 +128,8 @@
       "shortName": "BOU",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD764",
@@ -123,7 +137,8 @@
       "shortName": "BRA",
       "rating": 1600,
       "venue": "",
-      "league": "WC"
+      "league": "WC",
+      "form": []
     },
     {
       "id": "FD12",
@@ -131,7 +146,8 @@
       "shortName": "SVW",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD402",
@@ -139,7 +155,8 @@
       "shortName": "BRE",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD397",
@@ -147,7 +164,8 @@
       "shortName": "BHA",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD104",
@@ -155,7 +173,8 @@
       "shortName": "CAG",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD558",
@@ -163,7 +182,8 @@
       "shortName": "CEL",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD61",
@@ -171,7 +191,8 @@
       "shortName": "CHE",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD818",
@@ -179,7 +200,8 @@
       "shortName": "COL",
       "rating": 1600,
       "venue": "",
-      "league": "WC"
+      "league": "WC",
+      "form": []
     },
     {
       "id": "FD7397",
@@ -187,7 +209,8 @@
       "shortName": "COM",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD1076",
@@ -195,7 +218,8 @@
       "shortName": "COV",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD354",
@@ -203,7 +227,8 @@
       "shortName": "CRY",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD560",
@@ -211,7 +236,8 @@
       "shortName": "DEP",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD4",
@@ -219,7 +245,8 @@
       "shortName": "BVB",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD825",
@@ -227,7 +254,8 @@
       "shortName": "EGY",
       "rating": 1600,
       "venue": "",
-      "league": "WC"
+      "league": "WC",
+      "form": []
     },
     {
       "id": "FD285",
@@ -235,7 +263,8 @@
       "shortName": "ELC",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD719",
@@ -243,7 +272,8 @@
       "shortName": "ELV",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD770",
@@ -251,7 +281,8 @@
       "shortName": "ENG",
       "rating": 1600,
       "venue": "",
-      "league": "WC"
+      "league": "WC",
+      "form": []
     },
     {
       "id": "FD80",
@@ -259,7 +290,8 @@
       "shortName": "ESP",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD62",
@@ -267,7 +299,8 @@
       "shortName": "EVE",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD99",
@@ -275,7 +308,8 @@
       "shortName": "FIO",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD773",
@@ -283,7 +317,8 @@
       "shortName": "FRA",
       "rating": 1600,
       "venue": "",
-      "league": "WC"
+      "league": "WC",
+      "form": []
     },
     {
       "id": "FD19",
@@ -291,7 +326,8 @@
       "shortName": "SGE",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD17",
@@ -299,7 +335,8 @@
       "shortName": "SCF",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD470",
@@ -307,7 +344,8 @@
       "shortName": "FRO",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD63",
@@ -315,7 +353,8 @@
       "shortName": "FUL",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD107",
@@ -323,7 +362,8 @@
       "shortName": "GEN",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD82",
@@ -331,7 +371,8 @@
       "shortName": "GET",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD2",
@@ -339,7 +380,8 @@
       "shortName": "TSG",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD7",
@@ -347,7 +389,8 @@
       "shortName": "HSV",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD322",
@@ -355,7 +398,8 @@
       "shortName": "HUL",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD108",
@@ -363,7 +407,8 @@
       "shortName": "INT",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD349",
@@ -371,7 +416,8 @@
       "shortName": "IPS",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD109",
@@ -379,7 +425,8 @@
       "shortName": "JUV",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD110",
@@ -387,7 +434,8 @@
       "shortName": "LAZ",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD5890",
@@ -395,7 +443,8 @@
       "shortName": "USL",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD341",
@@ -403,7 +452,8 @@
       "shortName": "LEE",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD88",
@@ -411,7 +461,8 @@
       "shortName": "LEV",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD3",
@@ -419,7 +470,8 @@
       "shortName": "B04",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD64",
@@ -427,7 +479,8 @@
       "shortName": "LIV",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD18",
@@ -435,7 +488,8 @@
       "shortName": "BMG",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD15",
@@ -443,7 +497,8 @@
       "shortName": "M05",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD84",
@@ -451,7 +506,8 @@
       "shortName": "MAL",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD65",
@@ -459,7 +515,8 @@
       "shortName": "MCI",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD66",
@@ -467,7 +524,8 @@
       "shortName": "MUN",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD769",
@@ -475,7 +533,8 @@
       "shortName": "MEX",
       "rating": 1600,
       "venue": "",
-      "league": "WC"
+      "league": "WC",
+      "form": []
     },
     {
       "id": "FD98",
@@ -483,7 +542,8 @@
       "shortName": "MIL",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD5911",
@@ -491,7 +551,8 @@
       "shortName": "MON",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD815",
@@ -499,7 +560,8 @@
       "shortName": "MAR",
       "rating": 1600,
       "venue": "",
-      "league": "WC"
+      "league": "WC",
+      "form": []
     },
     {
       "id": "FD113",
@@ -507,7 +569,8 @@
       "shortName": "NAP",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD67",
@@ -515,7 +578,8 @@
       "shortName": "NEW",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD8872",
@@ -523,7 +587,8 @@
       "shortName": "NOR",
       "rating": 1600,
       "venue": "",
-      "league": "WC"
+      "league": "WC",
+      "form": []
     },
     {
       "id": "FD351",
@@ -531,7 +596,8 @@
       "shortName": "NOT",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD79",
@@ -539,7 +605,8 @@
       "shortName": "OSA",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD112",
@@ -547,7 +614,8 @@
       "shortName": "PAR",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD765",
@@ -555,7 +623,8 @@
       "shortName": "POR",
       "rating": 1600,
       "venue": "",
-      "league": "WC"
+      "league": "WC",
+      "form": []
     },
     {
       "id": "FD87",
@@ -563,7 +632,8 @@
       "shortName": "RAY",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD721",
@@ -571,7 +641,8 @@
       "shortName": "RBL",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD90",
@@ -579,7 +650,8 @@
       "shortName": "BET",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD86",
@@ -587,7 +659,8 @@
       "shortName": "RMA",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD92",
@@ -595,7 +668,8 @@
       "shortName": "RSO",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD100",
@@ -603,7 +677,8 @@
       "shortName": "ROM",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD5335",
@@ -611,7 +686,8 @@
       "shortName": "SAN",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD471",
@@ -619,7 +695,8 @@
       "shortName": "SAS",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD29",
@@ -627,7 +704,8 @@
       "shortName": "SCP",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD6",
@@ -635,7 +713,8 @@
       "shortName": "S04",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD559",
@@ -643,7 +722,8 @@
       "shortName": "SEV",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD760",
@@ -651,7 +731,8 @@
       "shortName": "ESP",
       "rating": 1600,
       "venue": "",
-      "league": "WC"
+      "league": "WC",
+      "form": []
     },
     {
       "id": "FD10",
@@ -659,7 +740,8 @@
       "shortName": "VFB",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD71",
@@ -667,7 +749,8 @@
       "shortName": "SUN",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD788",
@@ -675,7 +758,8 @@
       "shortName": "SUI",
       "rating": 1600,
       "venue": "",
-      "league": "WC"
+      "league": "WC",
+      "form": []
     },
     {
       "id": "FD586",
@@ -683,7 +767,8 @@
       "shortName": "TOR",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD73",
@@ -691,7 +776,8 @@
       "shortName": "TOT",
       "rating": 1600,
       "venue": "",
-      "league": "EPL"
+      "league": "EPL",
+      "form": []
     },
     {
       "id": "FD115",
@@ -699,7 +785,8 @@
       "shortName": "UDI",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD28",
@@ -707,7 +794,8 @@
       "shortName": "UNB",
       "rating": 1600,
       "venue": "",
-      "league": "BUNDESLIGA"
+      "league": "BUNDESLIGA",
+      "form": []
     },
     {
       "id": "FD771",
@@ -715,7 +803,8 @@
       "shortName": "USA",
       "rating": 1600,
       "venue": "",
-      "league": "WC"
+      "league": "WC",
+      "form": []
     },
     {
       "id": "FD95",
@@ -723,7 +812,8 @@
       "shortName": "VAL",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     },
     {
       "id": "FD454",
@@ -731,7 +821,8 @@
       "shortName": "VEN",
       "rating": 1600,
       "venue": "",
-      "league": "SERIEA"
+      "league": "SERIEA",
+      "form": []
     },
     {
       "id": "FD94",
@@ -739,7 +830,8 @@
       "shortName": "VIL",
       "rating": 1600,
       "venue": "",
-      "league": "LALIGA"
+      "league": "LALIGA",
+      "form": []
     }
   ],
   "matches": [

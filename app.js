@@ -544,6 +544,7 @@ const matches = [
 ];
 
 const seedMatches = matches.map(cloneMatch);
+const seedTeams = cloneTeamMap(teams);
 let fixtureMeta = { ...seedFixtureMeta };
 
 const headToHead = {
@@ -719,6 +720,54 @@ function quickTeam(id, name, shortName, rating, venue, league) {
   });
 }
 
+function makeImportedTeam(id, name, shortName, rating, venue, league) {
+  const strength = clamp((rating - 1600) / 300, -0.3, 0.8);
+
+  return {
+    id,
+    name,
+    shortName,
+    rating,
+    venue,
+    attacking: {
+      avgGoals: clamp(1.25 + strength * 0.45, 0.85, 2.05),
+      shots: clamp(11.2 + strength * 3.4, 8.4, 16.4),
+      shotsOnTarget: clamp(3.8 + strength * 1.4, 2.6, 6.1),
+      bigChances: clamp(1.6 + strength, 0.8, 3.2),
+      xg: clamp(1.18 + strength * 0.45, 0.78, 2.0)
+    },
+    defensive: {
+      goalsConcededAvg: clamp(1.38 - strength * 0.34, 0.82, 1.88),
+      cleanSheetPct: clamp(27 + strength * 14, 16, 52),
+      xga: clamp(1.42 - strength * 0.3, 0.82, 1.86),
+      cards: clamp(2.4 - strength * 0.25, 1.5, 2.9)
+    },
+    form: []
+  };
+}
+
+function cloneTeamMap(teamMap) {
+  return Object.fromEntries(Object.entries(teamMap).map(([teamId, team]) => [teamId, cloneTeam(team)]));
+}
+
+function resetTeamsToSeed() {
+  Object.keys(teams).forEach((teamId) => {
+    delete teams[teamId];
+  });
+  Object.entries(seedTeams).forEach(([teamId, team]) => {
+    teams[teamId] = cloneTeam(team);
+  });
+}
+
+function cloneTeam(team) {
+  return {
+    ...team,
+    attacking: { ...team.attacking },
+    defensive: { ...team.defensive },
+    form: Array.isArray(team.form) ? team.form.map((match) => ({ ...match })) : []
+  };
+}
+
 function makeTeam(id, name, shortName, rating, venue, data) {
   return {
     id,
@@ -819,7 +868,8 @@ function getMatchDetails(matchId) {
 }
 
 function getTeamLastFiveMatches(teamId) {
-  return teams[teamId]?.form.slice(0, 5) || [];
+  const form = teams[teamId]?.form;
+  return Array.isArray(form) ? form.slice(0, 5) : [];
 }
 
 function importFixtureData(payload, options = {}) {
@@ -842,6 +892,7 @@ function importFixtureData(payload, options = {}) {
 }
 
 function resetFixtureData() {
+  resetTeamsToSeed();
   matches.splice(0, matches.length, ...seedMatches.map(cloneMatch));
   fixtureMeta = { ...seedFixtureMeta };
   localStorage.removeItem(FIXTURE_STORAGE_KEY);
@@ -949,7 +1000,9 @@ function normalizeImportedTeam(team) {
   const league = normalizeLeague(team.league || team.competition || "EPL");
   const id = normalizeTeamId(team.id || team.teamId || createTeamId(name, league));
   const existingId = findTeamIdByName(name) || id;
-  const base = teams[existingId] || quickTeam(existingId, name, team.shortName || makeShortName(name), Number(team.rating) || 1600, team.venue || "", league);
+  const base =
+    teams[existingId] ||
+    makeImportedTeam(existingId, name, team.shortName || makeShortName(name), Number(team.rating) || 1600, team.venue || "", league);
 
   teams[existingId] = {
     ...base,
@@ -966,7 +1019,7 @@ function normalizeImportedTeam(team) {
       ...base.defensive,
       ...(team.defensive || {})
     },
-    form: normalizeImportedForm(team.form, base.form)
+    form: normalizeImportedForm(team.form)
   };
 
   return teams[existingId];
@@ -1010,7 +1063,7 @@ function resolveTeamForMatch(idLike, nameLike, league) {
 
   const name = String(nameLike || "").trim();
   if (!name && directId) {
-    if (!teams[directId]) teams[directId] = quickTeam(directId, directId, directId, 1600, "", league);
+    if (!teams[directId]) teams[directId] = makeImportedTeam(directId, directId, directId, 1600, "", league);
     return directId;
   }
   const existingId = findTeamIdByName(name);
@@ -1018,7 +1071,7 @@ function resolveTeamForMatch(idLike, nameLike, league) {
 
   const id = directId || createTeamId(name, league);
   if (!teams[id]) {
-    teams[id] = quickTeam(id, name, makeShortName(name), 1600, "", league);
+    teams[id] = makeImportedTeam(id, name, makeShortName(name), 1600, "", league);
   }
   return id;
 }
@@ -1071,8 +1124,8 @@ function normalizeScore(score) {
   return { home, away };
 }
 
-function normalizeImportedForm(form, fallback) {
-  if (!Array.isArray(form)) return fallback;
+function normalizeImportedForm(form) {
+  if (!Array.isArray(form)) return [];
   const normalized = form
     .map((match, index) => {
       if (Array.isArray(match)) {
@@ -1097,7 +1150,7 @@ function normalizeImportedForm(form, fallback) {
     })
     .filter(Boolean)
     .slice(0, 5);
-  return normalized.length ? normalized : fallback;
+  return normalized;
 }
 
 function exportTeam(team) {
@@ -1141,17 +1194,18 @@ function calculatePrediction(matchData) {
   const h2h = summarizeH2H(matchData.h2h, home.id, away.id);
 
   const ratingEdge = (home.rating - away.rating) / 950;
-  const formEdge = (homeForm.pointsPerMatch - awayForm.pointsPerMatch) / 6;
-  const goalTrendEdge = ((homeForm.goalDifference / 5) - (awayForm.goalDifference / 5)) * 0.08;
+  const hasComparableForm = homeForm.matchesPlayed > 0 && awayForm.matchesPlayed > 0;
+  const formEdge = hasComparableForm ? (homeForm.pointsPerMatch - awayForm.pointsPerMatch) / 6 : 0;
+  const goalTrendEdge = hasComparableForm ? ((homeForm.goalDifference / homeForm.matchesPlayed) - (awayForm.goalDifference / awayForm.matchesPlayed)) * 0.08 : 0;
   const h2hEdge = h2h.total ? ((h2h.homeWins - h2h.awayWins) / h2h.total) * 0.12 : 0;
   const homeEdge = profile.homeAdvantage + ratingEdge + formEdge + goalTrendEdge + h2hEdge;
 
   const baseHomeXg = profile.avgGoals * 0.53;
   const baseAwayXg = profile.avgGoals * 0.47;
-  const homeAttack = blend(home.attacking.xg, homeForm.avgGoalsFor, 0.55);
-  const awayAttack = blend(away.attacking.xg, awayForm.avgGoalsFor, 0.55);
-  const homeDefense = blend(home.defensive.xga, homeForm.avgGoalsAgainst, 0.5);
-  const awayDefense = blend(away.defensive.xga, awayForm.avgGoalsAgainst, 0.5);
+  const homeAttack = homeForm.matchesPlayed ? blend(home.attacking.xg, homeForm.avgGoalsFor, 0.55) : home.attacking.xg;
+  const awayAttack = awayForm.matchesPlayed ? blend(away.attacking.xg, awayForm.avgGoalsFor, 0.55) : away.attacking.xg;
+  const homeDefense = homeForm.matchesPlayed ? blend(home.defensive.xga, homeForm.avgGoalsAgainst, 0.5) : home.defensive.xga;
+  const awayDefense = awayForm.matchesPlayed ? blend(away.defensive.xga, awayForm.avgGoalsAgainst, 0.5) : away.defensive.xga;
 
   const pregameHomeXg = clamp(baseHomeXg + (homeAttack - awayDefense) * 0.42 + homeEdge * 0.48, 0.25, 4.4);
   const pregameAwayXg = clamp(baseAwayXg + (awayAttack - homeDefense) * 0.42 - homeEdge * 0.34, 0.25, 4.4);
@@ -1260,14 +1314,15 @@ function summarizeForm(team) {
     }
   );
 
-  const matchesPlayed = form.length || 1;
+  const matchesPlayed = form.length;
   return {
     ...summary,
     matches: form,
-    avgGoalsFor: summary.goalsFor / matchesPlayed,
-    avgGoalsAgainst: summary.goalsAgainst / matchesPlayed,
+    matchesPlayed,
+    avgGoalsFor: matchesPlayed ? summary.goalsFor / matchesPlayed : 0,
+    avgGoalsAgainst: matchesPlayed ? summary.goalsAgainst / matchesPlayed : 0,
     goalDifference: summary.goalsFor - summary.goalsAgainst,
-    pointsPerMatch: summary.points / matchesPlayed
+    pointsPerMatch: matchesPlayed ? summary.points / matchesPlayed : 0
   };
 }
 
@@ -1466,7 +1521,7 @@ function renderMatchCard(match) {
   const prediction = calculatePrediction(details);
   const status = statusLabels[match.status];
   const scoreLabel = match.score ? `${match.score.home}-${match.score.away}` : "vs";
-    const contextLabel = formatMatchContext(match, details);
+  const contextLabel = formatMatchContext(match, details);
 
   return `
     <button class="match-card" type="button" data-match-id="${match.id}">
@@ -1491,8 +1546,8 @@ function renderMatchCard(match) {
         ${renderPick("Draw", prediction.probabilities.draw)}
         ${renderPick("Away", prediction.probabilities.away)}
       </div>
-              <span>${escapeHtml(contextLabel)}</span>
-        
+      <div class="card-footer">
+        <span>${escapeHtml(contextLabel)}</span>
         <strong>${scoreLabel}</strong>
       </div>
     </button>
@@ -1501,9 +1556,9 @@ function renderMatchCard(match) {
 
 
 function formatMatchContext(match, details) {
-    const stage = String(details.stage || "").trim();
-    const date = match.date ? dateLabel(match.date) : "Date TBC";
-    return stage ? `${stage} - ${date}` : date;
+  const stage = String(details.stage || "").trim();
+  const date = match.date ? dateLabel(match.date) : "Date TBC";
+  return stage ? `${stage} - ${date}` : date;
 }
 function renderPick(label, probability) {
   return `
@@ -1643,6 +1698,7 @@ function renderMarketTile(label, probability) {
 }
 
 function renderFormPanel(team, formSummary) {
+  const hasForm = formSummary.matches.length > 0;
   const rows = [
     ["Wins", formSummary.wins],
     ["Draws", formSummary.draws],
@@ -1657,24 +1713,30 @@ function renderFormPanel(team, formSummary) {
     <section class="panel-card">
       <div class="panel-title">
         <span>${escapeHtml(team.name)}</span>
-        <strong>${formatNumber(formSummary.pointsPerMatch)} PPM</strong>
+        <strong>${hasForm ? `${formatNumber(formSummary.pointsPerMatch)} PPM` : "No form"}</strong>
       </div>
-      <div class="form-strip">
-        ${formSummary.results.map((result) => `<span class="form-chip ${result.toLowerCase()}">${result}</span>`).join("")}
-      </div>
-      <div class="form-matches">
-        ${formSummary.matches
-          .map(
-            (match) => `
-              <div>
-                <span>${escapeHtml(match.venue)} vs ${escapeHtml(match.opponent)}</span>
-                <strong>${match.goalsFor}-${match.goalsAgainst}</strong>
-              </div>
-            `
-          )
-          .join("")}
-      </div>
-      <div class="stat-rows">${renderStatRows(rows)}</div>
+      ${
+        hasForm
+          ? `
+            <div class="form-strip">
+              ${formSummary.results.map((result) => `<span class="form-chip ${result.toLowerCase()}">${result}</span>`).join("")}
+            </div>
+            <div class="form-matches">
+              ${formSummary.matches
+                .map(
+                  (match) => `
+                    <div>
+                      <span>${escapeHtml(match.venue)} vs ${escapeHtml(match.opponent)}</span>
+                      <strong>${match.goalsFor}-${match.goalsAgainst}</strong>
+                    </div>
+                  `
+                )
+                .join("")}
+            </div>
+            <div class="stat-rows">${renderStatRows(rows)}</div>
+          `
+          : `<div class="empty-state inline"><strong>No recent form data available</strong><span>GoalIQ will show live form when the feed provides finished matches for this team.</span></div>`
+      }
     </section>
   `;
 }

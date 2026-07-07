@@ -1,0 +1,74 @@
+import { readFile } from "node:fs/promises";
+
+const feed = JSON.parse(await readFile("fixtures.live.json", "utf8"));
+const appSource = await readFile("app.js", "utf8");
+
+const eplFallbackOpponents = ["Everton", "West Ham", "Fulham", "Brentford", "Bournemouth", "Newcastle United"];
+
+assert(Array.isArray(feed.teams), "fixtures.live.json must export a teams array.");
+assert(feed.teams.every((team) => Array.isArray(team.form)), "Every exported team must include a form array.");
+
+feed.teams.forEach((team) => {
+  assert(team.form.length <= 5, `${team.name} exports more than five form matches.`);
+  team.form.forEach((match) => {
+    assert(typeof match.date === "string" && match.date.length > 0, `${team.name} has a form row without a date.`);
+    assert(typeof match.competition === "string" && match.competition.length > 0, `${team.name} has a form row without a competition.`);
+    assert(typeof match.opponent === "string" && match.opponent.length > 0, `${team.name} has a form row without an opponent.`);
+    assert(["H", "A"].includes(match.venue), `${team.name} has a form row with invalid venue ${match.venue}.`);
+    assert(Number.isFinite(Number(match.goalsFor)), `${team.name} has a form row without goalsFor.`);
+    assert(Number.isFinite(Number(match.goalsAgainst)), `${team.name} has a form row without goalsAgainst.`);
+  });
+});
+
+feed.teams
+  .filter((team) => team.league === "WC")
+  .forEach((team) => {
+    team.form.forEach((match) => {
+      assert(match.competition === "WC", `${team.name} World Cup form includes non-WC competition ${match.competition}.`);
+      assert(!eplFallbackOpponents.includes(match.opponent), `${team.name} form contains EPL fallback opponent ${match.opponent}.`);
+    });
+  });
+
+["France", "Senegal"].forEach((teamName) => {
+  const team = findTeam(teamName);
+  if (!team) return;
+  const leakedOpponent = team.form.find((match) => eplFallbackOpponents.includes(match.opponent));
+  assert(!leakedOpponent, `${teamName} form contains EPL fallback opponent ${leakedOpponent?.opponent}.`);
+});
+
+assert(
+  appSource.includes("No recent form data available"),
+  "Form panel must render an explicit no-data state for imported teams without form."
+);
+assert(
+  appSource.includes("if (!Array.isArray(form)) return [];"),
+  "Imported teams without form must not fall back to demo/generated form."
+);
+assert(
+  !appSource.includes("normalizeImportedForm(team.form, base.form)"),
+  "Imported teams must not pass demo form as an import fallback."
+);
+assert(appSource.includes("function makeImportedTeam"), "Imported teams need a non-demo team factory.");
+assert(appSource.includes("form: []"), "Imported teams without real form should keep an empty form array.");
+assert(appSource.includes("const seedTeams = cloneTeamMap(teams);"), "Demo team snapshot must be kept for reset.");
+assert(appSource.includes("resetTeamsToSeed();"), "Reset must restore the built-in demo team data.");
+
+console.log("Form data validation passed.");
+
+function findTeam(name) {
+  const clean = normalizeName(name);
+  return feed.teams.find((team) => normalizeName(team.name) === clean || normalizeName(team.shortName) === clean);
+}
+
+function normalizeName(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function assert(condition, message) {
+  if (!condition) {
+    throw new Error(message);
+  }
+}

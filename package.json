@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/dev-server.mjs",
-    "build": "node --check app.js && node --check scripts/update-fixtures.mjs && node --check scripts/worldcup-bracket.mjs",
-    "test": "node --test tests/*.test.mjs"
+    "build": "node --check app.js && node --check scripts/update-fixtures.mjs && node --check scripts/worldcup-bracket.mjs && node scripts/validate-form-data.mjs",
+    "test": "node --test tests/*.test.mjs && node scripts/validate-form-data.mjs"
   }
 }

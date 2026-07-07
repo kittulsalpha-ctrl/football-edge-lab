@@ -5,6 +5,8 @@ const COMPETITIONS = ["PL", "PD", "SA", "BL1", "CL", "WC"];
 const OUT_FILE = "fixtures.live.json";
 const DISPLAY_TIME_ZONE = process.env.FIXTURE_TIME_ZONE || "Asia/Kolkata";
 const MAX_WINDOW_DAYS = 10;
+const FORM_LOOKBACK_DAYS = 220;
+const MAX_FORM_MATCHES = 5;
 
 const token = process.env.FOOTBALL_DATA_TOKEN;
 if (!token) {
@@ -16,11 +18,14 @@ const toDate = addDays(new Date(), 60);
 
 const from = formatDateKey(fromDate);
 const to = formatDateKey(toDate);
+const formFromDate = addDays(new Date(), -FORM_LOOKBACK_DAYS);
+const formToDate = new Date();
 
 const apiMatches = await fetchMatchesInWindows(fromDate, toDate);
+const apiFormMatches = await fetchMatchesInWindows(formFromDate, formToDate, { status: "FINISHED" });
 
 const existingFeed = await loadExistingFeed();
-const converted = convertFootballData({ matches: apiMatches }, from, to, existingFeed);
+const converted = convertFootballData({ matches: apiMatches, formMatches: apiFormMatches }, from, to, existingFeed);
 if (!converted) {
   console.log("football-data.org returned no supported fixtures for the configured date range; skipping update.");
   process.exit(0);
@@ -29,7 +34,7 @@ if (!converted) {
 await writeFile(OUT_FILE, `${JSON.stringify(converted, null, 2)}\n`);
 console.log(`Wrote ${converted.matches.length} fixtures to ${OUT_FILE}.`);
 
-async function fetchMatchesInWindows(fromDate, toDate) {
+async function fetchMatchesInWindows(fromDate, toDate, extraParams = {}) {
   const matches = [];
   let start = fromDate;
 
@@ -41,6 +46,7 @@ async function fetchMatchesInWindows(fromDate, toDate) {
       competitions: COMPETITIONS.join(","),
       dateFrom: formatDateKey(start),
       dateTo: formatDateKey(end),
+      ...extraParams,
     });
 
     const response = await fetch(`${API_BASE}/matches?${params.toString()}`, {
@@ -80,6 +86,7 @@ async function loadExistingFeed() {
 
 function convertFootballData(payload, fromDate, toDate, existingFeed) {
   const apiMatches = Array.isArray(payload?.matches) ? payload.matches : [];
+  const apiFormMatches = Array.isArray(payload?.formMatches) ? payload.formMatches : [];
 
   const teams = new Map();
   const existingTeams = new Map((existingFeed?.teams || []).map((team) => [team.id, team]));
@@ -100,6 +107,8 @@ function convertFootballData(payload, fromDate, toDate, existingFeed) {
   if (!mergedMatches.length) {
     return null;
   }
+
+  applyTeamForms(teams, [...apiFormMatches, ...apiMatches]);
 
   return {
     meta: {
@@ -174,7 +183,65 @@ function convertTeam(team, league) {
     rating: 1600,
     venue: "",
     league,
+    form: [],
   };
+}
+
+function applyTeamForms(teams, apiMatches) {
+  const teamForms = new Map([...teams.keys()].map((teamId) => [teamId, []]));
+  const seen = new Set();
+  const sortedMatches = apiMatches
+    .filter((match) => normalizeStatus(match.status) === "finished" && normalizeScore(match.score))
+    .sort((a, b) => String(b.utcDate || "").localeCompare(String(a.utcDate || "")));
+
+  sortedMatches.forEach((match) => {
+    const league = normalizeLeague(match.competition?.code || match.competition?.name);
+    if (!league) return;
+
+    const homeTeam = convertTeam(match.homeTeam, league);
+    const awayTeam = convertTeam(match.awayTeam, league);
+    const score = normalizeScore(match.score);
+    if (!homeTeam || !awayTeam || !score) return;
+
+    appendFormMatch(teamForms, teams, seen, homeTeam.id, match.id, {
+      date: formatApiMatchDate(match),
+      competition: league,
+      opponent: awayTeam.name,
+      venue: "H",
+      goalsFor: score.home,
+      goalsAgainst: score.away,
+    });
+
+    appendFormMatch(teamForms, teams, seen, awayTeam.id, match.id, {
+      date: formatApiMatchDate(match),
+      competition: league,
+      opponent: homeTeam.name,
+      venue: "A",
+      goalsFor: score.away,
+      goalsAgainst: score.home,
+    });
+  });
+
+  teams.forEach((team) => {
+    team.form = teamForms.get(team.id) || [];
+  });
+}
+
+function appendFormMatch(teamForms, teams, seen, teamId, matchId, formMatch) {
+  const team = teams.get(teamId);
+  const form = teamForms.get(teamId);
+  if (!team || !form || form.length >= MAX_FORM_MATCHES) return;
+  if (team.league === "WC" && formMatch.competition !== "WC") return;
+  const key = `${teamId}:${matchId || `${formMatch.date}:${formMatch.opponent}`}`;
+  if (seen.has(key)) return;
+  seen.add(key);
+  form.push(formMatch);
+}
+
+function formatApiMatchDate(match) {
+  const date = match.utcDate ? new Date(match.utcDate) : null;
+  if (date && !Number.isNaN(date.getTime())) return formatDateInTimeZone(date);
+  return formatDateKey(new Date());
 }
 
 function normalizeLeague(value) {
