@@ -7,6 +7,8 @@ const DISPLAY_TIME_ZONE = process.env.FIXTURE_TIME_ZONE || "Asia/Kolkata";
 const MAX_WINDOW_DAYS = 10;
 const FORM_LOOKBACK_DAYS = 220;
 const MAX_FORM_MATCHES = 5;
+const MAX_FETCH_RETRIES = 3;
+const REQUEST_PAUSE_MS = 1500;
 
 const token = process.env.FOOTBALL_DATA_TOKEN;
 if (!token) {
@@ -49,7 +51,21 @@ async function fetchMatchesInWindows(fromDate, toDate, extraParams = {}) {
       ...extraParams,
     });
 
-    const response = await fetch(`${API_BASE}/matches?${params.toString()}`, {
+    const payload = await fetchFootballData(`${API_BASE}/matches?${params.toString()}`);
+
+    const windowMatches = Array.isArray(payload?.matches) ? payload.matches : [];
+    matches.push(...windowMatches);
+
+    start = addDays(end, 1);
+    await delay(REQUEST_PAUSE_MS);
+  }
+
+  return matches;
+}
+
+async function fetchFootballData(url) {
+  for (let attempt = 0; attempt <= MAX_FETCH_RETRIES; attempt += 1) {
+    const response = await fetch(url, {
       headers: {
         "X-Auth-Token": token,
       },
@@ -62,18 +78,36 @@ async function fetchMatchesInWindows(fromDate, toDate, extraParams = {}) {
       payload = null;
     }
 
-    if (!response.ok) {
-      const message = payload?.message || payload?.error || `HTTP ${response.status}`;
-      throw new Error(`football-data.org request failed: ${message}`);
+    if (response.ok) return payload;
+
+    const message = payload?.message || payload?.error || `HTTP ${response.status}`;
+    const retryDelayMs = getRetryDelayMs(response, message);
+    if (retryDelayMs && attempt < MAX_FETCH_RETRIES) {
+      console.log(`football-data.org rate limit hit; retrying in ${Math.round(retryDelayMs / 1000)}s.`);
+      await delay(retryDelayMs);
+      continue;
     }
 
-    const windowMatches = Array.isArray(payload?.matches) ? payload.matches : [];
-    matches.push(...windowMatches);
-
-    start = addDays(end, 1);
+    throw new Error(`football-data.org request failed: ${message}`);
   }
 
-  return matches;
+  throw new Error("football-data.org request failed after retries.");
+}
+
+function getRetryDelayMs(response, message) {
+  if (response.status !== 429 && !/request limit/i.test(message)) return 0;
+
+  const retryAfter = Number(response.headers.get("retry-after"));
+  if (Number.isFinite(retryAfter) && retryAfter > 0) return (retryAfter + 2) * 1000;
+
+  const waitMatch = String(message).match(/wait\s+(\d+)\s+seconds/i);
+  if (waitMatch) return (Number(waitMatch[1]) + 2) * 1000;
+
+  return 35000;
+}
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 async function loadExistingFeed() {
