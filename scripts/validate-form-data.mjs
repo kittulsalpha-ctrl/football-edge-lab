@@ -49,9 +49,18 @@ assert(
   "Imported teams must not pass demo form as an import fallback."
 );
 assert(appSource.includes("function makeImportedTeam"), "Imported teams need a non-demo team factory.");
+assert(appSource.includes("function buildTeamProfileFromForm"), "Imported teams with real form must derive team stats from that form.");
+assert(appSource.includes("buildTeamProfileFromForm(importedForm"), "Imported team normalization must apply form-derived profiles.");
+assert(appSource.includes("function getFixtureHeadToHead"), "Live/imported H2H must come from finished fixture feed meetings.");
+assert(appSource.includes("No verified head-to-head data"), "Live/imported teams without H2H need a no-data state.");
 assert(appSource.includes("form: []"), "Imported teams without real form should keep an empty form array.");
 assert(appSource.includes("const seedTeams = cloneTeamMap(teams);"), "Demo team snapshot must be kept for reset.");
 assert(appSource.includes("resetTeamsToSeed();"), "Reset must restore the built-in demo team data.");
+
+if (feed.matches?.some((match) => match.league === "WC" && /last 16|round of 16|quarter|semi|final/i.test(match.stage || ""))) {
+  assert(appSource.includes("function buildLiveWorldCupBracket"), "World Cup page must build a bracket from live knockout fixtures.");
+  assert(appSource.includes("bracket.mode === \"liveFeed\""), "World Cup UI must render a live-feed bracket mode.");
+}
 
 console.log("Form data validation passed.");
 

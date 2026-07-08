@@ -768,6 +768,58 @@ function cloneTeam(team) {
   };
 }
 
+function buildTeamProfileFromForm(form, seedRating = 1600) {
+  const recent = Array.isArray(form)
+    ? form.filter((match) => Number.isFinite(Number(match.goalsFor)) && Number.isFinite(Number(match.goalsAgainst)))
+    : [];
+  if (!recent.length) return null;
+
+  const totals = recent.reduce(
+    (summary, match) => {
+      const goalsFor = Number(match.goalsFor);
+      const goalsAgainst = Number(match.goalsAgainst);
+      const result = resultFor(goalsFor, goalsAgainst);
+      summary.goalsFor += goalsFor;
+      summary.goalsAgainst += goalsAgainst;
+      summary.cleanSheets += goalsAgainst === 0 ? 1 : 0;
+      summary.failedToScore += goalsFor === 0 ? 1 : 0;
+      summary.points += result === "W" ? 3 : result === "D" ? 1 : 0;
+      return summary;
+    },
+    { goalsFor: 0, goalsAgainst: 0, cleanSheets: 0, failedToScore: 0, points: 0 }
+  );
+
+  const matchesPlayed = recent.length;
+  const avgGoals = totals.goalsFor / matchesPlayed;
+  const avgAgainst = totals.goalsAgainst / matchesPlayed;
+  const pointsPerMatch = totals.points / matchesPlayed;
+  const goalDifferencePerMatch = (totals.goalsFor - totals.goalsAgainst) / matchesPlayed;
+  const cleanSheetPct = (totals.cleanSheets / matchesPlayed) * 100;
+  const failedToScorePct = (totals.failedToScore / matchesPlayed) * 100;
+  const ratingBase = Number.isFinite(Number(seedRating)) ? Number(seedRating) : 1600;
+
+  return {
+    rating: Math.round(clamp(ratingBase + (pointsPerMatch - 1.35) * 95 + goalDifferencePerMatch * 70 + (cleanSheetPct - 30) * 1.1, 1380, 2025)),
+    attacking: {
+      avgGoals: roundMetric(avgGoals),
+      shots: roundMetric(clamp(8.2 + avgGoals * 3.1 + pointsPerMatch * 0.9 - failedToScorePct * 0.018, 6.8, 19.5), 1),
+      shotsOnTarget: roundMetric(clamp(2.4 + avgGoals * 1.35 + pointsPerMatch * 0.22, 1.8, 7.4), 1),
+      bigChances: roundMetric(clamp(0.65 + avgGoals * 0.85 + pointsPerMatch * 0.18, 0.3, 4.2), 1),
+      xg: roundMetric(clamp(avgGoals * 0.82 + pointsPerMatch * 0.18 + 0.28, 0.45, 3.05))
+    },
+    defensive: {
+      goalsConcededAvg: roundMetric(avgAgainst),
+      cleanSheetPct: Math.round(cleanSheetPct),
+      xga: roundMetric(clamp(avgAgainst * 0.88 + (100 - cleanSheetPct) * 0.004, 0.35, 2.85)),
+      cards: roundMetric(clamp(2.45 - pointsPerMatch * 0.2 + avgAgainst * 0.14, 1.3, 3.4), 1)
+    }
+  };
+}
+
+function roundMetric(value, digits = 2) {
+  return Number(value.toFixed(digits));
+}
+
 function makeTeam(id, name, shortName, rating, venue, data) {
   return {
     id,
@@ -1003,23 +1055,29 @@ function normalizeImportedTeam(team) {
   const base =
     teams[existingId] ||
     makeImportedTeam(existingId, name, team.shortName || makeShortName(name), Number(team.rating) || 1600, team.venue || "", league);
+  const importedForm = normalizeImportedForm(team.form);
+  const suppliedRating = Number(team.rating);
+  const ratingSeed = Number.isFinite(suppliedRating) ? suppliedRating : base.rating;
+  const formProfile = buildTeamProfileFromForm(importedForm, ratingSeed);
 
   teams[existingId] = {
     ...base,
     id: existingId,
     name,
     shortName: String(team.shortName || team.abbreviation || base.shortName || makeShortName(name)).slice(0, 4).toUpperCase(),
-    rating: Number(team.rating) || base.rating,
+    rating: formProfile?.rating || ratingSeed || base.rating,
     venue: team.venue || base.venue || "",
     attacking: {
       ...base.attacking,
+      ...(formProfile?.attacking || {}),
       ...(team.attacking || {})
     },
     defensive: {
       ...base.defensive,
+      ...(formProfile?.defensive || {}),
       ...(team.defensive || {})
     },
-    form: normalizeImportedForm(team.form)
+    form: importedForm
   };
 
   return teams[existingId];
@@ -1248,7 +1306,36 @@ function calculatePrediction(matchData) {
 }
 
 function getHeadToHead(homeTeamId, awayTeamId) {
-  return headToHead[pairKey(homeTeamId, awayTeamId)] || generateHeadToHead(homeTeamId, awayTeamId);
+  const feedMeetings = getFixtureHeadToHead(homeTeamId, awayTeamId);
+  if (feedMeetings.length) return feedMeetings;
+
+  const seededMeetings = headToHead[pairKey(homeTeamId, awayTeamId)];
+  if (seededMeetings) return seededMeetings;
+
+  if (!seedTeams[homeTeamId] || !seedTeams[awayTeamId]) return [];
+  return generateHeadToHead(homeTeamId, awayTeamId);
+}
+
+function getFixtureHeadToHead(homeTeamId, awayTeamId) {
+  return matches
+    .filter(
+      (match) =>
+        match.score &&
+        match.status === "finished" &&
+        ((match.homeTeamId === homeTeamId && match.awayTeamId === awayTeamId) ||
+          (match.homeTeamId === awayTeamId && match.awayTeamId === homeTeamId))
+    )
+    .map((match) => ({
+      date: match.date,
+      competition: match.league,
+      homeTeamId: match.homeTeamId,
+      awayTeamId: match.awayTeamId,
+      homeGoals: match.score.home,
+      awayGoals: match.score.away,
+      venue: match.venue
+    }))
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 5);
 }
 
 function generateHeadToHead(homeTeamId, awayTeamId) {
@@ -1766,7 +1853,7 @@ function renderComparisonRows(homeTeam, awayTeam, rows) {
 
 function renderH2H(details, summary) {
   if (!details.h2h.length) {
-    return `<div class="empty-state inline"><strong>No head-to-head data</strong><span>Mock data can be replaced by an API later.</span></div>`;
+    return `<div class="empty-state inline"><strong>No verified head-to-head data</strong><span>GoalIQ will show meetings when the fixture feed includes finished matches between these teams.</span></div>`;
   }
 
   return `
@@ -1806,19 +1893,11 @@ function renderWorldCupView() {
   selectors.bracketContent.innerHTML = `
     ${renderWorldCupHero(modelBracket, bracket)}
     <div class="worldcup-layout">
-      <section class="worldcup-section">
-        <div class="panel-title">
-          <span>Group stage</span>
-          <strong>12 groups of 4</strong>
-        </div>
-        <div class="worldcup-groups">
-          ${bracket.standings.map(renderWorldCupGroup).join("")}
-        </div>
-      </section>
+      ${bracket.mode === "liveFeed" ? renderWorldCupLiveFeedSummary(bracket) : renderWorldCupGroupStage(bracket)}
       <section class="worldcup-section bracket-section">
         <div class="panel-title">
-          <span>Prediction bracket</span>
-          <strong>Round of 32 to final</strong>
+          <span>${bracket.mode === "liveFeed" ? "Live knockout chart" : "Prediction bracket"}</span>
+          <strong>${bracket.mode === "liveFeed" ? `${bracket.liveFixtureCount} feed fixtures` : "Round of 32 to final"}</strong>
         </div>
         <div class="bracket-scroll" aria-label="FIFA World Cup 2026 prediction bracket">
           <div class="bracket-grid">
@@ -1835,19 +1914,72 @@ function renderWorldCupHero(modelBracket, userBracket) {
   const modelChampion = modelBracket.champion;
   const userChampion = userBracket.champion;
   const pickCount = Object.keys(state.bracketUserPicks).length;
+  const isLiveFeed = modelBracket.mode === "liveFeed";
   return `
     <section class="worldcup-hero">
       <div>
         <span class="section-kicker">FIFA World Cup 2026</span>
-        <h2>GoalIQ prediction bracket</h2>
-        <p>Group tables use live World Cup fixture scores when they exist, then the bracket advances from actual results, your picks, or the model favorite.</p>
+        <h2>${isLiveFeed ? "Live knockout bracket" : "GoalIQ prediction bracket"}</h2>
+        <p>${isLiveFeed ? "This chart is built from the current World Cup fixture feed. Finished matches lock in from scores; upcoming matches use the model until results arrive." : "Group tables use live World Cup fixture scores when they exist, then the bracket advances from actual results, your picks, or the model favorite."}</p>
       </div>
       <div class="champion-card">
-        <span>Model champion</span>
+        <span>${isLiveFeed ? "Bracket leader" : "Model champion"}</span>
         <strong>${escapeHtml(modelChampion?.name || "TBD")}</strong>
-        <small>${pickCount ? `${pickCount} saved pick${pickCount === 1 ? "" : "s"}` : "No user picks yet"}${userChampion ? ` - Your path: ${escapeHtml(userChampion.name)}` : ""}</small>
+        <small>${isLiveFeed ? `${modelBracket.liveFixtureCount} live knockout fixture${modelBracket.liveFixtureCount === 1 ? "" : "s"}` : pickCount ? `${pickCount} saved pick${pickCount === 1 ? "" : "s"}` : "No user picks yet"}${!isLiveFeed && userChampion ? ` - Your path: ${escapeHtml(userChampion.name)}` : ""}</small>
       </div>
     </section>
+  `;
+}
+
+function renderWorldCupGroupStage(bracket) {
+  return `
+    <section class="worldcup-section">
+      <div class="panel-title">
+        <span>Group stage</span>
+        <strong>12 groups of 4</strong>
+      </div>
+      <div class="worldcup-groups">
+        ${bracket.standings.map(renderWorldCupGroup).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderWorldCupLiveFeedSummary(bracket) {
+  return `
+    <section class="worldcup-section">
+      <div class="panel-title">
+        <span>Live feed rounds</span>
+        <strong>${fixtureMeta.updatedAt}</strong>
+      </div>
+      <div class="worldcup-groups">
+        ${bracket.rounds.map(renderWorldCupLiveRoundSummary).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderWorldCupLiveRoundSummary(round) {
+  return `
+    <article class="worldcup-group-card">
+      <header>
+        <span>${escapeHtml(round.label)}</span>
+        <strong>${round.matches.length} match${round.matches.length === 1 ? "" : "es"}</strong>
+      </header>
+      <div class="worldcup-table">
+        ${round.matches
+          .map(
+            (match) => `
+              <div class="worldcup-table-row">
+                <span>${match.result ? "FT" : formatShortDate(match.date)}</span>
+                <strong>${escapeHtml(match.home?.shortName || "TBD")} vs ${escapeHtml(match.away?.shortName || "TBD")}</strong>
+                <small>${match.result ? `${match.result.home}-${match.result.away}` : "Upcoming"}</small>
+              </div>
+            `
+          )
+          .join("")}
+      </div>
+    </article>
   `;
 }
 
@@ -1956,6 +2088,10 @@ function renderWorldCupMatchDrawer(match, modelMatch) {
 }
 
 function buildWorldCupBracket({ userPicks = {} } = {}) {
+  return buildLiveWorldCupBracket({ userPicks }) || buildProjectedWorldCupBracket({ userPicks });
+}
+
+function buildProjectedWorldCupBracket({ userPicks = {} } = {}) {
   const standings = getWorldCupStandings();
   const slots = getWorldCupSeedSlots(standings);
   const usedThirdGroups = new Set();
@@ -1990,8 +2126,110 @@ function buildWorldCupBracket({ userPicks = {} } = {}) {
     standings,
     rounds,
     matchesById: byId,
-    champion: byId.get("M104")?.winner || null
+    champion: byId.get("M104")?.winner || null,
+    mode: "projection"
   };
+}
+
+function buildLiveWorldCupBracket({ userPicks = {} } = {}) {
+  const roundBuckets = new Map();
+  const byId = new Map();
+  const knockoutFixtures = getWorldCupFixtures()
+    .filter((fixture) => getLiveWorldCupRound(fixture.stage))
+    .sort(sortMatches);
+
+  if (!knockoutFixtures.length) return null;
+
+  knockoutFixtures.forEach((fixture) => {
+    const roundMeta = getLiveWorldCupRound(fixture.stage);
+    const match = createWorldCupMatchFromFixture(fixture, roundMeta, userPicks);
+    if (!roundBuckets.has(roundMeta.key)) {
+      roundBuckets.set(roundMeta.key, { key: roundMeta.key, label: roundMeta.label, order: roundMeta.order, matches: [] });
+    }
+    roundBuckets.get(roundMeta.key).matches.push(match);
+    byId.set(match.id, match);
+  });
+
+  const rounds = [...roundBuckets.values()]
+    .sort((a, b) => a.order - b.order)
+    .map((round) => ({
+      key: round.key,
+      label: round.label,
+      matches: round.matches.sort(sortWorldCupBracketMatches)
+    }));
+
+  return {
+    standings: getWorldCupStandings(),
+    rounds,
+    matchesById: byId,
+    champion: getLiveWorldCupLeader(rounds),
+    mode: "liveFeed",
+    liveFixtureCount: knockoutFixtures.length
+  };
+}
+
+function getLiveWorldCupRound(stage) {
+  const clean = String(stage || "")
+    .toLowerCase()
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const rounds = [
+    { key: "round32", label: "Round of 32", order: 1, aliases: ["round of 32", "last 32"] },
+    { key: "round16", label: "Round of 16", order: 2, aliases: ["round of 16", "last 16"] },
+    { key: "quarterfinals", label: "Quarter-finals", order: 3, aliases: ["quarter finals", "quarterfinals", "quarter final"] },
+    { key: "semifinals", label: "Semi-finals", order: 4, aliases: ["semi finals", "semifinals", "semi final"] },
+    { key: "thirdPlace", label: "Third place", order: 5, aliases: ["third place", "third place game"] },
+    { key: "final", label: "Final", order: 6, aliases: ["final"] }
+  ];
+  return rounds.find((round) => round.aliases.includes(clean)) || null;
+}
+
+function createWorldCupMatchFromFixture(fixture, roundMeta, userPicks) {
+  const home = toWorldCupTeamEntry(teams[fixture.homeTeamId], fixture.homeTeamId);
+  const away = toWorldCupTeamEntry(teams[fixture.awayTeamId], fixture.awayTeamId);
+  const result = fixture.score ? { home: fixture.score.home, away: fixture.score.away } : null;
+  const userPick = userPicks[fixture.id] || null;
+  const modelWinner = getWorldCupModelWinner(home, away);
+
+  return {
+    id: fixture.id,
+    label: roundMeta.label,
+    date: fixture.date,
+    venue: fixture.venue || "",
+    home,
+    away,
+    result,
+    userPick,
+    modelWinner,
+    winner: getWorldCupWinner(home, away, result, userPick),
+    source: fixture
+  };
+}
+
+function toWorldCupTeamEntry(team, fallbackId) {
+  if (!team) return null;
+  return {
+    code: team.id || fallbackId,
+    name: team.name || fallbackId,
+    shortName: team.shortName || makeShortName(team.name || fallbackId),
+    rating: team.rating || 1600
+  };
+}
+
+function sortWorldCupBracketMatches(a, b) {
+  return a.date.localeCompare(b.date) || a.id.localeCompare(b.id);
+}
+
+function getLiveWorldCupLeader(rounds) {
+  const final = rounds.find((round) => round.key === "final")?.matches.find((match) => match.winner);
+  if (final?.winner) return final.winner;
+
+  const settledMatches = rounds.flatMap((round) => round.matches).filter((match) => match.result && match.winner);
+  if (settledMatches.length) return settledMatches[settledMatches.length - 1].winner;
+
+  const latestRound = rounds[rounds.length - 1];
+  return latestRound?.matches.find((match) => match.winner)?.winner || null;
 }
 
 function getWorldCupStandings() {
