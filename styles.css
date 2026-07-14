@@ -1270,3 +1270,298 @@ input:focus {
     min-width: 1040px;
   }
 }
+
+.competition-nav {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 5px;
+  overflow-x: auto;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow);
+  scrollbar-width: thin;
+}
+
+.competition-chip {
+  min-height: 42px;
+  min-width: max-content;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.competition-chip.active {
+  border-color: var(--primary-ink);
+  background: var(--primary-ink);
+  color: #ffffff;
+}
+
+.home-view,
+.competition-summary {
+  display: grid;
+  gap: 12px;
+}
+
+.competition-hero {
+  display: grid;
+  gap: 12px;
+  align-items: center;
+  background:
+    linear-gradient(135deg, rgba(23, 111, 71, 0.08), transparent 44%),
+    var(--surface);
+}
+
+.competition-hero h2 {
+  margin: 4px 0 6px;
+}
+
+.competition-hero p,
+.competition-status small,
+.summary-fixture small,
+.insight-row small {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.competition-status {
+  display: grid;
+  gap: 4px;
+  min-height: 92px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.competition-status span {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.competition-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.competition-card {
+  min-width: 0;
+}
+
+.summary-fixtures,
+.insight-list,
+.team-list-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.summary-fixture,
+.insight-row {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  min-height: 58px;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface-2);
+  text-align: left;
+}
+
+.summary-fixture:hover,
+.insight-row:hover,
+.competition-chip:hover {
+  border-color: var(--green);
+}
+
+.summary-fixture span,
+.insight-row span {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.team-list-grid {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.team-list-item {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface-2);
+  font-weight: 850;
+}
+
+.crest-badge {
+  overflow: hidden;
+  background: var(--surface-3);
+}
+
+.crest-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 3px;
+}
+
+.crest-badge span {
+  display: none;
+}
+
+.crest-badge.crest-failed span {
+  display: inline;
+}
+
+.standings-card {
+  overflow-x: auto;
+}
+
+.standings-table {
+  display: grid;
+  gap: 0;
+  min-width: 820px;
+}
+
+.standings-row {
+  display: grid;
+  grid-template-columns: 42px minmax(190px, 1fr) repeat(8, 46px) 86px;
+  gap: 8px;
+  align-items: center;
+  min-height: 40px;
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.standings-head {
+  min-height: 34px;
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.standing-team {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+}
+
+.standing-team strong,
+.team-list-item span {
+  overflow-wrap: anywhere;
+}
+
+.standing-form {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.form-dot {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-style: normal;
+  font-weight: 950;
+}
+
+.form-dot.w {
+  background: var(--green);
+}
+
+.form-dot.d {
+  background: var(--amber);
+}
+
+.form-dot.l {
+  background: var(--red);
+}
+
+.zone-champions {
+  box-shadow: inset 4px 0 0 var(--green);
+}
+
+.zone-europa {
+  box-shadow: inset 4px 0 0 var(--blue);
+}
+
+.zone-relegation {
+  box-shadow: inset 4px 0 0 var(--red);
+}
+
+.status-chip.postponed,
+.status-chip.suspended,
+.status-chip.cancelled {
+  border-color: rgba(187, 59, 47, 0.35);
+  color: var(--red);
+}
+
+.form-matches small {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(23, 111, 71, 0.24);
+  outline-offset: 2px;
+}
+
+@supports (padding: max(0px)) {
+  .app-shell {
+    padding-left: max(14px, env(safe-area-inset-left));
+    padding-right: max(14px, env(safe-area-inset-right));
+  }
+}
+
+@media (min-width: 720px) {
+  .competition-hero {
+    grid-template-columns: minmax(0, 1fr) 240px;
+  }
+
+  .competition-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .standings-card {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 520px) {
+  .competition-chip {
+    min-height: 44px;
+    padding-inline: 10px;
+    font-size: 0.8rem;
+  }
+
+  .summary-fixture,
+  .insight-row,
+  .team-list-item {
+    min-height: 44px;
+  }
+}

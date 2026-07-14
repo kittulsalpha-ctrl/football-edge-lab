@@ -1,0 +1,1234 @@
+{
+  "meta": {
+    "source": "football-data.org",
+    "season": "2026/27",
+    "updatedAt": "2026-07-14T13:42:14.512Z",
+    "competitions": [
+      "WC",
+      "EPL",
+      "LALIGA",
+      "BUNDESLIGA",
+      "SERIEA"
+    ]
+  },
+  "competitions": {
+    "WC": {
+      "id": "WC",
+      "name": "FIFA World Cup 2026",
+      "shortName": "World Cup",
+      "season": "2026",
+      "type": "international",
+      "apiCode": "WC",
+      "source": "football-data.org live feed",
+      "updatedAt": "2026-07-14",
+      "status": "snapshot",
+      "message": "Team list inferred from the current fixture snapshot until the official teams endpoint refreshes.",
+      "teams": [
+        {
+          "id": "FD762",
+          "externalId": "762",
+          "name": "Argentina",
+          "shortName": "ARG",
+          "code": "ARG",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "WC"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD770",
+          "externalId": "770",
+          "name": "England",
+          "shortName": "ENG",
+          "code": "ENG",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "WC"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD773",
+          "externalId": "773",
+          "name": "France",
+          "shortName": "FRA",
+          "code": "FRA",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "WC"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD760",
+          "externalId": "760",
+          "name": "Spain",
+          "shortName": "ESP",
+          "code": "ESP",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "WC"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        }
+      ]
+    },
+    "EPL": {
+      "id": "EPL",
+      "name": "Premier League",
+      "shortName": "EPL",
+      "season": "2026/27",
+      "type": "league",
+      "apiCode": "PL",
+      "source": "football-data.org live feed",
+      "updatedAt": "2026-07-14",
+      "status": "snapshot",
+      "message": "Team list inferred from the current fixture snapshot until the official teams endpoint refreshes.",
+      "teams": [
+        {
+          "id": "FD57",
+          "externalId": "57",
+          "name": "Arsenal",
+          "shortName": "ARS",
+          "code": "ARS",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD58",
+          "externalId": "58",
+          "name": "Aston Villa",
+          "shortName": "AVL",
+          "code": "AVL",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD1044",
+          "externalId": "1044",
+          "name": "Bournemouth",
+          "shortName": "BOU",
+          "code": "BOU",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD402",
+          "externalId": "402",
+          "name": "Brentford",
+          "shortName": "BRE",
+          "code": "BRE",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD397",
+          "externalId": "397",
+          "name": "Brighton Hove",
+          "shortName": "BHA",
+          "code": "BHA",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD61",
+          "externalId": "61",
+          "name": "Chelsea",
+          "shortName": "CHE",
+          "code": "CHE",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD1076",
+          "externalId": "1076",
+          "name": "Coventry City",
+          "shortName": "COV",
+          "code": "COV",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD354",
+          "externalId": "354",
+          "name": "Crystal Palace",
+          "shortName": "CRY",
+          "code": "CRY",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD62",
+          "externalId": "62",
+          "name": "Everton",
+          "shortName": "EVE",
+          "code": "EVE",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD63",
+          "externalId": "63",
+          "name": "Fulham",
+          "shortName": "FUL",
+          "code": "FUL",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD322",
+          "externalId": "322",
+          "name": "Hull City",
+          "shortName": "HUL",
+          "code": "HUL",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD349",
+          "externalId": "349",
+          "name": "Ipswich Town",
+          "shortName": "IPS",
+          "code": "IPS",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD341",
+          "externalId": "341",
+          "name": "Leeds United",
+          "shortName": "LEE",
+          "code": "LEE",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD64",
+          "externalId": "64",
+          "name": "Liverpool",
+          "shortName": "LIV",
+          "code": "LIV",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD65",
+          "externalId": "65",
+          "name": "Man City",
+          "shortName": "MCI",
+          "code": "MCI",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD66",
+          "externalId": "66",
+          "name": "Man United",
+          "shortName": "MUN",
+          "code": "MUN",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD67",
+          "externalId": "67",
+          "name": "Newcastle",
+          "shortName": "NEW",
+          "code": "NEW",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD351",
+          "externalId": "351",
+          "name": "Nottingham",
+          "shortName": "NOT",
+          "code": "NOT",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD71",
+          "externalId": "71",
+          "name": "Sunderland",
+          "shortName": "SUN",
+          "code": "SUN",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD73",
+          "externalId": "73",
+          "name": "Tottenham",
+          "shortName": "TOT",
+          "code": "TOT",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "EPL"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        }
+      ]
+    },
+    "LALIGA": {
+      "id": "LALIGA",
+      "name": "La Liga",
+      "shortName": "La Liga",
+      "season": "2026/27",
+      "type": "league",
+      "apiCode": "PD",
+      "source": "football-data.org live feed",
+      "updatedAt": "2026-07-14",
+      "status": "snapshot",
+      "message": "Team list inferred from the current fixture snapshot until the official teams endpoint refreshes.",
+      "teams": [
+        {
+          "id": "FD263",
+          "externalId": "263",
+          "name": "Alavés",
+          "shortName": "ALA",
+          "code": "ALA",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD77",
+          "externalId": "77",
+          "name": "Athletic",
+          "shortName": "ATH",
+          "code": "ATH",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD78",
+          "externalId": "78",
+          "name": "Atleti",
+          "shortName": "ATL",
+          "code": "ATL",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD81",
+          "externalId": "81",
+          "name": "Barça",
+          "shortName": "FCB",
+          "code": "FCB",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD558",
+          "externalId": "558",
+          "name": "Celta",
+          "shortName": "CEL",
+          "code": "CEL",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD560",
+          "externalId": "560",
+          "name": "Deportivo",
+          "shortName": "DEP",
+          "code": "DEP",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD285",
+          "externalId": "285",
+          "name": "Elche",
+          "shortName": "ELC",
+          "code": "ELC",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD80",
+          "externalId": "80",
+          "name": "Espanyol",
+          "shortName": "ESP",
+          "code": "ESP",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD82",
+          "externalId": "82",
+          "name": "Getafe",
+          "shortName": "GET",
+          "code": "GET",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD88",
+          "externalId": "88",
+          "name": "Levante",
+          "shortName": "LEV",
+          "code": "LEV",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD84",
+          "externalId": "84",
+          "name": "Málaga",
+          "shortName": "MAL",
+          "code": "MAL",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD79",
+          "externalId": "79",
+          "name": "Osasuna",
+          "shortName": "OSA",
+          "code": "OSA",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD87",
+          "externalId": "87",
+          "name": "Rayo Vallecano",
+          "shortName": "RAY",
+          "code": "RAY",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD90",
+          "externalId": "90",
+          "name": "Real Betis",
+          "shortName": "BET",
+          "code": "BET",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD86",
+          "externalId": "86",
+          "name": "Real Madrid",
+          "shortName": "RMA",
+          "code": "RMA",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD92",
+          "externalId": "92",
+          "name": "Real Sociedad",
+          "shortName": "RSO",
+          "code": "RSO",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD5335",
+          "externalId": "5335",
+          "name": "Santander",
+          "shortName": "SAN",
+          "code": "SAN",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD559",
+          "externalId": "559",
+          "name": "Sevilla FC",
+          "shortName": "SEV",
+          "code": "SEV",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD95",
+          "externalId": "95",
+          "name": "Valencia",
+          "shortName": "VAL",
+          "code": "VAL",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD94",
+          "externalId": "94",
+          "name": "Villarreal",
+          "shortName": "VIL",
+          "code": "VIL",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "LALIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        }
+      ]
+    },
+    "BUNDESLIGA": {
+      "id": "BUNDESLIGA",
+      "name": "Bundesliga",
+      "shortName": "Bundesliga",
+      "season": "2026/27",
+      "type": "league",
+      "apiCode": "BL1",
+      "source": "football-data.org live feed",
+      "updatedAt": "2026-07-14",
+      "status": "snapshot",
+      "message": "Team list inferred from the current fixture snapshot until the official teams endpoint refreshes.",
+      "teams": [
+        {
+          "id": "FD1",
+          "externalId": "1",
+          "name": "1. FC Köln",
+          "shortName": "KOE",
+          "code": "KOE",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD16",
+          "externalId": "16",
+          "name": "Augsburg",
+          "shortName": "FCA",
+          "code": "FCA",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD5",
+          "externalId": "5",
+          "name": "Bayern",
+          "shortName": "FCB",
+          "code": "FCB",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD12",
+          "externalId": "12",
+          "name": "Bremen",
+          "shortName": "SVW",
+          "code": "SVW",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD4",
+          "externalId": "4",
+          "name": "Dortmund",
+          "shortName": "BVB",
+          "code": "BVB",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD719",
+          "externalId": "719",
+          "name": "Elversberg",
+          "shortName": "ELV",
+          "code": "ELV",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD19",
+          "externalId": "19",
+          "name": "Frankfurt",
+          "shortName": "SGE",
+          "code": "SGE",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD17",
+          "externalId": "17",
+          "name": "Freiburg",
+          "shortName": "SCF",
+          "code": "SCF",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD2",
+          "externalId": "2",
+          "name": "Hoffenheim",
+          "shortName": "TSG",
+          "code": "TSG",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD7",
+          "externalId": "7",
+          "name": "HSV",
+          "shortName": "HSV",
+          "code": "HSV",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD3",
+          "externalId": "3",
+          "name": "Leverkusen",
+          "shortName": "B04",
+          "code": "B04",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD18",
+          "externalId": "18",
+          "name": "M'gladbach",
+          "shortName": "BMG",
+          "code": "BMG",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD15",
+          "externalId": "15",
+          "name": "Mainz",
+          "shortName": "M05",
+          "code": "M05",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD721",
+          "externalId": "721",
+          "name": "RB Leipzig",
+          "shortName": "RBL",
+          "code": "RBL",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD29",
+          "externalId": "29",
+          "name": "SC Paderborn",
+          "shortName": "SCP",
+          "code": "SCP",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD6",
+          "externalId": "6",
+          "name": "Schalke",
+          "shortName": "S04",
+          "code": "S04",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD10",
+          "externalId": "10",
+          "name": "Stuttgart",
+          "shortName": "VFB",
+          "code": "VFB",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD28",
+          "externalId": "28",
+          "name": "Union Berlin",
+          "shortName": "UNB",
+          "code": "UNB",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "BUNDESLIGA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        }
+      ]
+    },
+    "SERIEA": {
+      "id": "SERIEA",
+      "name": "Serie A",
+      "shortName": "Serie A",
+      "season": "2026/27",
+      "type": "league",
+      "apiCode": "SA",
+      "source": "football-data.org live feed",
+      "updatedAt": "2026-07-14",
+      "status": "snapshot",
+      "message": "Team list inferred from the current fixture snapshot until the official teams endpoint refreshes.",
+      "teams": [
+        {
+          "id": "FD102",
+          "externalId": "102",
+          "name": "Atalanta",
+          "shortName": "ATA",
+          "code": "ATA",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD103",
+          "externalId": "103",
+          "name": "Bologna",
+          "shortName": "BOL",
+          "code": "BOL",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD104",
+          "externalId": "104",
+          "name": "Cagliari",
+          "shortName": "CAG",
+          "code": "CAG",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD7397",
+          "externalId": "7397",
+          "name": "Como 1907",
+          "shortName": "COM",
+          "code": "COM",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD99",
+          "externalId": "99",
+          "name": "Fiorentina",
+          "shortName": "FIO",
+          "code": "FIO",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD470",
+          "externalId": "470",
+          "name": "Frosinone",
+          "shortName": "FRO",
+          "code": "FRO",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD107",
+          "externalId": "107",
+          "name": "Genoa",
+          "shortName": "GEN",
+          "code": "GEN",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD108",
+          "externalId": "108",
+          "name": "Inter",
+          "shortName": "INT",
+          "code": "INT",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD109",
+          "externalId": "109",
+          "name": "Juventus",
+          "shortName": "JUV",
+          "code": "JUV",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD110",
+          "externalId": "110",
+          "name": "Lazio",
+          "shortName": "LAZ",
+          "code": "LAZ",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD5890",
+          "externalId": "5890",
+          "name": "Lecce",
+          "shortName": "USL",
+          "code": "USL",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD98",
+          "externalId": "98",
+          "name": "Milan",
+          "shortName": "MIL",
+          "code": "MIL",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD5911",
+          "externalId": "5911",
+          "name": "Monza",
+          "shortName": "MON",
+          "code": "MON",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD113",
+          "externalId": "113",
+          "name": "Napoli",
+          "shortName": "NAP",
+          "code": "NAP",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD112",
+          "externalId": "112",
+          "name": "Parma",
+          "shortName": "PAR",
+          "code": "PAR",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD100",
+          "externalId": "100",
+          "name": "Roma",
+          "shortName": "ROM",
+          "code": "ROM",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD471",
+          "externalId": "471",
+          "name": "Sassuolo",
+          "shortName": "SAS",
+          "code": "SAS",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD586",
+          "externalId": "586",
+          "name": "Torino",
+          "shortName": "TOR",
+          "code": "TOR",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD115",
+          "externalId": "115",
+          "name": "Udinese",
+          "shortName": "UDI",
+          "code": "UDI",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        },
+        {
+          "id": "FD454",
+          "externalId": "454",
+          "name": "Venezia FC",
+          "shortName": "VEN",
+          "code": "VEN",
+          "crest": "",
+          "country": "",
+          "competitionIds": [
+            "SERIEA"
+          ],
+          "venue": "",
+          "source": "football-data.org live feed"
+        }
+      ]
+    }
+  }
+}

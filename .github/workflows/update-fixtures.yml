@@ -19,14 +19,14 @@ jobs:
         run: node scripts/update-fixtures.mjs
         env:
           FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
-      - name: Commit fixture feed
+      - name: Commit generated football data
         run: |
-          if git diff --quiet -- fixtures.live.json; then
-            echo "No fixture changes to commit."
+          if git diff --quiet -- fixtures.live.json standings.live.json competitions.live.json; then
+            echo "No fixture, standings, or competition metadata changes to commit."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add fixtures.live.json
-          git commit -m "Update live fixture feed"
+          git add fixtures.live.json standings.live.json competitions.live.json
+          git commit -m "Update live football data"
           git push

@@ -8,6 +8,8 @@ const appFiles = [
   "app.js",
   "styles.css",
   "fixtures.live.json",
+  "standings.live.json",
+  "competitions.live.json",
   "fixtures.sample.json",
   "manifest.webmanifest",
   "sw.js",

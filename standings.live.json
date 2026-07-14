@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "source": "football-data.org",
+    "season": "2026/27",
+    "updatedAt": "2026-07-14T13:42:14.512Z",
+    "competitions": [
+      "EPL",
+      "LALIGA",
+      "BUNDESLIGA",
+      "SERIEA"
+    ],
+    "note": "The 2026/27 league table will appear when official competition data becomes available."
+  },
+  "standings": {
+    "WC": {
+      "competitionId": "WC",
+      "season": "2026",
+      "source": "football-data.org live feed",
+      "updatedAt": "2026-07-14",
+      "message": "Standings are not published for this competition in GoalIQ.",
+      "table": []
+    },
+    "EPL": {
+      "competitionId": "EPL",
+      "season": "2026/27",
+      "source": "football-data.org live feed",
+      "updatedAt": "2026-07-14",
+      "message": "The 2026/27 league table will appear when official competition data becomes available.",
+      "table": []
+    },
+    "LALIGA": {
+      "competitionId": "LALIGA",
+      "season": "2026/27",
+      "source": "football-data.org live feed",
+      "updatedAt": "2026-07-14",
+      "message": "The 2026/27 league table will appear when official competition data becomes available.",
+      "table": []
+    },
+    "BUNDESLIGA": {
+      "competitionId": "BUNDESLIGA",
+      "season": "2026/27",
+      "source": "football-data.org live feed",
+      "updatedAt": "2026-07-14",
+      "message": "The 2026/27 league table will appear when official competition data becomes available.",
+      "table": []
+    },
+    "SERIEA": {
+      "competitionId": "SERIEA",
+      "season": "2026/27",
+      "source": "football-data.org live feed",
+      "updatedAt": "2026-07-14",
+      "message": "The 2026/27 league table will appear when official competition data becomes available.",
+      "table": []
+    }
+  }
+}

@@ -1,11 +1,13 @@
-const CACHE_NAME = "goaliq-shell-v1";
+const CACHE_NAME = "goaliq-shell-v2-domestic-leagues";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=20260610-light-bracket",
-  "./app.js?v=20260610-light-bracket",
+  "./styles.css?v=20260714-domestic-leagues",
+  "./app.js?v=20260714-domestic-leagues",
   "./manifest.webmanifest",
   "./fixtures.live.json",
+  "./standings.live.json",
+  "./competitions.live.json",
   "./assets/match-pitch.svg",
   "./assets/assets/match-pitch.svg",
   "./assets/goaliq-logo.jpeg",
@@ -38,7 +40,7 @@ self.addEventListener("fetch", (event) => {
   const requestUrl = new URL(event.request.url);
   if (requestUrl.origin !== self.location.origin) return;
 
-  if (requestUrl.pathname.endsWith("/fixtures.live.json")) {
+  if (["/fixtures.live.json", "/standings.live.json", "/competitions.live.json"].some((path) => requestUrl.pathname.endsWith(path))) {
     event.respondWith(networkFirst(event.request));
     return;
   }

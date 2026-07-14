@@ -1,56 +1,136 @@
 const FIXTURE_STORAGE_KEY = "goaliq-fixture-data";
+const COMPETITION_FILTER_STORAGE_KEY = "goaliq-competition-filter";
 const LIVE_FIXTURE_FEED_URL = "fixtures.live.json";
+const LIVE_STANDINGS_FEED_URL = "standings.live.json";
+const LIVE_COMPETITIONS_FEED_URL = "competitions.live.json";
 
-const leagueProfiles = {
-  EPL: {
-    name: "Premier League",
-    shortName: "EPL",
-    avgGoals: 2.82,
-    homeAdvantage: 0.12,
-    order: 1
-  },
-  LALIGA: {
-    name: "La Liga",
-    shortName: "La Liga",
-    avgGoals: 2.58,
-    homeAdvantage: 0.13,
-    order: 2
-  },
-  SERIEA: {
-    name: "Serie A",
-    shortName: "Serie A",
-    avgGoals: 2.62,
-    homeAdvantage: 0.11,
-    order: 3
-  },
-  BUNDESLIGA: {
-    name: "Bundesliga",
-    shortName: "Bundesliga",
-    avgGoals: 3.08,
-    homeAdvantage: 0.1,
-    order: 4
-  },
-  UCL: {
-    name: "UEFA Champions League",
-    shortName: "UCL",
-    avgGoals: 2.96,
-    homeAdvantage: 0.08,
-    order: 5
-  },
+const competitionConfigs = {
   WC: {
+    id: "WC",
     name: "FIFA World Cup 2026",
-    shortName: "WC",
+    shortName: "World Cup",
+    season: "2026",
+    type: "international",
+    apiCode: "WC",
     avgGoals: 2.65,
     homeAdvantage: 0.04,
-    order: 0
+    order: 0,
+    qualificationZones: []
+  },
+  EPL: {
+    id: "EPL",
+    name: "Premier League",
+    shortName: "EPL",
+    season: "2026/27",
+    type: "league",
+    apiCode: "PL",
+    avgGoals: 2.82,
+    homeAdvantage: 0.12,
+    order: 1,
+    qualificationZones: [
+      { from: 1, to: 4, type: "champions", label: "Champions League" },
+      { from: 5, to: 6, type: "europa", label: "European places" },
+      { from: 18, to: 20, type: "relegation", label: "Relegation" }
+    ]
+  },
+  LALIGA: {
+    id: "LALIGA",
+    name: "La Liga",
+    shortName: "La Liga",
+    season: "2026/27",
+    type: "league",
+    apiCode: "PD",
+    avgGoals: 2.58,
+    homeAdvantage: 0.13,
+    order: 2,
+    qualificationZones: [
+      { from: 1, to: 4, type: "champions", label: "Champions League" },
+      { from: 5, to: 6, type: "europa", label: "European places" },
+      { from: 18, to: 20, type: "relegation", label: "Relegation" }
+    ]
+  },
+  BUNDESLIGA: {
+    id: "BUNDESLIGA",
+    name: "Bundesliga",
+    shortName: "Bundesliga",
+    season: "2026/27",
+    type: "league",
+    apiCode: "BL1",
+    avgGoals: 3.08,
+    homeAdvantage: 0.1,
+    order: 3,
+    qualificationZones: [
+      { from: 1, to: 4, type: "champions", label: "Champions League" },
+      { from: 5, to: 6, type: "europa", label: "European places" },
+      { from: 17, to: 18, type: "relegation", label: "Relegation" }
+    ]
+  },
+  SERIEA: {
+    id: "SERIEA",
+    name: "Serie A",
+    shortName: "Serie A",
+    season: "2026/27",
+    type: "league",
+    apiCode: "SA",
+    avgGoals: 2.62,
+    homeAdvantage: 0.11,
+    order: 4,
+    qualificationZones: [
+      { from: 1, to: 4, type: "champions", label: "Champions League" },
+      { from: 5, to: 6, type: "europa", label: "European places" },
+      { from: 18, to: 20, type: "relegation", label: "Relegation" }
+    ]
+  },
+  UCL: {
+    id: "UCL",
+    name: "UEFA Champions League",
+    shortName: "UCL",
+    season: "2026/27",
+    type: "cup",
+    apiCode: "CL",
+    avgGoals: 2.96,
+    homeAdvantage: 0.08,
+    order: 5,
+    qualificationZones: []
   }
 };
+
+const leagueProfiles = competitionConfigs;
+
+const competitionSelectorItems = [
+  { id: "ALL", label: "All Competitions", hash: "" },
+  { id: "WC", label: "World Cup 2026", hash: "#worldcup-2026" },
+  { id: "EPL", label: "Premier League", hash: "#competition/epl" },
+  { id: "LALIGA", label: "La Liga", hash: "#competition/laliga" },
+  { id: "BUNDESLIGA", label: "Bundesliga", hash: "#competition/bundesliga" },
+  { id: "SERIEA", label: "Serie A", hash: "#competition/seriea" }
+];
 
 const statusLabels = {
   upcoming: "Upcoming",
   live: "Live",
   halftime: "Halftime",
-  finished: "Finished"
+  finished: "Finished",
+  postponed: "Postponed",
+  suspended: "Suspended",
+  cancelled: "Cancelled"
+};
+
+let standingsFeed = {
+  meta: {
+    source: "No standings feed loaded",
+    updatedAt: "",
+    note: "League tables will appear when official competition data becomes available."
+  },
+  standings: {}
+};
+
+let competitionsFeed = {
+  meta: {
+    source: "No competition feed loaded",
+    updatedAt: ""
+  },
+  competitions: competitionConfigs
 };
 
 const WORLD_CUP_PICK_STORAGE_KEY = "goaliq-worldcup-picks";
@@ -632,6 +712,8 @@ const selectors = {
   dateInput: document.querySelector("#dateInput"),
   searchInput: document.querySelector("#searchInput"),
   fixtureSourceText: document.querySelector("#fixtureSourceText"),
+  competitionNav: document.querySelector("#competitionNav"),
+  competitionSummary: document.querySelector("#competitionSummary"),
   fixtureJsonFile: document.querySelector("#fixtureJsonFile"),
   fixtureUrlInput: document.querySelector("#fixtureUrlInput"),
   loadFixtureUrlButton: document.querySelector("#loadFixtureUrlButton"),
@@ -670,6 +752,7 @@ const state = {
   activeView: "today",
   selectedDate: todayKey,
   search: "",
+  selectedCompetition: getInitialCompetitionFromLocation() || loadStoredCompetitionFilter(),
   selectedMatchId: null,
   selectedBracketMatchId: null,
   bracketUserPicks: loadWorldCupPicks(),
@@ -729,6 +812,12 @@ function makeImportedTeam(id, name, shortName, rating, venue, league) {
     shortName,
     rating,
     venue,
+    league,
+    externalId: "",
+    code: shortName,
+    crest: "",
+    country: "",
+    competitionIds: [league].filter(Boolean),
     attacking: {
       avgGoals: clamp(1.25 + strength * 0.45, 0.85, 2.05),
       shots: clamp(11.2 + strength * 3.4, 8.4, 16.4),
@@ -736,6 +825,8 @@ function makeImportedTeam(id, name, shortName, rating, venue, league) {
       bigChances: clamp(1.6 + strength, 0.8, 3.2),
       xg: clamp(1.18 + strength * 0.45, 0.78, 2.0)
     },
+    statsAvailable: false,
+    source: "imported",
     defensive: {
       goalsConcededAvg: clamp(1.38 - strength * 0.34, 0.82, 1.88),
       cleanSheetPct: clamp(27 + strength * 14, 16, 52),
@@ -821,12 +912,19 @@ function roundMetric(value, digits = 2) {
 }
 
 function makeTeam(id, name, shortName, rating, venue, data) {
+  const league = data.form?.[0]?.[0] || "";
   return {
     id,
     name,
     shortName,
     rating,
     venue,
+    league,
+    externalId: "",
+    code: shortName,
+    crest: "",
+    country: "",
+    competitionIds: [league].filter(Boolean),
     attacking: {
       avgGoals: data.attack[0],
       shots: data.attack[1],
@@ -834,6 +932,8 @@ function makeTeam(id, name, shortName, rating, venue, data) {
       bigChances: data.attack[3],
       xg: data.attack[4]
     },
+    statsAvailable: true,
+    source: "demo",
     defensive: {
       goalsConcededAvg: data.defense[0],
       cleanSheetPct: data.defense[1],
@@ -997,6 +1097,41 @@ async function loadLiveFixtureFeed(options = {}) {
   return imported;
 }
 
+async function loadLiveCompetitionFeeds(options = {}) {
+  const results = await Promise.allSettled([loadLiveStandingsFeed(options), loadLiveCompetitionsFeed(options)]);
+  const failures = results.filter((result) => result.status === "rejected");
+  if (failures.length && !options.silent) {
+    setImportStatus("Fixtures loaded, but one competition metadata feed is unavailable. Existing data is still shown.");
+  }
+  renderActiveView();
+  return results;
+}
+
+async function loadLiveStandingsFeed(options = {}) {
+  const response = await fetch(`${LIVE_STANDINGS_FEED_URL}?v=${Date.now()}`, { cache: "no-store" });
+  if (!response.ok) throw new Error(`Could not load standings feed: HTTP ${response.status}`);
+  const payload = await response.json();
+  if (payload?.standings && typeof payload.standings === "object") {
+    standingsFeed = {
+      meta: { ...standingsFeed.meta, ...(payload.meta || {}) },
+      standings: payload.standings,
+    };
+  }
+  return standingsFeed;
+}
+
+async function loadLiveCompetitionsFeed(options = {}) {
+  const response = await fetch(`${LIVE_COMPETITIONS_FEED_URL}?v=${Date.now()}`, { cache: "no-store" });
+  if (!response.ok) throw new Error(`Could not load competition feed: HTTP ${response.status}`);
+  const payload = await response.json();
+  if (payload?.competitions && typeof payload.competitions === "object") {
+    competitionsFeed = {
+      meta: { ...competitionsFeed.meta, ...(payload.meta || {}) },
+      competitions: { ...competitionConfigs, ...payload.competitions },
+    };
+  }
+  return competitionsFeed;
+}
 function getWorldCupBracket() {
   return buildWorldCupBracket({ userPicks: state.bracketUserPicks });
 }
@@ -1038,7 +1173,8 @@ function normalizeFixturePayload(payload, fallbackSource) {
     meta: {
       source: payload?.meta?.source || payload?.source || fallbackSource,
       updatedAt: payload?.meta?.updatedAt || payload?.updatedAt || new Date().toISOString().slice(0, 10),
-      note: payload?.meta?.note || "Imported fixture data"
+      note: payload?.meta?.note || "Imported fixture data",
+      competitions: payload?.meta?.competitions || []
     },
     matches: normalizedMatches.sort(sortMatches)
   };
@@ -1049,13 +1185,18 @@ function normalizeImportedTeam(team) {
   const name = String(team.name || team.team || "").trim();
   if (!name) return null;
 
-  const league = normalizeLeague(team.league || team.competition || "EPL");
-  const id = normalizeTeamId(team.id || team.teamId || createTeamId(name, league));
+  const suppliedCompetitions = Array.isArray(team.competitionIds)
+    ? team.competitionIds.map(normalizeLeague).filter(Boolean)
+    : [];
+  const league = normalizeLeague(team.competitionId || team.league || team.competition || suppliedCompetitions[0] || "EPL");
+  const id = normalizeTeamId(team.id || team.teamId || team.externalId || createTeamId(name, league));
   const existingId = findTeamIdByName(name) || id;
+  const existingTeam = teams[existingId];
   const base =
-    teams[existingId] ||
-    makeImportedTeam(existingId, name, team.shortName || makeShortName(name), Number(team.rating) || 1600, team.venue || "", league);
-  const importedForm = normalizeImportedForm(team.form);
+    existingTeam && existingTeam.source !== "demo"
+      ? existingTeam
+      : makeImportedTeam(existingId, name, team.shortName || makeShortName(name), Number(team.rating) || 1600, team.venue || "", league);
+  const importedForm = normalizeImportedForm(team.form, league);
   const suppliedRating = Number(team.rating);
   const ratingSeed = Number.isFinite(suppliedRating) ? suppliedRating : base.rating;
   const formProfile = buildTeamProfileFromForm(importedForm, ratingSeed);
@@ -1066,6 +1207,13 @@ function normalizeImportedTeam(team) {
     name,
     shortName: String(team.shortName || team.abbreviation || base.shortName || makeShortName(name)).slice(0, 4).toUpperCase(),
     rating: formProfile?.rating || ratingSeed || base.rating,
+    externalId: team.externalId || team.apiId || base.externalId || "",
+    code: team.code || base.code || team.shortName || "",
+    crest: team.crest || team.crestUrl || base.crest || "",
+    country: team.country || base.country || "",
+    source: team.source || base.source || "imported",
+    competitionIds: [...new Set([...suppliedCompetitions, league].filter(Boolean))],
+    statsAvailable: Boolean(formProfile || team.statsAvailable),
     venue: team.venue || base.venue || "",
     attacking: {
       ...base.attacking,
@@ -1086,73 +1234,122 @@ function normalizeImportedTeam(team) {
 function normalizeImportedMatch(match, index) {
   if (!match || typeof match !== "object") return null;
 
-  const league = normalizeLeague(match.league || match.competition);
-  const date = normalizeDate(match.date || match.kickoffDate || match.utcDate);
-  const time = normalizeTime(match.time || match.kickoffTime || match.utcTime || match.kickoff || match.utcDate);
+  const league = normalizeLeague(match.competitionId || match.league || match.competition);
+  const dateTime = normalizeKickoffParts(match);
+  const date = dateTime.date;
+  const time = dateTime.time;
   ensureLeagueProfile(league);
-  const homeTeamId = resolveTeamForMatch(match.homeTeamId || match.homeId, match.homeTeam || match.home || match.homeName, league);
-  const awayTeamId = resolveTeamForMatch(match.awayTeamId || match.awayId, match.awayTeam || match.away || match.awayName, league);
+  const homeTeamId = resolveTeamForMatch(match.homeTeamId || match.homeId, match.homeTeam || match.home || match.homeName, league, {
+    name: match.homeTeam || match.home || match.homeName,
+    crest: match.homeCrest || match.homeTeam?.crest || match.home?.crest,
+    externalId: match.homeExternalId || match.homeTeam?.id || match.home?.id
+  });
+  const awayTeamId = resolveTeamForMatch(match.awayTeamId || match.awayId, match.awayTeam || match.away || match.awayName, league, {
+    name: match.awayTeam || match.away || match.awayName,
+    crest: match.awayCrest || match.awayTeam?.crest || match.away?.crest,
+    externalId: match.awayExternalId || match.awayTeam?.id || match.away?.id
+  });
 
   if (!league || !date || !homeTeamId || !awayTeamId || homeTeamId === awayTeamId) return null;
 
   const score = normalizeScore(match.score);
   const status = normalizeStatus(match.status, date, score);
   const id = String(match.id || match.matchId || `${league}-${date}-${homeTeamId}-${awayTeamId}-${index}`).toLowerCase();
+  const halftimeHomeScore = Number(match.halftimeHomeScore ?? match.score?.halfTime?.home);
+  const halftimeAwayScore = Number(match.halftimeAwayScore ?? match.score?.halfTime?.away);
 
   return {
     id,
+    externalId: String(match.externalId || match.apiId || match.matchId || ""),
+    competitionId: league,
     league,
+    season: match.season || ensureLeagueProfile(league).season || "",
+    matchday: match.matchday || null,
     date,
     time,
-    kickoff: `${date}T${time}:00`,
+    utcDate: match.utcDate || match.kickoffUtc || "",
+    kickoff: match.kickoff || `${date}T${time}:00`,
     homeTeamId,
     awayTeamId,
+    homeTeam: teams[homeTeamId]?.name || homeTeamId,
+    homeCrest: match.homeCrest || teams[homeTeamId]?.crest || "",
+    awayTeam: teams[awayTeamId]?.name || awayTeamId,
+    awayCrest: match.awayCrest || teams[awayTeamId]?.crest || "",
+    homeScore: score?.home ?? null,
+    awayScore: score?.away ?? null,
+    halftimeHomeScore: Number.isFinite(halftimeHomeScore) ? halftimeHomeScore : null,
+    halftimeAwayScore: Number.isFinite(halftimeAwayScore) ? halftimeAwayScore : null,
     status,
     venue: match.venue || teams[homeTeamId]?.venue || "",
-    stage: match.stage || match.round || match.matchday || "",
+    stage: match.stage || match.round || (match.matchday ? `Matchweek ${match.matchday}` : ""),
     minute: Number(match.minute) || null,
+    referee: match.referee || "",
+    source: match.source || fixtureMeta.source || "",
+    updatedAt: match.updatedAt || fixtureMeta.updatedAt || "",
     score
   };
 }
 
-function resolveTeamForMatch(idLike, nameLike, league) {
+function resolveTeamForMatch(idLike, nameLike, league, profile = {}) {
   const directId = idLike ? normalizeTeamId(idLike) : "";
-  if (directId && teams[directId]) return directId;
+  if (directId && teams[directId]) {
+    mergeTeamProfile(directId, league, profile);
+    return directId;
+  }
 
-  const name = String(nameLike || "").trim();
+  const profileName = typeof profile.name === "object" ? profile.name?.name || profile.name?.shortName : profile.name;
+  const name = String(nameLike?.name || nameLike?.shortName || profileName || nameLike || "").trim();
   if (!name && directId) {
     if (!teams[directId]) teams[directId] = makeImportedTeam(directId, directId, directId, 1600, "", league);
+    mergeTeamProfile(directId, league, profile);
     return directId;
   }
   const existingId = findTeamIdByName(name);
-  if (existingId) return existingId;
+  if (existingId && teams[existingId]?.source !== "demo") {
+    mergeTeamProfile(existingId, league, profile);
+    return existingId;
+  }
 
   const id = directId || createTeamId(name, league);
   if (!teams[id]) {
     teams[id] = makeImportedTeam(id, name, makeShortName(name), 1600, "", league);
   }
+  mergeTeamProfile(id, league, profile);
   return id;
 }
 
+function mergeTeamProfile(teamId, league, profile = {}) {
+  const team = teams[teamId];
+  if (!team) return;
+  const crest = profile.crest || profile.crestUrl || "";
+  teams[teamId] = {
+    ...team,
+    externalId: profile.externalId || team.externalId || "",
+    crest: crest || team.crest || "",
+    competitionIds: [...new Set([...(team.competitionIds || []), league].filter(Boolean))]
+  };
+}
 function normalizeLeague(value) {
   const raw = String(value || "").trim();
-  if (leagueProfiles[raw]) return raw;
-  const clean = raw.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  if (!raw) return "";
+  const upper = raw.toUpperCase();
+  if (competitionConfigs[upper]) return upper;
+  const clean = normalizeText(raw);
   const aliases = {
     "premier league": "EPL",
+    "english premier league": "EPL",
     epl: "EPL",
     pl: "EPL",
-    "english premier league": "EPL",
     "la liga": "LALIGA",
     laliga: "LALIGA",
-    pd: "LALIGA",
     "primera division": "LALIGA",
-    "serie a": "SERIEA",
-    "seria a": "SERIEA",
-    sa: "SERIEA",
+    pd: "LALIGA",
     bundesliga: "BUNDESLIGA",
     bl1: "BUNDESLIGA",
     "1 bundesliga": "BUNDESLIGA",
+    "serie a": "SERIEA",
+    "seria a": "SERIEA",
+    sa: "SERIEA",
     "uefa champions league": "UCL",
     "champions league": "UCL",
     cl: "UCL",
@@ -1162,14 +1359,20 @@ function normalizeLeague(value) {
     "world cup": "WC",
     wc: "WC"
   };
-  return aliases[clean] || raw.toUpperCase();
+  return aliases[clean] || upper;
 }
 
 function normalizeStatus(status, date, score) {
-  const clean = String(status || "").toLowerCase().replace(/\s+/g, "");
-  if (["live", "halftime", "finished", "upcoming"].includes(clean)) return clean;
-  if (["ft", "fulltime", "full-time"].includes(clean)) return "finished";
-  if (["ht", "half-time"].includes(clean)) return "halftime";
+  const clean = String(status || "")
+    .toLowerCase()
+    .replace(/[_\s-]+/g, "");
+  if (["live", "inplay"].includes(clean)) return "live";
+  if (["halftime", "half", "paused", "ht"].includes(clean)) return "halftime";
+  if (["finished", "awarded", "ft", "fulltime"].includes(clean)) return "finished";
+  if (clean === "postponed") return "postponed";
+  if (clean === "suspended") return "suspended";
+  if (clean === "cancelled" || clean === "canceled") return "cancelled";
+  if (["scheduled", "timed", "upcoming"].includes(clean)) return "upcoming";
   if (score) return "finished";
   return date < todayKey ? "finished" : "upcoming";
 }
@@ -1182,14 +1385,14 @@ function normalizeScore(score) {
   return { home, away };
 }
 
-function normalizeImportedForm(form) {
+function normalizeImportedForm(form, fallbackCompetition = "") {
   if (!Array.isArray(form)) return [];
   const normalized = form
     .map((match, index) => {
       if (Array.isArray(match)) {
         return {
           date: formatDateKey(addDays(new Date(), -(index + 1) * 7)),
-          competition: normalizeLeague(match[0] || "EPL"),
+          competition: normalizeLeague(match[0] || fallbackCompetition),
           opponent: String(match[1] || "Opponent"),
           venue: String(match[2] || "H"),
           goalsFor: Number(match[3]) || 0,
@@ -1199,7 +1402,7 @@ function normalizeImportedForm(form) {
       if (!match || typeof match !== "object") return null;
       return {
         date: normalizeDate(match.date) || formatDateKey(addDays(new Date(), -(index + 1) * 7)),
-        competition: normalizeLeague(match.competition || match.league || "EPL"),
+        competition: normalizeLeague(match.competition || match.league || fallbackCompetition),
         opponent: String(match.opponent || "Opponent"),
         venue: String(match.venue || match.side || "H"),
         goalsFor: Number(match.goalsFor ?? match.gf) || 0,
@@ -1215,10 +1418,18 @@ function exportTeam(team) {
   if (!team) return null;
   return {
     id: team.id,
+    externalId: team.externalId || "",
     name: team.name,
     shortName: team.shortName,
+    code: team.code || team.shortName || "",
+    crest: team.crest || "",
+    country: team.country || "",
+    competitionIds: team.competitionIds || [team.league].filter(Boolean),
+    league: team.league,
     rating: team.rating,
     venue: team.venue,
+    source: team.source || "demo",
+    statsAvailable: team.statsAvailable !== false,
     attacking: team.attacking,
     defensive: team.defensive,
     form: team.form
@@ -1228,17 +1439,32 @@ function exportTeam(team) {
 function exportMatch(match) {
   return {
     id: match.id,
+    externalId: match.externalId || "",
+    competitionId: match.competitionId || match.league,
     league: match.league,
-    date: match.date,
-    time: match.time,
-    homeTeamId: match.homeTeamId,
-    awayTeamId: match.awayTeamId,
-    homeTeam: teams[match.homeTeamId]?.name || match.homeTeamId,
-    awayTeam: teams[match.awayTeamId]?.name || match.awayTeamId,
-    status: match.status,
-    venue: match.venue,
+    season: match.season || ensureLeagueProfile(match.league).season || "",
+    matchday: match.matchday || null,
     stage: match.stage,
+    date: match.date,
+    utcDate: match.utcDate || "",
+    time: match.time,
+    kickoff: match.kickoff,
+    status: match.status,
     minute: match.minute,
+    homeTeamId: match.homeTeamId,
+    homeTeam: teams[match.homeTeamId]?.name || match.homeTeamId,
+    homeCrest: teams[match.homeTeamId]?.crest || match.homeCrest || "",
+    awayTeamId: match.awayTeamId,
+    awayTeam: teams[match.awayTeamId]?.name || match.awayTeamId,
+    awayCrest: teams[match.awayTeamId]?.crest || match.awayCrest || "",
+    homeScore: match.score?.home ?? match.homeScore ?? null,
+    awayScore: match.score?.away ?? match.awayScore ?? null,
+    halftimeHomeScore: match.halftimeHomeScore ?? null,
+    halftimeAwayScore: match.halftimeAwayScore ?? null,
+    venue: match.venue,
+    referee: match.referee || "",
+    source: match.source || fixtureMeta.source || "",
+    updatedAt: match.updatedAt || fixtureMeta.updatedAt || "",
     score: match.score
   };
 }
@@ -1278,8 +1504,13 @@ function calculatePrediction(matchData) {
   const likelyScore = matrix.flat().sort((a, b) => b.probability - a.probability)[0];
   const maxOutcome = Math.max(outcome.home, outcome.draw, outcome.away);
   const secondOutcome = [outcome.home, outcome.draw, outcome.away].sort((a, b) => b - a)[1];
-  const confidenceScore = clamp((maxOutcome - secondOutcome) * 1.6 + Math.abs(homeEdge) * 0.3 + 0.08, 0, 1);
-  const confidence = confidenceScore > 0.42 ? "High" : confidenceScore > 0.22 ? "Medium" : "Low";
+  const dataCompleteness = (homeForm.matchesPlayed + awayForm.matchesPlayed + Math.min(h2h.total, 3)) / 13;
+  const confidenceScore = clamp((maxOutcome - secondOutcome) * 1.6 + Math.abs(homeEdge) * 0.3 + 0.08, 0, 1) * clamp(0.55 + dataCompleteness, 0.55, 1);
+  const confidence = !hasComparableForm ? "Low" : confidenceScore > 0.42 ? "High" : confidenceScore > 0.22 ? "Medium" : "Low";
+  const dataQuality = hasComparableForm ? (dataCompleteness > 0.72 ? "Strong data" : "Partial data") : "Insufficient data";
+  const explanation = hasComparableForm
+    ? "Model uses recent team form, goals for and against, head-to-head, rating, and competition home advantage."
+    : "Recent form is incomplete, so GoalIQ lowers confidence and leans more on neutral ratings and competition averages.";
   const winner =
     outcome.home >= outcome.draw && outcome.home >= outcome.away
       ? `${home.name} win`
@@ -1291,6 +1522,8 @@ function calculatePrediction(matchData) {
     probabilities: outcome,
     confidence,
     confidenceScore,
+    dataQuality,
+    explanation,
     predictedScore: `${likelyScore.homeGoals}-${likelyScore.awayGoals}`,
     expectedGoals: {
       home: currentScore.home + remainingHomeXg,
@@ -1516,14 +1749,252 @@ function renderBoardWithLoading() {
 }
 
 function renderActiveView() {
+  renderCompetitionNav();
   if (state.activeView === "worldcup") {
+    if (selectors.competitionSummary) selectors.competitionSummary.hidden = true;
     renderWorldCupView();
     return;
   }
   renderBoardWithLoading();
 }
 
+function renderCompetitionNav() {
+  if (!selectors.competitionNav) return;
+  selectors.competitionNav.innerHTML = competitionSelectorItems
+    .map((item) => {
+      const active = state.selectedCompetition === item.id || (state.activeView === "worldcup" && item.id === "WC");
+      return `<button class="competition-chip ${active ? "active" : ""}" type="button" data-competition="${escapeHtml(item.id)}" aria-pressed="${active ? "true" : "false"}">${escapeHtml(item.label)}</button>`;
+    })
+    .join("");
+}
+
+function getCompetitionMatches(competitionId) {
+  const normalized = normalizeLeague(competitionId);
+  if (!normalized || normalized === "ALL") return matches;
+  return matches.filter((match) => normalizeLeague(match.league) === normalized);
+}
+
+function getSelectedCompetitionConfig() {
+  return state.selectedCompetition === "ALL" ? null : competitionConfigs[state.selectedCompetition] || null;
+}
+
+function renderCompetitionSummary() {
+  if (!selectors.competitionSummary) return;
+  const config = getSelectedCompetitionConfig();
+  if (!config || state.activeView === "worldcup") {
+    selectors.competitionSummary.hidden = true;
+    selectors.competitionSummary.innerHTML = "";
+    return;
+  }
+
+  const competitionMatches = getCompetitionMatches(config.id).sort(sortMatches);
+  const todayMatches = competitionMatches.filter((match) => match.date === state.selectedDate).slice(0, 4);
+  const nextFixtures = competitionMatches
+    .filter((match) => ["upcoming", "live", "halftime"].includes(match.status) && match.date >= state.selectedDate)
+    .sort(sortMatches)
+    .slice(0, 5);
+  const recentResults = competitionMatches
+    .filter((match) => match.status === "finished" && match.score)
+    .sort(sortMatchesReverse)
+    .slice(0, 5);
+  const matchday = getCompetitionMatchday(config.id, competitionMatches);
+  const teamsForCompetition = getCompetitionTeams(config.id).slice(0, 28);
+  const source = getCompetitionSourceStatus(config.id);
+
+  selectors.competitionSummary.hidden = false;
+  selectors.competitionSummary.innerHTML = `
+    <section class="competition-hero panel-card">
+      <div>
+        <span class="section-kicker">${escapeHtml(config.type === "league" ? "Domestic league" : "Competition")}</span>
+        <h2>${escapeHtml(config.name)}</h2>
+        <p>${escapeHtml(config.season)}${matchday ? ` - ${escapeHtml(matchday)}` : ""}</p>
+      </div>
+      <div class="competition-status">
+        <span>Data source</span>
+        <strong>${escapeHtml(source.label)}</strong>
+        <small>${escapeHtml(source.updatedAt || "Waiting for update")}</small>
+      </div>
+    </section>
+    <div class="competition-grid">
+      ${renderCompetitionFixtureBlock("Today's matches", todayMatches, "No matches for this selected date.")}
+      ${renderCompetitionFixtureBlock("Next fixtures", nextFixtures, "Schedule not yet available.")}
+      ${renderCompetitionFixtureBlock("Recent results", recentResults, "No recent results in the current feed.")}
+      ${renderCompetitionInsights(config, nextFixtures)}
+      ${renderCompetitionStandings(config)}
+      ${renderCompetitionTeamList(config, teamsForCompetition)}
+    </div>
+  `;
+}
+
+function getCompetitionMatchday(competitionId, competitionMatches) {
+  const explicit = competitionMatches.find((match) => match.matchday || /matchday/i.test(String(match.stage || "")));
+  if (explicit?.matchday) return `Matchweek ${explicit.matchday}`;
+  const stage = String(explicit?.stage || "").trim();
+  return stage || "";
+}
+
+function getCompetitionSourceStatus(competitionId) {
+  const standing = getCompetitionStandingFeed(competitionId);
+  if (standing?.updatedAt || standingsFeed.meta?.updatedAt) {
+    return {
+      label: standing?.source || standingsFeed.meta?.source || "football-data.org",
+      updatedAt: standing?.updatedAt || standingsFeed.meta?.updatedAt
+    };
+  }
+  if (fixtureMeta.updatedAt) {
+    return { label: fixtureMeta.source || "Fixture feed", updatedAt: fixtureMeta.updatedAt };
+  }
+  return { label: "Unavailable", updatedAt: "" };
+}
+
+function renderCompetitionFixtureBlock(title, fixtureList, emptyMessage) {
+  return `
+    <section class="competition-card panel-card">
+      <div class="panel-title"><span>${escapeHtml(title)}</span><strong>${fixtureList.length}</strong></div>
+      ${
+        fixtureList.length
+          ? `<div class="summary-fixtures">${fixtureList.map(renderSummaryFixture).join("")}</div>`
+          : `<div class="empty-state inline"><strong>${escapeHtml(emptyMessage)}</strong><span>GoalIQ will update this section when official data is available.</span></div>`
+      }
+    </section>
+  `;
+}
+
+function renderSummaryFixture(match) {
+  const details = getMatchDetails(match.id);
+  const score = match.score ? `${match.score.home}-${match.score.away}` : formatMatchTime(match);
+  return `
+    <button class="summary-fixture" type="button" data-match-id="${escapeHtml(match.id)}">
+      <span>${escapeHtml(formatShortDate(match.date))}</span>
+      <strong>${escapeHtml(details?.homeTeam?.shortName || match.homeTeamId)} vs ${escapeHtml(details?.awayTeam?.shortName || match.awayTeamId)}</strong>
+      <small>${escapeHtml(statusLabels[match.status] || match.status)} - ${escapeHtml(score)}</small>
+    </button>
+  `;
+}
+
+function renderCompetitionInsights(config, nextFixtures) {
+  const insights = nextFixtures
+    .map((match) => {
+      const details = getMatchDetails(match.id);
+      if (!details) return null;
+      const prediction = calculatePrediction(details);
+      const rounded = roundOutcomePercentages(prediction.probabilities);
+      const top = [
+        [details.homeTeam.shortName, rounded.home],
+        ["Draw", rounded.draw],
+        [details.awayTeam.shortName, rounded.away]
+      ].sort((a, b) => b[1] - a[1])[0];
+      return { match, details, top, prediction };
+    })
+    .filter(Boolean)
+    .slice(0, 3);
+
+  return `
+    <section class="competition-card panel-card">
+      <div class="panel-title"><span>Top prediction insights</span><strong>${escapeHtml(config.shortName)}</strong></div>
+      ${
+        insights.length
+          ? `<div class="insight-list">${insights
+              .map(
+                (item) => `
+                  <button class="insight-row" type="button" data-match-id="${escapeHtml(item.match.id)}">
+                    <span>${escapeHtml(item.details.homeTeam.shortName)} vs ${escapeHtml(item.details.awayTeam.shortName)}</span>
+                    <strong>${escapeHtml(item.top[0])} ${item.top[1]}%</strong>
+                    <small>${escapeHtml(item.prediction.confidence)} confidence - ${escapeHtml(item.prediction.dataQuality)}</small>
+                  </button>
+                `
+              )
+              .join("")}</div>`
+          : `<div class="empty-state inline"><strong>Insufficient data</strong><span>Prediction insights need upcoming fixtures and team profiles from the feed.</span></div>`
+      }
+    </section>
+  `;
+}
+
+function getCompetitionStandingFeed(competitionId) {
+  const id = normalizeLeague(competitionId);
+  return standingsFeed.standings?.[id] || standingsFeed[id] || null;
+}
+
+function renderCompetitionStandings(config) {
+  const standing = getCompetitionStandingFeed(config.id);
+  const rows = Array.isArray(standing?.table) ? standing.table : Array.isArray(standing?.rows) ? standing.rows : [];
+  return `
+    <section class="competition-card standings-card panel-card">
+      <div class="panel-title"><span>League standings</span><strong>${escapeHtml(config.season)}</strong></div>
+      ${
+        rows.length
+          ? `<div class="standings-table" role="table" aria-label="${escapeHtml(config.name)} standings">
+              <div class="standings-row standings-head" role="row">
+                <span>Pos</span><span>Team</span><span>P</span><span>W</span><span>D</span><span>L</span><span>GF</span><span>GA</span><span>GD</span><span>Pts</span><span>Form</span>
+              </div>
+              ${rows.map((row, index) => renderStandingRow(config, row, index + 1)).join("")}
+            </div>`
+          : `<div class="empty-state inline"><strong>The 2026/27 league table will appear when official competition data becomes available.</strong><span>${escapeHtml(standing?.message || standingsFeed.meta?.note || "No official standings are in the current feed.")}</span></div>`
+      }
+    </section>
+  `;
+}
+
+function renderStandingRow(config, row, position) {
+  const zone = getQualificationZone(config, position);
+  const team = {
+    name: row.teamName || row.name || teams[row.teamId]?.name || "Team",
+    shortName: row.shortName || teams[row.teamId]?.shortName || makeShortName(row.teamName || row.name || "Team"),
+    crest: row.crest || teams[row.teamId]?.crest || ""
+  };
+  const gd = Number(row.goalDifference ?? row.goalsFor - row.goalsAgainst) || 0;
+  const form = Array.isArray(row.form) ? row.form.slice(-5) : [];
+  return `
+    <div class="standings-row ${zone ? `zone-${zone.type}` : ""}" role="row" title="${zone ? escapeHtml(zone.label) : ""}">
+      <span>${position}</span>
+      <span class="standing-team">${renderTeamBadge(team)}<strong>${escapeHtml(team.name)}</strong></span>
+      <span>${Number(row.played || 0)}</span>
+      <span>${Number(row.won ?? row.wins ?? 0)}</span>
+      <span>${Number(row.drawn ?? row.draws ?? 0)}</span>
+      <span>${Number(row.lost ?? row.losses ?? 0)}</span>
+      <span>${Number(row.goalsFor || 0)}</span>
+      <span>${Number(row.goalsAgainst || 0)}</span>
+      <span>${gd >= 0 ? "+" : ""}${gd}</span>
+      <span><strong>${Number(row.points || 0)}</strong></span>
+      <span class="standing-form">${form.length ? form.map((result) => `<i class="form-dot ${String(result).toLowerCase()}">${escapeHtml(result)}</i>`).join("") : "—"}</span>
+    </div>
+  `;
+}
+
+function getQualificationZone(config, position) {
+  return config.qualificationZones?.find((zone) => position >= zone.from && position <= zone.to) || null;
+}
+
+function renderCompetitionTeamList(config, teamList) {
+  return `
+    <section class="competition-card panel-card">
+      <div class="panel-title"><span>Team list</span><strong>${teamList.length}</strong></div>
+      ${
+        teamList.length
+          ? `<div class="team-list-grid">${teamList
+              .map((team) => `<div class="team-list-item">${renderTeamBadge(team)}<span>${escapeHtml(team.name)}</span></div>`)
+              .join("")}</div>`
+          : `<div class="empty-state inline"><strong>Official team list unavailable</strong><span>Teams will populate from fixtures or the competition teams endpoint.</span></div>`
+      }
+    </section>
+  `;
+}
+
+function getCompetitionTeams(competitionId) {
+  const id = normalizeLeague(competitionId);
+  const matchTeamIds = new Set(
+    getCompetitionMatches(id).flatMap((match) => [match.homeTeamId, match.awayTeamId]).filter(Boolean)
+  );
+  const feedTeams = Array.isArray(competitionsFeed.competitions?.[id]?.teams) ? competitionsFeed.competitions[id].teams : [];
+  feedTeams.forEach((team) => normalizeImportedTeam({ ...team, competitionId: id, competitionIds: [id] }));
+  return Object.values(teams)
+    .filter((team) => matchTeamIds.has(team.id) || team.league === id || team.competitionIds?.includes(id))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
 function renderBoard() {
+  renderCompetitionSummary();
   const allMatches = getMatchesForActiveView();
   const visibleMatches = filterMatches(allMatches);
   selectors.headerMatchCount.textContent = `${visibleMatches.length} ${visibleMatches.length === 1 ? "match" : "matches"}`;
@@ -1547,9 +2018,11 @@ function getMatchesForActiveView() {
 }
 
 function filterMatches(list) {
+  const selectedCompetition = state.selectedCompetition;
+  const competitionFiltered = selectedCompetition === "ALL" ? list : list.filter((match) => normalizeLeague(match.league) === selectedCompetition);
   const needle = state.search.trim().toLowerCase();
-  if (!needle) return list;
-  return list.filter((match) => {
+  if (!needle) return competitionFiltered;
+  return competitionFiltered.filter((match) => {
     const home = teams?.[match.homeTeamId];
     const away = teams?.[match.awayTeamId];
     const league = leagueProfiles?.[match.league];
@@ -1606,6 +2079,7 @@ function safeRenderMatchCard(match) {
 function renderMatchCard(match) {
   const details = getMatchDetails(match.id);
   const prediction = calculatePrediction(details);
+  const roundedOutcomes = roundOutcomePercentages(prediction.probabilities);
   const status = statusLabels[match.status];
   const scoreLabel = match.score ? `${match.score.home}-${match.score.away}` : "vs";
   const contextLabel = formatMatchContext(match, details);
@@ -1618,20 +2092,20 @@ function renderMatchCard(match) {
       </div>
       <div class="team-lines">
         <div class="team-row">
-          <span class="team-badge">${escapeHtml(details.homeTeam.shortName)}</span>
+          ${renderTeamBadge(details.homeTeam)}
           <strong>${escapeHtml(details.homeTeam.name)}</strong>
           <span class="team-score">${match.score ? match.score.home : ""}</span>
         </div>
         <div class="team-row">
-          <span class="team-badge away">${escapeHtml(details.awayTeam.shortName)}</span>
+          ${renderTeamBadge(details.awayTeam, "away")}
           <strong>${escapeHtml(details.awayTeam.name)}</strong>
           <span class="team-score">${match.score ? match.score.away : ""}</span>
         </div>
       </div>
       <div class="board-picks" aria-label="Prediction percentages">
-        ${renderPick("Home", prediction.probabilities.home)}
-        ${renderPick("Draw", prediction.probabilities.draw)}
-        ${renderPick("Away", prediction.probabilities.away)}
+        ${renderPick("Home", prediction.probabilities.home, roundedOutcomes.home)}
+        ${renderPick("Draw", prediction.probabilities.draw, roundedOutcomes.draw)}
+        ${renderPick("Away", prediction.probabilities.away, roundedOutcomes.away)}
       </div>
       <div class="card-footer">
         <span>${escapeHtml(contextLabel)}</span>
@@ -1647,11 +2121,12 @@ function formatMatchContext(match, details) {
   const date = match.date ? dateLabel(match.date) : "Date TBC";
   return stage ? `${stage} - ${date}` : date;
 }
-function renderPick(label, probability) {
+function renderPick(label, probability, roundedPercent = null) {
+  const displayValue = roundedPercent === null ? formatPercent(probability) : formatWholePercent(roundedPercent);
   return `
     <span class="pick-card">
       <small>${label}</small>
-      <strong>${formatPercent(probability)}</strong>
+      <strong>${displayValue}</strong>
     </span>
   `;
 }
@@ -1696,21 +2171,27 @@ function renderDetail() {
   selectors.extraPredictionsTitle.textContent = isFinished ? "Archived predictions" : "Extra predictions";
   selectors.mostLikelyResult.textContent = prediction.mostLikelyResult;
 
+  const roundedOutcomes = roundOutcomePercentages(prediction.probabilities);
   selectors.probabilityCards.innerHTML = [
-    [details.homeTeam.name, prediction.probabilities.home],
-    ["Draw", prediction.probabilities.draw],
-    [details.awayTeam.name, prediction.probabilities.away]
+    [details.homeTeam.name, prediction.probabilities.home, roundedOutcomes.home],
+    ["Draw", prediction.probabilities.draw, roundedOutcomes.draw],
+    [details.awayTeam.name, prediction.probabilities.away, roundedOutcomes.away]
   ]
-    .map(([label, value]) => renderProbabilityCard(label, value))
+    .map(([label, value, rounded]) => renderProbabilityCard(label, value, rounded))
     .join("");
 
   selectors.overviewRows.innerHTML = renderStatRows([
     ["Competition", details.leagueProfile.name],
+    ["Season", details.leagueProfile.season || "Current"],
+    ...(details.matchday ? [["Matchweek", details.matchday]] : []),
     ...(details.stage ? [["Stage", details.stage]] : []),
     ["Date", formatLongDate(details.date)],
     ["Kickoff", details.time],
     ["Venue", details.venue],
     ["Status", statusLabels[details.status]],
+    ["Data quality", prediction.dataQuality],
+    ["Source", fixtureMeta.source || "Fixture feed"],
+    ["Prediction note", prediction.explanation],
     ...(details.score ? [[scoreDisplay.label, `${details.homeTeam.shortName} ${details.score.home} - ${details.score.away} ${details.awayTeam.shortName}`]] : []),
     ["Expected goals", `${formatNumber(prediction.expectedGoals.home)} - ${formatNumber(prediction.expectedGoals.away)}`]
   ]);
@@ -1765,12 +2246,13 @@ function getDetailScoreDisplay(match, prediction) {
   };
 }
 
-function renderProbabilityCard(label, probability) {
+function renderProbabilityCard(label, probability, roundedPercent = null) {
+  const displayValue = roundedPercent === null ? formatPercent(probability) : formatWholePercent(roundedPercent);
   return `
     <article class="prob-card">
       <span>${escapeHtml(label)}</span>
-      <strong>${formatPercent(probability)}</strong>
-      <div class="prob-bar"><span style="width:${probability * 100}%"></span></div>
+      <strong>${displayValue}</strong>
+      <div class="prob-bar"><span style="width:${roundedPercent ?? probability * 100}%"></span></div>
     </article>
   `;
 }
@@ -1813,7 +2295,10 @@ function renderFormPanel(team, formSummary) {
                 .map(
                   (match) => `
                     <div>
-                      <span>${escapeHtml(match.venue)} vs ${escapeHtml(match.opponent)}</span>
+                      <span>
+                        ${escapeHtml(match.venue)} vs ${escapeHtml(match.opponent)}
+                        <small>${escapeHtml(leagueProfiles[match.competition]?.shortName || match.competition || "Competition")} - ${escapeHtml(formatShortDate(match.date))}</small>
+                      </span>
                       <strong>${match.goalsFor}-${match.goalsAgainst}</strong>
                     </div>
                   `
@@ -1829,6 +2314,10 @@ function renderFormPanel(team, formSummary) {
 }
 
 function renderComparisonRows(homeTeam, awayTeam, rows) {
+  const hasAnyStats = homeTeam.statsAvailable !== false || awayTeam.statsAvailable !== false;
+  if (!hasAnyStats) {
+    return '<div class="empty-state inline"><strong>Statistics unavailable</strong><span>GoalIQ will show attacking and defensive stats when real form or season statistics are available for these teams.</span></div>';
+  }
   return `
     <div class="comparison-head">
       <span></span>
@@ -1837,13 +2326,13 @@ function renderComparisonRows(homeTeam, awayTeam, rows) {
     </div>
     ${rows
       .map(([label, group, key, suffix = ""]) => {
-        const homeValue = homeTeam[group][key];
-        const awayValue = awayTeam[group][key];
+        const homeValue = homeTeam.statsAvailable === false ? null : homeTeam[group][key];
+        const awayValue = awayTeam.statsAvailable === false ? null : awayTeam[group][key];
         return `
           <div class="comparison-row">
             <span>${escapeHtml(label)}</span>
-            <strong>${formatStat(homeValue, suffix)}</strong>
-            <strong>${formatStat(awayValue, suffix)}</strong>
+            <strong>${homeValue === null ? "—" : formatStat(homeValue, suffix)}</strong>
+            <strong>${awayValue === null ? "—" : formatStat(awayValue, suffix)}</strong>
           </div>
         `;
       })
@@ -2485,6 +2974,118 @@ function wcRound(key, label, roundMatches) {
   return { key, label, matches: roundMatches };
 }
 
+function renderTeamBadge(team, extraClass = "") {
+  const shortName = escapeHtml(team?.shortName || makeShortName(team?.name || "Team"));
+  const crest = String(team?.crest || "").trim();
+  if (crest) {
+    return `<span class="team-badge crest-badge ${extraClass}"><img src="${escapeHtml(crest)}" alt="${escapeHtml(team.name)} crest" loading="lazy" onerror="this.closest('.team-badge').classList.add('crest-failed'); this.remove();" /><span>${shortName}</span></span>`;
+  }
+  return `<span class="team-badge ${extraClass}">${shortName}</span>`;
+}
+
+function roundOutcomePercentages(probabilities) {
+  const keys = ["home", "draw", "away"];
+  const raw = keys.map((key) => Number(probabilities?.[key]) || 0);
+  const total = raw.reduce((sum, value) => sum + value, 0) || 1;
+  const exact = raw.map((value) => (value / total) * 100);
+  const rounded = exact.map(Math.floor);
+  let remainder = 100 - rounded.reduce((sum, value) => sum + value, 0);
+  exact
+    .map((value, index) => ({ index, fraction: value - Math.floor(value) }))
+    .sort((a, b) => b.fraction - a.fraction)
+    .forEach(({ index }) => {
+      if (remainder <= 0) return;
+      rounded[index] += 1;
+      remainder -= 1;
+    });
+  return Object.fromEntries(keys.map((key, index) => [key, rounded[index]]));
+}
+
+function formatWholePercent(value) {
+  const num = Number(value);
+  return Number.isFinite(num) ? `${Math.round(num)}%` : "—";
+}
+
+function loadStoredCompetitionFilter() {
+  try {
+    const stored = sessionStorage.getItem(COMPETITION_FILTER_STORAGE_KEY);
+    const normalized = stored === "ALL" ? "ALL" : normalizeLeague(stored);
+    return normalized && (normalized === "ALL" || competitionConfigs[normalized]) ? normalized : "ALL";
+  } catch {
+    return "ALL";
+  }
+}
+
+function saveCompetitionFilter(competitionId) {
+  try {
+    sessionStorage.setItem(COMPETITION_FILTER_STORAGE_KEY, competitionId || "ALL");
+  } catch {
+    // Session storage is optional in embedded webviews.
+  }
+}
+
+function getInitialCompetitionFromLocation() {
+  const hash = window.location.hash || "";
+  if (["#worldcup-2026", "#bracket"].includes(hash)) return "WC";
+  const match = hash.match(/^#competition\/([^/?#]+)/i);
+  if (!match) return "";
+  const normalized = normalizeLeague(decodeURIComponent(match[1]));
+  return competitionConfigs[normalized] ? normalized : "ALL";
+}
+
+function updateRouteForState() {
+  if (state.activeView === "worldcup") {
+    history.replaceState(null, "", "#worldcup-2026");
+    return;
+  }
+  const item = competitionSelectorItems.find((candidate) => candidate.id === state.selectedCompetition);
+  const nextHash = item?.hash || "";
+  history.replaceState(null, "", `${window.location.pathname}${window.location.search}${nextHash}`);
+}
+
+function setSelectedCompetition(competitionId, updateUrl = true) {
+  const normalized = competitionId === "ALL" ? "ALL" : normalizeLeague(competitionId);
+  state.selectedCompetition = normalized && (normalized === "ALL" || competitionConfigs[normalized]) ? normalized : "ALL";
+  saveCompetitionFilter(state.selectedCompetition);
+  if (state.selectedCompetition === "WC") {
+    state.activeView = "worldcup";
+  } else if (state.activeView === "worldcup") {
+    state.activeView = "today";
+  }
+  state.selectedMatchId = null;
+  selectors.detailView.hidden = true;
+  if (updateUrl) updateRouteForState();
+  renderActiveView();
+}
+
+function normalizeText(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function getLocalDateTimeParts(value) {
+  const parsed = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(parsed.getTime())) return null;
+  const parts = new Intl.DateTimeFormat(undefined, {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false
+  }).formatToParts(parsed);
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return {
+    date: `${values.year}-${values.month}-${values.day}`,
+    time: `${values.hour === "24" ? "00" : values.hour}:${values.minute}`
+  };
+}
+
 function renderStatRows(rows) {
   return rows
     .map(
@@ -2516,6 +3117,29 @@ function bindEvents() {
       setActiveView(button.dataset.view);
     });
   });
+
+  selectors.competitionNav?.addEventListener("click", (event) => {
+    const chip = event.target.closest("[data-competition]");
+    if (!chip) return;
+    setSelectedCompetition(chip.dataset.competition);
+  });
+
+  selectors.competitionSummary?.addEventListener("click", (event) => {
+    const target = event.target.closest("[data-match-id]");
+    if (!target) return;
+    openMatchDetail(target.dataset.matchId);
+  });
+
+  window.addEventListener("hashchange", () => {
+    const hashCompetition = getInitialCompetitionFromLocation();
+    state.activeView = getInitialViewFromLocation();
+    if (hashCompetition) state.selectedCompetition = hashCompetition;
+    document.querySelectorAll(".nav-tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.view === state.activeView));
+    renderActiveView();
+  });
+
+  window.addEventListener("offline", () => setImportStatus("Offline. Showing cached or local fixture data."));
+  window.addEventListener("online", () => setImportStatus("Back online. Load live feed to refresh football data."));
 
   selectors.dateInput.addEventListener("change", () => {
     state.selectedDate = selectors.dateInput.value || todayKey;
@@ -2610,6 +3234,7 @@ function bindEvents() {
 
     try {
       await loadLiveFixtureFeed();
+      await loadLiveCompetitionFeeds({ silent: true });
     } catch (error) {
       setImportStatus(error.message || "Could not load the live fixture feed.", true);
     } finally {
@@ -2623,16 +3248,18 @@ function bindEvents() {
 
 function setActiveView(view, updateUrl = true) {
   state.activeView = view;
+  if (view === "worldcup") {
+    state.selectedCompetition = "WC";
+  } else if (state.selectedCompetition === "WC") {
+    state.selectedCompetition = "ALL";
+  }
+  saveCompetitionFilter(state.selectedCompetition);
   document.querySelectorAll(".nav-tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.view === view));
   state.selectedMatchId = null;
   selectors.detailView.hidden = true;
-  if (updateUrl) {
-    const nextUrl = view === "worldcup" ? "#worldcup-2026" : `${window.location.pathname}${window.location.search}`;
-    history.replaceState(null, "", nextUrl);
-  }
+  if (updateUrl) updateRouteForState();
   renderActiveView();
 }
-
 function getInitialViewFromLocation() {
   return ["#worldcup-2026", "#bracket"].includes(window.location.hash) ? "worldcup" : "today";
 }
@@ -2644,11 +3271,14 @@ function init() {
   bindEvents();
   document.querySelectorAll(".nav-tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.view === state.activeView));
   renderActiveView();
-  loadLiveFixtureFeed({ persist: false, silent: true }).catch(() => {
-    if (!restoredStoredFixtures) {
-      setImportStatus("Live feed is not ready yet. Using the built-in demo snapshot.");
-    }
-  });
+  loadLiveFixtureFeed({ persist: false, silent: true })
+    .then(() => loadLiveCompetitionFeeds({ silent: true }))
+    .catch(() => {
+      loadLiveCompetitionFeeds({ silent: true }).catch(() => {});
+      if (!restoredStoredFixtures) {
+        setImportStatus("Live feed is not ready yet. Using the built-in demo snapshot.");
+      }
+    });
 }
 
 function registerServiceWorker() {
@@ -2756,6 +3386,21 @@ function ensureLeagueProfile(league) {
   return leagueProfiles[key];
 }
 
+function normalizeKickoffParts(match) {
+  const utcValue = match.utcDate || match.kickoffUtc || "";
+  if (utcValue) {
+    const localParts = getLocalDateTimeParts(utcValue);
+    if (localParts) return localParts;
+  }
+
+  const directDate = normalizeDate(match.date || match.kickoffDate || match.kickoff);
+  const directTime = normalizeTime(match.time || match.kickoffTime || match.utcTime || match.kickoff || utcValue);
+  return {
+    date: directDate,
+    time: directTime
+  };
+}
+
 function normalizeDate(value) {
   if (!value) return "";
   if (value instanceof Date && !Number.isNaN(value.getTime())) return formatDateKey(value);
@@ -2846,12 +3491,12 @@ function formatLongDate(date) {
 }
 
 function formatMatchTime(match) {
-  if (match.status === "live") return `${match.minute}'`;
+  if (match.status === "live") return `${match.minute || ""}'`;
   if (match.status === "halftime") return "HT";
   if (match.status === "finished") return "FT";
+  if (["postponed", "suspended", "cancelled"].includes(match.status)) return statusLabels[match.status] || match.status;
   return match.time;
 }
-
 function formatPercent(value) {
   const num = Number(value);
   if (!Number.isFinite(num)) return "—";
@@ -2889,6 +3534,8 @@ window.GoalIQServices = {
   getFixtureDataExport,
   loadFixtureDataFromUrl,
   loadLiveFixtureFeed,
+  loadLiveStandingsFeed,
+  loadLiveCompetitionsFeed,
   getWorldCupBracket
 };
 window.FootballEdgeServices = window.GoalIQServices;
