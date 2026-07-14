@@ -907,6 +907,112 @@ input:focus {
   font-size: 1.35rem;
 }
 
+.model-breakdown-panel {
+  overflow: hidden;
+}
+
+.model-breakdown-list {
+  display: grid;
+  gap: 9px;
+}
+
+.breakdown-row {
+  display: grid;
+  gap: 9px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface-2);
+}
+
+.breakdown-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.breakdown-copy span,
+.breakdown-row small {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 900;
+}
+
+.breakdown-copy span {
+  text-transform: uppercase;
+}
+
+.breakdown-copy strong {
+  color: var(--text);
+  font-size: 0.96rem;
+  overflow-wrap: anywhere;
+}
+
+.breakdown-copy em {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 760;
+  line-height: 1.35;
+}
+
+.breakdown-meter {
+  position: relative;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--surface-3);
+}
+
+.breakdown-meter::before {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  content: "";
+  background: rgba(17, 24, 20, 0.28);
+}
+
+.breakdown-meter span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: block;
+  min-width: 4px;
+  border-radius: inherit;
+}
+
+.breakdown-row.home .breakdown-meter span {
+  left: 50%;
+  width: var(--bar-width);
+  background: linear-gradient(90deg, var(--green), var(--green-2));
+}
+
+.breakdown-row.away .breakdown-meter span {
+  right: 50%;
+  width: var(--bar-width);
+  background: linear-gradient(90deg, var(--blue), #174d82);
+}
+
+.breakdown-row.balanced .breakdown-meter span {
+  left: 50%;
+  width: var(--bar-width);
+  transform: translateX(-50%);
+  background: var(--muted);
+}
+
+.breakdown-row.neutral .breakdown-meter::before {
+  display: none;
+}
+
+.breakdown-row.neutral .breakdown-meter span {
+  left: 0;
+  width: var(--bar-width);
+  background: linear-gradient(90deg, var(--green), var(--blue));
+}
+
 .recommendation-panel {
   display: grid;
   grid-column: 1 / -1;
@@ -1488,6 +1594,15 @@ input:focus {
 
   .probability-cards {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .breakdown-row {
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 0.72fr) minmax(88px, auto);
+    align-items: center;
+  }
+
+  .breakdown-row small {
+    text-align: right;
   }
 
   .market-grid {

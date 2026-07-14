@@ -660,6 +660,8 @@ const selectors = {
   confidenceLevel: document.querySelector("#confidenceLevel"),
   probabilityCards: document.querySelector("#probabilityCards"),
   overviewRows: document.querySelector("#overviewRows"),
+  modelBreakdownSummary: document.querySelector("#modelBreakdownSummary"),
+  modelBreakdownRows: document.querySelector("#modelBreakdownRows"),
   extraPredictions: document.querySelector("#extraPredictions"),
   extraPredictionsTitle: document.querySelector("#extraPredictionsTitle"),
   mostLikelyResult: document.querySelector("#mostLikelyResult"),
@@ -1282,6 +1284,21 @@ function calculatePrediction(matchData) {
   const likelyScore = matrix.flat().sort((a, b) => b.probability - a.probability)[0];
   const dataQuality = calculateDataQuality(homeForm, awayForm, h2h);
   const marketEdges = buildMarketRecommendations(outcome, home, away, dataQuality);
+  const modelBreakdown = buildModelBreakdown({
+    home,
+    away,
+    profile,
+    homeForm,
+    awayForm,
+    h2h,
+    h2hEdge,
+    homeAttack,
+    awayAttack,
+    homeDefense,
+    awayDefense,
+    outcome,
+    dataQuality
+  });
   const insights = buildPredictionInsights({
     home,
     away,
@@ -1326,8 +1343,126 @@ function calculatePrediction(matchData) {
     h2h,
     dataQuality,
     marketEdges,
+    modelBreakdown,
     insights
   };
+}
+
+function buildModelBreakdown({
+  home,
+  away,
+  profile,
+  homeForm,
+  awayForm,
+  h2h,
+  h2hEdge,
+  homeAttack,
+  awayAttack,
+  homeDefense,
+  awayDefense,
+  outcome,
+  dataQuality
+}) {
+  const formScore = homeForm.matchesPlayed && awayForm.matchesPlayed ? clamp((homeForm.pointsPerMatch - awayForm.pointsPerMatch) / 2.4, -1, 1) : 0;
+  const attackScore = clamp((homeAttack - awayAttack) / 1.9, -1, 1);
+  const defenseScore = clamp((awayDefense - homeDefense) / 1.8, -1, 1);
+  const homeAdvantageScore = clamp(profile.homeAdvantage / 0.18, 0, 1);
+  const h2hScore = h2h.total ? clamp(h2hEdge / 0.16, -1, 1) : 0;
+  const goalMarket = getGoalMarketLean(outcome);
+  const edgeTotal = formScore * 0.28 + attackScore * 0.2 + defenseScore * 0.18 + homeAdvantageScore * 0.15 + h2hScore * 0.12;
+  const summary =
+    edgeTotal > 0.12
+      ? `${home.shortName} edge`
+      : edgeTotal < -0.12
+        ? `${away.shortName} edge`
+        : "Balanced model";
+
+  return {
+    summary: `${summary} - ${dataQuality.label} data`,
+    rows: [
+      breakdownEdgeRow(
+        "Form edge",
+        formScore,
+        home,
+        away,
+        homeForm.matchesPlayed && awayForm.matchesPlayed
+          ? `${home.shortName} ${formatNumber(homeForm.pointsPerMatch)} PPM vs ${away.shortName} ${formatNumber(awayForm.pointsPerMatch)} PPM`
+          : "Recent form is incomplete",
+        "Last five results, points per match, and goal difference."
+      ),
+      breakdownEdgeRow(
+        "Attack edge",
+        attackScore,
+        home,
+        away,
+        `${home.shortName} ${formatNumber(homeAttack)} xG vs ${away.shortName} ${formatNumber(awayAttack)} xG`,
+        "Blended team xG and recent goals scored."
+      ),
+      breakdownEdgeRow(
+        "Defence edge",
+        defenseScore,
+        home,
+        away,
+        `${home.shortName} ${formatNumber(homeDefense)} xGA vs ${away.shortName} ${formatNumber(awayDefense)} xGA`,
+        "Lower expected goals against is stronger."
+      ),
+      {
+        label: "Home advantage",
+        direction: "home",
+        score: homeAdvantageScore,
+        lean: `${home.shortName} venue lift`,
+        value: formatPercent(profile.homeAdvantage),
+        description: `${profile.shortName} home-field adjustment.`
+      },
+      breakdownEdgeRow(
+        "Head-to-head",
+        h2hScore,
+        home,
+        away,
+        h2h.total ? `${h2h.homeWins}-${h2h.draws}-${h2h.awayWins} in ${h2h.total}` : "No verified sample",
+        "Recent direct meetings when available."
+      ),
+      {
+        label: "Goal market lean",
+        direction: "neutral",
+        score: goalMarket.probability,
+        lean: goalMarket.label,
+        value: formatPercent(goalMarket.probability),
+        description: goalMarket.description
+      },
+      {
+        label: "Data quality",
+        direction: "neutral",
+        score: dataQuality.score,
+        lean: `${dataQuality.label} evidence`,
+        value: `${dataQuality.formMatches} form / ${dataQuality.h2hMatches} H2H`,
+        description: dataQuality.summary
+      }
+    ]
+  };
+}
+
+function breakdownEdgeRow(label, score, home, away, value, description) {
+  const direction = score > 0.04 ? "home" : score < -0.04 ? "away" : "balanced";
+  return {
+    label,
+    direction,
+    score,
+    lean: direction === "home" ? `${home.shortName} edge` : direction === "away" ? `${away.shortName} edge` : "Even",
+    value,
+    description
+  };
+}
+
+function getGoalMarketLean(outcome) {
+  const candidates = [
+    ["Over 2.5", outcome.over25, "Open-game signal from projected score distribution."],
+    ["Under 3.5", outcome.under35, "Lower-volatility goals angle from projected score distribution."],
+    ["BTTS", outcome.btts, "Both teams show enough scoring probability."],
+    ["Over 1.5", outcome.over15, "Two-goal floor has the strongest goal-market support."]
+  ];
+  const [label, probability, description] = candidates.sort((a, b) => b[1] - a[1])[0];
+  return { label, probability, description };
 }
 
 function calculateDataQuality(homeForm, awayForm, h2h) {
@@ -1945,6 +2080,9 @@ function renderDetail() {
     ["Safer angle", `${prediction.marketEdges.recommended.label} (${formatPercent(prediction.marketEdges.recommended.probability)})`]
   ]);
 
+  selectors.modelBreakdownSummary.textContent = prediction.modelBreakdown.summary;
+  selectors.modelBreakdownRows.innerHTML = renderModelBreakdown(prediction.modelBreakdown);
+
   selectors.extraPredictions.innerHTML = `
     ${renderRecommendationPanel(prediction)}
     ${[
@@ -2014,6 +2152,31 @@ function renderMarketTile(label, probability) {
     <article class="market-tile">
       <span>${escapeHtml(label)}</span>
       <strong>${formatPercent(probability)}</strong>
+    </article>
+  `;
+}
+
+function renderModelBreakdown(breakdown) {
+  return breakdown.rows.map(renderModelBreakdownRow).join("");
+}
+
+function renderModelBreakdownRow(row) {
+  const width = row.direction === "neutral" ? Math.round(row.score * 100) : Math.max(4, Math.round(Math.abs(row.score) * 50));
+  const meterStyle = `--bar-width:${clamp(width, 0, 100)}%`;
+  const directionLabel =
+    row.direction === "neutral" ? "Strength" : row.direction === "home" ? "Home edge" : row.direction === "away" ? "Away edge" : "Balanced";
+
+  return `
+    <article class="breakdown-row ${escapeHtml(row.direction)}">
+      <div class="breakdown-copy">
+        <span>${escapeHtml(row.label)}</span>
+        <strong>${escapeHtml(row.lean)}</strong>
+        <em>${escapeHtml(row.description)}</em>
+      </div>
+      <div class="breakdown-meter" aria-label="${escapeHtml(`${row.label}: ${directionLabel}`)}">
+        <span style="${meterStyle}"></span>
+      </div>
+      <small>${escapeHtml(row.value)}</small>
     </article>
   `;
 }
