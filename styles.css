@@ -189,6 +189,130 @@ h2 {
   margin-bottom: 12px;
 }
 
+.top-picks-panel {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 14px;
+  border: 1px solid rgba(23, 111, 71, 0.18);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(23, 111, 71, 0.1), transparent 48%),
+    var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.top-picks-head {
+  display: grid;
+  gap: 8px;
+}
+
+.top-picks-head h2 {
+  margin-top: 5px;
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.top-picks-head p {
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 760;
+  line-height: 1.45;
+}
+
+.top-picks-list {
+  display: grid;
+  gap: 9px;
+}
+
+.top-pick-card {
+  display: grid;
+  width: 100%;
+  gap: 10px;
+  padding: 11px;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.88);
+  text-align: left;
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease,
+    background 160ms ease;
+}
+
+.top-pick-card:hover {
+  border-color: rgba(23, 111, 71, 0.46);
+  background: #f7fbf8;
+  transform: translateY(-1px);
+}
+
+.top-pick-rank {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 32px;
+  border-radius: 7px;
+  background: var(--primary-ink);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 950;
+}
+
+.top-pick-main,
+.top-pick-signal {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.top-pick-league,
+.top-pick-main span,
+.top-pick-signal span,
+.top-pick-signal em,
+.top-pick-card p,
+.top-pick-badges span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-style: normal;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.top-pick-main strong,
+.top-pick-signal strong {
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.top-pick-main strong {
+  font-size: 1.05rem;
+}
+
+.top-pick-signal {
+  padding: 9px;
+  border: 1px solid rgba(23, 111, 71, 0.2);
+  border-radius: 7px;
+  background: #f1f8f4;
+}
+
+.top-pick-signal strong {
+  color: var(--green);
+  font-size: 1rem;
+}
+
+.top-pick-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.top-pick-badges span {
+  min-height: 28px;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+}
+
 .date-control,
 .search-field {
   display: flex;
@@ -1306,6 +1430,19 @@ input:focus {
   .board-toolbar {
     grid-template-columns: minmax(260px, 360px) minmax(280px, 1fr);
     align-items: center;
+  }
+
+  .top-picks-head {
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 380px);
+    align-items: end;
+  }
+
+  .top-picks-head p {
+    text-align: right;
+  }
+
+  .top-picks-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .board-layout {

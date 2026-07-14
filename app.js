@@ -642,6 +642,10 @@ const selectors = {
   loadingState: document.querySelector("#loadingState"),
   emptyState: document.querySelector("#emptyState"),
   matchGroups: document.querySelector("#matchGroups"),
+  topPicksPanel: document.querySelector("#topPicksPanel"),
+  topPicksTitle: document.querySelector("#topPicksTitle"),
+  topPicksMeta: document.querySelector("#topPicksMeta"),
+  topPicksList: document.querySelector("#topPicksList"),
   homeView: document.querySelector("#homeView"),
   bracketView: document.querySelector("#bracketView"),
   bracketContent: document.querySelector("#bracketContent"),
@@ -1640,6 +1644,7 @@ function renderBoardWithLoading() {
   selectors.detailView.hidden = true;
   selectors.loadingState.hidden = false;
   selectors.matchGroups.hidden = true;
+  selectors.topPicksPanel.hidden = true;
   selectors.emptyState.hidden = true;
   clearTimeout(state.renderTimer);
   state.renderTimer = setTimeout(() => {
@@ -1662,6 +1667,7 @@ function renderBoard() {
   const visibleMatches = filterMatches(allMatches);
   selectors.headerMatchCount.textContent = `${visibleMatches.length} ${visibleMatches.length === 1 ? "match" : "matches"}`;
   selectors.emptyState.hidden = visibleMatches.length > 0;
+  renderTopPicks(visibleMatches);
 
   if (!visibleMatches.length) {
     selectors.matchGroups.innerHTML = "";
@@ -1671,6 +1677,81 @@ function renderBoard() {
   selectors.matchGroups.innerHTML = groupByLeague(visibleMatches)
     .map(renderLeagueGroup)
     .join("");
+}
+
+function renderTopPicks(visibleMatches) {
+  const picks = getTopPicks(visibleMatches, 4);
+  if (!picks.length || state.activeView === "finished") {
+    selectors.topPicksPanel.hidden = true;
+    selectors.topPicksList.innerHTML = "";
+    return;
+  }
+
+  const labels = {
+    today: state.selectedDate === todayKey ? "Top Picks Today" : `Top Picks ${formatShortDate(state.selectedDate)}`,
+    live: "Live Model Reads",
+    upcoming: "Best Upcoming Picks"
+  };
+  selectors.topPicksTitle.textContent = labels[state.activeView] || "Top Picks";
+  selectors.topPicksMeta.textContent = `${picks.length} ranked ${picks.length === 1 ? "signal" : "signals"} from visible matches. Analysis only.`;
+  selectors.topPicksList.innerHTML = picks.map(renderTopPickCard).join("");
+  selectors.topPicksPanel.hidden = false;
+}
+
+function getTopPicks(candidateMatches, limit = 4) {
+  return candidateMatches
+    .filter((match) => match.status !== "finished")
+    .map((match) => {
+      const details = getMatchDetails(match.id);
+      if (!details) return null;
+      const prediction = calculatePrediction(details);
+      const pick = prediction.marketEdges?.recommended;
+      if (!pick) return null;
+
+      const rankScore =
+        pick.probability * (0.72 + prediction.dataQuality.score * 0.18) +
+        prediction.confidenceScore * 0.08 +
+        (pick.risk === "Lower risk" ? 0.03 : pick.risk === "Balanced" ? 0.015 : 0);
+
+      return {
+        match,
+        details,
+        prediction,
+        pick,
+        rankScore
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => b.rankScore - a.rankScore)
+    .slice(0, limit);
+}
+
+function renderTopPickCard(item, index) {
+  const { match, details, prediction, pick } = item;
+  const reason = prediction.insights[0] || pick.reason;
+  const scoreLabel = match.score ? `${match.score.home}-${match.score.away}` : formatMatchTime(match);
+
+  return `
+    <button class="top-pick-card" type="button" data-match-id="${escapeHtml(match.id)}">
+      <div class="top-pick-rank">#${index + 1}</div>
+      <div class="top-pick-main">
+        <div class="top-pick-league">${escapeHtml(details.leagueProfile.shortName)} - ${escapeHtml(scoreLabel)}</div>
+        <strong>${escapeHtml(details.homeTeam.shortName)} vs ${escapeHtml(details.awayTeam.shortName)}</strong>
+        <span>${escapeHtml(details.homeTeam.name)} vs ${escapeHtml(details.awayTeam.name)}</span>
+      </div>
+      <div class="top-pick-signal">
+        <span>Safer angle</span>
+        <strong>${escapeHtml(pick.label)}</strong>
+        <em>${formatPercent(pick.probability)} model probability</em>
+      </div>
+      <div class="top-pick-badges">
+        <span class="quality-pill ${prediction.dataQuality.level}">${escapeHtml(prediction.dataQuality.label)} data</span>
+        <span>${escapeHtml(prediction.confidence)} confidence</span>
+        <span>${escapeHtml(pick.risk)}</span>
+      </div>
+      <p>${escapeHtml(reason)}</p>
+    </button>
+  `;
 }
 
 function getMatchesForActiveView() {
@@ -2722,6 +2803,12 @@ function bindEvents() {
   });
 
   selectors.matchGroups.addEventListener("click", (event) => {
+    const card = event.target.closest("[data-match-id]");
+    if (!card) return;
+    openMatchDetail(card.dataset.matchId);
+  });
+
+  selectors.topPicksList.addEventListener("click", (event) => {
     const card = event.target.closest("[data-match-id]");
     if (!card) return;
     openMatchDetail(card.dataset.matchId);
