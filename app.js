@@ -2651,6 +2651,16 @@ function init() {
   });
 }
 
+function registerServiceWorker() {
+  if (!("serviceWorker" in navigator) || window.location.protocol === "file:") return;
+
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch((error) => {
+      console.warn("GoalIQ service worker registration failed", error);
+    });
+  });
+}
+
 function renderFixtureSource() {
   selectors.fixtureSourceText.textContent = `${fixtureMeta.source}. Updated ${fixtureMeta.updatedAt}. ${fixtureMeta.note || ""}`;
 }
@@ -2883,4 +2893,5 @@ window.GoalIQServices = {
 };
 window.FootballEdgeServices = window.GoalIQServices;
 
+registerServiceWorker();
 init();

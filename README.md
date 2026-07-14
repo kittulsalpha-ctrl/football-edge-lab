@@ -15,6 +15,37 @@ npm test
 
 `npm run dev` serves the static app at `http://localhost:4173/`.
 
+## Mobile app packaging
+
+GoalIQ is now PWA-ready and can also be wrapped with Capacitor for Android and iOS. The PWA path stays free on GitHub Pages: users can open the site in a mobile browser and add it to their home screen. Native store publishing still has platform fees: Google Play has a one-time developer fee, and Apple requires the yearly Apple Developer Program.
+
+The repo includes:
+
+- `manifest.webmanifest` for installable app metadata.
+- `sw.js` for an offline-safe app shell and network-first live fixture refreshes.
+- App icons in `assets/`.
+- `capacitor.config.json` pointing Capacitor at the generated `www` folder.
+- `npm run mobile:prepare` to copy the static web app into `www`.
+
+Install Capacitor packages when you are ready to create native projects:
+
+```bash
+npm i @capacitor/core
+npm i -D @capacitor/cli
+npm i @capacitor/android @capacitor/ios
+```
+
+Then create and open the native projects:
+
+```bash
+npm run mobile:add:android
+npm run mobile:add:ios
+npm run mobile:android
+npm run mobile:ios
+```
+
+Android builds require Android Studio. iOS builds require macOS with Xcode and an Apple Developer account for App Store distribution. Keep the app description as football analysis/prediction only, with no real-money betting, wallet, payment, or betting slip features.
+
 ## Current screens
 
 - Today, Live, Upcoming, and Finished match boards.
@@ -23,6 +54,7 @@ npm test
 - Match detail pages with overview, winning probability, last five form, attacking stats, defensive stats, head-to-head, and extra goal-market predictions.
 - FIFA World Cup 2026 bracket page at `#worldcup-2026`, including group tables, Round of 32 through Final, model champion, match drawer, and saved user picks.
 - Built-in demo fixture snapshot for offline use.
+- Installable PWA metadata, home-screen icons, and an offline-safe service worker.
 - GitHub-hosted live fixture feed, local JSON import, remote JSON URL import, browser storage, export current fixtures, and reset to the built-in snapshot.
 
 ## Service functions
@@ -105,7 +137,7 @@ The mock prediction engine combines:
 
 ## Zero-cost hosting
 
-This can be hosted free on GitHub Pages because it is only HTML, CSS, JavaScript, and an SVG asset.
+This can be hosted free on GitHub Pages because it is only static HTML, CSS, JavaScript, JSON, and image assets. The PWA install path is also free; App Store and Play Store publishing fees are separate platform costs.
 
 ## Disclaimer
 

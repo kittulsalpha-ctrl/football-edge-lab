@@ -1,0 +1,8 @@
+{
+  "appId": "com.kittulsalpha.goaliq",
+  "appName": "GoalIQ",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}
