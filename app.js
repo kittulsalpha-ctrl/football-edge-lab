@@ -1276,9 +1276,27 @@ function calculatePrediction(matchData) {
   const matrix = buildScoreMatrix(remainingHomeXg, remainingAwayXg, currentScore, 7);
   const outcome = summarizeScoreMatrix(matrix);
   const likelyScore = matrix.flat().sort((a, b) => b.probability - a.probability)[0];
+  const dataQuality = calculateDataQuality(homeForm, awayForm, h2h);
+  const marketEdges = buildMarketRecommendations(outcome, home, away, dataQuality);
+  const insights = buildPredictionInsights({
+    home,
+    away,
+    profile,
+    homeForm,
+    awayForm,
+    h2h,
+    homeEdge,
+    homeXg: currentScore.home + remainingHomeXg,
+    awayXg: currentScore.away + remainingAwayXg,
+    dataQuality
+  });
   const maxOutcome = Math.max(outcome.home, outcome.draw, outcome.away);
   const secondOutcome = [outcome.home, outcome.draw, outcome.away].sort((a, b) => b - a)[1];
-  const confidenceScore = clamp((maxOutcome - secondOutcome) * 1.6 + Math.abs(homeEdge) * 0.3 + 0.08, 0, 1);
+  const confidenceScore = clamp(
+    ((maxOutcome - secondOutcome) * 1.6 + Math.abs(homeEdge) * 0.3 + 0.08) * (0.78 + dataQuality.score * 0.22),
+    0,
+    1
+  );
   const confidence = confidenceScore > 0.42 ? "High" : confidenceScore > 0.22 ? "Medium" : "Low";
   const winner =
     outcome.home >= outcome.draw && outcome.home >= outcome.away
@@ -1301,8 +1319,122 @@ function calculatePrediction(matchData) {
       home: homeForm,
       away: awayForm
     },
-    h2h
+    h2h,
+    dataQuality,
+    marketEdges,
+    insights
   };
+}
+
+function calculateDataQuality(homeForm, awayForm, h2h) {
+  const formCoverage = clamp((homeForm.matchesPlayed + awayForm.matchesPlayed) / 10, 0, 1);
+  const h2hCoverage = clamp(h2h.total / 3, 0, 1);
+  const score = clamp(formCoverage * 0.66 + h2hCoverage * 0.16 + 0.18, 0, 1);
+  const label = score >= 0.78 ? "Strong" : score >= 0.54 ? "Moderate" : "Limited";
+  const level = score >= 0.78 ? "strong" : score >= 0.54 ? "moderate" : "limited";
+  const summary =
+    label === "Strong"
+      ? "recent form and matchup context available"
+      : label === "Moderate"
+        ? "some recent form available"
+        : "model leans more on ratings and competition averages";
+
+  return {
+    score,
+    label,
+    level,
+    summary,
+    formMatches: homeForm.matchesPlayed + awayForm.matchesPlayed,
+    h2hMatches: h2h.total
+  };
+}
+
+function buildMarketRecommendations(outcome, home, away, dataQuality) {
+  const noDrawTotal = outcome.home + outcome.away;
+  const candidates = [
+    marketCandidate(`${home.shortName} or draw`, "Double chance", outcome.home + outcome.draw, "Covers the home win and draw outcomes."),
+    marketCandidate(`${away.shortName} or draw`, "Double chance", outcome.away + outcome.draw, "Covers the away win and draw outcomes."),
+    marketCandidate("No draw", "Double chance", outcome.home + outcome.away, "Covers either team winning; draw is the danger result."),
+    marketCandidate(
+      `${home.shortName} draw no bet`,
+      "Draw no bet",
+      noDrawTotal ? outcome.home / noDrawTotal : 0,
+      "Backs the home side while treating a draw as protection."
+    ),
+    marketCandidate(
+      `${away.shortName} draw no bet`,
+      "Draw no bet",
+      noDrawTotal ? outcome.away / noDrawTotal : 0,
+      "Backs the away side while treating a draw as protection."
+    ),
+    marketCandidate("Over 1.5 goals", "Goals", outcome.over15, "Needs at least two total goals."),
+    marketCandidate("Under 3.5 goals", "Goals", outcome.under35, "Allows 0, 1, 2, or 3 total goals."),
+    marketCandidate("Both teams to score", "BTTS", outcome.btts, "Needs one goal from each team."),
+    marketCandidate("BTTS - No", "BTTS", 1 - outcome.btts, "One side can blank, or the match can stay low scoring.")
+  ];
+
+  const ranked = candidates
+    .map((candidate) => ({
+      ...candidate,
+      risk: classifyMarketRisk(candidate.probability, dataQuality),
+      rank: rankMarketCandidate(candidate, dataQuality)
+    }))
+    .sort((a, b) => b.rank - a.rank);
+
+  return {
+    recommended: ranked[0],
+    alternatives: ranked.slice(1, 3),
+    all: ranked
+  };
+}
+
+function marketCandidate(label, market, probability, reason) {
+  return {
+    label,
+    market,
+    probability: clamp(probability, 0, 1),
+    reason
+  };
+}
+
+function rankMarketCandidate(candidate, dataQuality) {
+  const marketBonus = candidate.market === "Double chance" ? 0.045 : candidate.market === "Draw no bet" ? 0.025 : 0;
+  const lowDataPenalty = (1 - dataQuality.score) * 0.08;
+  return candidate.probability + marketBonus - lowDataPenalty;
+}
+
+function classifyMarketRisk(probability, dataQuality) {
+  const adjusted = probability * (0.82 + dataQuality.score * 0.18);
+  if (adjusted >= 0.74) return "Lower risk";
+  if (adjusted >= 0.62) return "Balanced";
+  return "High variance";
+}
+
+function buildPredictionInsights({ home, away, profile, homeForm, awayForm, h2h, homeEdge, homeXg, awayXg, dataQuality }) {
+  const insights = [];
+  if (homeForm.matchesPlayed && awayForm.matchesPlayed) {
+    insights.push(
+      `Recent form: ${home.shortName} ${formatNumber(homeForm.pointsPerMatch)} PPM vs ${away.shortName} ${formatNumber(
+        awayForm.pointsPerMatch
+      )} PPM.`
+    );
+  } else {
+    insights.push(`Recent form is ${dataQuality.level}; GoalIQ weights ratings and ${profile.shortName} scoring averages more heavily.`);
+  }
+
+  insights.push(`Projected goals: ${home.shortName} ${formatNumber(homeXg)} xG, ${away.shortName} ${formatNumber(awayXg)} xG.`);
+
+  if (h2h.total) {
+    insights.push(`Head-to-head sample: ${h2h.homeWins}-${h2h.draws}-${h2h.awayWins} across ${h2h.total} recent meeting(s).`);
+  } else {
+    insights.push("No verified head-to-head sample is available for this matchup.");
+  }
+
+  if (Math.abs(homeEdge) > 0.08) {
+    insights.push(homeEdge > 0 ? `${home.shortName} carries the stronger blended edge.` : `${away.shortName} carries the stronger blended edge.`);
+  }
+
+  return insights.slice(0, 4);
 }
 
 function getHeadToHead(homeTeamId, awayTeamId) {
@@ -1457,6 +1589,7 @@ function summarizeScoreMatrix(matrix) {
     away: 0,
     over15: 0,
     over25: 0,
+    under35: 0,
     btts: 0,
     homeCleanSheet: 0,
     awayCleanSheet: 0,
@@ -1470,6 +1603,7 @@ function summarizeScoreMatrix(matrix) {
       if (score.homeGoals < score.awayGoals) result.away += score.probability;
       if (score.homeGoals + score.awayGoals > 1.5) result.over15 += score.probability;
       if (score.homeGoals + score.awayGoals > 2.5) result.over25 += score.probability;
+      if (score.homeGoals + score.awayGoals < 3.5) result.under35 += score.probability;
       if (score.homeGoals > 0 && score.awayGoals > 0) result.btts += score.probability;
       if (score.awayGoals === 0) result.homeCleanSheet += score.probability;
       if (score.homeGoals === 0) result.awayCleanSheet += score.probability;
@@ -1633,11 +1767,24 @@ function renderMatchCard(match) {
         ${renderPick("Draw", prediction.probabilities.draw)}
         ${renderPick("Away", prediction.probabilities.away)}
       </div>
+      ${renderCardRecommendation(prediction)}
       <div class="card-footer">
         <span>${escapeHtml(contextLabel)}</span>
         <strong>${scoreLabel}</strong>
       </div>
     </button>
+  `;
+}
+
+function renderCardRecommendation(prediction) {
+  const pick = prediction.marketEdges?.recommended;
+  if (!pick) return "";
+  return `
+    <div class="safe-pick-mini">
+      <span>Safer angle</span>
+      <strong>${escapeHtml(pick.label)}</strong>
+      <em>${formatPercent(pick.probability)} - ${escapeHtml(pick.risk)}</em>
+    </div>
   `;
 }
 
@@ -1712,19 +1859,25 @@ function renderDetail() {
     ["Venue", details.venue],
     ["Status", statusLabels[details.status]],
     ...(details.score ? [[scoreDisplay.label, `${details.homeTeam.shortName} ${details.score.home} - ${details.score.away} ${details.awayTeam.shortName}`]] : []),
-    ["Expected goals", `${formatNumber(prediction.expectedGoals.home)} - ${formatNumber(prediction.expectedGoals.away)}`]
+    ["Expected goals", `${formatNumber(prediction.expectedGoals.home)} - ${formatNumber(prediction.expectedGoals.away)}`],
+    ["Data quality", `${prediction.dataQuality.label} - ${prediction.dataQuality.summary}`],
+    ["Safer angle", `${prediction.marketEdges.recommended.label} (${formatPercent(prediction.marketEdges.recommended.probability)})`]
   ]);
 
-  selectors.extraPredictions.innerHTML = [
-    ["Over 1.5 goals", prediction.probabilities.over15],
-    ["Over 2.5 goals", prediction.probabilities.over25],
-    ["Both teams to score", prediction.probabilities.btts],
-    [`${details.homeTeam.shortName} clean sheet`, prediction.probabilities.homeCleanSheet],
-    [`${details.awayTeam.shortName} clean sheet`, prediction.probabilities.awayCleanSheet],
-    ["First half goal", prediction.probabilities.firstHalfGoal]
-  ]
-    .map(([label, value]) => renderMarketTile(label, value))
-    .join("");
+  selectors.extraPredictions.innerHTML = `
+    ${renderRecommendationPanel(prediction)}
+    ${[
+      ["Over 1.5 goals", prediction.probabilities.over15],
+      ["Over 2.5 goals", prediction.probabilities.over25],
+      ["Under 3.5 goals", prediction.probabilities.under35],
+      ["Both teams to score", prediction.probabilities.btts],
+      [`${details.homeTeam.shortName} clean sheet`, prediction.probabilities.homeCleanSheet],
+      [`${details.awayTeam.shortName} clean sheet`, prediction.probabilities.awayCleanSheet],
+      ["First half goal", prediction.probabilities.firstHalfGoal]
+    ]
+      .map(([label, value]) => renderMarketTile(label, value))
+      .join("")}
+  `;
 
   selectors.formGrid.innerHTML = [
     renderFormPanel(details.homeTeam, prediction.form.home),
@@ -1780,6 +1933,35 @@ function renderMarketTile(label, probability) {
     <article class="market-tile">
       <span>${escapeHtml(label)}</span>
       <strong>${formatPercent(probability)}</strong>
+    </article>
+  `;
+}
+
+function renderRecommendationPanel(prediction) {
+  const pick = prediction.marketEdges.recommended;
+  const alternatives = prediction.marketEdges.alternatives
+    .map((item) => `<span>${escapeHtml(item.label)} ${formatPercent(item.probability)}</span>`)
+    .join("");
+
+  return `
+    <article class="recommendation-panel ${prediction.dataQuality.level}">
+      <div class="recommendation-head">
+        <div>
+          <span>Safer angle</span>
+          <strong>${escapeHtml(pick.label)}</strong>
+        </div>
+        <div class="quality-pill ${prediction.dataQuality.level}">${escapeHtml(prediction.dataQuality.label)} data</div>
+      </div>
+      <div class="recommendation-meta">
+        <span>${escapeHtml(pick.market)}</span>
+        <span>${formatPercent(pick.probability)} model probability</span>
+        <span>${escapeHtml(pick.risk)}</span>
+      </div>
+      <p>${escapeHtml(pick.reason)} This is an analysis signal, not a guaranteed result.</p>
+      <div class="insight-list">
+        ${prediction.insights.map((insight) => `<span>${escapeHtml(insight)}</span>`).join("")}
+      </div>
+      ${alternatives ? `<div class="alternative-picks"><strong>Also watch</strong>${alternatives}</div>` : ""}
     </article>
   `;
 }
