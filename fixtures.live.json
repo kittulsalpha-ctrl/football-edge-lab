@@ -1,26 +1,18 @@
 {
   "meta": {
     "source": "football-data.org live feed",
-    "updatedAt": "2026-07-15",
-    "note": "Real fixtures and scores for 2026-07-14 to 2026-09-13.\nTimes shown in Asia/Kolkata."
+    "updatedAt": "2026-07-16",
+    "note": "Real fixtures and scores for 2026-07-15 to 2026-09-14.\nTimes shown in Asia/Kolkata."
   },
   "teams": [
     {
       "id": "FD1",
       "name": "1. FC Köln",
       "shortName": "KOE",
-      "rating": 1478,
+      "rating": 1520,
       "venue": "",
       "league": "BUNDESLIGA",
       "form": [
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Bayern",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 5
-        },
         {
           "date": "2026-05-10",
           "competition": "BUNDESLIGA",
@@ -35,6 +27,14 @@
           "opponent": "Union Berlin",
           "venue": "A",
           "goalsFor": 2,
+          "goalsAgainst": 2
+        },
+        {
+          "date": "2026-04-25",
+          "competition": "BUNDESLIGA",
+          "opponent": "Leverkusen",
+          "venue": "H",
+          "goalsFor": 1,
           "goalsAgainst": 2
         },
         {
@@ -62,10 +62,10 @@
         "xg": 1.77
       },
       "defensive": {
-        "goalsConcededAvg": 2.4,
+        "goalsConcededAvg": 1.8,
         "cleanSheetPct": 0,
-        "xga": 2.51,
-        "cards": 2.6
+        "xga": 1.98,
+        "cards": 2.5
       }
     },
     {
@@ -198,7 +198,7 @@
       "id": "FD57",
       "name": "Arsenal",
       "shortName": "ARS",
-      "rating": 1803,
+      "rating": 1775,
       "venue": "",
       "league": "EPL",
       "form": [
@@ -235,20 +235,20 @@
           "goalsAgainst": 0
         },
         {
-          "date": "2026-05-02",
-          "competition": "EPL",
-          "opponent": "Fulham",
+          "date": "2026-05-06",
+          "competition": "UCL",
+          "opponent": "Atleti",
           "venue": "H",
-          "goalsFor": 3,
+          "goalsFor": 1,
           "goalsAgainst": 0
         }
       ],
       "attacking": {
-        "avgGoals": 2.2,
-        "shots": 17.2,
-        "shotsOnTarget": 5.9,
-        "bigChances": 3,
-        "xg": 2.52
+        "avgGoals": 1.8,
+        "shots": 15.9,
+        "shotsOnTarget": 5.4,
+        "bigChances": 2.6,
+        "xg": 2.19
       },
       "defensive": {
         "goalsConcededAvg": 1.2,
@@ -261,7 +261,7 @@
       "id": "FD58",
       "name": "Aston Villa",
       "shortName": "AVL",
-      "rating": 1605,
+      "rating": 1586,
       "venue": "",
       "league": "EPL",
       "form": [
@@ -272,6 +272,14 @@
           "venue": "A",
           "goalsFor": 2,
           "goalsAgainst": 1
+        },
+        {
+          "date": "2026-05-16",
+          "competition": "EPL",
+          "opponent": "Liverpool",
+          "venue": "H",
+          "goalsFor": 4,
+          "goalsAgainst": 2
         },
         {
           "date": "2026-05-10",
@@ -290,33 +298,25 @@
           "goalsAgainst": 2
         },
         {
-          "date": "2026-04-19",
+          "date": "2026-04-25",
           "competition": "EPL",
-          "opponent": "Sunderland",
-          "venue": "H",
-          "goalsFor": 4,
-          "goalsAgainst": 3
-        },
-        {
-          "date": "2026-04-12",
-          "competition": "EPL",
-          "opponent": "Nottingham",
+          "opponent": "Fulham",
           "venue": "A",
-          "goalsFor": 1,
+          "goalsFor": 0,
           "goalsAgainst": 1
         }
       ],
       "attacking": {
-        "avgGoals": 2,
-        "shots": 15.8,
-        "shotsOnTarget": 5.5,
-        "bigChances": 2.6,
-        "xg": 2.21
+        "avgGoals": 1.8,
+        "shots": 14.7,
+        "shotsOnTarget": 5.1,
+        "bigChances": 2.4,
+        "xg": 2.01
       },
       "defensive": {
-        "goalsConcededAvg": 1.8,
+        "goalsConcededAvg": 1.6,
         "cleanSheetPct": 0,
-        "xga": 1.98,
+        "xga": 1.81,
         "cards": 2.4
       }
     },
@@ -450,7 +450,7 @@
       "id": "FD78",
       "name": "Atleti",
       "shortName": "ATL",
-      "rating": 1640,
+      "rating": 1519,
       "venue": "",
       "league": "LALIGA",
       "form": [
@@ -487,44 +487,36 @@
           "goalsAgainst": 1
         },
         {
-          "date": "2026-05-02",
-          "competition": "LALIGA",
-          "opponent": "Valencia",
+          "date": "2026-05-06",
+          "competition": "UCL",
+          "opponent": "Arsenal",
           "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 0
+          "goalsFor": 0,
+          "goalsAgainst": 1
         }
       ],
       "attacking": {
-        "avgGoals": 1.2,
-        "shots": 13.2,
-        "shotsOnTarget": 4.4,
-        "bigChances": 2,
-        "xg": 1.59
+        "avgGoals": 0.8,
+        "shots": 11,
+        "shotsOnTarget": 3.7,
+        "bigChances": 1.5,
+        "xg": 1.15
       },
       "defensive": {
-        "goalsConcededAvg": 1.4,
-        "cleanSheetPct": 40,
-        "xga": 1.47,
-        "cards": 2.3
+        "goalsConcededAvg": 1.6,
+        "cleanSheetPct": 20,
+        "xga": 1.73,
+        "cards": 2.4
       }
     },
     {
       "id": "FD16",
       "name": "Augsburg",
       "shortName": "FCA",
-      "rating": 1643,
+      "rating": 1718,
       "venue": "",
       "league": "BUNDESLIGA",
       "form": [
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Union Berlin",
-          "venue": "A",
-          "goalsFor": 0,
-          "goalsAgainst": 4
-        },
         {
           "date": "2026-05-09",
           "competition": "BUNDESLIGA",
@@ -539,6 +531,14 @@
           "opponent": "Bremen",
           "venue": "A",
           "goalsFor": 3,
+          "goalsAgainst": 1
+        },
+        {
+          "date": "2026-04-25",
+          "competition": "BUNDESLIGA",
+          "opponent": "Frankfurt",
+          "venue": "H",
+          "goalsFor": 1,
           "goalsAgainst": 1
         },
         {
@@ -559,17 +559,17 @@
         }
       ],
       "attacking": {
-        "avgGoals": 2,
-        "shots": 15.8,
-        "shotsOnTarget": 5.5,
-        "bigChances": 2.7,
-        "xg": 2.28
+        "avgGoals": 2.2,
+        "shots": 17,
+        "shotsOnTarget": 5.9,
+        "bigChances": 2.9,
+        "xg": 2.48
       },
       "defensive": {
-        "goalsConcededAvg": 1.8,
+        "goalsConcededAvg": 1.2,
         "cleanSheetPct": 0,
-        "xga": 1.98,
-        "cards": 2.3
+        "xga": 1.46,
+        "cards": 2.2
       }
     },
     {
@@ -639,18 +639,10 @@
       "id": "FD5",
       "name": "Bayern",
       "shortName": "FCB",
-      "rating": 1669,
+      "rating": 1693,
       "venue": "",
       "league": "BUNDESLIGA",
       "form": [
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "1. FC Köln",
-          "venue": "H",
-          "goalsFor": 5,
-          "goalsAgainst": 1
-        },
         {
           "date": "2026-05-09",
           "competition": "BUNDESLIGA",
@@ -658,14 +650,6 @@
           "venue": "A",
           "goalsFor": 1,
           "goalsAgainst": 0
-        },
-        {
-          "date": "2026-05-07",
-          "competition": "UCL",
-          "opponent": "PSG",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 1
         },
         {
           "date": "2026-05-02",
@@ -682,19 +666,35 @@
           "venue": "A",
           "goalsFor": 4,
           "goalsAgainst": 5
+        },
+        {
+          "date": "2026-04-25",
+          "competition": "BUNDESLIGA",
+          "opponent": "Mainz",
+          "venue": "A",
+          "goalsFor": 4,
+          "goalsAgainst": 3
+        },
+        {
+          "date": "2026-04-19",
+          "competition": "BUNDESLIGA",
+          "opponent": "Stuttgart",
+          "venue": "H",
+          "goalsFor": 4,
+          "goalsAgainst": 2
         }
       ],
       "attacking": {
-        "avgGoals": 2.8,
-        "shots": 18.3,
-        "shotsOnTarget": 6.5,
-        "bigChances": 3.3,
-        "xg": 2.86
+        "avgGoals": 3.2,
+        "shots": 19.5,
+        "shotsOnTarget": 7.2,
+        "bigChances": 3.7,
+        "xg": 3.05
       },
       "defensive": {
-        "goalsConcededAvg": 2,
+        "goalsConcededAvg": 2.6,
         "cleanSheetPct": 20,
-        "xga": 2.08,
+        "xga": 2.61,
         "cards": 2.4
       }
     },
@@ -739,10 +739,10 @@
           "goalsAgainst": 0
         },
         {
-          "date": "2026-04-20",
+          "date": "2026-04-25",
           "competition": "SERIEA",
-          "opponent": "Juventus",
-          "venue": "A",
+          "opponent": "Roma",
+          "venue": "H",
           "goalsFor": 0,
           "goalsAgainst": 2
         }
@@ -828,18 +828,10 @@
       "id": "FD12",
       "name": "Bremen",
       "shortName": "SVW",
-      "rating": 1473,
+      "rating": 1440,
       "venue": "",
       "league": "BUNDESLIGA",
       "form": [
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Dortmund",
-          "venue": "H",
-          "goalsFor": 0,
-          "goalsAgainst": 2
-        },
         {
           "date": "2026-05-09",
           "competition": "BUNDESLIGA",
@@ -857,34 +849,42 @@
           "goalsAgainst": 3
         },
         {
-          "date": "2026-04-26",
-          "competition": "BUNDESLIGA",
-          "opponent": "Stuttgart",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 1
-        },
-        {
           "date": "2026-04-18",
           "competition": "BUNDESLIGA",
           "opponent": "HSV",
           "venue": "H",
           "goalsFor": 3,
           "goalsAgainst": 1
+        },
+        {
+          "date": "2026-04-12",
+          "competition": "BUNDESLIGA",
+          "opponent": "1. FC Köln",
+          "venue": "A",
+          "goalsFor": 1,
+          "goalsAgainst": 3
+        },
+        {
+          "date": "2026-04-04",
+          "competition": "BUNDESLIGA",
+          "opponent": "RB Leipzig",
+          "venue": "H",
+          "goalsFor": 1,
+          "goalsAgainst": 2
         }
       ],
       "attacking": {
-        "avgGoals": 1,
-        "shots": 11.3,
-        "shotsOnTarget": 3.9,
-        "bigChances": 1.6,
-        "xg": 1.24
+        "avgGoals": 1.2,
+        "shots": 12.1,
+        "shotsOnTarget": 4.2,
+        "bigChances": 1.8,
+        "xg": 1.37
       },
       "defensive": {
-        "goalsConcededAvg": 1.6,
+        "goalsConcededAvg": 2,
         "cleanSheetPct": 0,
-        "xga": 1.81,
-        "cards": 2.5
+        "xga": 2.16,
+        "cards": 2.6
       }
     },
     {
@@ -1206,7 +1206,7 @@
       "id": "FD7397",
       "name": "Como 1907",
       "shortName": "COM",
-      "rating": 1872,
+      "rating": 1751,
       "venue": "",
       "league": "SERIEA",
       "form": [
@@ -1243,26 +1243,26 @@
           "goalsAgainst": 0
         },
         {
-          "date": "2026-04-26",
+          "date": "2026-04-17",
           "competition": "SERIEA",
-          "opponent": "Genoa",
+          "opponent": "Sassuolo",
           "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 0
+          "goalsFor": 1,
+          "goalsAgainst": 2
         }
       ],
       "attacking": {
-        "avgGoals": 1.6,
-        "shots": 15.1,
-        "shotsOnTarget": 5.1,
-        "bigChances": 2.5,
-        "xg": 2.06
+        "avgGoals": 1.4,
+        "shots": 14,
+        "shotsOnTarget": 4.7,
+        "bigChances": 2.2,
+        "xg": 1.79
       },
       "defensive": {
-        "goalsConcededAvg": 0.2,
-        "cleanSheetPct": 80,
-        "xga": 0.35,
-        "cards": 2
+        "goalsConcededAvg": 0.6,
+        "cleanSheetPct": 60,
+        "xga": 0.69,
+        "cards": 2.1
       }
     },
     {
@@ -1376,18 +1376,10 @@
       "id": "FD4",
       "name": "Dortmund",
       "shortName": "BVB",
-      "rating": 1724,
+      "rating": 1575,
       "venue": "",
       "league": "BUNDESLIGA",
       "form": [
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Bremen",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 0
-        },
         {
           "date": "2026-05-09",
           "competition": "BUNDESLIGA",
@@ -1405,34 +1397,42 @@
           "goalsAgainst": 1
         },
         {
-          "date": "2026-04-26",
-          "competition": "BUNDESLIGA",
-          "opponent": "Freiburg",
-          "venue": "H",
-          "goalsFor": 4,
-          "goalsAgainst": 0
-        },
-        {
           "date": "2026-04-18",
           "competition": "BUNDESLIGA",
           "opponent": "Hoffenheim",
           "venue": "A",
           "goalsFor": 1,
           "goalsAgainst": 2
+        },
+        {
+          "date": "2026-04-11",
+          "competition": "BUNDESLIGA",
+          "opponent": "Leverkusen",
+          "venue": "H",
+          "goalsFor": 0,
+          "goalsAgainst": 1
+        },
+        {
+          "date": "2026-04-04",
+          "competition": "BUNDESLIGA",
+          "opponent": "Stuttgart",
+          "venue": "A",
+          "goalsFor": 2,
+          "goalsAgainst": 0
         }
       ],
       "attacking": {
-        "avgGoals": 2,
-        "shots": 15.7,
-        "shotsOnTarget": 5.5,
-        "bigChances": 2.7,
-        "xg": 2.24
+        "avgGoals": 1.2,
+        "shots": 12.3,
+        "shotsOnTarget": 4.3,
+        "bigChances": 1.9,
+        "xg": 1.48
       },
       "defensive": {
-        "goalsConcededAvg": 1,
-        "cleanSheetPct": 40,
-        "xga": 1.12,
-        "cards": 2.2
+        "goalsConcededAvg": 1.2,
+        "cleanSheetPct": 20,
+        "xga": 1.38,
+        "cards": 2.4
       }
     },
     {
@@ -1687,10 +1687,10 @@
           "goalsAgainst": 3
         },
         {
-          "date": "2026-04-19",
+          "date": "2026-04-25",
           "competition": "EPL",
-          "opponent": "Liverpool",
-          "venue": "H",
+          "opponent": "West Ham",
+          "venue": "A",
           "goalsFor": 1,
           "goalsAgainst": 2
         }
@@ -1713,7 +1713,7 @@
       "id": "FD99",
       "name": "Fiorentina",
       "shortName": "FIO",
-      "rating": 1591,
+      "rating": 1569,
       "venue": "",
       "league": "SERIEA",
       "form": [
@@ -1750,25 +1750,25 @@
           "goalsAgainst": 4
         },
         {
-          "date": "2026-04-26",
+          "date": "2026-04-21",
           "competition": "SERIEA",
-          "opponent": "Sassuolo",
-          "venue": "H",
-          "goalsFor": 0,
-          "goalsAgainst": 0
+          "opponent": "Lecce",
+          "venue": "A",
+          "goalsFor": 1,
+          "goalsAgainst": 1
         }
       ],
       "attacking": {
-        "avgGoals": 0.6,
-        "shots": 10.1,
-        "shotsOnTarget": 3.5,
-        "bigChances": 1.4,
-        "xg": 0.99
+        "avgGoals": 0.8,
+        "shots": 11,
+        "shotsOnTarget": 3.7,
+        "bigChances": 1.5,
+        "xg": 1.15
       },
       "defensive": {
-        "goalsConcededAvg": 1,
-        "cleanSheetPct": 60,
-        "xga": 1.04,
+        "goalsConcededAvg": 1.2,
+        "cleanSheetPct": 40,
+        "xga": 1.3,
         "cards": 2.4
       }
     },
@@ -1776,7 +1776,7 @@
       "id": "FD773",
       "name": "France",
       "shortName": "FRA",
-      "rating": 1859,
+      "rating": 2025,
       "venue": "",
       "league": "WC",
       "form": [
@@ -1797,6 +1797,14 @@
           "goalsAgainst": 0
         },
         {
+          "date": "2026-07-05",
+          "competition": "WC",
+          "opponent": "Paraguay",
+          "venue": "A",
+          "goalsFor": 1,
+          "goalsAgainst": 0
+        },
+        {
           "date": "2026-07-01",
           "competition": "WC",
           "opponent": "Sweden",
@@ -1811,22 +1819,14 @@
           "venue": "A",
           "goalsFor": 4,
           "goalsAgainst": 1
-        },
-        {
-          "date": "2026-06-23",
-          "competition": "WC",
-          "opponent": "Iraq",
-          "venue": "H",
-          "goalsFor": 3,
-          "goalsAgainst": 0
         }
       ],
       "attacking": {
-        "avgGoals": 2.4,
-        "shots": 17.4,
-        "shotsOnTarget": 6.2,
-        "bigChances": 3.1,
-        "xg": 2.68
+        "avgGoals": 2,
+        "shots": 16.2,
+        "shotsOnTarget": 5.6,
+        "bigChances": 2.8,
+        "xg": 2.35
       },
       "defensive": {
         "goalsConcededAvg": 0.6,
@@ -1844,14 +1844,6 @@
       "league": "BUNDESLIGA",
       "form": [
         {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Stuttgart",
-          "venue": "H",
-          "goalsFor": 2,
-          "goalsAgainst": 2
-        },
-        {
           "date": "2026-05-09",
           "competition": "BUNDESLIGA",
           "opponent": "Dortmund",
@@ -1866,6 +1858,14 @@
           "venue": "H",
           "goalsFor": 1,
           "goalsAgainst": 2
+        },
+        {
+          "date": "2026-04-25",
+          "competition": "BUNDESLIGA",
+          "opponent": "Augsburg",
+          "venue": "A",
+          "goalsFor": 1,
+          "goalsAgainst": 1
         },
         {
           "date": "2026-04-18",
@@ -1885,16 +1885,16 @@
         }
       ],
       "attacking": {
-        "avgGoals": 1.6,
-        "shots": 13.9,
-        "shotsOnTarget": 4.7,
-        "bigChances": 2.2,
-        "xg": 1.74
+        "avgGoals": 1.4,
+        "shots": 13.3,
+        "shotsOnTarget": 4.5,
+        "bigChances": 2,
+        "xg": 1.57
       },
       "defensive": {
-        "goalsConcededAvg": 2.2,
+        "goalsConcededAvg": 2,
         "cleanSheetPct": 0,
-        "xga": 2.34,
+        "xga": 2.16,
         "cards": 2.6
       }
     },
@@ -1902,18 +1902,10 @@
       "id": "FD17",
       "name": "Freiburg",
       "shortName": "SCF",
-      "rating": 1558,
+      "rating": 1594,
       "venue": "",
       "league": "BUNDESLIGA",
       "form": [
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "RB Leipzig",
-          "venue": "H",
-          "goalsFor": 4,
-          "goalsAgainst": 1
-        },
         {
           "date": "2026-05-10",
           "competition": "BUNDESLIGA",
@@ -1931,34 +1923,42 @@
           "goalsAgainst": 1
         },
         {
-          "date": "2026-04-26",
-          "competition": "BUNDESLIGA",
-          "opponent": "Dortmund",
-          "venue": "A",
-          "goalsFor": 0,
-          "goalsAgainst": 4
-        },
-        {
           "date": "2026-04-19",
           "competition": "BUNDESLIGA",
           "opponent": "Heidenheim",
           "venue": "H",
           "goalsFor": 2,
           "goalsAgainst": 1
+        },
+        {
+          "date": "2026-04-12",
+          "competition": "BUNDESLIGA",
+          "opponent": "Mainz",
+          "venue": "A",
+          "goalsFor": 1,
+          "goalsAgainst": 0
+        },
+        {
+          "date": "2026-04-04",
+          "competition": "BUNDESLIGA",
+          "opponent": "Bayern",
+          "venue": "H",
+          "goalsFor": 2,
+          "goalsAgainst": 3
         }
       ],
       "attacking": {
-        "avgGoals": 1.8,
-        "shots": 14.7,
-        "shotsOnTarget": 5.1,
-        "bigChances": 2.4,
-        "xg": 2.01
+        "avgGoals": 1.6,
+        "shots": 14.4,
+        "shotsOnTarget": 4.9,
+        "bigChances": 2.3,
+        "xg": 1.84
       },
       "defensive": {
-        "goalsConcededAvg": 2,
-        "cleanSheetPct": 0,
-        "xga": 2.16,
-        "cards": 2.5
+        "goalsConcededAvg": 1.6,
+        "cleanSheetPct": 20,
+        "xga": 1.73,
+        "cards": 2.4
       }
     },
     {
@@ -1987,7 +1987,7 @@
       "id": "FD63",
       "name": "Fulham",
       "shortName": "FUL",
-      "rating": 1550,
+      "rating": 1602,
       "venue": "",
       "league": "EPL",
       "form": [
@@ -2024,33 +2024,33 @@
           "goalsAgainst": 3
         },
         {
-          "date": "2026-04-18",
+          "date": "2026-04-25",
           "competition": "EPL",
-          "opponent": "Brentford",
-          "venue": "A",
-          "goalsFor": 0,
+          "opponent": "Aston Villa",
+          "venue": "H",
+          "goalsFor": 1,
           "goalsAgainst": 0
         }
       ],
       "attacking": {
-        "avgGoals": 0.6,
-        "shots": 9.9,
-        "shotsOnTarget": 3.4,
-        "bigChances": 1.3,
-        "xg": 0.95
+        "avgGoals": 0.8,
+        "shots": 11.2,
+        "shotsOnTarget": 3.8,
+        "bigChances": 1.6,
+        "xg": 1.19
       },
       "defensive": {
         "goalsConcededAvg": 1,
         "cleanSheetPct": 40,
         "xga": 1.12,
-        "cards": 2.4
+        "cards": 2.3
       }
     },
     {
       "id": "FD107",
       "name": "Genoa",
       "shortName": "GEN",
-      "rating": 1465,
+      "rating": 1564,
       "venue": "",
       "league": "SERIEA",
       "form": [
@@ -2087,26 +2087,26 @@
           "goalsAgainst": 0
         },
         {
-          "date": "2026-04-26",
+          "date": "2026-04-19",
           "competition": "SERIEA",
-          "opponent": "Como 1907",
-          "venue": "H",
-          "goalsFor": 0,
-          "goalsAgainst": 2
+          "opponent": "AC Pisa",
+          "venue": "A",
+          "goalsFor": 2,
+          "goalsAgainst": 1
         }
       ],
       "attacking": {
-        "avgGoals": 0.2,
-        "shots": 7.7,
-        "shotsOnTarget": 2.8,
-        "bigChances": 0.9,
-        "xg": 0.52
+        "avgGoals": 0.6,
+        "shots": 9.9,
+        "shotsOnTarget": 3.4,
+        "bigChances": 1.3,
+        "xg": 0.95
       },
       "defensive": {
-        "goalsConcededAvg": 1,
+        "goalsConcededAvg": 0.8,
         "cleanSheetPct": 40,
-        "xga": 1.12,
-        "cards": 2.5
+        "xga": 0.94,
+        "cards": 2.4
       }
     },
     {
@@ -2176,18 +2176,10 @@
       "id": "FD2",
       "name": "Hoffenheim",
       "shortName": "TSG",
-      "rating": 1585,
+      "rating": 1712,
       "venue": "",
       "league": "BUNDESLIGA",
       "form": [
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "M'gladbach",
-          "venue": "A",
-          "goalsFor": 0,
-          "goalsAgainst": 4
-        },
         {
           "date": "2026-05-09",
           "competition": "BUNDESLIGA",
@@ -2203,6 +2195,14 @@
           "venue": "H",
           "goalsFor": 3,
           "goalsAgainst": 3
+        },
+        {
+          "date": "2026-04-25",
+          "competition": "BUNDESLIGA",
+          "opponent": "HSV",
+          "venue": "A",
+          "goalsFor": 2,
+          "goalsAgainst": 1
         },
         {
           "date": "2026-04-18",
@@ -2222,35 +2222,27 @@
         }
       ],
       "attacking": {
-        "avgGoals": 1.6,
-        "shots": 14.2,
-        "shotsOnTarget": 4.9,
-        "bigChances": 2.3,
-        "xg": 1.88
+        "avgGoals": 2,
+        "shots": 16.4,
+        "shotsOnTarget": 5.6,
+        "bigChances": 2.7,
+        "xg": 2.32
       },
       "defensive": {
-        "goalsConcededAvg": 2,
+        "goalsConcededAvg": 1.4,
         "cleanSheetPct": 20,
-        "xga": 2.08,
-        "cards": 2.4
+        "xga": 1.55,
+        "cards": 2.2
       }
     },
     {
       "id": "FD7",
       "name": "HSV",
       "shortName": "HSV",
-      "rating": 1516,
+      "rating": 1483,
       "venue": "",
       "league": "BUNDESLIGA",
       "form": [
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Leverkusen",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 1
-        },
         {
           "date": "2026-05-10",
           "competition": "BUNDESLIGA",
@@ -2266,6 +2258,14 @@
           "venue": "A",
           "goalsFor": 2,
           "goalsAgainst": 1
+        },
+        {
+          "date": "2026-04-25",
+          "competition": "BUNDESLIGA",
+          "opponent": "Hoffenheim",
+          "venue": "H",
+          "goalsFor": 1,
+          "goalsAgainst": 2
         },
         {
           "date": "2026-04-18",
@@ -2286,15 +2286,15 @@
       ],
       "attacking": {
         "avgGoals": 1.4,
-        "shots": 13.4,
+        "shots": 13.3,
         "shotsOnTarget": 4.6,
         "bigChances": 2.1,
-        "xg": 1.68
+        "xg": 1.64
       },
       "defensive": {
-        "goalsConcededAvg": 2.2,
+        "goalsConcededAvg": 2.4,
         "cleanSheetPct": 0,
-        "xga": 2.34,
+        "xga": 2.51,
         "cards": 2.5
       }
     },
@@ -2324,7 +2324,7 @@
       "id": "FD108",
       "name": "Inter",
       "shortName": "INT",
-      "rating": 1724,
+      "rating": 1826,
       "venue": "",
       "league": "SERIEA",
       "form": [
@@ -2361,26 +2361,26 @@
           "goalsAgainst": 0
         },
         {
-          "date": "2026-04-26",
+          "date": "2026-04-18",
           "competition": "SERIEA",
-          "opponent": "Torino",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 2
+          "opponent": "Cagliari",
+          "venue": "H",
+          "goalsFor": 3,
+          "goalsAgainst": 0
         }
       ],
       "attacking": {
-        "avgGoals": 2.2,
-        "shots": 16.6,
-        "shotsOnTarget": 5.8,
-        "bigChances": 2.8,
-        "xg": 2.41
+        "avgGoals": 2.4,
+        "shots": 17.6,
+        "shotsOnTarget": 6.1,
+        "bigChances": 3.1,
+        "xg": 2.64
       },
       "defensive": {
-        "goalsConcededAvg": 1.2,
-        "cleanSheetPct": 40,
-        "xga": 1.3,
-        "cards": 2.3
+        "goalsConcededAvg": 0.8,
+        "cleanSheetPct": 60,
+        "xga": 0.86,
+        "cards": 2.1
       }
     },
     {
@@ -2409,7 +2409,7 @@
       "id": "FD109",
       "name": "Juventus",
       "shortName": "JUV",
-      "rating": 1583,
+      "rating": 1649,
       "venue": "",
       "league": "SERIEA",
       "form": [
@@ -2446,26 +2446,26 @@
           "goalsAgainst": 1
         },
         {
-          "date": "2026-04-27",
+          "date": "2026-04-20",
           "competition": "SERIEA",
-          "opponent": "Milan",
-          "venue": "A",
-          "goalsFor": 0,
+          "opponent": "Bologna",
+          "venue": "H",
+          "goalsFor": 2,
           "goalsAgainst": 0
         }
       ],
       "attacking": {
-        "avgGoals": 0.8,
-        "shots": 11,
-        "shotsOnTarget": 3.7,
-        "bigChances": 1.5,
-        "xg": 1.15
+        "avgGoals": 1.2,
+        "shots": 13,
+        "shotsOnTarget": 4.4,
+        "bigChances": 2,
+        "xg": 1.55
       },
       "defensive": {
         "goalsConcededAvg": 1,
         "cleanSheetPct": 40,
         "xga": 1.12,
-        "cards": 2.4
+        "cards": 2.3
       }
     },
     {
@@ -2535,7 +2535,7 @@
       "id": "FD5890",
       "name": "Lecce",
       "shortName": "USL",
-      "rating": 1679,
+      "rating": 1701,
       "venue": "",
       "league": "SERIEA",
       "form": [
@@ -2572,25 +2572,25 @@
           "goalsAgainst": 1
         },
         {
-          "date": "2026-04-21",
+          "date": "2026-04-26",
           "competition": "SERIEA",
-          "opponent": "Fiorentina",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 1
+          "opponent": "Verona",
+          "venue": "A",
+          "goalsFor": 0,
+          "goalsAgainst": 0
         }
       ],
       "attacking": {
-        "avgGoals": 1.4,
-        "shots": 14,
-        "shotsOnTarget": 4.7,
-        "bigChances": 2.2,
-        "xg": 1.79
+        "avgGoals": 1.2,
+        "shots": 13,
+        "shotsOnTarget": 4.5,
+        "bigChances": 2,
+        "xg": 1.62
       },
       "defensive": {
-        "goalsConcededAvg": 1,
-        "cleanSheetPct": 20,
-        "xga": 1.2,
+        "goalsConcededAvg": 0.8,
+        "cleanSheetPct": 40,
+        "xga": 0.94,
         "cards": 2.2
       }
     },
@@ -2724,18 +2724,10 @@
       "id": "FD3",
       "name": "Leverkusen",
       "shortName": "B04",
-      "rating": 1608,
+      "rating": 1660,
       "venue": "",
       "league": "BUNDESLIGA",
       "form": [
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "HSV",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 1
-        },
         {
           "date": "2026-05-09",
           "competition": "BUNDESLIGA",
@@ -2750,6 +2742,14 @@
           "opponent": "RB Leipzig",
           "venue": "H",
           "goalsFor": 4,
+          "goalsAgainst": 1
+        },
+        {
+          "date": "2026-04-25",
+          "competition": "BUNDESLIGA",
+          "opponent": "1. FC Köln",
+          "venue": "A",
+          "goalsFor": 2,
           "goalsAgainst": 1
         },
         {
@@ -2770,24 +2770,24 @@
         }
       ],
       "attacking": {
-        "avgGoals": 1.6,
-        "shots": 14.4,
-        "shotsOnTarget": 4.9,
-        "bigChances": 2.3,
-        "xg": 1.84
+        "avgGoals": 1.8,
+        "shots": 15.4,
+        "shotsOnTarget": 5.2,
+        "bigChances": 2.5,
+        "xg": 2.08
       },
       "defensive": {
         "goalsConcededAvg": 1.4,
         "cleanSheetPct": 20,
         "xga": 1.55,
-        "cards": 2.4
+        "cards": 2.3
       }
     },
     {
       "id": "FD64",
       "name": "Liverpool",
       "shortName": "LIV",
-      "rating": 1506,
+      "rating": 1520,
       "venue": "",
       "league": "EPL",
       "form": [
@@ -2798,6 +2798,14 @@
           "venue": "H",
           "goalsFor": 1,
           "goalsAgainst": 1
+        },
+        {
+          "date": "2026-05-16",
+          "competition": "EPL",
+          "opponent": "Aston Villa",
+          "venue": "A",
+          "goalsFor": 2,
+          "goalsAgainst": 4
         },
         {
           "date": "2026-05-09",
@@ -2816,33 +2824,25 @@
           "goalsAgainst": 3
         },
         {
-          "date": "2026-04-19",
+          "date": "2026-04-25",
           "competition": "EPL",
-          "opponent": "Everton",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-04-15",
-          "competition": "UCL",
-          "opponent": "PSG",
+          "opponent": "Crystal Palace",
           "venue": "H",
-          "goalsFor": 0,
-          "goalsAgainst": 2
+          "goalsFor": 3,
+          "goalsAgainst": 1
         }
       ],
       "attacking": {
-        "avgGoals": 1.2,
-        "shots": 12.5,
-        "shotsOnTarget": 4.2,
-        "bigChances": 1.8,
-        "xg": 1.44
+        "avgGoals": 1.8,
+        "shots": 14.7,
+        "shotsOnTarget": 5,
+        "bigChances": 2.4,
+        "xg": 1.94
       },
       "defensive": {
-        "goalsConcededAvg": 1.6,
+        "goalsConcededAvg": 2,
         "cleanSheetPct": 0,
-        "xga": 1.81,
+        "xga": 2.16,
         "cards": 2.5
       }
     },
@@ -2850,18 +2850,10 @@
       "id": "FD18",
       "name": "M'gladbach",
       "shortName": "BMG",
-      "rating": 1644,
+      "rating": 1550,
       "venue": "",
       "league": "BUNDESLIGA",
       "form": [
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Hoffenheim",
-          "venue": "H",
-          "goalsFor": 4,
-          "goalsAgainst": 0
-        },
         {
           "date": "2026-05-09",
           "competition": "BUNDESLIGA",
@@ -2876,6 +2868,14 @@
           "opponent": "Dortmund",
           "venue": "H",
           "goalsFor": 1,
+          "goalsAgainst": 0
+        },
+        {
+          "date": "2026-04-25",
+          "competition": "BUNDESLIGA",
+          "opponent": "Wolfsburg",
+          "venue": "A",
+          "goalsFor": 0,
           "goalsAgainst": 0
         },
         {
@@ -2896,35 +2896,27 @@
         }
       ],
       "attacking": {
-        "avgGoals": 1.4,
-        "shots": 13.4,
-        "shotsOnTarget": 4.6,
-        "bigChances": 2.1,
-        "xg": 1.68
+        "avgGoals": 0.6,
+        "shots": 10.2,
+        "shotsOnTarget": 3.4,
+        "bigChances": 1.3,
+        "xg": 0.95
       },
       "defensive": {
         "goalsConcededAvg": 1,
         "cleanSheetPct": 40,
         "xga": 1.12,
-        "cards": 2.3
+        "cards": 2.4
       }
     },
     {
       "id": "FD15",
       "name": "Mainz",
       "shortName": "M05",
-      "rating": 1594,
+      "rating": 1473,
       "venue": "",
       "league": "BUNDESLIGA",
       "form": [
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Heidenheim",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 0
-        },
         {
           "date": "2026-05-10",
           "competition": "BUNDESLIGA",
@@ -2940,6 +2932,14 @@
           "venue": "A",
           "goalsFor": 2,
           "goalsAgainst": 1
+        },
+        {
+          "date": "2026-04-25",
+          "competition": "BUNDESLIGA",
+          "opponent": "Bayern",
+          "venue": "H",
+          "goalsFor": 3,
+          "goalsAgainst": 4
         },
         {
           "date": "2026-04-19",
@@ -2959,17 +2959,17 @@
         }
       ],
       "attacking": {
-        "avgGoals": 1.2,
-        "shots": 12.8,
-        "shotsOnTarget": 4.3,
-        "bigChances": 1.9,
-        "xg": 1.52
+        "avgGoals": 1.4,
+        "shots": 12.9,
+        "shotsOnTarget": 4.5,
+        "bigChances": 2,
+        "xg": 1.57
       },
       "defensive": {
-        "goalsConcededAvg": 1.2,
-        "cleanSheetPct": 20,
-        "xga": 1.38,
-        "cards": 2.3
+        "goalsConcededAvg": 2,
+        "cleanSheetPct": 0,
+        "xga": 2.16,
+        "cards": 2.6
       }
     },
     {
@@ -3124,7 +3124,7 @@
       "id": "FD98",
       "name": "Milan",
       "shortName": "MIL",
-      "rating": 1495,
+      "rating": 1547,
       "venue": "",
       "league": "SERIEA",
       "form": [
@@ -3161,26 +3161,26 @@
           "goalsAgainst": 2
         },
         {
-          "date": "2026-04-27",
+          "date": "2026-04-19",
           "competition": "SERIEA",
-          "opponent": "Juventus",
-          "venue": "H",
-          "goalsFor": 0,
+          "opponent": "Verona",
+          "venue": "A",
+          "goalsFor": 1,
           "goalsAgainst": 0
         }
       ],
       "attacking": {
-        "avgGoals": 1,
-        "shots": 11.3,
-        "shotsOnTarget": 3.9,
-        "bigChances": 1.6,
-        "xg": 1.24
+        "avgGoals": 1.2,
+        "shots": 12.6,
+        "shotsOnTarget": 4.3,
+        "bigChances": 1.9,
+        "xg": 1.48
       },
       "defensive": {
         "goalsConcededAvg": 1.6,
         "cleanSheetPct": 20,
         "xga": 1.73,
-        "cards": 2.5
+        "cards": 2.4
       }
     },
     {
@@ -3309,26 +3309,26 @@
           "goalsAgainst": 1
         },
         {
-          "date": "2026-04-18",
+          "date": "2026-04-25",
           "competition": "EPL",
-          "opponent": "Bournemouth",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 2
+          "opponent": "Arsenal",
+          "venue": "A",
+          "goalsFor": 0,
+          "goalsAgainst": 1
         }
       ],
       "attacking": {
-        "avgGoals": 1.6,
-        "shots": 14.1,
-        "shotsOnTarget": 4.9,
-        "bigChances": 2.3,
-        "xg": 1.84
+        "avgGoals": 1.4,
+        "shots": 13.1,
+        "shotsOnTarget": 4.6,
+        "bigChances": 2.1,
+        "xg": 1.68
       },
       "defensive": {
-        "goalsConcededAvg": 1.4,
+        "goalsConcededAvg": 1.2,
         "cleanSheetPct": 0,
-        "xga": 1.63,
-        "cards": 2.4
+        "xga": 1.46,
+        "cards": 2.3
       }
     },
     {
@@ -3498,10 +3498,10 @@
           "goalsAgainst": 2
         },
         {
-          "date": "2026-04-18",
+          "date": "2026-04-25",
           "competition": "SERIEA",
-          "opponent": "Udinese",
-          "venue": "A",
+          "opponent": "AC Pisa",
+          "venue": "H",
           "goalsFor": 1,
           "goalsAgainst": 0
         }
@@ -3587,18 +3587,10 @@
       "id": "FD721",
       "name": "RB Leipzig",
       "shortName": "RBL",
-      "rating": 1596,
+      "rating": 1731,
       "venue": "",
       "league": "BUNDESLIGA",
       "form": [
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Freiburg",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 4
-        },
         {
           "date": "2026-05-09",
           "competition": "BUNDESLIGA",
@@ -3630,20 +3622,28 @@
           "venue": "A",
           "goalsFor": 3,
           "goalsAgainst": 1
+        },
+        {
+          "date": "2026-04-11",
+          "competition": "BUNDESLIGA",
+          "opponent": "M'gladbach",
+          "venue": "H",
+          "goalsFor": 1,
+          "goalsAgainst": 0
         }
       ],
       "attacking": {
         "avgGoals": 2,
-        "shots": 16,
-        "shotsOnTarget": 5.5,
-        "bigChances": 2.7,
-        "xg": 2.24
+        "shots": 16.6,
+        "shotsOnTarget": 5.6,
+        "bigChances": 2.8,
+        "xg": 2.35
       },
       "defensive": {
-        "goalsConcededAvg": 2.2,
-        "cleanSheetPct": 0,
-        "xga": 2.34,
-        "cards": 2.4
+        "goalsConcededAvg": 1.4,
+        "cleanSheetPct": 20,
+        "xga": 1.55,
+        "cards": 2.2
       }
     },
     {
@@ -3839,7 +3839,7 @@
       "id": "FD100",
       "name": "Roma",
       "shortName": "ROM",
-      "rating": 1878,
+      "rating": 1966,
       "venue": "",
       "league": "SERIEA",
       "form": [
@@ -3876,26 +3876,26 @@
           "goalsAgainst": 0
         },
         {
-          "date": "2026-04-19",
+          "date": "2026-04-25",
           "competition": "SERIEA",
-          "opponent": "Atalanta",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 1
+          "opponent": "Bologna",
+          "venue": "A",
+          "goalsFor": 2,
+          "goalsAgainst": 0
         }
       ],
       "attacking": {
-        "avgGoals": 2.4,
-        "shots": 18,
-        "shotsOnTarget": 6.2,
-        "bigChances": 3.2,
-        "xg": 2.72
+        "avgGoals": 2.6,
+        "shots": 19,
+        "shotsOnTarget": 6.6,
+        "bigChances": 3.4,
+        "xg": 2.95
       },
       "defensive": {
-        "goalsConcededAvg": 0.6,
-        "cleanSheetPct": 60,
-        "xga": 0.69,
-        "cards": 2
+        "goalsConcededAvg": 0.4,
+        "cleanSheetPct": 80,
+        "xga": 0.43,
+        "cards": 1.9
       }
     },
     {
@@ -3924,7 +3924,7 @@
       "id": "FD471",
       "name": "Sassuolo",
       "shortName": "SAS",
-      "rating": 1545,
+      "rating": 1575,
       "venue": "",
       "league": "SERIEA",
       "form": [
@@ -3961,26 +3961,26 @@
           "goalsAgainst": 0
         },
         {
-          "date": "2026-04-26",
+          "date": "2026-04-17",
           "competition": "SERIEA",
-          "opponent": "Fiorentina",
-          "venue": "A",
-          "goalsFor": 0,
-          "goalsAgainst": 0
+          "opponent": "Como 1907",
+          "venue": "H",
+          "goalsFor": 2,
+          "goalsAgainst": 1
         }
       ],
       "attacking": {
-        "avgGoals": 1,
-        "shots": 11.3,
-        "shotsOnTarget": 3.9,
-        "bigChances": 1.6,
-        "xg": 1.24
+        "avgGoals": 1.4,
+        "shots": 13.3,
+        "shotsOnTarget": 4.6,
+        "bigChances": 2.1,
+        "xg": 1.64
       },
       "defensive": {
-        "goalsConcededAvg": 1.2,
-        "cleanSheetPct": 40,
-        "xga": 1.3,
-        "cards": 2.5
+        "goalsConcededAvg": 1.4,
+        "cleanSheetPct": 20,
+        "xga": 1.55,
+        "cards": 2.4
       }
     },
     {
@@ -4094,7 +4094,7 @@
       "id": "FD760",
       "name": "Spain",
       "shortName": "ESP",
-      "rating": 1924,
+      "rating": 2025,
       "venue": "",
       "league": "WC",
       "form": [
@@ -4157,18 +4157,10 @@
       "id": "FD10",
       "name": "Stuttgart",
       "shortName": "VFB",
-      "rating": 1553,
+      "rating": 1622,
       "venue": "",
       "league": "BUNDESLIGA",
       "form": [
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Frankfurt",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 2
-        },
         {
           "date": "2026-05-09",
           "competition": "BUNDESLIGA",
@@ -4186,33 +4178,41 @@
           "goalsAgainst": 3
         },
         {
-          "date": "2026-04-26",
-          "competition": "BUNDESLIGA",
-          "opponent": "Bremen",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 1
-        },
-        {
           "date": "2026-04-19",
           "competition": "BUNDESLIGA",
           "opponent": "Bayern",
           "venue": "A",
           "goalsFor": 2,
           "goalsAgainst": 4
+        },
+        {
+          "date": "2026-04-12",
+          "competition": "BUNDESLIGA",
+          "opponent": "HSV",
+          "venue": "H",
+          "goalsFor": 4,
+          "goalsAgainst": 0
+        },
+        {
+          "date": "2026-04-04",
+          "competition": "BUNDESLIGA",
+          "opponent": "Dortmund",
+          "venue": "H",
+          "goalsFor": 0,
+          "goalsAgainst": 2
         }
       ],
       "attacking": {
-        "avgGoals": 2.2,
-        "shots": 16.1,
-        "shotsOnTarget": 5.6,
-        "bigChances": 2.7,
-        "xg": 2.3
+        "avgGoals": 2.4,
+        "shots": 16.5,
+        "shotsOnTarget": 5.9,
+        "bigChances": 2.9,
+        "xg": 2.5
       },
       "defensive": {
-        "goalsConcededAvg": 2.2,
-        "cleanSheetPct": 0,
-        "xga": 2.34,
+        "goalsConcededAvg": 2,
+        "cleanSheetPct": 20,
+        "xga": 2.08,
         "cards": 2.5
       }
     },
@@ -4283,7 +4283,7 @@
       "id": "FD586",
       "name": "Torino",
       "shortName": "TOR",
-      "rating": 1506,
+      "rating": 1528,
       "venue": "",
       "league": "SERIEA",
       "form": [
@@ -4320,33 +4320,33 @@
           "goalsAgainst": 2
         },
         {
-          "date": "2026-04-26",
+          "date": "2026-04-19",
           "competition": "SERIEA",
-          "opponent": "Inter",
-          "venue": "H",
-          "goalsFor": 2,
-          "goalsAgainst": 2
+          "opponent": "Cremonese",
+          "venue": "A",
+          "goalsFor": 0,
+          "goalsAgainst": 0
         }
       ],
       "attacking": {
-        "avgGoals": 1.4,
-        "shots": 13.1,
-        "shotsOnTarget": 4.5,
-        "bigChances": 2,
-        "xg": 1.61
+        "avgGoals": 1,
+        "shots": 11.5,
+        "shotsOnTarget": 4,
+        "bigChances": 1.7,
+        "xg": 1.28
       },
       "defensive": {
-        "goalsConcededAvg": 1.8,
-        "cleanSheetPct": 0,
-        "xga": 1.98,
-        "cards": 2.5
+        "goalsConcededAvg": 1.4,
+        "cleanSheetPct": 20,
+        "xga": 1.55,
+        "cards": 2.4
       }
     },
     {
       "id": "FD73",
       "name": "Tottenham",
       "shortName": "TOT",
-      "rating": 1627,
+      "rating": 1701,
       "venue": "",
       "league": "EPL",
       "form": [
@@ -4383,26 +4383,26 @@
           "goalsAgainst": 1
         },
         {
-          "date": "2026-04-18",
+          "date": "2026-04-25",
           "competition": "EPL",
-          "opponent": "Brighton Hove",
-          "venue": "H",
-          "goalsFor": 2,
-          "goalsAgainst": 2
+          "opponent": "Wolverhampton",
+          "venue": "A",
+          "goalsFor": 1,
+          "goalsAgainst": 0
         }
       ],
       "attacking": {
-        "avgGoals": 1.4,
-        "shots": 14,
-        "shotsOnTarget": 4.6,
-        "bigChances": 2.1,
-        "xg": 1.72
+        "avgGoals": 1.2,
+        "shots": 13.7,
+        "shotsOnTarget": 4.5,
+        "bigChances": 2,
+        "xg": 1.62
       },
       "defensive": {
-        "goalsConcededAvg": 1.2,
-        "cleanSheetPct": 20,
-        "xga": 1.38,
-        "cards": 2.3
+        "goalsConcededAvg": 0.8,
+        "cleanSheetPct": 40,
+        "xga": 0.94,
+        "cards": 2.2
       }
     },
     {
@@ -4472,18 +4472,10 @@
       "id": "FD28",
       "name": "Union Berlin",
       "shortName": "UNB",
-      "rating": 1636,
+      "rating": 1473,
       "venue": "",
       "league": "BUNDESLIGA",
       "form": [
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Augsburg",
-          "venue": "H",
-          "goalsFor": 4,
-          "goalsAgainst": 0
-        },
         {
           "date": "2026-05-10",
           "competition": "BUNDESLIGA",
@@ -4515,20 +4507,28 @@
           "venue": "H",
           "goalsFor": 1,
           "goalsAgainst": 2
+        },
+        {
+          "date": "2026-04-11",
+          "competition": "BUNDESLIGA",
+          "opponent": "Heidenheim",
+          "venue": "A",
+          "goalsFor": 1,
+          "goalsAgainst": 3
         }
       ],
       "attacking": {
-        "avgGoals": 2.2,
-        "shots": 16.3,
-        "shotsOnTarget": 5.7,
-        "bigChances": 2.8,
-        "xg": 2.34
+        "avgGoals": 1.6,
+        "shots": 13.9,
+        "shotsOnTarget": 4.7,
+        "bigChances": 2.2,
+        "xg": 1.74
       },
       "defensive": {
-        "goalsConcededAvg": 1.6,
-        "cleanSheetPct": 20,
-        "xga": 1.73,
-        "cards": 2.4
+        "goalsConcededAvg": 2.2,
+        "cleanSheetPct": 0,
+        "xga": 2.34,
+        "cards": 2.6
       }
     },
     {
@@ -4716,6 +4716,34 @@
       }
     },
     {
+      "id": "fd-564631",
+      "league": "LALIGA",
+      "date": "2026-08-16",
+      "time": "20:30",
+      "homeTeamId": "FD86",
+      "awayTeamId": "FD92",
+      "homeTeam": "Real Madrid",
+      "awayTeam": "Real Sociedad",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564637",
+      "league": "LALIGA",
+      "date": "2026-08-16",
+      "time": "20:30",
+      "homeTeamId": "FD95",
+      "awayTeamId": "FD90",
+      "homeTeam": "Valencia",
+      "awayTeam": "Real Betis",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
       "id": "fd-564633",
       "league": "LALIGA",
       "date": "2026-08-16",
@@ -4758,28 +4786,28 @@
       "score": null
     },
     {
-      "id": "fd-564631",
+      "id": "fd-564636",
       "league": "LALIGA",
       "date": "2026-08-16",
       "time": "20:30",
-      "homeTeamId": "FD86",
-      "awayTeamId": "FD92",
-      "homeTeam": "Real Madrid",
-      "awayTeam": "Real Sociedad",
+      "homeTeamId": "FD558",
+      "awayTeamId": "FD79",
+      "homeTeam": "Celta",
+      "awayTeam": "Osasuna",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
       "score": null
     },
     {
-      "id": "fd-564637",
+      "id": "fd-564632",
       "league": "LALIGA",
       "date": "2026-08-16",
       "time": "20:30",
-      "homeTeamId": "FD95",
-      "awayTeamId": "FD90",
-      "homeTeam": "Valencia",
-      "awayTeam": "Real Betis",
+      "homeTeamId": "FD80",
+      "awayTeamId": "FD88",
+      "homeTeam": "Espanyol",
+      "awayTeam": "Levante",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -4828,34 +4856,6 @@
       "score": null
     },
     {
-      "id": "fd-564636",
-      "league": "LALIGA",
-      "date": "2026-08-16",
-      "time": "20:30",
-      "homeTeamId": "FD558",
-      "awayTeamId": "FD79",
-      "homeTeam": "Celta",
-      "awayTeam": "Osasuna",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564632",
-      "league": "LALIGA",
-      "date": "2026-08-16",
-      "time": "20:30",
-      "homeTeamId": "FD80",
-      "awayTeamId": "FD88",
-      "homeTeam": "Espanyol",
-      "awayTeam": "Levante",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-560542",
       "league": "EPL",
       "date": "2026-08-22",
@@ -4870,238 +4870,126 @@
       "score": null
     },
     {
-      "id": "fd-560549",
+      "id": "fd-560543",
       "league": "EPL",
-      "date": "2026-08-23",
-      "time": "18:30",
-      "homeTeamId": "FD397",
-      "awayTeamId": "FD58",
-      "homeTeam": "Brighton Hove",
-      "awayTeam": "Aston Villa",
+      "date": "2026-08-22",
+      "time": "17:00",
+      "homeTeamId": "FD322",
+      "awayTeamId": "FD66",
+      "homeTeam": "Hull City",
+      "awayTeam": "Man United",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
       "score": null
     },
     {
-      "id": "fd-560548",
+      "id": "fd-560544",
       "league": "EPL",
-      "date": "2026-08-23",
-      "time": "18:30",
-      "homeTeamId": "FD65",
-      "awayTeamId": "FD1044",
-      "homeTeam": "Man City",
-      "awayTeam": "Bournemouth",
+      "date": "2026-08-22",
+      "time": "19:30",
+      "homeTeamId": "FD349",
+      "awayTeamId": "FD71",
+      "homeTeam": "Ipswich Town",
+      "awayTeam": "Sunderland",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
       "score": null
     },
     {
-      "id": "fd-564644",
-      "league": "LALIGA",
-      "date": "2026-08-23",
-      "time": "20:30",
-      "homeTeamId": "FD82",
-      "awayTeamId": "FD5335",
-      "homeTeam": "Getafe",
-      "awayTeam": "Santander",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564640",
-      "league": "LALIGA",
-      "date": "2026-08-23",
-      "time": "20:30",
-      "homeTeamId": "FD84",
-      "awayTeamId": "FD560",
-      "homeTeam": "Málaga",
-      "awayTeam": "Deportivo",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564646",
-      "league": "LALIGA",
-      "date": "2026-08-23",
-      "time": "20:30",
-      "homeTeamId": "FD78",
-      "awayTeamId": "FD94",
-      "homeTeam": "Atleti",
-      "awayTeam": "Villarreal",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564642",
-      "league": "LALIGA",
-      "date": "2026-08-23",
-      "time": "20:30",
-      "homeTeamId": "FD285",
-      "awayTeamId": "FD81",
-      "homeTeam": "Elche",
-      "awayTeam": "Barça",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564638",
-      "league": "LALIGA",
-      "date": "2026-08-23",
-      "time": "20:30",
-      "homeTeamId": "FD87",
-      "awayTeamId": "FD263",
-      "homeTeam": "Rayo Vallecano",
-      "awayTeam": "Alavés",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564639",
-      "league": "LALIGA",
-      "date": "2026-08-23",
-      "time": "20:30",
-      "homeTeamId": "FD79",
-      "awayTeamId": "FD88",
-      "homeTeam": "Osasuna",
-      "awayTeam": "Levante",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564645",
-      "league": "LALIGA",
-      "date": "2026-08-23",
-      "time": "20:30",
-      "homeTeamId": "FD80",
-      "awayTeamId": "FD86",
-      "homeTeam": "Espanyol",
-      "awayTeam": "Real Madrid",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564641",
-      "league": "LALIGA",
-      "date": "2026-08-23",
-      "time": "20:30",
-      "homeTeamId": "FD77",
-      "awayTeamId": "FD559",
-      "homeTeam": "Athletic",
-      "awayTeam": "Sevilla FC",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564647",
-      "league": "LALIGA",
-      "date": "2026-08-23",
-      "time": "20:30",
-      "homeTeamId": "FD90",
-      "awayTeamId": "FD92",
-      "homeTeam": "Real Betis",
-      "awayTeam": "Real Sociedad",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564643",
-      "league": "LALIGA",
-      "date": "2026-08-23",
-      "time": "20:30",
-      "homeTeamId": "FD95",
-      "awayTeamId": "FD558",
-      "homeTeam": "Valencia",
-      "awayTeam": "Celta",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-560550",
+      "id": "fd-560546",
       "league": "EPL",
-      "date": "2026-08-23",
-      "time": "21:00",
-      "homeTeamId": "FD67",
-      "awayTeamId": "FD64",
-      "homeTeam": "Newcastle",
-      "awayTeam": "Liverpool",
+      "date": "2026-08-22",
+      "time": "19:30",
+      "homeTeamId": "FD62",
+      "awayTeamId": "FD354",
+      "homeTeam": "Everton",
+      "awayTeam": "Crystal Palace",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
       "score": null
     },
     {
-      "id": "fd-558635",
+      "id": "fd-560545",
+      "league": "EPL",
+      "date": "2026-08-22",
+      "time": "19:30",
+      "homeTeamId": "FD351",
+      "awayTeamId": "FD341",
+      "homeTeam": "Nottingham",
+      "awayTeam": "Leeds United",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-558632",
       "league": "SERIEA",
-      "date": "2026-08-23",
+      "date": "2026-08-22",
       "time": "22:00",
-      "homeTeamId": "FD470",
-      "awayTeamId": "FD109",
-      "homeTeam": "Frosinone",
-      "awayTeam": "Juventus",
+      "homeTeamId": "FD108",
+      "awayTeamId": "FD5911",
+      "homeTeam": "Inter",
+      "awayTeam": "Monza",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
       "score": null
     },
     {
-      "id": "fd-558637",
+      "id": "fd-558629",
+      "league": "SERIEA",
+      "date": "2026-08-22",
+      "time": "22:00",
+      "homeTeamId": "FD115",
+      "awayTeamId": "FD7397",
+      "homeTeam": "Udinese",
+      "awayTeam": "Como 1907",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-560547",
+      "league": "EPL",
+      "date": "2026-08-22",
+      "time": "22:00",
+      "homeTeamId": "FD402",
+      "awayTeamId": "FD73",
+      "homeTeam": "Brentford",
+      "awayTeam": "Tottenham",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-558631",
       "league": "SERIEA",
       "date": "2026-08-23",
-      "time": "22:00",
-      "homeTeamId": "FD454",
-      "awayTeamId": "FD5890",
-      "homeTeam": "Venezia FC",
-      "awayTeam": "Lecce",
+      "time": "00:15",
+      "homeTeamId": "FD107",
+      "awayTeamId": "FD113",
+      "homeTeam": "Genoa",
+      "awayTeam": "Napoli",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
       "score": null
     },
     {
-      "id": "fd-558633",
+      "id": "fd-558636",
       "league": "SERIEA",
-      "date": "2026-08-24",
+      "date": "2026-08-23",
       "time": "00:15",
-      "homeTeamId": "FD102",
-      "awayTeamId": "FD471",
-      "homeTeam": "Atalanta",
-      "awayTeam": "Sassuolo",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-558634",
-      "league": "SERIEA",
-      "date": "2026-08-24",
-      "time": "00:15",
-      "homeTeamId": "FD586",
-      "awayTeamId": "FD98",
-      "homeTeam": "Torino",
-      "awayTeam": "Milan",
+      "homeTeamId": "FD112",
+      "awayTeamId": "FD104",
+      "homeTeam": "Parma",
+      "awayTeam": "Cagliari",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -5206,20 +5094,6 @@
       "score": null
     },
     {
-      "id": "fd-565781",
-      "league": "BUNDESLIGA",
-      "date": "2026-08-29",
-      "time": "19:00",
-      "homeTeamId": "FD4",
-      "awayTeamId": "FD7",
-      "homeTeam": "Dortmund",
-      "awayTeam": "HSV",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-565777",
       "league": "BUNDESLIGA",
       "date": "2026-08-29",
@@ -5256,6 +5130,20 @@
       "awayTeamId": "FD19",
       "homeTeam": "Union Berlin",
       "awayTeam": "Frankfurt",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-565781",
+      "league": "BUNDESLIGA",
+      "date": "2026-08-29",
+      "time": "19:00",
+      "homeTeamId": "FD4",
+      "awayTeamId": "FD7",
+      "homeTeam": "Dortmund",
+      "awayTeam": "HSV",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -5318,6 +5206,20 @@
       "score": null
     },
     {
+      "id": "fd-560560",
+      "league": "EPL",
+      "date": "2026-08-29",
+      "time": "19:30",
+      "homeTeamId": "FD1044",
+      "awayTeamId": "FD62",
+      "homeTeam": "Bournemouth",
+      "awayTeam": "Everton",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
       "id": "fd-560561",
       "league": "EPL",
       "date": "2026-08-29",
@@ -5332,14 +5234,14 @@
       "score": null
     },
     {
-      "id": "fd-560560",
+      "id": "fd-560558",
       "league": "EPL",
       "date": "2026-08-29",
-      "time": "19:30",
-      "homeTeamId": "FD1044",
-      "awayTeamId": "FD62",
-      "homeTeam": "Bournemouth",
-      "awayTeam": "Everton",
+      "time": "22:00",
+      "homeTeamId": "FD73",
+      "awayTeamId": "FD67",
+      "homeTeam": "Tottenham",
+      "awayTeam": "Newcastle",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -5388,20 +5290,6 @@
       "score": null
     },
     {
-      "id": "fd-560558",
-      "league": "EPL",
-      "date": "2026-08-29",
-      "time": "22:00",
-      "homeTeamId": "FD73",
-      "awayTeamId": "FD67",
-      "homeTeam": "Tottenham",
-      "awayTeam": "Newcastle",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-558619",
       "league": "SERIEA",
       "date": "2026-08-30",
@@ -5410,34 +5298,6 @@
       "awayTeamId": "FD112",
       "homeTeam": "Juventus",
       "awayTeam": "Parma",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-560559",
-      "league": "EPL",
-      "date": "2026-08-30",
-      "time": "18:30",
-      "homeTeamId": "FD341",
-      "awayTeamId": "FD402",
-      "homeTeam": "Leeds United",
-      "awayTeam": "Brentford",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-560554",
-      "league": "EPL",
-      "date": "2026-08-30",
-      "time": "18:30",
-      "homeTeamId": "FD71",
-      "awayTeamId": "FD63",
-      "homeTeam": "Sunderland",
-      "awayTeam": "Fulham",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -5458,28 +5318,98 @@
       "score": null
     },
     {
-      "id": "fd-564648",
-      "league": "LALIGA",
+      "id": "fd-560554",
+      "league": "EPL",
       "date": "2026-08-30",
-      "time": "20:30",
-      "homeTeamId": "FD263",
-      "awayTeamId": "FD94",
-      "homeTeam": "Alavés",
-      "awayTeam": "Villarreal",
+      "time": "18:30",
+      "homeTeamId": "FD71",
+      "awayTeamId": "FD63",
+      "homeTeam": "Sunderland",
+      "awayTeam": "Fulham",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
       "score": null
     },
     {
-      "id": "fd-564654",
+      "id": "fd-560559",
+      "league": "EPL",
+      "date": "2026-08-30",
+      "time": "18:30",
+      "homeTeamId": "FD341",
+      "awayTeamId": "FD402",
+      "homeTeam": "Leeds United",
+      "awayTeam": "Brentford",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564655",
       "league": "LALIGA",
       "date": "2026-08-30",
       "time": "20:30",
-      "homeTeamId": "FD5335",
-      "awayTeamId": "FD285",
-      "homeTeam": "Santander",
-      "awayTeam": "Elche",
+      "homeTeamId": "FD88",
+      "awayTeamId": "FD90",
+      "homeTeam": "Levante",
+      "awayTeam": "Real Betis",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564651",
+      "league": "LALIGA",
+      "date": "2026-08-30",
+      "time": "20:30",
+      "homeTeamId": "FD560",
+      "awayTeamId": "FD95",
+      "homeTeam": "Deportivo",
+      "awayTeam": "Valencia",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564657",
+      "league": "LALIGA",
+      "date": "2026-08-30",
+      "time": "20:30",
+      "homeTeamId": "FD79",
+      "awayTeamId": "FD82",
+      "homeTeam": "Osasuna",
+      "awayTeam": "Getafe",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564653",
+      "league": "LALIGA",
+      "date": "2026-08-30",
+      "time": "20:30",
+      "homeTeamId": "FD92",
+      "awayTeamId": "FD80",
+      "homeTeam": "Real Sociedad",
+      "awayTeam": "Espanyol",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564649",
+      "league": "LALIGA",
+      "date": "2026-08-30",
+      "time": "20:30",
+      "homeTeamId": "FD559",
+      "awayTeamId": "FD78",
+      "homeTeam": "Sevilla FC",
+      "awayTeam": "Atleti",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -5528,70 +5458,28 @@
       "score": null
     },
     {
-      "id": "fd-564653",
+      "id": "fd-564648",
       "league": "LALIGA",
       "date": "2026-08-30",
       "time": "20:30",
-      "homeTeamId": "FD92",
-      "awayTeamId": "FD80",
-      "homeTeam": "Real Sociedad",
-      "awayTeam": "Espanyol",
+      "homeTeamId": "FD263",
+      "awayTeamId": "FD94",
+      "homeTeam": "Alavés",
+      "awayTeam": "Villarreal",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
       "score": null
     },
     {
-      "id": "fd-564649",
+      "id": "fd-564654",
       "league": "LALIGA",
       "date": "2026-08-30",
       "time": "20:30",
-      "homeTeamId": "FD559",
-      "awayTeamId": "FD78",
-      "homeTeam": "Sevilla FC",
-      "awayTeam": "Atleti",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564655",
-      "league": "LALIGA",
-      "date": "2026-08-30",
-      "time": "20:30",
-      "homeTeamId": "FD88",
-      "awayTeamId": "FD90",
-      "homeTeam": "Levante",
-      "awayTeam": "Real Betis",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564651",
-      "league": "LALIGA",
-      "date": "2026-08-30",
-      "time": "20:30",
-      "homeTeamId": "FD560",
-      "awayTeamId": "FD95",
-      "homeTeam": "Deportivo",
-      "awayTeam": "Valencia",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564657",
-      "league": "LALIGA",
-      "date": "2026-08-30",
-      "time": "20:30",
-      "homeTeamId": "FD79",
-      "awayTeamId": "FD82",
-      "homeTeam": "Osasuna",
-      "awayTeam": "Getafe",
+      "homeTeamId": "FD5335",
+      "awayTeamId": "FD285",
+      "homeTeam": "Santander",
+      "awayTeam": "Elche",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -5752,6 +5640,62 @@
       "score": null
     },
     {
+      "id": "fd-565786",
+      "league": "BUNDESLIGA",
+      "date": "2026-09-05",
+      "time": "19:00",
+      "homeTeamId": "FD19",
+      "awayTeamId": "FD16",
+      "homeTeam": "Frankfurt",
+      "awayTeam": "Augsburg",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-565792",
+      "league": "BUNDESLIGA",
+      "date": "2026-09-05",
+      "time": "19:00",
+      "homeTeamId": "FD18",
+      "awayTeamId": "FD719",
+      "homeTeam": "M'gladbach",
+      "awayTeam": "Elversberg",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-565788",
+      "league": "BUNDESLIGA",
+      "date": "2026-09-05",
+      "time": "19:00",
+      "homeTeamId": "FD7",
+      "awayTeamId": "FD15",
+      "homeTeam": "HSV",
+      "awayTeam": "Mainz",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-565790",
+      "league": "BUNDESLIGA",
+      "date": "2026-09-05",
+      "time": "19:00",
+      "homeTeamId": "FD3",
+      "awayTeamId": "FD28",
+      "homeTeam": "Leverkusen",
+      "awayTeam": "Union Berlin",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
       "id": "fd-565791",
       "league": "BUNDESLIGA",
       "date": "2026-09-05",
@@ -5822,84 +5766,14 @@
       "score": null
     },
     {
-      "id": "fd-565792",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-05",
-      "time": "19:00",
-      "homeTeamId": "FD18",
-      "awayTeamId": "FD719",
-      "homeTeam": "M'gladbach",
-      "awayTeam": "Elversberg",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565788",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-05",
-      "time": "19:00",
-      "homeTeamId": "FD7",
-      "awayTeamId": "FD15",
-      "homeTeam": "HSV",
-      "awayTeam": "Mainz",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565790",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-05",
-      "time": "19:00",
-      "homeTeamId": "FD3",
-      "awayTeamId": "FD28",
-      "homeTeam": "Leverkusen",
-      "awayTeam": "Union Berlin",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565786",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-05",
-      "time": "19:00",
-      "homeTeamId": "FD19",
-      "awayTeamId": "FD16",
-      "homeTeam": "Frankfurt",
-      "awayTeam": "Augsburg",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-560565",
+      "id": "fd-560564",
       "league": "EPL",
       "date": "2026-09-05",
       "time": "19:30",
-      "homeTeamId": "FD402",
-      "awayTeamId": "FD71",
-      "homeTeam": "Brentford",
-      "awayTeam": "Sunderland",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-560563",
-      "league": "EPL",
-      "date": "2026-09-05",
-      "time": "19:30",
-      "homeTeamId": "FD65",
-      "awayTeamId": "FD1076",
-      "homeTeam": "Man City",
-      "awayTeam": "Coventry City",
+      "homeTeamId": "FD397",
+      "awayTeamId": "FD341",
+      "homeTeam": "Brighton Hove",
+      "awayTeam": "Leeds United",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -5934,14 +5808,28 @@
       "score": null
     },
     {
-      "id": "fd-560564",
+      "id": "fd-560565",
       "league": "EPL",
       "date": "2026-09-05",
       "time": "19:30",
-      "homeTeamId": "FD397",
-      "awayTeamId": "FD341",
-      "homeTeam": "Brighton Hove",
-      "awayTeam": "Leeds United",
+      "homeTeamId": "FD402",
+      "awayTeamId": "FD71",
+      "homeTeam": "Brentford",
+      "awayTeam": "Sunderland",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-560563",
+      "league": "EPL",
+      "date": "2026-09-05",
+      "time": "19:30",
+      "homeTeamId": "FD65",
+      "awayTeamId": "FD1076",
+      "homeTeam": "Man City",
+      "awayTeam": "Coventry City",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -5990,14 +5878,14 @@
       "score": null
     },
     {
-      "id": "fd-560567",
-      "league": "EPL",
+      "id": "fd-558615",
+      "league": "SERIEA",
       "date": "2026-09-06",
       "time": "18:30",
-      "homeTeamId": "FD62",
-      "awayTeamId": "FD66",
-      "homeTeam": "Everton",
-      "awayTeam": "Man United",
+      "homeTeamId": "FD470",
+      "awayTeamId": "FD454",
+      "homeTeam": "Frosinone",
+      "awayTeam": "Venezia FC",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -6018,28 +5906,84 @@
       "score": null
     },
     {
-      "id": "fd-558615",
-      "league": "SERIEA",
+      "id": "fd-560567",
+      "league": "EPL",
       "date": "2026-09-06",
       "time": "18:30",
-      "homeTeamId": "FD470",
-      "awayTeamId": "FD454",
-      "homeTeam": "Frosinone",
-      "awayTeam": "Venezia FC",
+      "homeTeamId": "FD62",
+      "awayTeamId": "FD66",
+      "homeTeam": "Everton",
+      "awayTeam": "Man United",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
       "score": null
     },
     {
-      "id": "fd-564659",
+      "id": "fd-564660",
       "league": "LALIGA",
       "date": "2026-09-06",
       "time": "20:30",
-      "homeTeamId": "FD95",
-      "awayTeamId": "FD81",
-      "homeTeam": "Valencia",
-      "awayTeam": "Barça",
+      "homeTeamId": "FD87",
+      "awayTeamId": "FD5335",
+      "homeTeam": "Rayo Vallecano",
+      "awayTeam": "Santander",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564666",
+      "league": "LALIGA",
+      "date": "2026-09-06",
+      "time": "20:30",
+      "homeTeamId": "FD84",
+      "awayTeamId": "FD88",
+      "homeTeam": "Málaga",
+      "awayTeam": "Levante",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564662",
+      "league": "LALIGA",
+      "date": "2026-09-06",
+      "time": "20:30",
+      "homeTeamId": "FD94",
+      "awayTeamId": "FD560",
+      "homeTeam": "Villarreal",
+      "awayTeam": "Deportivo",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564658",
+      "league": "LALIGA",
+      "date": "2026-09-06",
+      "time": "20:30",
+      "homeTeamId": "FD285",
+      "awayTeamId": "FD92",
+      "homeTeam": "Elche",
+      "awayTeam": "Real Sociedad",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564664",
+      "league": "LALIGA",
+      "date": "2026-09-06",
+      "time": "20:30",
+      "homeTeamId": "FD263",
+      "awayTeamId": "FD79",
+      "homeTeam": "Alavés",
+      "awayTeam": "Osasuna",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -6102,70 +6046,14 @@
       "score": null
     },
     {
-      "id": "fd-564664",
+      "id": "fd-564659",
       "league": "LALIGA",
       "date": "2026-09-06",
       "time": "20:30",
-      "homeTeamId": "FD263",
-      "awayTeamId": "FD79",
-      "homeTeam": "Alavés",
-      "awayTeam": "Osasuna",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564660",
-      "league": "LALIGA",
-      "date": "2026-09-06",
-      "time": "20:30",
-      "homeTeamId": "FD87",
-      "awayTeamId": "FD5335",
-      "homeTeam": "Rayo Vallecano",
-      "awayTeam": "Santander",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564666",
-      "league": "LALIGA",
-      "date": "2026-09-06",
-      "time": "20:30",
-      "homeTeamId": "FD84",
-      "awayTeamId": "FD88",
-      "homeTeam": "Málaga",
-      "awayTeam": "Levante",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564662",
-      "league": "LALIGA",
-      "date": "2026-09-06",
-      "time": "20:30",
-      "homeTeamId": "FD94",
-      "awayTeamId": "FD560",
-      "homeTeam": "Villarreal",
-      "awayTeam": "Deportivo",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-564658",
-      "league": "LALIGA",
-      "date": "2026-09-06",
-      "time": "20:30",
-      "homeTeamId": "FD285",
-      "awayTeamId": "FD92",
-      "homeTeam": "Elche",
-      "awayTeam": "Real Sociedad",
+      "homeTeamId": "FD95",
+      "awayTeamId": "FD81",
+      "homeTeam": "Valencia",
+      "awayTeam": "Barça",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -6242,266 +6130,252 @@
       "score": null
     },
     {
-      "id": "fd-558604",
+      "id": "fd-558606",
       "league": "SERIEA",
       "date": "2026-09-12",
-      "time": "18:30",
-      "homeTeamId": "FD107",
-      "awayTeamId": "FD470",
-      "homeTeam": "Genoa",
-      "awayTeam": "Frosinone",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565794",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-12",
-      "time": "19:00",
-      "homeTeamId": "FD2",
-      "awayTeamId": "FD10",
-      "homeTeam": "Hoffenheim",
-      "awayTeam": "Stuttgart",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565800",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-12",
-      "time": "19:00",
-      "homeTeamId": "FD719",
-      "awayTeamId": "FD5",
-      "homeTeam": "Elversberg",
-      "awayTeam": "Bayern",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565796",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-12",
-      "time": "19:00",
-      "homeTeamId": "FD16",
-      "awayTeamId": "FD3",
-      "homeTeam": "Augsburg",
-      "awayTeam": "Leverkusen",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565802",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-12",
-      "time": "19:00",
-      "homeTeamId": "FD17",
-      "awayTeamId": "FD18",
-      "homeTeam": "Freiburg",
-      "awayTeam": "M'gladbach",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565798",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-12",
-      "time": "19:00",
-      "homeTeamId": "FD1",
-      "awayTeamId": "FD12",
-      "homeTeam": "1. FC Köln",
-      "awayTeam": "Bremen",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565799",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-12",
-      "time": "19:00",
-      "homeTeamId": "FD721",
-      "awayTeamId": "FD7",
-      "homeTeam": "RB Leipzig",
-      "awayTeam": "HSV",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565795",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-12",
-      "time": "19:00",
-      "homeTeamId": "FD4",
-      "awayTeamId": "FD29",
-      "homeTeam": "Dortmund",
-      "awayTeam": "SC Paderborn",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565801",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-12",
-      "time": "19:00",
-      "homeTeamId": "FD15",
-      "awayTeamId": "FD19",
-      "homeTeam": "Mainz",
-      "awayTeam": "Frankfurt",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565797",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-12",
-      "time": "19:00",
-      "homeTeamId": "FD28",
-      "awayTeamId": "FD6",
-      "homeTeam": "Union Berlin",
-      "awayTeam": "Schalke",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-560573",
-      "league": "EPL",
-      "date": "2026-09-12",
-      "time": "19:30",
-      "homeTeamId": "FD64",
-      "awayTeamId": "FD63",
-      "homeTeam": "Liverpool",
-      "awayTeam": "Fulham",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-560576",
-      "league": "EPL",
-      "date": "2026-09-12",
-      "time": "19:30",
-      "homeTeamId": "FD1044",
-      "awayTeamId": "FD402",
-      "homeTeam": "Bournemouth",
-      "awayTeam": "Brentford",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-560572",
-      "league": "EPL",
-      "date": "2026-09-12",
-      "time": "19:30",
-      "homeTeamId": "FD354",
-      "awayTeamId": "FD349",
-      "homeTeam": "Crystal Palace",
-      "awayTeam": "Ipswich Town",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-560581",
-      "league": "EPL",
-      "date": "2026-09-12",
-      "time": "19:30",
-      "homeTeamId": "FD61",
-      "awayTeamId": "FD322",
-      "homeTeam": "Chelsea",
-      "awayTeam": "Hull City",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-560574",
-      "league": "EPL",
-      "date": "2026-09-12",
-      "time": "19:30",
-      "homeTeamId": "FD58",
-      "awayTeamId": "FD351",
-      "homeTeam": "Aston Villa",
-      "awayTeam": "Nottingham",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-558608",
-      "league": "SERIEA",
-      "date": "2026-09-12",
-      "time": "21:30",
-      "homeTeamId": "FD471",
-      "awayTeamId": "FD109",
-      "homeTeam": "Sassuolo",
-      "awayTeam": "Juventus",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-560575",
-      "league": "EPL",
-      "date": "2026-09-12",
-      "time": "22:00",
-      "homeTeamId": "FD73",
-      "awayTeamId": "FD62",
-      "homeTeam": "Tottenham",
-      "awayTeam": "Everton",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-558607",
-      "league": "SERIEA",
-      "date": "2026-09-13",
       "time": "00:15",
-      "homeTeamId": "FD102",
-      "awayTeamId": "FD104",
-      "homeTeam": "Atalanta",
-      "awayTeam": "Cagliari",
+      "homeTeamId": "FD454",
+      "awayTeamId": "FD99",
+      "homeTeam": "Venezia FC",
+      "awayTeam": "Fiorentina",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
       "score": null
     },
     {
-      "id": "fd-560577",
+      "id": "fd-558603",
+      "league": "SERIEA",
+      "date": "2026-09-13",
+      "time": "16:00",
+      "homeTeamId": "FD586",
+      "awayTeamId": "FD100",
+      "homeTeam": "Torino",
+      "awayTeam": "Roma",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-560578",
       "league": "EPL",
       "date": "2026-09-13",
-      "time": "00:30",
-      "homeTeamId": "FD71",
-      "awayTeamId": "FD57",
-      "homeTeam": "Sunderland",
-      "awayTeam": "Arsenal",
+      "time": "18:30",
+      "homeTeamId": "FD1076",
+      "awayTeamId": "FD397",
+      "homeTeam": "Coventry City",
+      "awayTeam": "Brighton Hove",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-558602",
+      "league": "SERIEA",
+      "date": "2026-09-13",
+      "time": "18:30",
+      "homeTeamId": "FD7397",
+      "awayTeamId": "FD112",
+      "homeTeam": "Como 1907",
+      "awayTeam": "Parma",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-558605",
+      "league": "SERIEA",
+      "date": "2026-09-13",
+      "time": "18:30",
+      "homeTeamId": "FD5890",
+      "awayTeamId": "FD5911",
+      "homeTeam": "Lecce",
+      "awayTeam": "Monza",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564673",
+      "league": "LALIGA",
+      "date": "2026-09-13",
+      "time": "20:30",
+      "homeTeamId": "FD79",
+      "awayTeamId": "FD80",
+      "homeTeam": "Osasuna",
+      "awayTeam": "Espanyol",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564669",
+      "league": "LALIGA",
+      "date": "2026-09-13",
+      "time": "20:30",
+      "homeTeamId": "FD559",
+      "awayTeamId": "FD95",
+      "homeTeam": "Sevilla FC",
+      "awayTeam": "Valencia",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564675",
+      "league": "LALIGA",
+      "date": "2026-09-13",
+      "time": "20:30",
+      "homeTeamId": "FD88",
+      "awayTeamId": "FD81",
+      "homeTeam": "Levante",
+      "awayTeam": "Barça",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564671",
+      "league": "LALIGA",
+      "date": "2026-09-13",
+      "time": "20:30",
+      "homeTeamId": "FD94",
+      "awayTeamId": "FD90",
+      "homeTeam": "Villarreal",
+      "awayTeam": "Real Betis",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564677",
+      "league": "LALIGA",
+      "date": "2026-09-13",
+      "time": "20:30",
+      "homeTeamId": "FD86",
+      "awayTeamId": "FD87",
+      "homeTeam": "Real Madrid",
+      "awayTeam": "Rayo Vallecano",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564668",
+      "league": "LALIGA",
+      "date": "2026-09-13",
+      "time": "20:30",
+      "homeTeamId": "FD82",
+      "awayTeamId": "FD560",
+      "homeTeam": "Getafe",
+      "awayTeam": "Deportivo",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564674",
+      "league": "LALIGA",
+      "date": "2026-09-13",
+      "time": "20:30",
+      "homeTeamId": "FD92",
+      "awayTeamId": "FD78",
+      "homeTeam": "Real Sociedad",
+      "awayTeam": "Atleti",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564670",
+      "league": "LALIGA",
+      "date": "2026-09-13",
+      "time": "20:30",
+      "homeTeamId": "FD5335",
+      "awayTeamId": "FD263",
+      "homeTeam": "Santander",
+      "awayTeam": "Alavés",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564676",
+      "league": "LALIGA",
+      "date": "2026-09-13",
+      "time": "20:30",
+      "homeTeamId": "FD77",
+      "awayTeamId": "FD285",
+      "homeTeam": "Athletic",
+      "awayTeam": "Elche",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-564672",
+      "league": "LALIGA",
+      "date": "2026-09-13",
+      "time": "20:30",
+      "homeTeamId": "FD558",
+      "awayTeamId": "FD84",
+      "homeTeam": "Celta",
+      "awayTeam": "Málaga",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-560580",
+      "league": "EPL",
+      "date": "2026-09-13",
+      "time": "21:00",
+      "homeTeamId": "FD66",
+      "awayTeamId": "FD65",
+      "homeTeam": "Man United",
+      "awayTeam": "Man City",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-558599",
+      "league": "SERIEA",
+      "date": "2026-09-13",
+      "time": "21:30",
+      "homeTeamId": "FD113",
+      "awayTeamId": "FD103",
+      "homeTeam": "Napoli",
+      "awayTeam": "Bologna",
+      "status": "upcoming",
+      "venue": "",
+      "stage": "Regular Season",
+      "score": null
+    },
+    {
+      "id": "fd-558600",
+      "league": "SERIEA",
+      "date": "2026-09-14",
+      "time": "00:15",
+      "homeTeamId": "FD110",
+      "awayTeamId": "FD98",
+      "homeTeam": "Lazio",
+      "awayTeam": "Milan",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
