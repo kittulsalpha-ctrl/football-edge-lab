@@ -1,9 +1,9 @@
-const CACHE_NAME = "goaliq-shell-v1";
+const CACHE_NAME = "goaliq-shell-v2-real-feed-only";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=20260610-light-bracket",
-  "./app.js?v=20260610-light-bracket",
+  "./styles.css?v=20260817-real-feed-only",
+  "./app.js?v=20260817-real-feed-only",
   "./manifest.webmanifest",
   "./fixtures.live.json",
   "./assets/match-pitch.svg",

@@ -51,6 +51,15 @@ assert(
 assert(appSource.includes("function makeImportedTeam"), "Imported teams need a non-demo team factory.");
 assert(appSource.includes("function buildTeamProfileFromForm"), "Imported teams with real form must derive team stats from that form.");
 assert(appSource.includes("buildTeamProfileFromForm(importedForm"), "Imported team normalization must apply form-derived profiles.");
+assert(appSource.includes("function clearFixtureBoard"), "Public startup must be able to clear demo fixtures before live feed load.");
+assert(
+  appSource.includes("Demo fixtures are disabled on the public board"),
+  "Public startup must not present demo fixtures as verified live data."
+);
+assert(
+  !appSource.includes("Using the built-in demo snapshot"),
+  "Live-feed failure must not fall back to the built-in demo snapshot on public startup."
+);
 assert(appSource.includes("function getFixtureHeadToHead"), "Live/imported H2H must come from finished fixture feed meetings.");
 assert(appSource.includes("No verified head-to-head data"), "Live/imported teams without H2H need a no-data state.");
 assert(appSource.includes("form: []"), "Imported teams without real form should keep an empty form array.");

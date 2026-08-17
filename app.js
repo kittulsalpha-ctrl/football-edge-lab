@@ -184,6 +184,18 @@ const seedFixtureMeta = {
   note: "Sample today, live, finished, and upcoming fixtures. Import JSON to replace with a real schedule."
 };
 
+const liveFeedLoadingMeta = {
+  source: "football-data.org live feed",
+  updatedAt: "",
+  note: "Loading verified fixtures. Demo fixtures are disabled on the public board."
+};
+
+const liveFeedUnavailableMeta = {
+  source: "football-data.org live feed",
+  updatedAt: "",
+  note: "Verified fixtures could not be loaded. Demo fixtures are hidden to avoid showing wrong matches."
+};
+
 const teams = {
   MUN: makeTeam("MUN", "Manchester United", "MUN", 1764, "Old Trafford", {
     attack: [1.45, 13.2, 4.8, 2.4, 1.52],
@@ -967,7 +979,21 @@ function resetFixtureData() {
   selectors.homeView.hidden = false;
   renderFixtureSource();
   renderActiveView();
-  setImportStatus("Restored the built-in fixture snapshot.");
+  setImportStatus("Loaded demo fixtures for testing only. Use the live feed before sharing predictions.");
+}
+
+function clearFixtureBoard(meta = liveFeedUnavailableMeta, options = {}) {
+  resetTeamsToSeed();
+  matches.splice(0, matches.length);
+  fixtureMeta = { ...meta };
+  localStorage.removeItem(FIXTURE_STORAGE_KEY);
+  state.selectedMatchId = null;
+  selectors.detailView.hidden = true;
+  selectors.bracketView.hidden = state.activeView !== "worldcup";
+  selectors.homeView.hidden = state.activeView === "worldcup";
+  renderFixtureSource();
+  renderActiveView();
+  if (options.message) setImportStatus(options.message, options.isError);
 }
 
 function getFixtureDataExport() {
@@ -3164,15 +3190,21 @@ function getInitialViewFromLocation() {
 function init() {
   selectors.dateInput.value = state.selectedDate;
   state.activeView = getInitialViewFromLocation();
-  const restoredStoredFixtures = loadStoredFixtureData();
   bindEvents();
   document.querySelectorAll(".nav-tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.view === state.activeView));
-  renderActiveView();
-  loadLiveFixtureFeed({ persist: false, silent: true }).catch(() => {
-    if (!restoredStoredFixtures) {
-      setImportStatus("Live feed is not ready yet. Using the built-in demo snapshot.");
-    }
+  clearFixtureBoard(liveFeedLoadingMeta, {
+    message: "Loading verified live fixture feed..."
   });
+  loadLiveFixtureFeed({ persist: false, silent: true })
+    .then((imported) => {
+      setImportStatus(`Loaded ${imported.matches.length} verified fixtures from the live feed.`);
+    })
+    .catch((error) => {
+      clearFixtureBoard(liveFeedUnavailableMeta, {
+        message: `${error.message || "Could not load the live fixture feed."} Demo fixtures are hidden on the public board.`,
+        isError: true
+      });
+    });
 }
 
 function registerServiceWorker() {
