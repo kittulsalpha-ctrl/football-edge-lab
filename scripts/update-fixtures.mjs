@@ -378,6 +378,9 @@ function normalizeStatus(status) {
   if (clean === "IN_PLAY" || clean === "LIVE") return "live";
   if (clean === "PAUSED") return "halftime";
   if (clean === "FINISHED" || clean === "AWARDED") return "finished";
+  if (clean === "POSTPONED") return "postponed";
+  if (clean === "SUSPENDED") return "suspended";
+  if (clean === "CANCELLED" || clean === "CANCELED") return "cancelled";
 
   return "upcoming";
 }

@@ -50,7 +50,10 @@ const statusLabels = {
   upcoming: "Upcoming",
   live: "Live",
   halftime: "Halftime",
-  finished: "Finished"
+  finished: "Finished",
+  postponed: "Postponed",
+  suspended: "Suspended",
+  cancelled: "Cancelled"
 };
 
 const WORLD_CUP_PICK_STORAGE_KEY = "goaliq-worldcup-picks";
@@ -654,6 +657,8 @@ const selectors = {
   detailLeague: document.querySelector("#detailLeague"),
   detailTitle: document.querySelector("#detailTitle"),
   detailMeta: document.querySelector("#detailMeta"),
+  detailTrustBar: document.querySelector("#detailTrustBar"),
+  detailScoreboard: document.querySelector("#detailScoreboard"),
   scorePredictionLabel: document.querySelector("#scorePredictionLabel"),
   predictedScore: document.querySelector("#predictedScore"),
   probabilityPanelTitle: document.querySelector("#probabilityPanelTitle"),
@@ -901,7 +906,7 @@ function getLiveMatches() {
 
 function getUpcomingMatches() {
   return matches
-    .filter((match) => match.status === "upcoming" && match.date >= state.selectedDate)
+    .filter((match) => ["upcoming", "postponed", "suspended", "cancelled"].includes(match.status) && match.date >= state.selectedDate)
     .sort(sortMatches);
 }
 
@@ -1172,10 +1177,17 @@ function normalizeLeague(value) {
 }
 
 function normalizeStatus(status, date, score) {
-  const clean = String(status || "").toLowerCase().replace(/\s+/g, "");
-  if (["live", "halftime", "finished", "upcoming"].includes(clean)) return clean;
-  if (["ft", "fulltime", "full-time"].includes(clean)) return "finished";
-  if (["ht", "half-time"].includes(clean)) return "halftime";
+  const clean = String(status || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "");
+  if (["live", "halftime", "finished", "upcoming", "postponed", "suspended", "cancelled"].includes(clean)) return clean;
+  if (["ft", "fulltime", "awarded"].includes(clean)) return "finished";
+  if (["ht", "halftime", "paused"].includes(clean)) return "halftime";
+  if (["scheduled", "timed", "tbd"].includes(clean)) return "upcoming";
+  if (["inplay"].includes(clean)) return "live";
+  if (["postponed", "ppd"].includes(clean)) return "postponed";
+  if (["suspended"].includes(clean)) return "suspended";
+  if (["cancelled", "canceled"].includes(clean)) return "cancelled";
   if (score) return "finished";
   return date < todayKey ? "finished" : "upcoming";
 }
@@ -1801,7 +1813,7 @@ function renderBoard() {
   const allMatches = getMatchesForActiveView();
   const visibleMatches = filterMatches(allMatches);
   selectors.headerMatchCount.textContent = `${visibleMatches.length} ${visibleMatches.length === 1 ? "match" : "matches"}`;
-  selectors.emptyState.hidden = visibleMatches.length > 0;
+  renderEmptyState(visibleMatches.length, allMatches.length);
   renderTopPicks(visibleMatches);
 
   if (!visibleMatches.length) {
@@ -1812,6 +1824,51 @@ function renderBoard() {
   selectors.matchGroups.innerHTML = groupByLeague(visibleMatches)
     .map(renderLeagueGroup)
     .join("");
+}
+
+function renderEmptyState(visibleCount, totalCount) {
+  selectors.emptyState.hidden = visibleCount > 0;
+  if (visibleCount > 0) return;
+
+  const hasSearch = Boolean(state.search.trim());
+  const copy = hasSearch
+    ? {
+        title: "No matching fixtures",
+        body: totalCount
+          ? "Clear the search or try another team, league, or date."
+          : "No fixtures are available in this view yet."
+      }
+    : getEmptyStateCopyForView();
+
+  selectors.emptyState.innerHTML = `
+    <strong>${escapeHtml(copy.title)}</strong>
+    <span>${escapeHtml(copy.body)}</span>
+  `;
+}
+
+function getEmptyStateCopyForView() {
+  if (state.activeView === "live") {
+    return {
+      title: "No live matches right now",
+      body: "Live fixtures will appear here automatically when the feed reports an in-play match."
+    };
+  }
+  if (state.activeView === "finished") {
+    return {
+      title: "No finished results yet",
+      body: "Completed matches will appear here once the live feed publishes final scores."
+    };
+  }
+  if (state.activeView === "upcoming") {
+    return {
+      title: "No upcoming fixtures found",
+      body: "Try a later date or refresh the live fixture feed."
+    };
+  }
+  return {
+    title: "No matches on this date",
+    body: "Move the date selector or load the latest fixture feed."
+  };
 }
 
 function renderTopPicks(visibleMatches) {
@@ -1956,7 +2013,7 @@ function safeRenderMatchCard(match) {
 function renderMatchCard(match) {
   const details = getMatchDetails(match.id);
   const prediction = calculatePrediction(details);
-  const status = statusLabels[match.status];
+  const status = getStatusLabel(match.status);
   const scoreLabel = match.score ? `${match.score.home}-${match.score.away}` : "vs";
   const contextLabel = formatMatchContext(match, details);
 
@@ -2047,16 +2104,19 @@ function renderDetail() {
   const prediction = calculatePrediction(details);
   const scoreDisplay = getDetailScoreDisplay(details, prediction);
   const isFinished = details.status === "finished";
-  selectors.detailStatus.textContent = statusLabels[details.status];
+  const isInactive = isInactiveStatus(details.status);
+  selectors.detailStatus.textContent = getStatusLabel(details.status);
   selectors.detailStatus.className = `status-chip ${details.status}`;
   selectors.detailLeague.textContent = details.leagueProfile.name;
   selectors.detailTitle.textContent = `${details.homeTeam.name} vs ${details.awayTeam.name}`;
   selectors.detailMeta.textContent = `${formatLongDate(details.date)} - ${details.time} - ${details.stage ? `${details.stage} - ` : ""}${details.venue}`;
+  selectors.detailTrustBar.innerHTML = renderDetailTrustBar(details, prediction);
+  selectors.detailScoreboard.innerHTML = renderDetailScoreboard(details, scoreDisplay, prediction);
   selectors.scorePredictionLabel.textContent = scoreDisplay.label;
   selectors.predictedScore.textContent = scoreDisplay.value;
-  selectors.probabilityPanelTitle.textContent = isFinished ? "Pre-match probability" : "Winning probability";
-  selectors.confidenceLevel.textContent = isFinished ? "Finished result" : `${prediction.confidence} confidence`;
-  selectors.extraPredictionsTitle.textContent = isFinished ? "Archived predictions" : "Extra predictions";
+  selectors.probabilityPanelTitle.textContent = isInactive ? "Paused probability" : isFinished ? "Pre-match probability" : "Winning probability";
+  selectors.confidenceLevel.textContent = isInactive ? "Fixture inactive" : isFinished ? "Finished result" : `${prediction.confidence} confidence`;
+  selectors.extraPredictionsTitle.textContent = isInactive ? "Paused predictions" : isFinished ? "Archived predictions" : "Extra predictions";
   selectors.mostLikelyResult.textContent = prediction.mostLikelyResult;
 
   selectors.probabilityCards.innerHTML = [
@@ -2073,7 +2133,7 @@ function renderDetail() {
     ["Date", formatLongDate(details.date)],
     ["Kickoff", details.time],
     ["Venue", details.venue],
-    ["Status", statusLabels[details.status]],
+    ["Status", getStatusLabel(details.status)],
     ...(details.score ? [[scoreDisplay.label, `${details.homeTeam.shortName} ${details.score.home} - ${details.score.away} ${details.awayTeam.shortName}`]] : []),
     ["Expected goals", `${formatNumber(prediction.expectedGoals.home)} - ${formatNumber(prediction.expectedGoals.away)}`],
     ["Data quality", `${prediction.dataQuality.label} - ${prediction.dataQuality.summary}`],
@@ -2135,6 +2195,38 @@ function getDetailScoreDisplay(match, prediction) {
     label: "Predicted score",
     value: prediction.predictedScore
   };
+}
+
+function renderDetailTrustBar(details, prediction) {
+  return `
+    <span>${escapeHtml(prediction.dataQuality.label)} data</span>
+    <span>${escapeHtml(prediction.confidence)} confidence</span>
+    <span>${escapeHtml(prediction.marketEdges.recommended.label)}</span>
+    <span>${escapeHtml(getStatusLabel(details.status))}</span>
+  `;
+}
+
+function renderDetailScoreboard(details, scoreDisplay, prediction) {
+  const homeProbability = formatPercent(prediction.probabilities.home);
+  const awayProbability = formatPercent(prediction.probabilities.away);
+
+  return `
+    <div class="scoreboard-team">
+      <span class="team-badge">${escapeHtml(details.homeTeam.shortName)}</span>
+      <strong>${escapeHtml(details.homeTeam.name)}</strong>
+      <small>${homeProbability}</small>
+    </div>
+    <div class="scoreboard-centre">
+      <span>${escapeHtml(scoreDisplay.label)}</span>
+      <strong>${escapeHtml(scoreDisplay.value)}</strong>
+      <em>${escapeHtml(getStatusLabel(details.status))}</em>
+    </div>
+    <div class="scoreboard-team away">
+      <span class="team-badge away">${escapeHtml(details.awayTeam.shortName)}</span>
+      <strong>${escapeHtml(details.awayTeam.name)}</strong>
+      <small>${awayProbability}</small>
+    </div>
+  `;
 }
 
 function renderProbabilityCard(label, probability) {
@@ -3094,7 +3186,10 @@ function registerServiceWorker() {
 }
 
 function renderFixtureSource() {
-  selectors.fixtureSourceText.textContent = `${fixtureMeta.source}. Updated ${fixtureMeta.updatedAt}. ${fixtureMeta.note || ""}`;
+  const source = fixtureMeta.source || "Fixture feed";
+  const updated = fixtureMeta.updatedAt ? `Updated ${fixtureMeta.updatedAt}` : "Update time unavailable";
+  const note = fixtureMeta.note ? ` ${fixtureMeta.note}` : "";
+  selectors.fixtureSourceText.textContent = `${source}. ${updated}.${note}`;
 }
 
 function setImportStatus(message, isError = false) {
@@ -3281,7 +3376,23 @@ function formatMatchTime(match) {
   if (match.status === "live") return `${match.minute}'`;
   if (match.status === "halftime") return "HT";
   if (match.status === "finished") return "FT";
+  if (isInactiveStatus(match.status)) return getStatusLabel(match.status);
   return match.time;
+}
+
+function getStatusLabel(status) {
+  return (
+    statusLabels[status] ||
+    String(status || "upcoming")
+      .replace(/[_-]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .replace(/\b\w/g, (letter) => letter.toUpperCase())
+  );
+}
+
+function isInactiveStatus(status) {
+  return ["postponed", "suspended", "cancelled"].includes(status);
 }
 
 function formatPercent(value) {
