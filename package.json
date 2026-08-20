@@ -7,6 +7,7 @@
     "dev": "node scripts/dev-server.mjs",
     "build": "node --check app.js && node --check sw.js && node --check scripts/update-fixtures.mjs && node --check scripts/worldcup-bracket.mjs && node --check scripts/prepare-mobile.mjs && node scripts/validate-form-data.mjs",
     "test": "node --test tests/*.test.mjs && node scripts/validate-form-data.mjs",
+    "cloudflare:build": "npm run build && node scripts/prepare-cloudflare.mjs",
     "mobile:prepare": "node scripts/prepare-mobile.mjs",
     "mobile:build": "npm run build && npm run mobile:prepare",
     "mobile:add:android": "npm run mobile:build && npx cap add android",
