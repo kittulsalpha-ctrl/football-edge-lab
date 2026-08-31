@@ -1,10 +1,10 @@
-const CACHE_NAME = "goaliq-shell-v2-prediction-engine-v2";
+const CACHE_NAME = "goaliq-shell-v2-prediction-engine-v2b";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=20260831-engine-v2",
-  "./prediction-engine-v2.js?v=20260831-engine-v2",
-  "./app.js?v=20260831-engine-v2",
+  "./styles.css?v=20260831-engine-v2b",
+  "./prediction-engine-v2.js?v=20260831-engine-v2b",
+  "./app.js?v=20260831-engine-v2b",
   "./manifest.webmanifest",
   "./fixtures.live.json",
   "./assets/match-pitch.svg",

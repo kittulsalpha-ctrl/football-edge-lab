@@ -3247,11 +3247,14 @@ function formatLongDate(date) {
 }
 
 function formatMatchTime(match) {
-  if (match.status === "live") return `${match.minute}'`;
+  if (match.status === "live") {
+    const minute = Number(match.minute);
+    return Number.isFinite(minute) && minute > 0 ? `${Math.round(minute)}'` : "Live";
+  }
   if (match.status === "halftime") return "HT";
   if (match.status === "finished") return "FT";
   if (isInactiveStatus(match.status)) return getStatusLabel(match.status);
-  return match.time;
+  return match.time || "TBD";
 }
 
 function getStatusLabel(status) {
