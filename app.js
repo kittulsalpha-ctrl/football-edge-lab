@@ -561,6 +561,7 @@ const matches = [
 const seedMatches = matches.map(cloneMatch);
 const seedTeams = cloneTeamMap(teams);
 let fixtureMeta = { ...seedFixtureMeta };
+const historicalMatches = [];
 
 const headToHead = {
   [pairKey("MUN", "CHE")]: [
@@ -744,8 +745,6 @@ function quickTeam(id, name, shortName, rating, venue, league) {
 }
 
 function makeImportedTeam(id, name, shortName, rating, venue, league) {
-  const strength = clamp((rating - 1600) / 300, -0.3, 0.8);
-
   return {
     id,
     name,
@@ -753,19 +752,22 @@ function makeImportedTeam(id, name, shortName, rating, venue, league) {
     rating,
     venue,
     attacking: {
-      avgGoals: clamp(1.25 + strength * 0.45, 0.85, 2.05),
-      shots: clamp(11.2 + strength * 3.4, 8.4, 16.4),
-      shotsOnTarget: clamp(3.8 + strength * 1.4, 2.6, 6.1),
-      bigChances: clamp(1.6 + strength, 0.8, 3.2),
-      xg: clamp(1.18 + strength * 0.45, 0.78, 2.0)
+      avgGoals: null,
+      shots: null,
+      shotsOnTarget: null,
+      bigChances: null,
+      xg: null,
+      expectedGoalsModel: null
     },
     defensive: {
-      goalsConcededAvg: clamp(1.38 - strength * 0.34, 0.82, 1.88),
-      cleanSheetPct: clamp(27 + strength * 14, 16, 52),
-      xga: clamp(1.42 - strength * 0.3, 0.82, 1.86),
-      cards: clamp(2.4 - strength * 0.25, 1.5, 2.9)
+      goalsConcededAvg: null,
+      cleanSheetPct: null,
+      xga: null,
+      cards: null,
+      expectedGoalsAgainstModel: null
     },
-    form: []
+    form: [],
+    dataProvenance: createUnavailableTeamProvenance(league)
   };
 }
 
@@ -787,6 +789,7 @@ function cloneTeam(team) {
     ...team,
     attacking: { ...team.attacking },
     defensive: { ...team.defensive },
+    dataProvenance: cloneDataProvenance(team.dataProvenance),
     form: Array.isArray(team.form) ? team.form.map((match) => ({ ...match })) : []
   };
 }
@@ -818,25 +821,88 @@ function buildTeamProfileFromForm(form, seedRating = 1600) {
   const pointsPerMatch = totals.points / matchesPlayed;
   const goalDifferencePerMatch = (totals.goalsFor - totals.goalsAgainst) / matchesPlayed;
   const cleanSheetPct = (totals.cleanSheets / matchesPlayed) * 100;
-  const failedToScorePct = (totals.failedToScore / matchesPlayed) * 100;
   const ratingBase = Number.isFinite(Number(seedRating)) ? Number(seedRating) : 1600;
 
   return {
     rating: Math.round(clamp(ratingBase + (pointsPerMatch - 1.35) * 95 + goalDifferencePerMatch * 70 + (cleanSheetPct - 30) * 1.1, 1380, 2025)),
     attacking: {
       avgGoals: roundMetric(avgGoals),
-      shots: roundMetric(clamp(8.2 + avgGoals * 3.1 + pointsPerMatch * 0.9 - failedToScorePct * 0.018, 6.8, 19.5), 1),
-      shotsOnTarget: roundMetric(clamp(2.4 + avgGoals * 1.35 + pointsPerMatch * 0.22, 1.8, 7.4), 1),
-      bigChances: roundMetric(clamp(0.65 + avgGoals * 0.85 + pointsPerMatch * 0.18, 0.3, 4.2), 1),
-      xg: roundMetric(clamp(avgGoals * 0.82 + pointsPerMatch * 0.18 + 0.28, 0.45, 3.05))
+      shots: null,
+      shotsOnTarget: null,
+      bigChances: null,
+      xg: null,
+      expectedGoalsModel: null
     },
     defensive: {
       goalsConcededAvg: roundMetric(avgAgainst),
       cleanSheetPct: Math.round(cleanSheetPct),
-      xga: roundMetric(clamp(avgAgainst * 0.88 + (100 - cleanSheetPct) * 0.004, 0.35, 2.85)),
-      cards: roundMetric(clamp(2.45 - pointsPerMatch * 0.2 + avgAgainst * 0.14, 1.3, 3.4), 1)
+      xga: null,
+      cards: null,
+      expectedGoalsAgainstModel: null
+    },
+    dataProvenance: createDerivedTeamProvenance()
+  };
+}
+
+function createUnavailableTeamProvenance(league) {
+  return {
+    source: "imported-fixture-feed",
+    league,
+    attacking: {
+      avgGoals: unavailableProvenance(),
+      shots: unavailableProvenance(),
+      shotsOnTarget: unavailableProvenance(),
+      bigChances: unavailableProvenance(),
+      xg: unavailableProvenance()
+    },
+    defensive: {
+      goalsConcededAvg: unavailableProvenance(),
+      cleanSheetPct: unavailableProvenance(),
+      xga: unavailableProvenance(),
+      cards: unavailableProvenance()
     }
   };
+}
+
+function createDerivedTeamProvenance() {
+  return {
+    source: "verified-result-feed",
+    attacking: {
+      avgGoals: derivedProvenance("recent-finished-results"),
+      shots: unavailableProvenance(),
+      shotsOnTarget: unavailableProvenance(),
+      bigChances: unavailableProvenance(),
+      xg: unavailableProvenance()
+    },
+    defensive: {
+      goalsConcededAvg: derivedProvenance("recent-finished-results"),
+      cleanSheetPct: derivedProvenance("recent-finished-results"),
+      xga: unavailableProvenance(),
+      cards: unavailableProvenance()
+    }
+  };
+}
+
+function derivedProvenance(method) {
+  return {
+    sourceType: "derived",
+    source: "verified result feed",
+    method,
+    verified: false
+  };
+}
+
+function unavailableProvenance() {
+  return {
+    sourceType: "unavailable",
+    source: null,
+    verified: false
+  };
+}
+
+function cloneDataProvenance(provenance) {
+  if (!provenance || typeof provenance !== "object") return null;
+  return JSON.parse(JSON.stringify(provenance));
 }
 
 function roundMetric(value, digits = 2) {
@@ -863,6 +929,7 @@ function makeTeam(id, name, shortName, rating, venue, data) {
       xga: data.defense[2],
       cards: data.defense[3]
     },
+    dataProvenance: createDemoTeamProvenance(),
     form: data.form.map((row, index) => ({
       date: formatDateKey(addDays(new Date(), -(index + 1) * 7)),
       competition: row[0],
@@ -871,6 +938,33 @@ function makeTeam(id, name, shortName, rating, venue, data) {
       goalsFor: row[3],
       goalsAgainst: row[4]
     }))
+  };
+}
+
+function createDemoTeamProvenance() {
+  return {
+    source: "built-in-demo-snapshot",
+    attacking: {
+      avgGoals: demoProvenance(),
+      shots: demoProvenance(),
+      shotsOnTarget: demoProvenance(),
+      bigChances: demoProvenance(),
+      xg: demoProvenance()
+    },
+    defensive: {
+      goalsConcededAvg: demoProvenance(),
+      cleanSheetPct: demoProvenance(),
+      xga: demoProvenance(),
+      cards: demoProvenance()
+    }
+  };
+}
+
+function demoProvenance() {
+  return {
+    sourceType: "demo",
+    source: "built-in demo snapshot",
+    verified: false
   };
 }
 
@@ -950,6 +1044,7 @@ function getTeamLastFiveMatches(teamId) {
 function importFixtureData(payload, options = {}) {
   const normalized = normalizeFixturePayload(payload, options.source || "Imported JSON");
   matches.splice(0, matches.length, ...normalized.matches.map(cloneMatch));
+  historicalMatches.splice(0, historicalMatches.length, ...normalized.historicalMatches.map(cloneHistoricalMatch));
   fixtureMeta = normalized.meta;
 
   if (options.persist !== false) {
@@ -969,6 +1064,7 @@ function importFixtureData(payload, options = {}) {
 function resetFixtureData() {
   resetTeamsToSeed();
   matches.splice(0, matches.length, ...seedMatches.map(cloneMatch));
+  historicalMatches.splice(0, historicalMatches.length);
   fixtureMeta = { ...seedFixtureMeta };
   localStorage.removeItem(FIXTURE_STORAGE_KEY);
   if (selectors.fixtureJsonFile) selectors.fixtureJsonFile.value = "";
@@ -985,6 +1081,7 @@ function resetFixtureData() {
 function clearFixtureBoard(meta = liveFeedUnavailableMeta, options = {}) {
   resetTeamsToSeed();
   matches.splice(0, matches.length);
+  historicalMatches.splice(0, historicalMatches.length);
   fixtureMeta = { ...meta };
   localStorage.removeItem(FIXTURE_STORAGE_KEY);
   state.selectedMatchId = null;
@@ -1004,6 +1101,7 @@ function getFixtureDataExport() {
       exportedAt: new Date().toISOString()
     },
     teams: teamIds.map((teamId) => exportTeam(teams[teamId])).filter(Boolean),
+    historicalMatches: historicalMatches.map(cloneHistoricalMatch),
     matches: matches.map(exportMatch)
   };
 }
@@ -1048,14 +1146,16 @@ function loadStoredFixtureData() {
   try {
     const normalized = normalizeFixturePayload(JSON.parse(raw), "Browser storage");
     matches.splice(0, matches.length, ...normalized.matches.map(cloneMatch));
+    historicalMatches.splice(0, historicalMatches.length, ...normalized.historicalMatches.map(cloneHistoricalMatch));
     fixtureMeta = normalized.meta;
     renderFixtureSource();
     return true;
   } catch {
-    localStorage.removeItem(FIXTURE_STORAGE_KEY);
-    fixtureMeta = { ...seedFixtureMeta };
-    renderFixtureSource();
-    return false;
+      localStorage.removeItem(FIXTURE_STORAGE_KEY);
+      fixtureMeta = { ...seedFixtureMeta };
+      historicalMatches.splice(0, historicalMatches.length);
+      renderFixtureSource();
+      return false;
   }
 }
 
@@ -1069,6 +1169,7 @@ function normalizeFixturePayload(payload, fallbackSource) {
   importedTeams.forEach((team) => normalizeImportedTeam(team));
 
   const normalizedMatches = rawMatches.map((match, index) => normalizeImportedMatch(match, index)).filter(Boolean);
+  const normalizedHistoricalMatches = normalizeImportedHistoricalMatches(payload);
   if (!normalizedMatches.length) throw new Error("No valid fixtures were found in that JSON.");
 
   return {
@@ -1077,7 +1178,57 @@ function normalizeFixturePayload(payload, fallbackSource) {
       updatedAt: payload?.meta?.updatedAt || payload?.updatedAt || new Date().toISOString().slice(0, 10),
       note: payload?.meta?.note || "Imported fixture data"
     },
+    historicalMatches: normalizedHistoricalMatches,
     matches: normalizedMatches.sort(sortMatches)
+  };
+}
+
+function normalizeImportedHistoricalMatches(payload) {
+  const rawHistory = payload?.historicalMatches || payload?.history || [];
+  if (!Array.isArray(rawHistory)) return [];
+  return rawHistory.map(normalizeImportedHistoricalMatch).filter(Boolean).sort(sortMatches);
+}
+
+function normalizeImportedHistoricalMatch(match, index) {
+  if (!match || typeof match !== "object") return null;
+
+  const league = normalizeLeague(match.league || match.competition || match.competitionId);
+  const date = normalizeDate(match.date || match.kickoffDate || match.utcDate || match.kickoff);
+  const time = normalizeTime(match.time || match.kickoffTime || match.utcTime || match.kickoff || match.utcDate);
+  const homeTeamId = resolveTeamForMatch(match.homeTeamId || match.homeId, match.homeTeam || match.home || match.homeName, league);
+  const awayTeamId = resolveTeamForMatch(match.awayTeamId || match.awayId, match.awayTeam || match.away || match.awayName, league);
+  const score = normalizeScore(match.score) || normalizeScore({ home: match.homeGoals, away: match.awayGoals });
+
+  if (!league || !date || !homeTeamId || !awayTeamId || homeTeamId === awayTeamId || !score) return null;
+
+  return {
+    id: String(match.id || match.matchId || `history-${league}-${date}-${homeTeamId}-${awayTeamId}-${index}`).toLowerCase(),
+    competitionId: league,
+    league,
+    season: match.season || "",
+    date,
+    time,
+    kickoff: match.kickoff || `${date}T${time}:00`,
+    homeTeamId,
+    awayTeamId,
+    homeTeam: match.homeTeam || teams[homeTeamId]?.name || homeTeamId,
+    awayTeam: match.awayTeam || teams[awayTeamId]?.name || awayTeamId,
+    homeGoals: Number(score.home),
+    awayGoals: Number(score.away),
+    halftimeHomeGoals: toFiniteOrNull(match.halftimeHomeGoals),
+    halftimeAwayGoals: toFiniteOrNull(match.halftimeAwayGoals),
+    homeShots: toFiniteOrNull(match.homeShots),
+    awayShots: toFiniteOrNull(match.awayShots),
+    homeShotsOnTarget: toFiniteOrNull(match.homeShotsOnTarget),
+    awayShotsOnTarget: toFiniteOrNull(match.awayShotsOnTarget),
+    homeXg: toFiniteOrNull(match.homeXg),
+    awayXg: toFiniteOrNull(match.awayXg),
+    source: match.source || "imported historical feed",
+    sourceQuality: match.sourceQuality || {
+      fixture: "provider",
+      score: "provider",
+      advancedStats: "unavailable"
+    }
   };
 }
 
@@ -1089,9 +1240,15 @@ function normalizeImportedTeam(team) {
   const league = normalizeLeague(team.league || team.competition || "EPL");
   const id = normalizeTeamId(team.id || team.teamId || createTeamId(name, league));
   const existingId = findTeamIdByName(name) || id;
-  const base =
-    teams[existingId] ||
-    makeImportedTeam(existingId, name, team.shortName || makeShortName(name), Number(team.rating) || 1600, team.venue || "", league);
+  const existingTeam = teams[existingId];
+  const base = makeImportedTeam(
+    existingId,
+    name,
+    team.shortName || existingTeam?.shortName || makeShortName(name),
+    Number(team.rating) || existingTeam?.rating || 1600,
+    team.venue || existingTeam?.venue || "",
+    league
+  );
   const importedForm = normalizeImportedForm(team.form);
   const suppliedRating = Number(team.rating);
   const ratingSeed = Number.isFinite(suppliedRating) ? suppliedRating : base.rating;
@@ -1106,14 +1263,13 @@ function normalizeImportedTeam(team) {
     venue: team.venue || base.venue || "",
     attacking: {
       ...base.attacking,
-      ...(formProfile?.attacking || {}),
-      ...(team.attacking || {})
+      ...(formProfile?.attacking || {})
     },
     defensive: {
       ...base.defensive,
-      ...(formProfile?.defensive || {}),
-      ...(team.defensive || {})
+      ...(formProfile?.defensive || {})
     },
+    dataProvenance: formProfile?.dataProvenance || base.dataProvenance || createUnavailableTeamProvenance(league),
     form: importedForm
   };
 
@@ -1231,23 +1387,29 @@ function normalizeImportedForm(form) {
   const normalized = form
     .map((match, index) => {
       if (Array.isArray(match)) {
+        const goalsFor = toFiniteOrNull(match[3]);
+        const goalsAgainst = toFiniteOrNull(match[4]);
+        if (!Number.isFinite(goalsFor) || !Number.isFinite(goalsAgainst)) return null;
         return {
           date: formatDateKey(addDays(new Date(), -(index + 1) * 7)),
           competition: normalizeLeague(match[0] || "EPL"),
           opponent: String(match[1] || "Opponent"),
           venue: String(match[2] || "H"),
-          goalsFor: Number(match[3]) || 0,
-          goalsAgainst: Number(match[4]) || 0
+          goalsFor,
+          goalsAgainst
         };
       }
       if (!match || typeof match !== "object") return null;
+      const goalsFor = toFiniteOrNull(match.goalsFor ?? match.gf);
+      const goalsAgainst = toFiniteOrNull(match.goalsAgainst ?? match.ga);
+      if (!Number.isFinite(goalsFor) || !Number.isFinite(goalsAgainst)) return null;
       return {
         date: normalizeDate(match.date) || formatDateKey(addDays(new Date(), -(index + 1) * 7)),
         competition: normalizeLeague(match.competition || match.league || "EPL"),
         opponent: String(match.opponent || "Opponent"),
         venue: String(match.venue || match.side || "H"),
-        goalsFor: Number(match.goalsFor ?? match.gf) || 0,
-        goalsAgainst: Number(match.goalsAgainst ?? match.ga) || 0
+        goalsFor,
+        goalsAgainst
       };
     })
     .filter(Boolean)
@@ -1265,6 +1427,7 @@ function exportTeam(team) {
     venue: team.venue,
     attacking: team.attacking,
     defensive: team.defensive,
+    dataProvenance: team.dataProvenance,
     form: team.form
   };
 }
@@ -1288,330 +1451,18 @@ function exportMatch(match) {
 }
 
 function calculatePrediction(matchData) {
-  const home = matchData.homeTeam;
-  const away = matchData.awayTeam;
-  const profile = matchData.leagueProfile;
-  const homeForm = summarizeForm(home);
-  const awayForm = summarizeForm(away);
-  const h2h = summarizeH2H(matchData.h2h, home.id, away.id);
+  const engine = window.GoalIQPredictionEngine;
+  if (!engine?.predictMatchV2) {
+    throw new Error("GoalIQ Prediction Engine v2 failed to load.");
+  }
 
-  const ratingEdge = (home.rating - away.rating) / 950;
-  const hasComparableForm = homeForm.matchesPlayed > 0 && awayForm.matchesPlayed > 0;
-  const formEdge = hasComparableForm ? (homeForm.pointsPerMatch - awayForm.pointsPerMatch) / 6 : 0;
-  const goalTrendEdge = hasComparableForm ? ((homeForm.goalDifference / homeForm.matchesPlayed) - (awayForm.goalDifference / awayForm.matchesPlayed)) * 0.08 : 0;
-  const h2hEdge = h2h.total ? ((h2h.homeWins - h2h.awayWins) / h2h.total) * 0.12 : 0;
-  const homeEdge = profile.homeAdvantage + ratingEdge + formEdge + goalTrendEdge + h2hEdge;
-
-  const baseHomeXg = profile.avgGoals * 0.53;
-  const baseAwayXg = profile.avgGoals * 0.47;
-  const homeAttack = homeForm.matchesPlayed ? blend(home.attacking.xg, homeForm.avgGoalsFor, 0.55) : home.attacking.xg;
-  const awayAttack = awayForm.matchesPlayed ? blend(away.attacking.xg, awayForm.avgGoalsFor, 0.55) : away.attacking.xg;
-  const homeDefense = homeForm.matchesPlayed ? blend(home.defensive.xga, homeForm.avgGoalsAgainst, 0.5) : home.defensive.xga;
-  const awayDefense = awayForm.matchesPlayed ? blend(away.defensive.xga, awayForm.avgGoalsAgainst, 0.5) : away.defensive.xga;
-
-  const pregameHomeXg = clamp(baseHomeXg + (homeAttack - awayDefense) * 0.42 + homeEdge * 0.48, 0.25, 4.4);
-  const pregameAwayXg = clamp(baseAwayXg + (awayAttack - homeDefense) * 0.42 - homeEdge * 0.34, 0.25, 4.4);
-  const currentScore = matchData.score || { home: 0, away: 0 };
-  const minute = matchData.minute || 0;
-  const remainingFactor = matchData.status === "live" || matchData.status === "halftime" ? clamp((94 - minute) / 94, 0.04, 1) : 1;
-  const remainingHomeXg = matchData.status === "finished" ? 0 : pregameHomeXg * remainingFactor;
-  const remainingAwayXg = matchData.status === "finished" ? 0 : pregameAwayXg * remainingFactor;
-
-  const matrix = buildScoreMatrix(remainingHomeXg, remainingAwayXg, currentScore, 7);
-  const outcome = summarizeScoreMatrix(matrix);
-  const likelyScore = matrix.flat().sort((a, b) => b.probability - a.probability)[0];
-  const dataQuality = calculateDataQuality(homeForm, awayForm, h2h);
-  const marketEdges = buildMarketRecommendations(outcome, home, away, dataQuality);
-  const modelBreakdown = buildModelBreakdown({
-    home,
-    away,
-    profile,
-    homeForm,
-    awayForm,
-    h2h,
-    h2hEdge,
-    homeAttack,
-    awayAttack,
-    homeDefense,
-    awayDefense,
-    outcome,
-    dataQuality
+  return engine.predictMatchV2({
+    match: matchData,
+    matches: [...historicalMatches, ...matches],
+    teams,
+    leagueProfiles,
+    fixtureMeta
   });
-  const insights = buildPredictionInsights({
-    home,
-    away,
-    profile,
-    homeForm,
-    awayForm,
-    h2h,
-    homeEdge,
-    homeXg: currentScore.home + remainingHomeXg,
-    awayXg: currentScore.away + remainingAwayXg,
-    dataQuality
-  });
-  const maxOutcome = Math.max(outcome.home, outcome.draw, outcome.away);
-  const secondOutcome = [outcome.home, outcome.draw, outcome.away].sort((a, b) => b - a)[1];
-  const confidenceScore = clamp(
-    ((maxOutcome - secondOutcome) * 1.6 + Math.abs(homeEdge) * 0.3 + 0.08) * (0.78 + dataQuality.score * 0.22),
-    0,
-    1
-  );
-  const confidence = confidenceScore > 0.42 ? "High" : confidenceScore > 0.22 ? "Medium" : "Low";
-  const winner =
-    outcome.home >= outcome.draw && outcome.home >= outcome.away
-      ? `${home.name} win`
-      : outcome.away >= outcome.home && outcome.away >= outcome.draw
-        ? `${away.name} win`
-        : "Draw";
-
-  return {
-    probabilities: outcome,
-    confidence,
-    confidenceScore,
-    predictedScore: `${likelyScore.homeGoals}-${likelyScore.awayGoals}`,
-    expectedGoals: {
-      home: currentScore.home + remainingHomeXg,
-      away: currentScore.away + remainingAwayXg
-    },
-    mostLikelyResult: winner,
-    form: {
-      home: homeForm,
-      away: awayForm
-    },
-    h2h,
-    dataQuality,
-    marketEdges,
-    modelBreakdown,
-    insights
-  };
-}
-
-function buildModelBreakdown({
-  home,
-  away,
-  profile,
-  homeForm,
-  awayForm,
-  h2h,
-  h2hEdge,
-  homeAttack,
-  awayAttack,
-  homeDefense,
-  awayDefense,
-  outcome,
-  dataQuality
-}) {
-  const formScore = homeForm.matchesPlayed && awayForm.matchesPlayed ? clamp((homeForm.pointsPerMatch - awayForm.pointsPerMatch) / 2.4, -1, 1) : 0;
-  const attackScore = clamp((homeAttack - awayAttack) / 1.9, -1, 1);
-  const defenseScore = clamp((awayDefense - homeDefense) / 1.8, -1, 1);
-  const homeAdvantageScore = clamp(profile.homeAdvantage / 0.18, 0, 1);
-  const h2hScore = h2h.total ? clamp(h2hEdge / 0.16, -1, 1) : 0;
-  const goalMarket = getGoalMarketLean(outcome);
-  const edgeTotal = formScore * 0.28 + attackScore * 0.2 + defenseScore * 0.18 + homeAdvantageScore * 0.15 + h2hScore * 0.12;
-  const summary =
-    edgeTotal > 0.12
-      ? `${home.shortName} edge`
-      : edgeTotal < -0.12
-        ? `${away.shortName} edge`
-        : "Balanced model";
-
-  return {
-    summary: `${summary} - ${dataQuality.label} data`,
-    rows: [
-      breakdownEdgeRow(
-        "Form edge",
-        formScore,
-        home,
-        away,
-        homeForm.matchesPlayed && awayForm.matchesPlayed
-          ? `${home.shortName} ${formatNumber(homeForm.pointsPerMatch)} PPM vs ${away.shortName} ${formatNumber(awayForm.pointsPerMatch)} PPM`
-          : "Recent form is incomplete",
-        "Last five results, points per match, and goal difference."
-      ),
-      breakdownEdgeRow(
-        "Attack edge",
-        attackScore,
-        home,
-        away,
-        `${home.shortName} ${formatNumber(homeAttack)} xG vs ${away.shortName} ${formatNumber(awayAttack)} xG`,
-        "Blended team xG and recent goals scored."
-      ),
-      breakdownEdgeRow(
-        "Defence edge",
-        defenseScore,
-        home,
-        away,
-        `${home.shortName} ${formatNumber(homeDefense)} xGA vs ${away.shortName} ${formatNumber(awayDefense)} xGA`,
-        "Lower expected goals against is stronger."
-      ),
-      {
-        label: "Home advantage",
-        direction: "home",
-        score: homeAdvantageScore,
-        lean: `${home.shortName} venue lift`,
-        value: formatPercent(profile.homeAdvantage),
-        description: `${profile.shortName} home-field adjustment.`
-      },
-      breakdownEdgeRow(
-        "Head-to-head",
-        h2hScore,
-        home,
-        away,
-        h2h.total ? `${h2h.homeWins}-${h2h.draws}-${h2h.awayWins} in ${h2h.total}` : "No verified sample",
-        "Recent direct meetings when available."
-      ),
-      {
-        label: "Goal market lean",
-        direction: "neutral",
-        score: goalMarket.probability,
-        lean: goalMarket.label,
-        value: formatPercent(goalMarket.probability),
-        description: goalMarket.description
-      },
-      {
-        label: "Data quality",
-        direction: "neutral",
-        score: dataQuality.score,
-        lean: `${dataQuality.label} evidence`,
-        value: `${dataQuality.formMatches} form / ${dataQuality.h2hMatches} H2H`,
-        description: dataQuality.summary
-      }
-    ]
-  };
-}
-
-function breakdownEdgeRow(label, score, home, away, value, description) {
-  const direction = score > 0.04 ? "home" : score < -0.04 ? "away" : "balanced";
-  return {
-    label,
-    direction,
-    score,
-    lean: direction === "home" ? `${home.shortName} edge` : direction === "away" ? `${away.shortName} edge` : "Even",
-    value,
-    description
-  };
-}
-
-function getGoalMarketLean(outcome) {
-  const candidates = [
-    ["Over 2.5", outcome.over25, "Open-game signal from projected score distribution."],
-    ["Under 3.5", outcome.under35, "Lower-volatility goals angle from projected score distribution."],
-    ["BTTS", outcome.btts, "Both teams show enough scoring probability."],
-    ["Over 1.5", outcome.over15, "Two-goal floor has the strongest goal-market support."]
-  ];
-  const [label, probability, description] = candidates.sort((a, b) => b[1] - a[1])[0];
-  return { label, probability, description };
-}
-
-function calculateDataQuality(homeForm, awayForm, h2h) {
-  const formCoverage = clamp((homeForm.matchesPlayed + awayForm.matchesPlayed) / 10, 0, 1);
-  const h2hCoverage = clamp(h2h.total / 3, 0, 1);
-  const score = clamp(formCoverage * 0.66 + h2hCoverage * 0.16 + 0.18, 0, 1);
-  const label = score >= 0.78 ? "Strong" : score >= 0.54 ? "Moderate" : "Limited";
-  const level = score >= 0.78 ? "strong" : score >= 0.54 ? "moderate" : "limited";
-  const summary =
-    label === "Strong"
-      ? "recent form and matchup context available"
-      : label === "Moderate"
-        ? "some recent form available"
-        : "model leans more on ratings and competition averages";
-
-  return {
-    score,
-    label,
-    level,
-    summary,
-    formMatches: homeForm.matchesPlayed + awayForm.matchesPlayed,
-    h2hMatches: h2h.total
-  };
-}
-
-function buildMarketRecommendations(outcome, home, away, dataQuality) {
-  const noDrawTotal = outcome.home + outcome.away;
-  const candidates = [
-    marketCandidate(`${home.shortName} or draw`, "Double chance", outcome.home + outcome.draw, "Covers the home win and draw outcomes."),
-    marketCandidate(`${away.shortName} or draw`, "Double chance", outcome.away + outcome.draw, "Covers the away win and draw outcomes."),
-    marketCandidate("No draw", "Double chance", outcome.home + outcome.away, "Covers either team winning; draw is the danger result."),
-    marketCandidate(
-      `${home.shortName} draw no bet`,
-      "Draw no bet",
-      noDrawTotal ? outcome.home / noDrawTotal : 0,
-      "Backs the home side while treating a draw as protection."
-    ),
-    marketCandidate(
-      `${away.shortName} draw no bet`,
-      "Draw no bet",
-      noDrawTotal ? outcome.away / noDrawTotal : 0,
-      "Backs the away side while treating a draw as protection."
-    ),
-    marketCandidate("Over 1.5 goals", "Goals", outcome.over15, "Needs at least two total goals."),
-    marketCandidate("Under 3.5 goals", "Goals", outcome.under35, "Allows 0, 1, 2, or 3 total goals."),
-    marketCandidate("Both teams to score", "BTTS", outcome.btts, "Needs one goal from each team."),
-    marketCandidate("BTTS - No", "BTTS", 1 - outcome.btts, "One side can blank, or the match can stay low scoring.")
-  ];
-
-  const ranked = candidates
-    .map((candidate) => ({
-      ...candidate,
-      risk: classifyMarketRisk(candidate.probability, dataQuality),
-      rank: rankMarketCandidate(candidate, dataQuality)
-    }))
-    .sort((a, b) => b.rank - a.rank);
-
-  return {
-    recommended: ranked[0],
-    alternatives: ranked.slice(1, 3),
-    all: ranked
-  };
-}
-
-function marketCandidate(label, market, probability, reason) {
-  return {
-    label,
-    market,
-    probability: clamp(probability, 0, 1),
-    reason
-  };
-}
-
-function rankMarketCandidate(candidate, dataQuality) {
-  const marketBonus = candidate.market === "Double chance" ? 0.045 : candidate.market === "Draw no bet" ? 0.025 : 0;
-  const lowDataPenalty = (1 - dataQuality.score) * 0.08;
-  return candidate.probability + marketBonus - lowDataPenalty;
-}
-
-function classifyMarketRisk(probability, dataQuality) {
-  const adjusted = probability * (0.82 + dataQuality.score * 0.18);
-  if (adjusted >= 0.74) return "Lower risk";
-  if (adjusted >= 0.62) return "Balanced";
-  return "High variance";
-}
-
-function buildPredictionInsights({ home, away, profile, homeForm, awayForm, h2h, homeEdge, homeXg, awayXg, dataQuality }) {
-  const insights = [];
-  if (homeForm.matchesPlayed && awayForm.matchesPlayed) {
-    insights.push(
-      `Recent form: ${home.shortName} ${formatNumber(homeForm.pointsPerMatch)} PPM vs ${away.shortName} ${formatNumber(
-        awayForm.pointsPerMatch
-      )} PPM.`
-    );
-  } else {
-    insights.push(`Recent form is ${dataQuality.level}; GoalIQ weights ratings and ${profile.shortName} scoring averages more heavily.`);
-  }
-
-  insights.push(`Projected goals: ${home.shortName} ${formatNumber(homeXg)} xG, ${away.shortName} ${formatNumber(awayXg)} xG.`);
-
-  if (h2h.total) {
-    insights.push(`Head-to-head sample: ${h2h.homeWins}-${h2h.draws}-${h2h.awayWins} across ${h2h.total} recent meeting(s).`);
-  } else {
-    insights.push("No verified head-to-head sample is available for this matchup.");
-  }
-
-  if (Math.abs(homeEdge) > 0.08) {
-    insights.push(homeEdge > 0 ? `${home.shortName} carries the stronger blended edge.` : `${away.shortName} carries the stronger blended edge.`);
-  }
-
-  return insights.slice(0, 4);
 }
 
 function getHeadToHead(homeTeamId, awayTeamId) {
@@ -1741,68 +1592,6 @@ function summarizeH2H(meetings, homeTeamId, awayTeamId) {
     ...summary,
     avgGoals: summary.total ? summary.goals / summary.total : 0
   };
-}
-
-function buildScoreMatrix(homeXg, awayXg, currentScore, maxAdditionalGoals) {
-  const matrix = [];
-  for (let homeAdd = 0; homeAdd <= maxAdditionalGoals; homeAdd += 1) {
-    const row = [];
-    for (let awayAdd = 0; awayAdd <= maxAdditionalGoals; awayAdd += 1) {
-      row.push({
-        homeGoals: currentScore.home + homeAdd,
-        awayGoals: currentScore.away + awayAdd,
-        probability: poisson(homeXg, homeAdd) * poisson(awayXg, awayAdd)
-      });
-    }
-    matrix.push(row);
-  }
-  return matrix;
-}
-
-function summarizeScoreMatrix(matrix) {
-  const result = {
-    home: 0,
-    draw: 0,
-    away: 0,
-    over15: 0,
-    over25: 0,
-    under35: 0,
-    btts: 0,
-    homeCleanSheet: 0,
-    awayCleanSheet: 0,
-    firstHalfGoal: 0
-  };
-
-  for (const row of matrix) {
-    for (const score of row) {
-      if (score.homeGoals > score.awayGoals) result.home += score.probability;
-      if (score.homeGoals === score.awayGoals) result.draw += score.probability;
-      if (score.homeGoals < score.awayGoals) result.away += score.probability;
-      if (score.homeGoals + score.awayGoals > 1.5) result.over15 += score.probability;
-      if (score.homeGoals + score.awayGoals > 2.5) result.over25 += score.probability;
-      if (score.homeGoals + score.awayGoals < 3.5) result.under35 += score.probability;
-      if (score.homeGoals > 0 && score.awayGoals > 0) result.btts += score.probability;
-      if (score.awayGoals === 0) result.homeCleanSheet += score.probability;
-      if (score.homeGoals === 0) result.awayCleanSheet += score.probability;
-    }
-  }
-
-  const outcomeTotal = result.home + result.draw + result.away;
-  Object.keys(result).forEach((key) => {
-    result[key] = outcomeTotal ? result[key] / outcomeTotal : 0;
-  });
-  result.firstHalfGoal = clamp((result.over15 * 0.68 + result.btts * 0.28), 0.18, 0.86);
-  return result;
-}
-
-function poisson(lambda, goals) {
-  return (Math.pow(lambda, goals) * Math.exp(-lambda)) / factorial(goals);
-}
-
-function factorial(number) {
-  let total = 1;
-  for (let index = 2; index <= number; index += 1) total *= index;
-  return total;
 }
 
 function resultFor(goalsFor, goalsAgainst) {
@@ -2161,8 +1950,11 @@ function renderDetail() {
     ["Venue", details.venue],
     ["Status", getStatusLabel(details.status)],
     ...(details.score ? [[scoreDisplay.label, `${details.homeTeam.shortName} ${details.score.home} - ${details.score.away} ${details.awayTeam.shortName}`]] : []),
-    ["Expected goals", `${formatNumber(prediction.expectedGoals.home)} - ${formatNumber(prediction.expectedGoals.away)}`],
-    ["Data quality", `${prediction.dataQuality.label} - ${prediction.dataQuality.summary}`],
+    ["Expected scoring model", `${formatNumber(prediction.expectedGoals.home)} - ${formatNumber(prediction.expectedGoals.away)}`],
+    ["Data quality", `${prediction.dataQuality.label} (${prediction.dataQuality.scorePercent}/100) - ${prediction.dataQuality.summary}`],
+    ["Feed freshness", prediction.dataQuality.freshness],
+    ["Model version", prediction.metadata.modelVersion],
+    ["Last update", formatTimestamp(prediction.metadata.fixtureDataUpdatedAt || prediction.metadata.generatedAt)],
     ["Safer angle", `${prediction.marketEdges.recommended.label} (${formatPercent(prediction.marketEdges.recommended.probability)})`]
   ]);
 
@@ -2189,20 +1981,9 @@ function renderDetail() {
     renderFormPanel(details.awayTeam, prediction.form.away)
   ].join("");
 
-  selectors.attackingStats.innerHTML = renderComparisonRows(details.homeTeam, details.awayTeam, [
-    ["Average goals", "attacking", "avgGoals"],
-    ["Average shots", "attacking", "shots"],
-    ["Shots on target", "attacking", "shotsOnTarget"],
-    ["Big chances", "attacking", "bigChances"],
-    ["Expected goals", "attacking", "xg"]
-  ]);
+  selectors.attackingStats.innerHTML = renderProvenanceComparisonRows(details.homeTeam, details.awayTeam, prediction.statistics.attacking);
 
-  selectors.defensiveStats.innerHTML = renderComparisonRows(details.homeTeam, details.awayTeam, [
-    ["Goals conceded avg", "defensive", "goalsConcededAvg"],
-    ["Clean sheet percentage", "defensive", "cleanSheetPct", "%"],
-    ["Expected goals against", "defensive", "xga"],
-    ["Cards", "defensive", "cards"]
-  ]);
+  selectors.defensiveStats.innerHTML = renderProvenanceComparisonRows(details.homeTeam, details.awayTeam, prediction.statistics.defensive);
 
   selectors.h2hSummary.textContent = `${prediction.h2h.homeWins}-${prediction.h2h.draws}-${prediction.h2h.awayWins}`;
   selectors.h2hRows.innerHTML = renderH2H(details, prediction.h2h);
@@ -2227,6 +2008,8 @@ function renderDetailTrustBar(details, prediction) {
   return `
     <span>${escapeHtml(prediction.dataQuality.label)} data</span>
     <span>${escapeHtml(prediction.confidence)} confidence</span>
+    <span>${escapeHtml(prediction.dataQuality.freshness)} feed</span>
+    <span>${escapeHtml(prediction.metadata.modelVersion)}</span>
     <span>${escapeHtml(prediction.marketEdges.recommended.label)}</span>
     <span>${escapeHtml(getStatusLabel(details.status))}</span>
   `;
@@ -2393,6 +2176,58 @@ function renderComparisonRows(homeTeam, awayTeam, rows) {
       })
       .join("")}
   `;
+}
+
+function renderProvenanceComparisonRows(homeTeam, awayTeam, rows = []) {
+  if (!rows.length) {
+    return `<div class="empty-state inline"><strong>No statistics available</strong><span>GoalIQ will show verified statistics when a licensed provider is connected.</span></div>`;
+  }
+
+  return `
+    <div class="comparison-head">
+      <span>Metric</span>
+      <strong>${escapeHtml(homeTeam.shortName)}</strong>
+      <strong>${escapeHtml(awayTeam.shortName)}</strong>
+    </div>
+    ${rows
+      .map(
+        (row) => `
+          <div class="comparison-row provenance-row">
+            <span>
+              ${escapeHtml(row.label)}
+              <small>${escapeHtml(getSharedProvenanceLabel(row.home, row.away))}</small>
+            </span>
+            ${renderProvenanceValue(row.home)}
+            ${renderProvenanceValue(row.away)}
+          </div>
+        `
+      )
+      .join("")}
+  `;
+}
+
+function renderProvenanceValue(stat) {
+  const safeStat = stat && typeof stat === "object" ? stat : { display: "Unavailable", sourceType: "unavailable", label: "Unavailable" };
+  const sourceType = safeStat.sourceType || "unavailable";
+  return `
+    <strong class="stat-value ${escapeHtml(sourceType)}">
+      ${escapeHtml(safeStat.display ?? formatStat(safeStat.value))}
+      <small>${escapeHtml(safeStat.label || getProvenanceLabel(safeStat))}</small>
+    </strong>
+  `;
+}
+
+function getSharedProvenanceLabel(homeStat, awayStat) {
+  const labels = [homeStat, awayStat].map(getProvenanceLabel);
+  return [...new Set(labels)].join(" / ");
+}
+
+function getProvenanceLabel(stat = {}) {
+  if (stat.verified || stat.sourceType === "provider") return "Verified statistic";
+  if (stat.sourceType === "model") return "Model estimate";
+  if (stat.sourceType === "derived") return "Derived from verified scores";
+  if (stat.sourceType === "demo") return "Demo snapshot";
+  return "Unavailable";
 }
 
 function renderH2H(details, summary) {
@@ -2609,7 +2444,7 @@ function renderWorldCupMatchDrawer(match, modelMatch) {
       </div>
       <div class="drawer-grid">
         <div><span>Model pick</span><strong>${escapeHtml(modelPick?.name || "TBD")}</strong></div>
-        <div><span>Expected goals</span><strong>${prediction.expectedGoals}</strong></div>
+        <div><span>Expected scoring model</span><strong>${prediction.expectedGoals}</strong></div>
         <div><span>Result source</span><strong>${match.result ? "Fixture feed" : match.userPick ? "Your pick" : "GoalIQ model"}</strong></div>
         <div><span>Score</span><strong>${match.result ? `${match.result.home}-${match.result.away}` : "Pending"}</strong></div>
       </div>
@@ -3250,6 +3085,13 @@ function cloneMatch(match) {
   };
 }
 
+function cloneHistoricalMatch(match) {
+  return {
+    ...match,
+    sourceQuality: match.sourceQuality ? { ...match.sourceQuality } : null
+  };
+}
+
 function normalizeTeamId(value) {
   return String(value || "")
     .trim()
@@ -3438,8 +3280,28 @@ function formatNumber(value) {
 }
 
 function formatStat(value, suffix) {
+  if (!Number.isFinite(Number(value))) return "Unavailable";
   if (suffix === "%") return `${Math.round(value)}%`;
   return Number(value).toFixed(value >= 10 ? 1 : 2);
+}
+
+function formatTimestamp(value) {
+  if (!value) return "Unavailable";
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return String(value);
+  return parsed.toLocaleString([], {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+
+function toFiniteOrNull(value) {
+  if (value === null || value === undefined || value === "") return null;
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
 }
 
 function escapeHtml(value) {

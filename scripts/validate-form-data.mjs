@@ -2,6 +2,8 @@ import { readFile } from "node:fs/promises";
 
 const feed = JSON.parse(await readFile("fixtures.live.json", "utf8"));
 const appSource = await readFile("app.js", "utf8");
+const engineSource = await readFile("prediction-engine-v2.js", "utf8");
+const updaterSource = await readFile("scripts/update-fixtures.mjs", "utf8");
 
 const eplFallbackOpponents = ["Everton", "West Ham", "Fulham", "Brentford", "Bournemouth", "Newcastle United"];
 
@@ -51,6 +53,21 @@ assert(
 assert(appSource.includes("function makeImportedTeam"), "Imported teams need a non-demo team factory.");
 assert(appSource.includes("function buildTeamProfileFromForm"), "Imported teams with real form must derive team stats from that form.");
 assert(appSource.includes("buildTeamProfileFromForm(importedForm"), "Imported team normalization must apply form-derived profiles.");
+assert(appSource.includes("GoalIQPredictionEngine"), "The browser app must use GoalIQ Prediction Engine v2.");
+assert(appSource.includes("renderProvenanceComparisonRows"), "Stats UI must render provenance-aware rows.");
+assert(appSource.includes("Verified statistic"), "Stats UI must distinguish verified provider statistics.");
+assert(appSource.includes("Model estimate"), "Stats UI must distinguish model estimates.");
+assert(appSource.includes("expectedGoalsModel"), "Imported teams must reserve modelled goal estimates for model output.");
+assert(
+  !updaterSource.includes("shots: roundMetric(clamp") && !updaterSource.includes("xg: roundMetric(clamp") && !updaterSource.includes("cards: roundMetric(clamp"),
+  "Fixture updater must not synthesize shots, xG, xGA, big chances, or cards."
+);
+assert(engineSource.includes('const MODEL_VERSION = "goaliq-2.0.0"'), "Prediction engine v2 must expose a model version.");
+assert(engineSource.includes("function dixonColesAdjustment"), "Prediction engine v2 must include a Dixon-Coles low-score correction.");
+assert(engineSource.includes("function backtestPredictions"), "Prediction engine v2 must include an offline backtesting engine.");
+assert(engineSource.includes("function createPredictionSnapshot"), "Prediction engine v2 must support immutable prediction snapshots.");
+assert(engineSource.includes("sourceType: \"unavailable\""), "Unavailable advanced stats must be represented explicitly.");
+assert(engineSource.includes("sourceType: \"model\""), "Model estimates must carry explicit provenance.");
 assert(appSource.includes("function clearFixtureBoard"), "Public startup must be able to clear demo fixtures before live feed load.");
 assert(
   appSource.includes("Demo fixtures are disabled on the public board"),

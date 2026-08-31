@@ -3,6 +3,7 @@ import { cp, mkdir, rm, writeFile } from "node:fs/promises";
 const OUTPUT_DIR = "dist";
 const STATIC_FILES = [
   "index.html",
+  "prediction-engine-v2.js",
   "app.js",
   "styles.css",
   "sw.js",
@@ -29,6 +30,9 @@ await writeFile(
   Cache-Control: no-store
 
 /app.js
+  Cache-Control: public, max-age=300
+
+/prediction-engine-v2.js
   Cache-Control: public, max-age=300
 
 /styles.css

@@ -56,6 +56,7 @@ Android builds require Android Studio. iOS builds require macOS with Xcode and a
 - Built-in demo fixture snapshot for offline use.
 - Installable PWA metadata, home-screen icons, and an offline-safe service worker.
 - GitHub-hosted live fixture feed, local JSON import, remote JSON URL import, browser storage, export current fixtures, and reset to the built-in snapshot.
+- GoalIQ Prediction Engine v2 with provenance-aware statistics, dynamic team ratings, Poisson/Dixon-Coles score probabilities, model disagreement, backtesting, calibration, and prediction snapshots.
 
 ## Service functions
 
@@ -126,14 +127,23 @@ The World Cup page uses a local 2026 group/knockout model and then overlays any 
 
 ## Prediction logic
 
-The mock prediction engine combines:
+GoalIQ Prediction Engine v2 uses a transparent football model instead of fabricated advanced stats:
 
-- Last five match form.
-- Goals scored and conceded.
-- Clean sheets and failed-to-score counts.
-- Head-to-head trend.
-- Home advantage.
-- Recent win, draw, and loss trend.
+- Verified fixtures, scores, recent form, and historical results from the static feed.
+- Derived score features such as goals per match, conceded average, clean sheets, and PPM.
+- Dynamic Elo-style overall ratings plus separate attack and defence strength indexes.
+- A Dixon-Coles/Poisson score matrix for 1X2, BTTS, over/under, clean sheets, expected scoring, and likely score.
+- Data quality and confidence based on sample size, freshness, provider coverage, and model agreement.
+
+Unavailable advanced stats such as real xG, xGA, shots, big chances, cards, lineups, and injuries stay marked as unavailable unless a licensed provider/import supplies them. See `docs/PREDICTION_ENGINE.md` for the audit, methodology, backtesting, calibration, and provider roadmap.
+
+Useful model commands:
+
+```bash
+npm run model:backtest
+npm run model:evaluate
+npm run prediction:snapshot
+```
 
 ## Zero-cost hosting
 

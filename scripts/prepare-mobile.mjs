@@ -5,6 +5,7 @@ const root = new URL("../", import.meta.url);
 const output = new URL("../www/", import.meta.url);
 const appFiles = [
   "index.html",
+  "prediction-engine-v2.js",
   "app.js",
   "styles.css",
   "fixtures.live.json",

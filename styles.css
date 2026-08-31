@@ -1259,6 +1259,32 @@ input:focus {
   color: var(--green);
 }
 
+.provenance-row span,
+.stat-value {
+  display: grid;
+  gap: 3px;
+}
+
+.provenance-row small,
+.stat-value small {
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.stat-value.provider small {
+  color: var(--green);
+}
+
+.stat-value.model small {
+  color: var(--amber);
+}
+
+.stat-value.unavailable {
+  color: var(--muted);
+}
+
 .h2h-summary-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-bottom: 12px;

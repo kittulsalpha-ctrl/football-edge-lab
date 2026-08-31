@@ -144,6 +144,10 @@ function convertFootballData(payload, fromDate, toDate, existingFeed) {
 
   applyTeamForms(teams, [...apiFormMatches, ...apiMatches]);
   applyTeamProfiles(teams);
+  const historicalMatches = apiFormMatches
+    .map((match, index) => convertHistoricalMatch(match, index))
+    .filter(Boolean)
+    .sort(sortMatches);
 
   return {
     meta: {
@@ -153,6 +157,7 @@ function convertFootballData(payload, fromDate, toDate, existingFeed) {
 Times shown in ${DISPLAY_TIME_ZONE}.`,
     },
     teams: [...teams.values()].sort((a, b) => a.name.localeCompare(b.name)),
+    historicalMatches,
     matches: mergedMatches,
   };
 }
@@ -218,7 +223,66 @@ function convertTeam(team, league) {
     rating: 1600,
     venue: "",
     league,
+    attacking: {
+      avgGoals: null,
+      shots: null,
+      shotsOnTarget: null,
+      bigChances: null,
+      xg: null,
+      expectedGoalsModel: null,
+    },
+    defensive: {
+      goalsConcededAvg: null,
+      cleanSheetPct: null,
+      xga: null,
+      cards: null,
+      expectedGoalsAgainstModel: null,
+    },
+    dataProvenance: createUnavailableTeamProvenance(league),
     form: [],
+  };
+}
+
+function convertHistoricalMatch(match, index) {
+  const league = normalizeLeague(match.competition?.code || match.competition?.name);
+  if (!league) return null;
+
+  const homeTeam = convertTeam(match.homeTeam, league);
+  const awayTeam = convertTeam(match.awayTeam, league);
+  const score = normalizeScore(match.score);
+  if (!homeTeam || !awayTeam || !score) return null;
+
+  const kickoff = match.utcDate ? new Date(match.utcDate) : null;
+  const hasKickoff = kickoff && !Number.isNaN(kickoff.getTime());
+
+  return {
+    id: `fd-history-${match.id || `${league}-${homeTeam.id}-${awayTeam.id}-${index}`}`,
+    competitionId: league,
+    league,
+    season: match.season?.id || match.season?.startDate || "",
+    date: hasKickoff ? formatDateInTimeZone(kickoff) : formatDateKey(new Date()),
+    time: hasKickoff ? formatClockTimeInTimeZone(kickoff) : "00:00",
+    kickoff: hasKickoff ? kickoff.toISOString() : "",
+    homeTeamId: homeTeam.id,
+    awayTeamId: awayTeam.id,
+    homeTeam: homeTeam.name,
+    awayTeam: awayTeam.name,
+    homeGoals: score.home,
+    awayGoals: score.away,
+    halftimeHomeGoals: null,
+    halftimeAwayGoals: null,
+    homeShots: null,
+    awayShots: null,
+    homeShotsOnTarget: null,
+    awayShotsOnTarget: null,
+    homeXg: null,
+    awayXg: null,
+    source: "football-data.org",
+    sourceQuality: {
+      fixture: "provider",
+      score: "provider",
+      advancedStats: "unavailable",
+    },
   };
 }
 
@@ -284,24 +348,28 @@ function applyTeamProfiles(teams) {
     const profile = buildTeamProfileFromForm(team.form, team.rating);
     if (!profile) {
       team.attacking = {
-        avgGoals: 1.25,
-        shots: 11.2,
-        shotsOnTarget: 3.8,
-        bigChances: 1.6,
-        xg: 1.18,
+        avgGoals: null,
+        shots: null,
+        shotsOnTarget: null,
+        bigChances: null,
+        xg: null,
+        expectedGoalsModel: null,
       };
       team.defensive = {
-        goalsConcededAvg: 1.38,
-        cleanSheetPct: 27,
-        xga: 1.42,
-        cards: 2.4,
+        goalsConcededAvg: null,
+        cleanSheetPct: null,
+        xga: null,
+        cards: null,
+        expectedGoalsAgainstModel: null,
       };
+      team.dataProvenance = createUnavailableTeamProvenance(team.league);
       return;
     }
 
     team.rating = profile.rating;
     team.attacking = profile.attacking;
     team.defensive = profile.defensive;
+    team.dataProvenance = profile.dataProvenance;
   });
 }
 
@@ -331,24 +399,82 @@ function buildTeamProfileFromForm(form, seedRating = 1600) {
   const pointsPerMatch = totals.points / matchesPlayed;
   const goalDifferencePerMatch = (totals.goalsFor - totals.goalsAgainst) / matchesPlayed;
   const cleanSheetPct = (totals.cleanSheets / matchesPlayed) * 100;
-  const failedToScorePct = (totals.failedToScore / matchesPlayed) * 100;
   const ratingBase = Number.isFinite(Number(seedRating)) ? Number(seedRating) : 1600;
 
   return {
     rating: Math.round(clamp(ratingBase + (pointsPerMatch - 1.35) * 95 + goalDifferencePerMatch * 70 + (cleanSheetPct - 30) * 1.1, 1380, 2025)),
     attacking: {
       avgGoals: roundMetric(avgGoals),
-      shots: roundMetric(clamp(8.2 + avgGoals * 3.1 + pointsPerMatch * 0.9 - failedToScorePct * 0.018, 6.8, 19.5), 1),
-      shotsOnTarget: roundMetric(clamp(2.4 + avgGoals * 1.35 + pointsPerMatch * 0.22, 1.8, 7.4), 1),
-      bigChances: roundMetric(clamp(0.65 + avgGoals * 0.85 + pointsPerMatch * 0.18, 0.3, 4.2), 1),
-      xg: roundMetric(clamp(avgGoals * 0.82 + pointsPerMatch * 0.18 + 0.28, 0.45, 3.05)),
+      shots: null,
+      shotsOnTarget: null,
+      bigChances: null,
+      xg: null,
+      expectedGoalsModel: null,
     },
     defensive: {
       goalsConcededAvg: roundMetric(avgAgainst),
       cleanSheetPct: Math.round(cleanSheetPct),
-      xga: roundMetric(clamp(avgAgainst * 0.88 + (100 - cleanSheetPct) * 0.004, 0.35, 2.85)),
-      cards: roundMetric(clamp(2.45 - pointsPerMatch * 0.2 + avgAgainst * 0.14, 1.3, 3.4), 1),
+      xga: null,
+      cards: null,
+      expectedGoalsAgainstModel: null,
     },
+    dataProvenance: createDerivedTeamProvenance(),
+  };
+}
+
+function createUnavailableTeamProvenance(league) {
+  return {
+    source: "football-data.org",
+    league,
+    attacking: {
+      avgGoals: unavailableProvenance(),
+      shots: unavailableProvenance(),
+      shotsOnTarget: unavailableProvenance(),
+      bigChances: unavailableProvenance(),
+      xg: unavailableProvenance(),
+    },
+    defensive: {
+      goalsConcededAvg: unavailableProvenance(),
+      cleanSheetPct: unavailableProvenance(),
+      xga: unavailableProvenance(),
+      cards: unavailableProvenance(),
+    },
+  };
+}
+
+function createDerivedTeamProvenance() {
+  return {
+    source: "verified-result-feed",
+    attacking: {
+      avgGoals: derivedProvenance("recent-finished-results"),
+      shots: unavailableProvenance(),
+      shotsOnTarget: unavailableProvenance(),
+      bigChances: unavailableProvenance(),
+      xg: unavailableProvenance(),
+    },
+    defensive: {
+      goalsConcededAvg: derivedProvenance("recent-finished-results"),
+      cleanSheetPct: derivedProvenance("recent-finished-results"),
+      xga: unavailableProvenance(),
+      cards: unavailableProvenance(),
+    },
+  };
+}
+
+function derivedProvenance(method) {
+  return {
+    sourceType: "derived",
+    source: "verified result feed",
+    method,
+    verified: false,
+  };
+}
+
+function unavailableProvenance() {
+  return {
+    sourceType: "unavailable",
+    source: null,
+    verified: false,
   };
 }
 
