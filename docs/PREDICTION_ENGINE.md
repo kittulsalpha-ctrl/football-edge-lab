@@ -146,7 +146,7 @@ Prediction snapshots are written before matches begin so old predictions can be 
 - football-data.org fixture coverage and refresh timing can lag on free tiers.
 - Current browser UI has no licensed xG, shot, lineup, injury, or market-consensus provider.
 - Small historical samples produce limited confidence.
-- World Cup future fixtures may require provider availability before the live bracket fully replaces projected seeds.
+- Provider plan limits can leave competitions unavailable; the updater skips restricted competitions rather than inventing fixtures or statistics.
 
 ## Provider Roadmap
 

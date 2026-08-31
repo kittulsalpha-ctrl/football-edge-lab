@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/dev-server.mjs",
-    "build": "node --check prediction-engine-v2.js && node --check app.js && node --check sw.js && node --check scripts/update-fixtures.mjs && node --check scripts/worldcup-bracket.mjs && node --check scripts/prepare-mobile.mjs && node --check scripts/prepare-cloudflare.mjs && node --check scripts/model-backtest.mjs && node --check scripts/model-evaluate.mjs && node --check scripts/create-prediction-snapshots.mjs && node --check scripts/import-football-data-co-uk.mjs && node scripts/validate-form-data.mjs",
+    "build": "node --check prediction-engine-v2.js && node --check app.js && node --check sw.js && node --check scripts/update-fixtures.mjs && node --check scripts/prepare-mobile.mjs && node --check scripts/prepare-cloudflare.mjs && node --check scripts/model-backtest.mjs && node --check scripts/model-evaluate.mjs && node --check scripts/create-prediction-snapshots.mjs && node --check scripts/import-football-data-co-uk.mjs && node scripts/validate-form-data.mjs",
     "test": "node --test tests/*.test.mjs && node scripts/validate-form-data.mjs",
     "model:backtest": "node scripts/model-backtest.mjs",
     "model:evaluate": "node scripts/model-evaluate.mjs",

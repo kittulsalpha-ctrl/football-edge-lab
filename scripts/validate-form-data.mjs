@@ -1,14 +1,22 @@
 import { readFile } from "node:fs/promises";
 
 const feed = JSON.parse(await readFile("fixtures.live.json", "utf8"));
+const indexSource = await readFile("index.html", "utf8");
 const appSource = await readFile("app.js", "utf8");
 const engineSource = await readFile("prediction-engine-v2.js", "utf8");
 const updaterSource = await readFile("scripts/update-fixtures.mjs", "utf8");
 
 const eplFallbackOpponents = ["Everton", "West Ham", "Fulham", "Brentford", "Bournemouth", "Newcastle United"];
+const focusedLeagues = new Set(["EPL", "LALIGA", "SERIEA", "LIGUE1", "UCL", "UEL"]);
 
 assert(Array.isArray(feed.teams), "fixtures.live.json must export a teams array.");
 assert(feed.teams.every((team) => Array.isArray(team.form)), "Every exported team must include a form array.");
+assert(feed.teams.every((team) => focusedLeagues.has(team.league)), "Live fixture feed contains team metadata outside the focused GoalIQ scope.");
+assert((feed.matches || []).every((match) => focusedLeagues.has(match.league)), "Live fixture feed contains a league outside the focused GoalIQ scope.");
+assert(
+  (feed.historicalMatches || feed.history || []).every((match) => focusedLeagues.has(match.league || match.competitionId)),
+  "Historical fixture feed contains a league outside the focused GoalIQ scope."
+);
 
 feed.teams.forEach((team) => {
   assert(team.form.length <= 5, `${team.name} exports more than five form matches.`);
@@ -19,17 +27,12 @@ feed.teams.forEach((team) => {
     assert(["H", "A"].includes(match.venue), `${team.name} has a form row with invalid venue ${match.venue}.`);
     assert(Number.isFinite(Number(match.goalsFor)), `${team.name} has a form row without goalsFor.`);
     assert(Number.isFinite(Number(match.goalsAgainst)), `${team.name} has a form row without goalsAgainst.`);
+    assert(
+      focusedLeagues.has(match.competition),
+      `${team.name} form contains a competition outside the focused GoalIQ scope: ${match.competition}.`
+    );
   });
 });
-
-feed.teams
-  .filter((team) => team.league === "WC")
-  .forEach((team) => {
-    team.form.forEach((match) => {
-      assert(match.competition === "WC", `${team.name} World Cup form includes non-WC competition ${match.competition}.`);
-      assert(!eplFallbackOpponents.includes(match.opponent), `${team.name} form contains EPL fallback opponent ${match.opponent}.`);
-    });
-  });
 
 ["France", "Senegal"].forEach((teamName) => {
   const team = findTeam(teamName);
@@ -82,11 +85,16 @@ assert(appSource.includes("No verified head-to-head data"), "Live/imported teams
 assert(appSource.includes("form: []"), "Imported teams without real form should keep an empty form array.");
 assert(appSource.includes("const seedTeams = cloneTeamMap(teams);"), "Demo team snapshot must be kept for reset.");
 assert(appSource.includes("resetTeamsToSeed();"), "Reset must restore the built-in demo team data.");
-
-if (feed.matches?.some((match) => match.league === "WC" && /last 16|round of 16|quarter|semi|final/i.test(match.stage || ""))) {
-  assert(appSource.includes("function buildLiveWorldCupBracket"), "World Cup page must build a bracket from live knockout fixtures.");
-  assert(appSource.includes("bracket.mode === \"liveFeed\""), "World Cup UI must render a live-feed bracket mode.");
-}
+assert(indexSource.includes('data-view="picks"'), "Top Picks must be available as a primary navigation tab.");
+assert(appSource.includes("function renderTopPicksView"), "Top Picks must render as a dedicated view.");
+assert(appSource.includes("function isFocusedMatch"), "Fixture board must filter to the focused league scope.");
+assert(updaterSource.includes('"FL1"'), "Fixture updater must include Ligue 1 via football-data.org FL1.");
+assert(updaterSource.includes('"EL"'), "Fixture updater must include UEFA Europa League via football-data.org EL.");
+assert(!updaterSource.includes('"WC"'), "Fixture updater must no longer fetch World Cup fixtures.");
+assert(!indexSource.includes('data-view="worldcup"'), "World Cup must not be a primary navigation tab.");
+assert(!appSource.includes("WORLD_CUP_PICK_STORAGE_KEY"), "World Cup bracket pick storage must be removed.");
+assert(!appSource.includes("function renderWorldCupView"), "World Cup bracket renderer must be removed.");
+assert(!appSource.includes("function buildLiveWorldCupBracket"), "World Cup live bracket builder must be removed.");
 
 console.log("Form data validation passed.");
 

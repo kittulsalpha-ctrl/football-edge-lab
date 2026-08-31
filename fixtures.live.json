@@ -2,137 +2,12 @@
   "meta": {
     "source": "football-data.org live feed",
     "updatedAt": "2026-08-31",
-    "note": "Real fixtures and scores for 2026-08-30 to 2026-10-30.\nTimes shown in Asia/Kolkata.",
+    "note": "Real fixtures and scores for the focused GoalIQ competitions: Premier League, La Liga, Serie A, Ligue 1, UEFA Champions League, and UEFA Europa League. Times shown in Asia/Kolkata.",
     "predictionEngine": "goaliq-2.0.0",
     "advancedStatsPolicy": "score-derived only unless a verified provider supplies xG/shots/cards",
     "dataProvenance": "football-data.org fixtures with explicit unavailable/model provenance for unsupported metrics"
   },
   "teams": [
-    {
-      "id": "FD1",
-      "name": "1. FC Köln",
-      "shortName": "KOE",
-      "rating": 71,
-      "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-29",
-          "competition": "BUNDESLIGA",
-          "opponent": "Hoffenheim",
-          "venue": "H",
-          "goalsFor": 3,
-          "goalsAgainst": 2
-        },
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Bayern",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 5
-        },
-        {
-          "date": "2026-05-10",
-          "competition": "BUNDESLIGA",
-          "opponent": "Heidenheim",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 3
-        },
-        {
-          "date": "2026-04-25",
-          "competition": "BUNDESLIGA",
-          "opponent": "Leverkusen",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 2
-        },
-        {
-          "date": "2026-04-18",
-          "competition": "BUNDESLIGA",
-          "opponent": "St. Pauli",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 1
-        }
-      ],
-      "attacking": {
-        "avgGoals": {
-          "value": 1.4,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "shots": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "shotsOnTarget": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "bigChances": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "xg": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "defensive": {
-        "goalsConcededAvg": {
-          "value": 2.6,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "cleanSheetPct": {
-          "value": 0,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "xga": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "cards": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsAgainstModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "dataProvenance": {
-        "form": "football-data.org finished fixtures",
-        "attacking": "score-derived from real fixtures where available",
-        "defensive": "score-derived from real fixtures where available"
-      }
-    },
     {
       "id": "FD263",
       "name": "Alavés",
@@ -884,131 +759,6 @@
       }
     },
     {
-      "id": "FD16",
-      "name": "Augsburg",
-      "shortName": "FCA",
-      "rating": 86,
-      "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-30",
-          "competition": "BUNDESLIGA",
-          "opponent": "Schalke",
-          "venue": "H",
-          "goalsFor": 3,
-          "goalsAgainst": 0
-        },
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Union Berlin",
-          "venue": "A",
-          "goalsFor": 0,
-          "goalsAgainst": 4
-        },
-        {
-          "date": "2026-05-09",
-          "competition": "BUNDESLIGA",
-          "opponent": "M'gladbach",
-          "venue": "H",
-          "goalsFor": 3,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-04-25",
-          "competition": "BUNDESLIGA",
-          "opponent": "Frankfurt",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-04-18",
-          "competition": "BUNDESLIGA",
-          "opponent": "Leverkusen",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 1
-        }
-      ],
-      "attacking": {
-        "avgGoals": {
-          "value": 1.8,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "shots": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "shotsOnTarget": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "bigChances": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "xg": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "defensive": {
-        "goalsConcededAvg": {
-          "value": 1.4,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "cleanSheetPct": {
-          "value": 20,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "xga": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "cards": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsAgainstModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "dataProvenance": {
-        "form": "football-data.org finished fixtures",
-        "attacking": "score-derived from real fixtures where available",
-        "defensive": "score-derived from real fixtures where available"
-      }
-    },
-    {
       "id": "FD81",
       "name": "Barça",
       "shortName": "FCB",
@@ -1139,32 +889,8 @@
       "shortName": "FCB",
       "rating": 95,
       "venue": "",
-      "league": "BUNDESLIGA",
+      "league": "UCL",
       "form": [
-        {
-          "date": "2026-08-29",
-          "competition": "BUNDESLIGA",
-          "opponent": "Stuttgart",
-          "venue": "H",
-          "goalsFor": 5,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "1. FC Köln",
-          "venue": "H",
-          "goalsFor": 5,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-05-09",
-          "competition": "BUNDESLIGA",
-          "opponent": "Wolfsburg",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 0
-        },
         {
           "date": "2026-05-07",
           "competition": "UCL",
@@ -1604,131 +1330,6 @@
         },
         "cleanSheetPct": {
           "value": 20,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "xga": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "cards": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsAgainstModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "dataProvenance": {
-        "form": "football-data.org finished fixtures",
-        "attacking": "score-derived from real fixtures where available",
-        "defensive": "score-derived from real fixtures where available"
-      }
-    },
-    {
-      "id": "FD12",
-      "name": "Bremen",
-      "shortName": "SVW",
-      "rating": 71,
-      "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-30",
-          "competition": "BUNDESLIGA",
-          "opponent": "Freiburg",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 4
-        },
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Dortmund",
-          "venue": "H",
-          "goalsFor": 0,
-          "goalsAgainst": 2
-        },
-        {
-          "date": "2026-05-09",
-          "competition": "BUNDESLIGA",
-          "opponent": "Hoffenheim",
-          "venue": "A",
-          "goalsFor": 0,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-04-26",
-          "competition": "BUNDESLIGA",
-          "opponent": "Stuttgart",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-04-18",
-          "competition": "BUNDESLIGA",
-          "opponent": "HSV",
-          "venue": "H",
-          "goalsFor": 3,
-          "goalsAgainst": 1
-        }
-      ],
-      "attacking": {
-        "avgGoals": {
-          "value": 1,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "shots": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "shotsOnTarget": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "bigChances": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "xg": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "defensive": {
-        "goalsConcededAvg": {
-          "value": 1.8,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "cleanSheetPct": {
-          "value": 0,
           "sourceType": "scoreDerived",
           "source": "finished fixture scores",
           "available": true
@@ -2950,49 +2551,8 @@
       "shortName": "BVB",
       "rating": 98,
       "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-29",
-          "competition": "BUNDESLIGA",
-          "opponent": "HSV",
-          "venue": "H",
-          "goalsFor": 2,
-          "goalsAgainst": 0
-        },
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Bremen",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 0
-        },
-        {
-          "date": "2026-05-09",
-          "competition": "BUNDESLIGA",
-          "opponent": "Frankfurt",
-          "venue": "H",
-          "goalsFor": 3,
-          "goalsAgainst": 2
-        },
-        {
-          "date": "2026-05-03",
-          "competition": "BUNDESLIGA",
-          "opponent": "M'gladbach",
-          "venue": "A",
-          "goalsFor": 0,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-04-26",
-          "competition": "BUNDESLIGA",
-          "opponent": "Freiburg",
-          "venue": "H",
-          "goalsFor": 4,
-          "goalsAgainst": 0
-        }
-      ],
+      "league": "UCL",
+      "form": [],
       "attacking": {
         "avgGoals": {
           "value": 2.2,
@@ -3165,99 +2725,6 @@
         },
         "cleanSheetPct": {
           "value": 20,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "xga": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "cards": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsAgainstModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "dataProvenance": {
-        "form": "football-data.org finished fixtures",
-        "attacking": "score-derived from real fixtures where available",
-        "defensive": "score-derived from real fixtures where available"
-      }
-    },
-    {
-      "id": "FD719",
-      "name": "Elversberg",
-      "shortName": "ELV",
-      "rating": 70,
-      "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-29",
-          "competition": "BUNDESLIGA",
-          "opponent": "Leverkusen",
-          "venue": "H",
-          "goalsFor": 3,
-          "goalsAgainst": 2
-        }
-      ],
-      "attacking": {
-        "avgGoals": {
-          "value": 3,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "shots": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "shotsOnTarget": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "bigChances": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "xg": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "defensive": {
-        "goalsConcededAvg": {
-          "value": 2,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "cleanSheetPct": {
-          "value": 0,
           "sourceType": "scoreDerived",
           "source": "finished fixture scores",
           "available": true
@@ -3801,256 +3268,6 @@
         },
         "cleanSheetPct": {
           "value": 40,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "xga": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "cards": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsAgainstModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "dataProvenance": {
-        "form": "football-data.org finished fixtures",
-        "attacking": "score-derived from real fixtures where available",
-        "defensive": "score-derived from real fixtures where available"
-      }
-    },
-    {
-      "id": "FD19",
-      "name": "Frankfurt",
-      "shortName": "SGE",
-      "rating": 71,
-      "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-29",
-          "competition": "BUNDESLIGA",
-          "opponent": "Union Berlin",
-          "venue": "A",
-          "goalsFor": 3,
-          "goalsAgainst": 3
-        },
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Stuttgart",
-          "venue": "H",
-          "goalsFor": 2,
-          "goalsAgainst": 2
-        },
-        {
-          "date": "2026-05-09",
-          "competition": "BUNDESLIGA",
-          "opponent": "Dortmund",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 3
-        },
-        {
-          "date": "2026-04-25",
-          "competition": "BUNDESLIGA",
-          "opponent": "Augsburg",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-04-18",
-          "competition": "BUNDESLIGA",
-          "opponent": "RB Leipzig",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 3
-        }
-      ],
-      "attacking": {
-        "avgGoals": {
-          "value": 1.8,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "shots": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "shotsOnTarget": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "bigChances": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "xg": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "defensive": {
-        "goalsConcededAvg": {
-          "value": 2.4,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "cleanSheetPct": {
-          "value": 0,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "xga": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "cards": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsAgainstModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "dataProvenance": {
-        "form": "football-data.org finished fixtures",
-        "attacking": "score-derived from real fixtures where available",
-        "defensive": "score-derived from real fixtures where available"
-      }
-    },
-    {
-      "id": "FD17",
-      "name": "Freiburg",
-      "shortName": "SCF",
-      "rating": 79,
-      "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-30",
-          "competition": "BUNDESLIGA",
-          "opponent": "Bremen",
-          "venue": "H",
-          "goalsFor": 4,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "RB Leipzig",
-          "venue": "H",
-          "goalsFor": 4,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-05-10",
-          "competition": "BUNDESLIGA",
-          "opponent": "HSV",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 3
-        },
-        {
-          "date": "2026-05-03",
-          "competition": "BUNDESLIGA",
-          "opponent": "Wolfsburg",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-04-26",
-          "competition": "BUNDESLIGA",
-          "opponent": "Dortmund",
-          "venue": "A",
-          "goalsFor": 0,
-          "goalsAgainst": 4
-        }
-      ],
-      "attacking": {
-        "avgGoals": {
-          "value": 2.2,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "shots": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "shotsOnTarget": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "bigChances": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "xg": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "defensive": {
-        "goalsConcededAvg": {
-          "value": 2,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "cleanSheetPct": {
-          "value": 0,
           "sourceType": "scoreDerived",
           "source": "finished fixture scores",
           "available": true
@@ -4652,256 +3869,6 @@
         },
         "cleanSheetPct": {
           "value": 40,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "xga": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "cards": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsAgainstModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "dataProvenance": {
-        "form": "football-data.org finished fixtures",
-        "attacking": "score-derived from real fixtures where available",
-        "defensive": "score-derived from real fixtures where available"
-      }
-    },
-    {
-      "id": "FD2",
-      "name": "Hoffenheim",
-      "shortName": "TSG",
-      "rating": 80,
-      "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-29",
-          "competition": "BUNDESLIGA",
-          "opponent": "1. FC Köln",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 3
-        },
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "M'gladbach",
-          "venue": "A",
-          "goalsFor": 0,
-          "goalsAgainst": 4
-        },
-        {
-          "date": "2026-05-09",
-          "competition": "BUNDESLIGA",
-          "opponent": "Bremen",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 0
-        },
-        {
-          "date": "2026-04-25",
-          "competition": "BUNDESLIGA",
-          "opponent": "HSV",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-04-18",
-          "competition": "BUNDESLIGA",
-          "opponent": "Dortmund",
-          "venue": "H",
-          "goalsFor": 2,
-          "goalsAgainst": 1
-        }
-      ],
-      "attacking": {
-        "avgGoals": {
-          "value": 1.4,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "shots": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "shotsOnTarget": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "bigChances": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "xg": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "defensive": {
-        "goalsConcededAvg": {
-          "value": 1.8,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "cleanSheetPct": {
-          "value": 20,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "xga": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "cards": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsAgainstModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "dataProvenance": {
-        "form": "football-data.org finished fixtures",
-        "attacking": "score-derived from real fixtures where available",
-        "defensive": "score-derived from real fixtures where available"
-      }
-    },
-    {
-      "id": "FD7",
-      "name": "HSV",
-      "shortName": "HSV",
-      "rating": 71,
-      "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-29",
-          "competition": "BUNDESLIGA",
-          "opponent": "Dortmund",
-          "venue": "A",
-          "goalsFor": 0,
-          "goalsAgainst": 2
-        },
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Leverkusen",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-05-10",
-          "competition": "BUNDESLIGA",
-          "opponent": "Freiburg",
-          "venue": "H",
-          "goalsFor": 3,
-          "goalsAgainst": 2
-        },
-        {
-          "date": "2026-04-25",
-          "competition": "BUNDESLIGA",
-          "opponent": "Hoffenheim",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 2
-        },
-        {
-          "date": "2026-04-18",
-          "competition": "BUNDESLIGA",
-          "opponent": "Bremen",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 3
-        }
-      ],
-      "attacking": {
-        "avgGoals": {
-          "value": 1.2,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "shots": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "shotsOnTarget": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "bigChances": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "xg": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "defensive": {
-        "goalsConcededAvg": {
-          "value": 2,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "cleanSheetPct": {
-          "value": 0,
           "sourceType": "scoreDerived",
           "source": "finished fixture scores",
           "available": true
@@ -5968,131 +4935,6 @@
       }
     },
     {
-      "id": "FD3",
-      "name": "Leverkusen",
-      "shortName": "B04",
-      "rating": 71,
-      "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-29",
-          "competition": "BUNDESLIGA",
-          "opponent": "Elversberg",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 3
-        },
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "HSV",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-05-09",
-          "competition": "BUNDESLIGA",
-          "opponent": "Stuttgart",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 3
-        },
-        {
-          "date": "2026-04-25",
-          "competition": "BUNDESLIGA",
-          "opponent": "1. FC Köln",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-04-18",
-          "competition": "BUNDESLIGA",
-          "opponent": "Augsburg",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 2
-        }
-      ],
-      "attacking": {
-        "avgGoals": {
-          "value": 1.4,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "shots": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "shotsOnTarget": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "bigChances": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "xg": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "defensive": {
-        "goalsConcededAvg": {
-          "value": 2,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "cleanSheetPct": {
-          "value": 0,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "xga": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "cards": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsAgainstModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "dataProvenance": {
-        "form": "football-data.org finished fixtures",
-        "attacking": "score-derived from real fixtures where available",
-        "defensive": "score-derived from real fixtures where available"
-      }
-    },
-    {
       "id": "FD521",
       "name": "Lille",
       "shortName": "LIL",
@@ -6272,256 +5114,6 @@
         },
         "cleanSheetPct": {
           "value": 0,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "xga": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "cards": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsAgainstModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "dataProvenance": {
-        "form": "football-data.org finished fixtures",
-        "attacking": "score-derived from real fixtures where available",
-        "defensive": "score-derived from real fixtures where available"
-      }
-    },
-    {
-      "id": "FD18",
-      "name": "M'gladbach",
-      "shortName": "BMG",
-      "rating": 77,
-      "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-29",
-          "competition": "BUNDESLIGA",
-          "opponent": "RB Leipzig",
-          "venue": "A",
-          "goalsFor": 0,
-          "goalsAgainst": 3
-        },
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Hoffenheim",
-          "venue": "H",
-          "goalsFor": 4,
-          "goalsAgainst": 0
-        },
-        {
-          "date": "2026-05-09",
-          "competition": "BUNDESLIGA",
-          "opponent": "Augsburg",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 3
-        },
-        {
-          "date": "2026-05-03",
-          "competition": "BUNDESLIGA",
-          "opponent": "Dortmund",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 0
-        },
-        {
-          "date": "2026-04-25",
-          "competition": "BUNDESLIGA",
-          "opponent": "Wolfsburg",
-          "venue": "A",
-          "goalsFor": 0,
-          "goalsAgainst": 0
-        }
-      ],
-      "attacking": {
-        "avgGoals": {
-          "value": 1.2,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "shots": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "shotsOnTarget": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "bigChances": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "xg": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "defensive": {
-        "goalsConcededAvg": {
-          "value": 1.2,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "cleanSheetPct": {
-          "value": 60,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "xga": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "cards": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsAgainstModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "dataProvenance": {
-        "form": "football-data.org finished fixtures",
-        "attacking": "score-derived from real fixtures where available",
-        "defensive": "score-derived from real fixtures where available"
-      }
-    },
-    {
-      "id": "FD15",
-      "name": "Mainz",
-      "shortName": "M05",
-      "rating": 77,
-      "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-29",
-          "competition": "BUNDESLIGA",
-          "opponent": "SC Paderborn",
-          "venue": "H",
-          "goalsFor": 0,
-          "goalsAgainst": 0
-        },
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Heidenheim",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 0
-        },
-        {
-          "date": "2026-05-10",
-          "competition": "BUNDESLIGA",
-          "opponent": "Union Berlin",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 3
-        },
-        {
-          "date": "2026-05-03",
-          "competition": "BUNDESLIGA",
-          "opponent": "St. Pauli",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-04-25",
-          "competition": "BUNDESLIGA",
-          "opponent": "Bayern",
-          "venue": "H",
-          "goalsFor": 3,
-          "goalsAgainst": 4
-        }
-      ],
-      "attacking": {
-        "avgGoals": {
-          "value": 1.6,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "shots": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "shotsOnTarget": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "bigChances": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "xg": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "defensive": {
-        "goalsConcededAvg": {
-          "value": 1.6,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "cleanSheetPct": {
-          "value": 40,
           "sourceType": "scoreDerived",
           "source": "finished fixture scores",
           "available": true
@@ -8278,49 +6870,8 @@
       "shortName": "RBL",
       "rating": 94,
       "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-29",
-          "competition": "BUNDESLIGA",
-          "opponent": "M'gladbach",
-          "venue": "H",
-          "goalsFor": 3,
-          "goalsAgainst": 0
-        },
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Freiburg",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 4
-        },
-        {
-          "date": "2026-05-09",
-          "competition": "BUNDESLIGA",
-          "opponent": "St. Pauli",
-          "venue": "H",
-          "goalsFor": 2,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-04-25",
-          "competition": "BUNDESLIGA",
-          "opponent": "Union Berlin",
-          "venue": "H",
-          "goalsFor": 3,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-04-18",
-          "competition": "BUNDESLIGA",
-          "opponent": "Frankfurt",
-          "venue": "A",
-          "goalsFor": 3,
-          "goalsAgainst": 1
-        }
-      ],
+      "league": "UCL",
+      "form": [],
       "attacking": {
         "avgGoals": {
           "value": 2.4,
@@ -9300,192 +7851,6 @@
       }
     },
     {
-      "id": "FD29",
-      "name": "SC Paderborn",
-      "shortName": "SCP",
-      "rating": 65,
-      "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-29",
-          "competition": "BUNDESLIGA",
-          "opponent": "Mainz",
-          "venue": "A",
-          "goalsFor": 0,
-          "goalsAgainst": 0
-        }
-      ],
-      "attacking": {
-        "avgGoals": {
-          "value": 0,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "shots": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "shotsOnTarget": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "bigChances": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "xg": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "defensive": {
-        "goalsConcededAvg": {
-          "value": 0,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "cleanSheetPct": {
-          "value": 100,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "xga": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "cards": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsAgainstModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "dataProvenance": {
-        "form": "football-data.org finished fixtures",
-        "attacking": "score-derived from real fixtures where available",
-        "defensive": "score-derived from real fixtures where available"
-      }
-    },
-    {
-      "id": "FD6",
-      "name": "Schalke",
-      "shortName": "S04",
-      "rating": 62,
-      "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-30",
-          "competition": "BUNDESLIGA",
-          "opponent": "Augsburg",
-          "venue": "A",
-          "goalsFor": 0,
-          "goalsAgainst": 3
-        }
-      ],
-      "attacking": {
-        "avgGoals": {
-          "value": 0,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "shots": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "shotsOnTarget": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "bigChances": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "xg": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "defensive": {
-        "goalsConcededAvg": {
-          "value": 3,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "cleanSheetPct": {
-          "value": 0,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "xga": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "cards": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsAgainstModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "dataProvenance": {
-        "form": "football-data.org finished fixtures",
-        "attacking": "score-derived from real fixtures where available",
-        "defensive": "score-derived from real fixtures where available"
-      }
-    },
-    {
       "id": "FD559",
       "name": "Sevilla FC",
       "shortName": "SEV",
@@ -10002,49 +8367,8 @@
       "shortName": "VFB",
       "rating": 74,
       "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-29",
-          "competition": "BUNDESLIGA",
-          "opponent": "Bayern",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 5
-        },
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Frankfurt",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 2
-        },
-        {
-          "date": "2026-05-09",
-          "competition": "BUNDESLIGA",
-          "opponent": "Leverkusen",
-          "venue": "H",
-          "goalsFor": 3,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-04-26",
-          "competition": "BUNDESLIGA",
-          "opponent": "Bremen",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-04-19",
-          "competition": "BUNDESLIGA",
-          "opponent": "Bayern",
-          "venue": "A",
-          "goalsFor": 2,
-          "goalsAgainst": 4
-        }
-      ],
+      "league": "UCL",
+      "form": [],
       "attacking": {
         "avgGoals": {
           "value": 1.8,
@@ -10622,131 +8946,6 @@
       }
     },
     {
-      "id": "FD28",
-      "name": "Union Berlin",
-      "shortName": "UNB",
-      "rating": 82,
-      "venue": "",
-      "league": "BUNDESLIGA",
-      "form": [
-        {
-          "date": "2026-08-29",
-          "competition": "BUNDESLIGA",
-          "opponent": "Frankfurt",
-          "venue": "H",
-          "goalsFor": 3,
-          "goalsAgainst": 3
-        },
-        {
-          "date": "2026-05-16",
-          "competition": "BUNDESLIGA",
-          "opponent": "Augsburg",
-          "venue": "H",
-          "goalsFor": 4,
-          "goalsAgainst": 0
-        },
-        {
-          "date": "2026-05-10",
-          "competition": "BUNDESLIGA",
-          "opponent": "Mainz",
-          "venue": "A",
-          "goalsFor": 3,
-          "goalsAgainst": 1
-        },
-        {
-          "date": "2026-04-25",
-          "competition": "BUNDESLIGA",
-          "opponent": "RB Leipzig",
-          "venue": "A",
-          "goalsFor": 1,
-          "goalsAgainst": 3
-        },
-        {
-          "date": "2026-04-18",
-          "competition": "BUNDESLIGA",
-          "opponent": "Wolfsburg",
-          "venue": "H",
-          "goalsFor": 1,
-          "goalsAgainst": 2
-        }
-      ],
-      "attacking": {
-        "avgGoals": {
-          "value": 2.4,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "shots": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "shotsOnTarget": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "bigChances": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "xg": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "defensive": {
-        "goalsConcededAvg": {
-          "value": 1.8,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "cleanSheetPct": {
-          "value": 20,
-          "sourceType": "scoreDerived",
-          "source": "finished fixture scores",
-          "available": true
-        },
-        "xga": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "cards": {
-          "value": null,
-          "sourceType": "unavailable",
-          "source": "unavailable",
-          "available": false
-        },
-        "expectedGoalsAgainstModel": {
-          "value": null,
-          "sourceType": "model",
-          "source": "GoalIQ model estimate",
-          "available": false
-        }
-      },
-      "dataProvenance": {
-        "form": "football-data.org finished fixtures",
-        "attacking": "score-derived from real fixtures where available",
-        "defensive": "score-derived from real fixtures where available"
-      }
-    },
-    {
       "id": "FD95",
       "name": "Valencia",
       "shortName": "VAL",
@@ -11269,23 +9468,6 @@
       }
     },
     {
-      "id": "fd-565784",
-      "league": "BUNDESLIGA",
-      "date": "2026-08-30",
-      "time": "19:00",
-      "homeTeamId": "FD17",
-      "awayTeamId": "FD12",
-      "homeTeam": "Freiburg",
-      "awayTeam": "Bremen",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 4,
-        "away": 1
-      }
-    },
-    {
       "id": "fd-564656",
       "league": "LALIGA",
       "date": "2026-08-30",
@@ -11299,23 +9481,6 @@
       "stage": "Regular Season",
       "score": {
         "home": 4,
-        "away": 0
-      }
-    },
-    {
-      "id": "fd-565782",
-      "league": "BUNDESLIGA",
-      "date": "2026-08-30",
-      "time": "21:00",
-      "homeTeamId": "FD16",
-      "awayTeamId": "FD6",
-      "homeTeam": "Augsburg",
-      "awayTeam": "Schalke",
-      "status": "finished",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": {
-        "home": 3,
         "away": 0
       }
     },
@@ -11503,20 +9668,6 @@
       "score": null
     },
     {
-      "id": "fd-565791",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-05",
-      "time": "00:00",
-      "homeTeamId": "FD10",
-      "awayTeamId": "FD1",
-      "homeTeam": "Stuttgart",
-      "awayTeam": "1. FC Köln",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-558609",
       "league": "SERIEA",
       "date": "2026-09-05",
@@ -11581,76 +9732,6 @@
       "awayTeamId": "FD586",
       "homeTeam": "Fiorentina",
       "awayTeam": "Torino",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565787",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-05",
-      "time": "19:00",
-      "homeTeamId": "FD2",
-      "awayTeamId": "FD4",
-      "homeTeam": "Hoffenheim",
-      "awayTeam": "Dortmund",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565785",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-05",
-      "time": "19:00",
-      "homeTeamId": "FD12",
-      "awayTeamId": "FD721",
-      "homeTeam": "Bremen",
-      "awayTeam": "RB Leipzig",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565793",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-05",
-      "time": "19:00",
-      "homeTeamId": "FD29",
-      "awayTeamId": "FD17",
-      "homeTeam": "SC Paderborn",
-      "awayTeam": "Freiburg",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565792",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-05",
-      "time": "19:00",
-      "homeTeamId": "FD18",
-      "awayTeamId": "FD719",
-      "homeTeam": "M'gladbach",
-      "awayTeam": "Elversberg",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565790",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-05",
-      "time": "19:00",
-      "homeTeamId": "FD3",
-      "awayTeamId": "FD28",
-      "homeTeam": "Leverkusen",
-      "awayTeam": "Union Berlin",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -11755,20 +9836,6 @@
       "score": null
     },
     {
-      "id": "fd-565789",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-05",
-      "time": "22:00",
-      "homeTeamId": "FD6",
-      "awayTeamId": "FD5",
-      "homeTeam": "Schalke",
-      "awayTeam": "Bayern",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-560569",
       "league": "EPL",
       "date": "2026-09-05",
@@ -11867,20 +9934,6 @@
       "score": null
     },
     {
-      "id": "fd-565788",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-06",
-      "time": "19:00",
-      "homeTeamId": "FD7",
-      "awayTeamId": "FD15",
-      "homeTeam": "HSV",
-      "awayTeam": "Mainz",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-564659",
       "league": "LALIGA",
       "date": "2026-09-06",
@@ -11903,20 +9956,6 @@
       "awayTeamId": "FD61",
       "homeTeam": "Arsenal",
       "awayTeam": "Chelsea",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565786",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-06",
-      "time": "21:00",
-      "homeTeamId": "FD19",
-      "awayTeamId": "FD16",
-      "homeTeam": "Frankfurt",
-      "awayTeam": "Augsburg",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -12217,20 +10256,6 @@
       "score": null
     },
     {
-      "id": "fd-565797",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-12",
-      "time": "00:00",
-      "homeTeamId": "FD28",
-      "awayTeamId": "FD6",
-      "homeTeam": "Union Berlin",
-      "awayTeam": "Schalke",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-558606",
       "league": "SERIEA",
       "date": "2026-09-12",
@@ -12253,76 +10278,6 @@
       "awayTeamId": "FD470",
       "homeTeam": "Genoa",
       "awayTeam": "Frosinone",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565796",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-12",
-      "time": "19:00",
-      "homeTeamId": "FD16",
-      "awayTeamId": "FD3",
-      "homeTeam": "Augsburg",
-      "awayTeam": "Leverkusen",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565794",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-12",
-      "time": "19:00",
-      "homeTeamId": "FD2",
-      "awayTeamId": "FD10",
-      "homeTeam": "Hoffenheim",
-      "awayTeam": "Stuttgart",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565802",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-12",
-      "time": "19:00",
-      "homeTeamId": "FD17",
-      "awayTeamId": "FD18",
-      "homeTeam": "Freiburg",
-      "awayTeam": "M'gladbach",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565801",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-12",
-      "time": "19:00",
-      "homeTeamId": "FD15",
-      "awayTeamId": "FD19",
-      "homeTeam": "Mainz",
-      "awayTeam": "Frankfurt",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565795",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-12",
-      "time": "19:00",
-      "homeTeamId": "FD4",
-      "awayTeamId": "FD29",
-      "homeTeam": "Dortmund",
-      "awayTeam": "SC Paderborn",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -12421,20 +10376,6 @@
       "awayTeamId": "FD62",
       "homeTeam": "Tottenham",
       "awayTeam": "Everton",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565798",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-12",
-      "time": "22:00",
-      "homeTeamId": "FD1",
-      "awayTeamId": "FD12",
-      "homeTeam": "1. FC Köln",
-      "awayTeam": "Bremen",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -12659,34 +10600,6 @@
       "awayTeamId": "FD397",
       "homeTeam": "Coventry City",
       "awayTeam": "Brighton Hove",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565799",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-13",
-      "time": "19:00",
-      "homeTeamId": "FD721",
-      "awayTeamId": "FD7",
-      "homeTeam": "RB Leipzig",
-      "awayTeam": "HSV",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565800",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-13",
-      "time": "21:00",
-      "homeTeamId": "FD719",
-      "awayTeamId": "FD5",
-      "homeTeam": "Elversberg",
-      "awayTeam": "Bayern",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -12931,62 +10844,6 @@
       "score": null
     },
     {
-      "id": "fd-565810",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-19",
-      "time": "19:00",
-      "homeTeamId": "FD12",
-      "awayTeamId": "FD16",
-      "homeTeam": "Bremen",
-      "awayTeam": "Augsburg",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565808",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-19",
-      "time": "19:00",
-      "homeTeamId": "FD7",
-      "awayTeamId": "FD1",
-      "homeTeam": "HSV",
-      "awayTeam": "1. FC Köln",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565811",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-19",
-      "time": "19:00",
-      "homeTeamId": "FD19",
-      "awayTeamId": "FD17",
-      "homeTeam": "Frankfurt",
-      "awayTeam": "Freiburg",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565809",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-19",
-      "time": "19:00",
-      "homeTeamId": "FD18",
-      "awayTeamId": "FD15",
-      "homeTeam": "M'gladbach",
-      "awayTeam": "Mainz",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-560588",
       "league": "EPL",
       "date": "2026-09-19",
@@ -13051,20 +10908,6 @@
       "awayTeamId": "FD108",
       "homeTeam": "Roma",
       "awayTeam": "Inter",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565806",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-19",
-      "time": "22:00",
-      "homeTeamId": "FD10",
-      "awayTeamId": "FD4",
-      "homeTeam": "Stuttgart",
-      "awayTeam": "Dortmund",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -13309,20 +11152,6 @@
       "score": null
     },
     {
-      "id": "fd-565807",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-20",
-      "time": "19:00",
-      "homeTeamId": "FD3",
-      "awayTeamId": "FD721",
-      "homeTeam": "Leverkusen",
-      "awayTeam": "RB Leipzig",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-560583",
       "league": "EPL",
       "date": "2026-09-20",
@@ -13331,20 +11160,6 @@
       "awayTeamId": "FD66",
       "homeTeam": "Fulham",
       "awayTeam": "Man United",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565805",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-20",
-      "time": "21:00",
-      "homeTeamId": "FD6",
-      "awayTeamId": "FD719",
-      "homeTeam": "Schalke",
-      "awayTeam": "Elversberg",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -13365,20 +11180,6 @@
       "score": null
     },
     {
-      "id": "fd-565803",
-      "league": "BUNDESLIGA",
-      "date": "2026-09-20",
-      "time": "23:00",
-      "homeTeamId": "FD29",
-      "awayTeamId": "FD2",
-      "homeTeam": "SC Paderborn",
-      "awayTeam": "Hoffenheim",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-558597",
       "league": "SERIEA",
       "date": "2026-09-21",
@@ -13387,132 +11188,6 @@
       "awayTeamId": "FD5890",
       "homeTeam": "Milan",
       "awayTeam": "Lecce",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565818",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-10",
-      "time": "05:30",
-      "homeTeamId": "FD2",
-      "awayTeamId": "FD7",
-      "homeTeam": "Hoffenheim",
-      "awayTeam": "HSV",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565814",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-10",
-      "time": "05:30",
-      "homeTeamId": "FD1",
-      "awayTeamId": "FD18",
-      "homeTeam": "1. FC Köln",
-      "awayTeam": "M'gladbach",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565820",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-10",
-      "time": "05:30",
-      "homeTeamId": "FD4",
-      "awayTeamId": "FD12",
-      "homeTeam": "Dortmund",
-      "awayTeam": "Bremen",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565816",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-10",
-      "time": "05:30",
-      "homeTeamId": "FD17",
-      "awayTeamId": "FD6",
-      "homeTeam": "Freiburg",
-      "awayTeam": "Schalke",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565812",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-10",
-      "time": "05:30",
-      "homeTeamId": "FD15",
-      "awayTeamId": "FD3",
-      "homeTeam": "Mainz",
-      "awayTeam": "Leverkusen",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565813",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-10",
-      "time": "05:30",
-      "homeTeamId": "FD29",
-      "awayTeamId": "FD10",
-      "homeTeam": "SC Paderborn",
-      "awayTeam": "Stuttgart",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565819",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-10",
-      "time": "05:30",
-      "homeTeamId": "FD16",
-      "awayTeamId": "FD5",
-      "homeTeam": "Augsburg",
-      "awayTeam": "Bayern",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565815",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-10",
-      "time": "05:30",
-      "homeTeamId": "FD721",
-      "awayTeamId": "FD19",
-      "homeTeam": "RB Leipzig",
-      "awayTeam": "Frankfurt",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565817",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-10",
-      "time": "05:30",
-      "homeTeamId": "FD28",
-      "awayTeamId": "FD719",
-      "homeTeam": "Union Berlin",
-      "awayTeam": "Elversberg",
       "status": "upcoming",
       "venue": "",
       "stage": "Regular Season",
@@ -14191,132 +11866,6 @@
       "score": null
     },
     {
-      "id": "fd-565828",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-17",
-      "time": "05:30",
-      "homeTeamId": "FD19",
-      "awayTeamId": "FD1",
-      "homeTeam": "Frankfurt",
-      "awayTeam": "1. FC Köln",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565824",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-17",
-      "time": "05:30",
-      "homeTeamId": "FD719",
-      "awayTeamId": "FD16",
-      "homeTeam": "Elversberg",
-      "awayTeam": "Augsburg",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565826",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-17",
-      "time": "05:30",
-      "homeTeamId": "FD18",
-      "awayTeamId": "FD2",
-      "homeTeam": "M'gladbach",
-      "awayTeam": "Hoffenheim",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565822",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-17",
-      "time": "05:30",
-      "homeTeamId": "FD7",
-      "awayTeamId": "FD10",
-      "homeTeam": "HSV",
-      "awayTeam": "Stuttgart",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565823",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-17",
-      "time": "05:30",
-      "homeTeamId": "FD12",
-      "awayTeamId": "FD29",
-      "homeTeam": "Bremen",
-      "awayTeam": "SC Paderborn",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565829",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-17",
-      "time": "05:30",
-      "homeTeamId": "FD6",
-      "awayTeamId": "FD15",
-      "homeTeam": "Schalke",
-      "awayTeam": "Mainz",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565825",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-17",
-      "time": "05:30",
-      "homeTeamId": "FD5",
-      "awayTeamId": "FD721",
-      "homeTeam": "Bayern",
-      "awayTeam": "RB Leipzig",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565821",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-17",
-      "time": "05:30",
-      "homeTeamId": "FD28",
-      "awayTeamId": "FD4",
-      "homeTeam": "Union Berlin",
-      "awayTeam": "Dortmund",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565827",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-17",
-      "time": "05:30",
-      "homeTeamId": "FD3",
-      "awayTeamId": "FD17",
-      "homeTeam": "Leverkusen",
-      "awayTeam": "Freiburg",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-560603",
       "league": "EPL",
       "date": "2026-10-17",
@@ -14947,132 +12496,6 @@
       "score": null
     },
     {
-      "id": "fd-565835",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-24",
-      "time": "05:30",
-      "homeTeamId": "FD2",
-      "awayTeamId": "FD3",
-      "homeTeam": "Hoffenheim",
-      "awayTeam": "Leverkusen",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565831",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-24",
-      "time": "05:30",
-      "homeTeamId": "FD1",
-      "awayTeamId": "FD6",
-      "homeTeam": "1. FC Köln",
-      "awayTeam": "Schalke",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565837",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-24",
-      "time": "05:30",
-      "homeTeamId": "FD4",
-      "awayTeamId": "FD19",
-      "homeTeam": "Dortmund",
-      "awayTeam": "Frankfurt",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565833",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-24",
-      "time": "05:30",
-      "homeTeamId": "FD10",
-      "awayTeamId": "FD18",
-      "homeTeam": "Stuttgart",
-      "awayTeam": "M'gladbach",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565830",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-24",
-      "time": "05:30",
-      "homeTeamId": "FD15",
-      "awayTeamId": "FD12",
-      "homeTeam": "Mainz",
-      "awayTeam": "Bremen",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565836",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-24",
-      "time": "05:30",
-      "homeTeamId": "FD17",
-      "awayTeamId": "FD5",
-      "homeTeam": "Freiburg",
-      "awayTeam": "Bayern",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565832",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-24",
-      "time": "05:30",
-      "homeTeamId": "FD721",
-      "awayTeamId": "FD719",
-      "homeTeam": "RB Leipzig",
-      "awayTeam": "Elversberg",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565838",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-24",
-      "time": "05:30",
-      "homeTeamId": "FD16",
-      "awayTeamId": "FD28",
-      "homeTeam": "Augsburg",
-      "awayTeam": "Union Berlin",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
-      "id": "fd-565834",
-      "league": "BUNDESLIGA",
-      "date": "2026-10-24",
-      "time": "05:30",
-      "homeTeamId": "FD29",
-      "awayTeamId": "FD7",
-      "homeTeam": "SC Paderborn",
-      "awayTeam": "HSV",
-      "status": "upcoming",
-      "venue": "",
-      "stage": "Regular Season",
-      "score": null
-    },
-    {
       "id": "fd-560614",
       "league": "EPL",
       "date": "2026-10-24",
@@ -15631,26 +13054,6 @@
       "awayScore": 3
     },
     {
-      "id": "form-2026-08-30-FD16-FD6",
-      "date": "2026-08-30",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD16",
-      "awayTeamId": "FD6",
-      "homeScore": 3,
-      "awayScore": 0
-    },
-    {
-      "id": "form-2026-08-30-FD17-FD12",
-      "date": "2026-08-30",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD17",
-      "awayTeamId": "FD12",
-      "homeScore": 4,
-      "awayScore": 1
-    },
-    {
       "id": "form-2026-08-30-FD341-FD402",
       "date": "2026-08-30",
       "league": "EPL",
@@ -15721,16 +13124,6 @@
       "awayScore": 0
     },
     {
-      "id": "form-2026-08-29-FD1-FD2",
-      "date": "2026-08-29",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD1",
-      "awayTeamId": "FD2",
-      "homeScore": 3,
-      "awayScore": 2
-    },
-    {
       "id": "form-2026-08-29-FD263-FD94",
       "date": "2026-08-29",
       "league": "LALIGA",
@@ -15739,16 +13132,6 @@
       "awayTeamId": "FD94",
       "homeScore": 1,
       "awayScore": 0
-    },
-    {
-      "id": "form-2026-08-29-FD5-FD10",
-      "date": "2026-08-29",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD5",
-      "awayTeamId": "FD10",
-      "homeScore": 5,
-      "awayScore": 1
     },
     {
       "id": "form-2026-08-29-FD1044-FD62",
@@ -15781,26 +13164,6 @@
       "awayScore": 4
     },
     {
-      "id": "form-2026-08-29-FD4-FD7",
-      "date": "2026-08-29",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD4",
-      "awayTeamId": "FD7",
-      "homeScore": 2,
-      "awayScore": 0
-    },
-    {
-      "id": "form-2026-08-29-FD719-FD3",
-      "date": "2026-08-29",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD719",
-      "awayTeamId": "FD3",
-      "homeScore": 3,
-      "awayScore": 2
-    },
-    {
       "id": "form-2026-08-29-FD92-FD80",
       "date": "2026-08-29",
       "league": "LALIGA",
@@ -15818,16 +13181,6 @@
       "homeTeamId": "FD99",
       "awayTeamId": "FD470",
       "homeScore": 0,
-      "awayScore": 3
-    },
-    {
-      "id": "form-2026-08-29-FD28-FD19",
-      "date": "2026-08-29",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD28",
-      "awayTeamId": "FD19",
-      "homeScore": 3,
       "awayScore": 3
     },
     {
@@ -15849,26 +13202,6 @@
       "awayTeamId": "FD351",
       "homeScore": 2,
       "awayScore": 2
-    },
-    {
-      "id": "form-2026-08-29-FD721-FD18",
-      "date": "2026-08-29",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD721",
-      "awayTeamId": "FD18",
-      "homeScore": 3,
-      "awayScore": 0
-    },
-    {
-      "id": "form-2026-08-29-FD15-FD29",
-      "date": "2026-08-29",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD15",
-      "awayTeamId": "FD29",
-      "homeScore": 0,
-      "awayScore": 0
     },
     {
       "id": "form-2026-08-29-FD98-FD454",
@@ -16741,16 +14074,6 @@
       "awayScore": 4
     },
     {
-      "id": "form-2026-05-16-FD5-FD1",
-      "date": "2026-05-16",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD5",
-      "awayTeamId": "FD1",
-      "homeScore": 5,
-      "awayScore": 1
-    },
-    {
       "id": "form-2026-05-16-FD58-FD64",
       "date": "2026-05-16",
       "league": "EPL",
@@ -16759,66 +14082,6 @@
       "awayTeamId": "FD64",
       "homeScore": 4,
       "awayScore": 2
-    },
-    {
-      "id": "form-2026-05-16-FD28-FD16",
-      "date": "2026-05-16",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD28",
-      "awayTeamId": "FD16",
-      "homeScore": 4,
-      "awayScore": 0
-    },
-    {
-      "id": "form-2026-05-16-FD12-FD4",
-      "date": "2026-05-16",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD12",
-      "awayTeamId": "FD4",
-      "homeScore": 0,
-      "awayScore": 2
-    },
-    {
-      "id": "form-2026-05-16-FD19-FD10",
-      "date": "2026-05-16",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD19",
-      "awayTeamId": "FD10",
-      "homeScore": 2,
-      "awayScore": 2
-    },
-    {
-      "id": "form-2026-05-16-FD17-FD721",
-      "date": "2026-05-16",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD17",
-      "awayTeamId": "FD721",
-      "homeScore": 4,
-      "awayScore": 1
-    },
-    {
-      "id": "form-2026-05-16-FD18-FD2",
-      "date": "2026-05-16",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD18",
-      "awayTeamId": "FD2",
-      "homeScore": 4,
-      "awayScore": 0
-    },
-    {
-      "id": "form-2026-05-16-FD3-FD7",
-      "date": "2026-05-16",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD3",
-      "awayTeamId": "FD7",
-      "homeScore": 1,
-      "awayScore": 1
     },
     {
       "id": "form-2026-05-14-FD263-FD81",
@@ -16911,16 +14174,6 @@
       "awayScore": 0
     },
     {
-      "id": "form-2026-05-10-FD7-FD17",
-      "date": "2026-05-10",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD7",
-      "awayTeamId": "FD17",
-      "homeScore": 3,
-      "awayScore": 2
-    },
-    {
       "id": "form-2026-05-10-FD5890-FD109",
       "date": "2026-05-10",
       "league": "SERIEA",
@@ -16929,16 +14182,6 @@
       "awayTeamId": "FD109",
       "homeScore": 0,
       "awayScore": 1
-    },
-    {
-      "id": "form-2026-05-10-FD15-FD28",
-      "date": "2026-05-10",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD15",
-      "awayTeamId": "FD28",
-      "homeScore": 1,
-      "awayScore": 3
     },
     {
       "id": "form-2026-05-10-FD351-FD67",
@@ -16961,16 +14204,6 @@
       "awayScore": 3
     },
     {
-      "id": "form-2026-05-09-FD16-FD18",
-      "date": "2026-05-09",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD16",
-      "awayTeamId": "FD18",
-      "homeScore": 3,
-      "awayScore": 1
-    },
-    {
       "id": "form-2026-05-09-FD63-FD1044",
       "date": "2026-05-09",
       "league": "EPL",
@@ -16979,16 +14212,6 @@
       "awayTeamId": "FD1044",
       "homeScore": 0,
       "awayScore": 1
-    },
-    {
-      "id": "form-2026-05-09-FD2-FD12",
-      "date": "2026-05-09",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD2",
-      "awayTeamId": "FD12",
-      "homeScore": 1,
-      "awayScore": 0
     },
     {
       "id": "form-2026-05-09-FD65-FD402",
@@ -17031,16 +14254,6 @@
       "awayScore": 1
     },
     {
-      "id": "form-2026-05-09-FD4-FD19",
-      "date": "2026-05-09",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD4",
-      "awayTeamId": "FD19",
-      "homeScore": 3,
-      "awayScore": 2
-    },
-    {
       "id": "form-2026-05-09-FD110-FD108",
       "date": "2026-05-09",
       "league": "SERIEA",
@@ -17049,16 +14262,6 @@
       "awayTeamId": "FD108",
       "homeScore": 0,
       "awayScore": 3
-    },
-    {
-      "id": "form-2026-05-09-FD10-FD3",
-      "date": "2026-05-09",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD10",
-      "awayTeamId": "FD3",
-      "homeScore": 3,
-      "awayScore": 1
     },
     {
       "id": "form-2026-05-09-FD71-FD66",
@@ -17141,16 +14344,6 @@
       "awayScore": 0
     },
     {
-      "id": "form-2026-05-03-FD18-FD4",
-      "date": "2026-05-03",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD18",
-      "awayTeamId": "FD4",
-      "homeScore": 1,
-      "awayScore": 0
-    },
-    {
       "id": "form-2026-04-29-FD524-FD5",
       "date": "2026-04-29",
       "league": "UCL",
@@ -17171,26 +14364,6 @@
       "awayScore": 2
     },
     {
-      "id": "form-2026-04-26-FD10-FD12",
-      "date": "2026-04-26",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD10",
-      "awayTeamId": "FD12",
-      "homeScore": 1,
-      "awayScore": 1
-    },
-    {
-      "id": "form-2026-04-26-FD4-FD17",
-      "date": "2026-04-26",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD4",
-      "awayTeamId": "FD17",
-      "homeScore": 4,
-      "awayScore": 0
-    },
-    {
       "id": "form-2026-04-26-FD107-FD7397",
       "date": "2026-04-26",
       "league": "SERIEA",
@@ -17201,56 +14374,6 @@
       "awayScore": 2
     },
     {
-      "id": "form-2026-04-25-FD1-FD3",
-      "date": "2026-04-25",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD1",
-      "awayTeamId": "FD3",
-      "homeScore": 1,
-      "awayScore": 2
-    },
-    {
-      "id": "form-2026-04-25-FD16-FD19",
-      "date": "2026-04-25",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD16",
-      "awayTeamId": "FD19",
-      "homeScore": 1,
-      "awayScore": 1
-    },
-    {
-      "id": "form-2026-04-25-FD7-FD2",
-      "date": "2026-04-25",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD7",
-      "awayTeamId": "FD2",
-      "homeScore": 1,
-      "awayScore": 2
-    },
-    {
-      "id": "form-2026-04-25-FD15-FD5",
-      "date": "2026-04-25",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD15",
-      "awayTeamId": "FD5",
-      "homeScore": 3,
-      "awayScore": 4
-    },
-    {
-      "id": "form-2026-04-25-FD721-FD28",
-      "date": "2026-04-25",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD721",
-      "awayTeamId": "FD28",
-      "homeScore": 3,
-      "awayScore": 1
-    },
-    {
       "id": "form-2026-04-19-FD100-FD102",
       "date": "2026-04-19",
       "league": "SERIEA",
@@ -17258,56 +14381,6 @@
       "homeTeamId": "FD100",
       "awayTeamId": "FD102",
       "homeScore": 1,
-      "awayScore": 1
-    },
-    {
-      "id": "form-2026-04-19-FD5-FD10",
-      "date": "2026-04-19",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD5",
-      "awayTeamId": "FD10",
-      "homeScore": 4,
-      "awayScore": 2
-    },
-    {
-      "id": "form-2026-04-18-FD3-FD16",
-      "date": "2026-04-18",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD3",
-      "awayTeamId": "FD16",
-      "homeScore": 1,
-      "awayScore": 2
-    },
-    {
-      "id": "form-2026-04-18-FD12-FD7",
-      "date": "2026-04-18",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD12",
-      "awayTeamId": "FD7",
-      "homeScore": 3,
-      "awayScore": 1
-    },
-    {
-      "id": "form-2026-04-18-FD19-FD721",
-      "date": "2026-04-18",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD19",
-      "awayTeamId": "FD721",
-      "homeScore": 1,
-      "awayScore": 3
-    },
-    {
-      "id": "form-2026-04-18-FD2-FD4",
-      "date": "2026-04-18",
-      "league": "BUNDESLIGA",
-      "status": "finished",
-      "homeTeamId": "FD2",
-      "awayTeamId": "FD4",
-      "homeScore": 2,
       "awayScore": 1
     },
     {

@@ -23,11 +23,11 @@ const leagueProfiles = {
     homeAdvantage: 0.11,
     order: 3
   },
-  BUNDESLIGA: {
-    name: "Bundesliga",
-    shortName: "Bundesliga",
-    avgGoals: 3.08,
-    homeAdvantage: 0.1,
+  LIGUE1: {
+    name: "Ligue 1",
+    shortName: "Ligue 1",
+    avgGoals: 2.74,
+    homeAdvantage: 0.11,
     order: 4
   },
   UCL: {
@@ -37,14 +37,16 @@ const leagueProfiles = {
     homeAdvantage: 0.08,
     order: 5
   },
-  WC: {
-    name: "FIFA World Cup 2026",
-    shortName: "WC",
-    avgGoals: 2.65,
-    homeAdvantage: 0.04,
-    order: 0
+  UEL: {
+    name: "UEFA Europa League",
+    shortName: "UEL",
+    avgGoals: 2.78,
+    homeAdvantage: 0.08,
+    order: 6
   }
 };
+
+const focusedLeagueIds = new Set(Object.keys(leagueProfiles));
 
 const statusLabels = {
   upcoming: "Upcoming",
@@ -55,126 +57,6 @@ const statusLabels = {
   suspended: "Suspended",
   cancelled: "Cancelled"
 };
-
-const WORLD_CUP_PICK_STORAGE_KEY = "goaliq-worldcup-picks";
-
-const worldCupGroups = [
-  worldCupGroup("A", [
-    worldCupTeam("MEX", "Mexico", 1780),
-    worldCupTeam("RSA", "South Africa", 1640),
-    worldCupTeam("KOR", "South Korea", 1742),
-    worldCupTeam("CZE", "Czechia", 1698)
-  ]),
-  worldCupGroup("B", [
-    worldCupTeam("CAN", "Canada", 1710),
-    worldCupTeam("BIH", "Bosnia and Herzegovina", 1660),
-    worldCupTeam("QAT", "Qatar", 1654),
-    worldCupTeam("SUI", "Switzerland", 1810)
-  ]),
-  worldCupGroup("C", [
-    worldCupTeam("BRA", "Brazil", 1905),
-    worldCupTeam("MAR", "Morocco", 1825),
-    worldCupTeam("HAI", "Haiti", 1585),
-    worldCupTeam("SCO", "Scotland", 1725)
-  ]),
-  worldCupGroup("D", [
-    worldCupTeam("USA", "United States", 1775),
-    worldCupTeam("PAR", "Paraguay", 1705),
-    worldCupTeam("AUS", "Australia", 1712),
-    worldCupTeam("TUR", "Turkey", 1768)
-  ]),
-  worldCupGroup("E", [
-    worldCupTeam("GER", "Germany", 1880),
-    worldCupTeam("CUR", "Curacao", 1580),
-    worldCupTeam("CIV", "Ivory Coast", 1718),
-    worldCupTeam("ECU", "Ecuador", 1788)
-  ]),
-  worldCupGroup("F", [
-    worldCupTeam("NED", "Netherlands", 1868),
-    worldCupTeam("JPN", "Japan", 1790),
-    worldCupTeam("SWE", "Sweden", 1722),
-    worldCupTeam("TUN", "Tunisia", 1688)
-  ]),
-  worldCupGroup("G", [
-    worldCupTeam("BEL", "Belgium", 1848),
-    worldCupTeam("EGY", "Egypt", 1715),
-    worldCupTeam("IRN", "Iran", 1735),
-    worldCupTeam("NZL", "New Zealand", 1568)
-  ]),
-  worldCupGroup("H", [
-    worldCupTeam("ESP", "Spain", 1930),
-    worldCupTeam("CPV", "Cape Verde", 1604),
-    worldCupTeam("KSA", "Saudi Arabia", 1648),
-    worldCupTeam("URU", "Uruguay", 1835)
-  ]),
-  worldCupGroup("I", [
-    worldCupTeam("FRA", "France", 1915),
-    worldCupTeam("SEN", "Senegal", 1772),
-    worldCupTeam("IRQ", "Iraq", 1638),
-    worldCupTeam("NOR", "Norway", 1758)
-  ]),
-  worldCupGroup("J", [
-    worldCupTeam("ARG", "Argentina", 1920),
-    worldCupTeam("ALG", "Algeria", 1710),
-    worldCupTeam("AUT", "Austria", 1765),
-    worldCupTeam("JOR", "Jordan", 1588)
-  ]),
-  worldCupGroup("K", [
-    worldCupTeam("POR", "Portugal", 1888),
-    worldCupTeam("COD", "DR Congo", 1658),
-    worldCupTeam("UZB", "Uzbekistan", 1646),
-    worldCupTeam("COL", "Colombia", 1805)
-  ]),
-  worldCupGroup("L", [
-    worldCupTeam("ENG", "England", 1900),
-    worldCupTeam("CRO", "Croatia", 1830),
-    worldCupTeam("GHA", "Ghana", 1664),
-    worldCupTeam("PAN", "Panama", 1622)
-  ])
-];
-
-const worldCupRoundOf32 = [
-  wcMatch("M73", "Round of 32", "2026-06-28", "Los Angeles", wcSeed("A", 2), wcSeed("B", 2)),
-  wcMatch("M74", "Round of 32", "2026-06-28", "Houston", wcSeed("C", 1), wcSeed("F", 2)),
-  wcMatch("M75", "Round of 32", "2026-06-29", "Dallas", wcSeed("E", 1), wcThird(["A", "B", "C", "D", "F"])),
-  wcMatch("M76", "Round of 32", "2026-06-29", "Mexico City", wcSeed("F", 1), wcSeed("C", 2)),
-  wcMatch("M77", "Round of 32", "2026-06-30", "New York New Jersey", wcSeed("E", 2), wcSeed("I", 2)),
-  wcMatch("M78", "Round of 32", "2026-06-30", "Atlanta", wcSeed("I", 1), wcThird(["C", "D", "F", "G", "H"])),
-  wcMatch("M79", "Round of 32", "2026-07-01", "Monterrey", wcSeed("A", 1), wcThird(["C", "E", "F", "H", "I"])),
-  wcMatch("M80", "Round of 32", "2026-07-01", "Vancouver", wcSeed("L", 1), wcThird(["E", "H", "I", "J", "K"])),
-  wcMatch("M81", "Round of 32", "2026-07-02", "Seattle", wcSeed("G", 1), wcThird(["A", "E", "H", "I", "J"])),
-  wcMatch("M82", "Round of 32", "2026-07-02", "Kansas City", wcSeed("D", 1), wcThird(["B", "E", "F", "I", "J"])),
-  wcMatch("M83", "Round of 32", "2026-07-03", "Miami", wcSeed("H", 1), wcSeed("J", 2)),
-  wcMatch("M84", "Round of 32", "2026-07-03", "Boston", wcSeed("K", 2), wcSeed("L", 2)),
-  wcMatch("M85", "Round of 32", "2026-07-03", "Toronto", wcSeed("B", 1), wcThird(["E", "F", "G", "I", "J"])),
-  wcMatch("M86", "Round of 32", "2026-07-03", "San Francisco Bay Area", wcSeed("D", 2), wcSeed("G", 2)),
-  wcMatch("M87", "Round of 32", "2026-07-03", "Philadelphia", wcSeed("J", 1), wcSeed("H", 2)),
-  wcMatch("M88", "Round of 32", "2026-07-03", "Dallas", wcSeed("K", 1), wcThird(["D", "E", "I", "J", "L"]))
-];
-
-const worldCupLaterRounds = [
-  wcRound("round16", "Round of 16", [
-    ["M89", "2026-07-04", "Philadelphia", "M73", "M75"],
-    ["M90", "2026-07-04", "Houston", "M74", "M77"],
-    ["M91", "2026-07-05", "New York New Jersey", "M76", "M78"],
-    ["M92", "2026-07-05", "Mexico City", "M79", "M80"],
-    ["M93", "2026-07-06", "Dallas", "M83", "M84"],
-    ["M94", "2026-07-06", "Seattle", "M81", "M82"],
-    ["M95", "2026-07-07", "Atlanta", "M86", "M88"],
-    ["M96", "2026-07-07", "Vancouver", "M85", "M87"]
-  ]),
-  wcRound("quarterfinals", "Quarter-finals", [
-    ["M97", "2026-07-09", "Boston", "M89", "M90"],
-    ["M98", "2026-07-10", "Los Angeles", "M93", "M94"],
-    ["M99", "2026-07-11", "Miami", "M91", "M92"],
-    ["M100", "2026-07-11", "Kansas City", "M95", "M96"]
-  ]),
-  wcRound("semifinals", "Semi-finals", [
-    ["M101", "2026-07-14", "Dallas", "M97", "M98"],
-    ["M102", "2026-07-15", "Atlanta", "M99", "M100"]
-  ]),
-  wcRound("final", "Final", [["M104", "2026-07-19", "New York New Jersey", "M101", "M102"]])
-];
 
 const todayKey = formatDateKey(new Date());
 
@@ -388,44 +270,44 @@ const teams = {
     attack: [2.35, 17.1, 6.8, 3.9, 2.28],
     defense: [0.98, 42, 1.02, 1.6],
     form: [
-      ["BUNDESLIGA", "Borussia Dortmund", "A", 2, 2],
-      ["BUNDESLIGA", "RB Leipzig", "H", 3, 1],
+      ["UCL", "Borussia Dortmund", "A", 2, 2],
+      ["UCL", "RB Leipzig", "H", 3, 1],
       ["UCL", "Paris Saint-Germain", "A", 1, 0],
-      ["BUNDESLIGA", "Freiburg", "H", 4, 0],
-      ["BUNDESLIGA", "Bayer Leverkusen", "A", 1, 1]
+      ["UCL", "Inter", "H", 2, 0],
+      ["UCL", "Bayer Leverkusen", "A", 1, 1]
     ]
   }),
   BVB: makeTeam("BVB", "Borussia Dortmund", "BVB", 1828, "Signal Iduna Park", {
     attack: [1.86, 14.4, 5.4, 2.8, 1.82],
     defense: [1.22, 33, 1.3, 1.9],
     form: [
-      ["BUNDESLIGA", "Bayern Munich", "H", 2, 2],
-      ["BUNDESLIGA", "Stuttgart", "A", 1, 2],
-      ["BUNDESLIGA", "Wolfsburg", "H", 3, 0],
+      ["UCL", "Bayern Munich", "H", 2, 2],
+      ["UCL", "Atletico Madrid", "A", 1, 2],
+      ["UCL", "Porto", "H", 3, 0],
       ["UCL", "Benfica", "A", 2, 1],
-      ["BUNDESLIGA", "Mainz", "H", 1, 1]
+      ["UCL", "Arsenal", "H", 1, 1]
     ]
   }),
   LEV: makeTeam("LEV", "Bayer Leverkusen", "LEV", 1884, "BayArena", {
     attack: [2.08, 15.7, 6.0, 3.3, 2.06],
     defense: [0.9, 48, 0.94, 1.8],
     form: [
-      ["BUNDESLIGA", "Bayern Munich", "H", 1, 1],
-      ["BUNDESLIGA", "RB Leipzig", "A", 2, 1],
-      ["BUNDESLIGA", "Freiburg", "A", 2, 0],
+      ["UCL", "Bayern Munich", "H", 1, 1],
+      ["UCL", "RB Leipzig", "A", 2, 1],
+      ["UCL", "Benfica", "A", 2, 0],
       ["UCL", "Atletico Madrid", "H", 1, 0],
-      ["BUNDESLIGA", "Union Berlin", "H", 3, 1]
+      ["UCL", "Chelsea", "H", 3, 1]
     ]
   }),
   RBL: makeTeam("RBL", "RB Leipzig", "RBL", 1818, "Red Bull Arena", {
     attack: [1.82, 14.1, 5.2, 2.7, 1.79],
     defense: [1.06, 40, 1.09, 1.7],
     form: [
-      ["BUNDESLIGA", "Bayern Munich", "A", 1, 3],
-      ["BUNDESLIGA", "Bayer Leverkusen", "H", 1, 2],
-      ["BUNDESLIGA", "Mainz", "A", 2, 0],
-      ["BUNDESLIGA", "Wolfsburg", "H", 2, 1],
-      ["BUNDESLIGA", "Stuttgart", "A", 1, 1]
+      ["UCL", "Bayern Munich", "A", 1, 3],
+      ["UCL", "Bayer Leverkusen", "H", 1, 2],
+      ["UCL", "Porto", "A", 2, 0],
+      ["UCL", "Benfica", "H", 2, 1],
+      ["UCL", "Inter", "A", 1, 1]
     ]
   }),
   PSG: makeTeam("PSG", "Paris Saint-Germain", "PSG", 1878, "Parc des Princes", {
@@ -492,21 +374,7 @@ const teams = {
   FIO: quickTeam("FIO", "Fiorentina", "FIO", 1724, "Artemio Franchi", "SERIEA"),
   SAS: quickTeam("SAS", "Sassuolo", "SAS", 1570, "Mapei Stadium", "SERIEA"),
   UDI: quickTeam("UDI", "Udinese", "UDI", 1642, "Bluenergy Stadium", "SERIEA"),
-  TOR: quickTeam("TOR", "Torino", "TOR", 1666, "Stadio Olimpico Grande Torino", "SERIEA"),
-  HEI: quickTeam("HEI", "Heidenheim", "HEI", 1608, "Voith-Arena", "BUNDESLIGA"),
-  FRA: quickTeam("FRA", "Eintracht Frankfurt", "SGE", 1738, "Deutsche Bank Park", "BUNDESLIGA"),
-  HSV: quickTeam("HSV", "Hamburger SV", "HSV", 1578, "Volksparkstadion", "BUNDESLIGA"),
-  HOF: quickTeam("HOF", "Hoffenheim", "HOF", 1624, "PreZero Arena", "BUNDESLIGA"),
-  STU: quickTeam("STU", "Stuttgart", "VFB", 1768, "MHP Arena", "BUNDESLIGA"),
-  UNI: quickTeam("UNI", "Union Berlin", "FCU", 1628, "Stadion An der Alten Forsterei", "BUNDESLIGA"),
-  KOL: quickTeam("KOL", "Koln", "KOE", 1572, "RheinEnergieStadion", "BUNDESLIGA"),
-  WER: quickTeam("WER", "Werder Bremen", "SVW", 1652, "Weserstadion", "BUNDESLIGA"),
-  AUG: quickTeam("AUG", "Augsburg", "FCA", 1636, "WWK Arena", "BUNDESLIGA"),
-  STP: quickTeam("STP", "St. Pauli", "STP", 1582, "Millerntor-Stadion", "BUNDESLIGA"),
-  MAI: quickTeam("MAI", "Mainz", "M05", 1648, "MEWA Arena", "BUNDESLIGA"),
-  BMG: quickTeam("BMG", "Borussia Monchengladbach", "BMG", 1668, "Borussia-Park", "BUNDESLIGA"),
-  FRE: quickTeam("FRE", "Freiburg", "SCF", 1682, "Europa-Park Stadion", "BUNDESLIGA"),
-  WOB: quickTeam("WOB", "Wolfsburg", "WOB", 1686, "Volkswagen Arena", "BUNDESLIGA")
+  TOR: quickTeam("TOR", "Torino", "TOR", 1666, "Stadio Olimpico Grande Torino", "SERIEA")
 };
 
 const matches = [
@@ -514,7 +382,6 @@ const matches = [
   makeMatch("today-epl-ars-liv", 0, "EPL", "20:45", "ARS", "LIV", "upcoming", "Emirates Stadium"),
   makeMatch("today-laliga-rma-bar", 0, "LALIGA", "16:00", "RMA", "BAR", "finished", "Santiago Bernabeu", { home: 2, away: 1 }),
   makeMatch("today-seriea-int-juv", 0, "SERIEA", "17:15", "INT", "JUV", "halftime", "San Siro", { home: 0, away: 0, minute: 45 }),
-  makeMatch("today-bundesliga-bay-bvb", 0, "BUNDESLIGA", "15:30", "BAY", "BVB", "finished", "Allianz Arena", { home: 3, away: 2 }),
   makeMatch("today-ucl-psg-atm", 0, "UCL", "22:00", "PSG", "ATM", "upcoming", "Parc des Princes", null, "Semi-final watchlist"),
   makeMatch("ucl-psg-bay-1", 1, "UCL", "00:30", "PSG", "BAY", "upcoming", "Parc des Princes", null, "Semi-final - Leg 1 of 2"),
   makeMatch("ucl-atm-ars-1", 2, "UCL", "00:30", "ATM", "ARS", "upcoming", "Metropolitano Stadium", null, "Semi-final - Leg 1 of 2"),
@@ -523,18 +390,9 @@ const matches = [
   makeMatch("epl-wol-sun", 4, "EPL", "19:30", "WOL", "SUN", "upcoming", "Molineux"),
   makeMatch("epl-new-bha", 4, "EPL", "19:30", "NEW", "BHA", "upcoming", "St James' Park"),
   makeMatch("epl-ars-ful", 4, "EPL", "22:00", "ARS", "FUL", "upcoming", "Emirates Stadium"),
-  makeMatch("bund-bay-hei", 4, "BUNDESLIGA", "19:00", "BAY", "HEI", "upcoming", "Allianz Arena"),
-  makeMatch("bund-fra-hsv", 4, "BUNDESLIGA", "19:00", "FRA", "HSV", "upcoming", "Deutsche Bank Park"),
-  makeMatch("bund-hof-stu", 4, "BUNDESLIGA", "19:00", "HOF", "STU", "upcoming", "PreZero Arena"),
-  makeMatch("bund-uni-kol", 4, "BUNDESLIGA", "19:00", "UNI", "KOL", "upcoming", "Stadion An der Alten Forsterei"),
-  makeMatch("bund-wer-aug", 4, "BUNDESLIGA", "19:00", "WER", "AUG", "upcoming", "Weserstadion"),
-  makeMatch("bund-lev-rbl", 4, "BUNDESLIGA", "22:00", "LEV", "RBL", "upcoming", "BayArena"),
   makeMatch("epl-bou-cry", 5, "EPL", "18:30", "BOU", "CRY", "upcoming", "Vitality Stadium"),
   makeMatch("epl-mun-liv", 5, "EPL", "20:00", "MUN", "LIV", "upcoming", "Old Trafford"),
   makeMatch("epl-avl-tot", 5, "EPL", "23:30", "AVL", "TOT", "upcoming", "Villa Park"),
-  makeMatch("bund-stp-mai", 5, "BUNDESLIGA", "19:00", "STP", "MAI", "upcoming", "Millerntor-Stadion"),
-  makeMatch("bund-bmg-bvb", 5, "BUNDESLIGA", "21:00", "BMG", "BVB", "upcoming", "Borussia-Park"),
-  makeMatch("bund-fre-wob", 5, "BUNDESLIGA", "23:00", "FRE", "WOB", "upcoming", "Europa-Park Stadion"),
   makeMatch("laliga-cel-elc", 5, "LALIGA", "17:30", "CEL", "ELC", "upcoming", "Balaidos"),
   makeMatch("laliga-get-ray", 5, "LALIGA", "19:45", "GET", "RAY", "upcoming", "Coliseum"),
   makeMatch("laliga-esp-rma", 5, "LALIGA", "21:30", "ESP", "RMA", "upcoming", "RCDE Stadium"),
@@ -589,12 +447,6 @@ const headToHead = {
     meeting(-382, "SERIEA", "JUV", "INT", 0, 1, "Allianz Stadium"),
     meeting(-560, "SERIEA", "INT", "JUV", 1, 1, "San Siro")
   ],
-  [pairKey("BAY", "BVB")]: [
-    meeting(-22, "BUNDESLIGA", "BVB", "BAY", 2, 2, "Signal Iduna Park"),
-    meeting(-205, "BUNDESLIGA", "BAY", "BVB", 3, 1, "Allianz Arena"),
-    meeting(-389, "BUNDESLIGA", "BVB", "BAY", 0, 2, "Signal Iduna Park"),
-    meeting(-560, "BUNDESLIGA", "BAY", "BVB", 4, 2, "Allianz Arena")
-  ],
   [pairKey("AVL", "BHA")]: [
     meeting(-80, "EPL", "BHA", "AVL", 1, 2, "Amex Stadium"),
     meeting(-270, "EPL", "AVL", "BHA", 2, 0, "Villa Park"),
@@ -609,11 +461,6 @@ const headToHead = {
     meeting(-65, "SERIEA", "ROM", "ACM", 2, 2, "Stadio Olimpico"),
     meeting(-240, "SERIEA", "ACM", "ROM", 2, 1, "San Siro"),
     meeting(-415, "SERIEA", "ROM", "ACM", 1, 1, "Stadio Olimpico")
-  ],
-  [pairKey("LEV", "RBL")]: [
-    meeting(-44, "BUNDESLIGA", "RBL", "LEV", 1, 2, "Red Bull Arena"),
-    meeting(-220, "BUNDESLIGA", "LEV", "RBL", 2, 0, "BayArena"),
-    meeting(-390, "BUNDESLIGA", "RBL", "LEV", 1, 1, "Red Bull Arena")
   ],
   [pairKey("MCI", "RMA")]: [
     meeting(-22, "UCL", "RMA", "MCI", 1, 1, "Santiago Bernabeu"),
@@ -663,8 +510,6 @@ const selectors = {
   topPicksMeta: document.querySelector("#topPicksMeta"),
   topPicksList: document.querySelector("#topPicksList"),
   homeView: document.querySelector("#homeView"),
-  bracketView: document.querySelector("#bracketView"),
-  bracketContent: document.querySelector("#bracketContent"),
   detailView: document.querySelector("#detailView"),
   detailStatus: document.querySelector("#detailStatus"),
   detailLeague: document.querySelector("#detailLeague"),
@@ -695,8 +540,6 @@ const state = {
   selectedDate: todayKey,
   search: "",
   selectedMatchId: null,
-  selectedBracketMatchId: null,
-  bracketUserPicks: loadWorldCupPicks(),
   detailTab: "overview",
   renderTimer: null
 };
@@ -707,8 +550,9 @@ function quickTeam(id, name, shortName, rating, venue, league) {
     EPL: ["Everton", "West Ham", "Fulham", "Brentford", "Bournemouth", "Newcastle United"],
     LALIGA: ["Sevilla", "Valencia", "Getafe", "Osasuna", "Mallorca", "Villarreal"],
     SERIEA: ["Torino", "Udinese", "Bologna", "Lazio", "Genoa", "Fiorentina"],
-    BUNDESLIGA: ["Mainz", "Freiburg", "Augsburg", "Wolfsburg", "Werder Bremen", "Union Berlin"],
-    UCL: ["Benfica", "Porto", "Ajax", "Celtic", "Sporting CP", "Monaco"]
+    LIGUE1: ["Rennes", "Lille", "Nice", "Monaco", "Lens", "Lyon"],
+    UCL: ["Benfica", "Porto", "Ajax", "Celtic", "Sporting CP", "Monaco"],
+    UEL: ["Real Betis", "Roma", "Fenerbahce", "Lyon", "Porto", "Freiburg"]
   };
   const opponents = opponentsByLeague[league] || opponentsByLeague.EPL;
   const offset = id.charCodeAt(0) + id.charCodeAt(id.length - 1);
@@ -1000,27 +844,41 @@ function meeting(dateOffset, competition, homeTeamId, awayTeamId, homeGoals, awa
 
 function getMatchesByDate(date) {
   return matches
-    .filter((match) => match.date === date)
+    .filter((match) => isFocusedMatch(match) && match.date === date)
     .sort(sortMatches);
 }
 
 function getLiveMatches() {
   return matches
-    .filter((match) => match.status === "live" || match.status === "halftime")
+    .filter((match) => isFocusedMatch(match) && (match.status === "live" || match.status === "halftime"))
     .sort(sortMatches);
 }
 
 function getUpcomingMatches() {
   return matches
-    .filter((match) => ["upcoming", "postponed", "suspended", "cancelled"].includes(match.status) && match.date >= state.selectedDate)
+    .filter(
+      (match) =>
+        isFocusedMatch(match) &&
+        ["upcoming", "postponed", "suspended", "cancelled"].includes(match.status) &&
+        match.date >= state.selectedDate
+    )
     .sort(sortMatches);
 }
 
 function getFinishedMatches() {
-  const finishedMatches = matches.filter((match) => match.status === "finished");
+  const finishedMatches = matches.filter((match) => isFocusedMatch(match) && match.status === "finished");
   const finishedUpToSelectedDate = finishedMatches.filter((match) => match.date <= state.selectedDate);
   const visibleFinished = finishedUpToSelectedDate.length ? finishedUpToSelectedDate : finishedMatches;
   return visibleFinished.sort(sortMatchesReverse);
+}
+
+function isFocusedMatch(match) {
+  return Boolean(match && isFocusedLeague(match.league));
+}
+
+function isFocusedLeague(league) {
+  const key = normalizeLeague(league);
+  return focusedLeagueIds.has(key);
 }
 
 function getMatchDetails(matchId) {
@@ -1053,7 +911,6 @@ function importFixtureData(payload, options = {}) {
 
   state.selectedMatchId = null;
   selectors.detailView.hidden = true;
-  selectors.bracketView.hidden = true;
   selectors.homeView.hidden = false;
   renderFixtureSource();
   renderActiveView();
@@ -1071,7 +928,6 @@ function resetFixtureData() {
   if (selectors.fixtureUrlInput) selectors.fixtureUrlInput.value = "";
   state.selectedMatchId = null;
   selectors.detailView.hidden = true;
-  selectors.bracketView.hidden = true;
   selectors.homeView.hidden = false;
   renderFixtureSource();
   renderActiveView();
@@ -1086,8 +942,7 @@ function clearFixtureBoard(meta = liveFeedUnavailableMeta, options = {}) {
   localStorage.removeItem(FIXTURE_STORAGE_KEY);
   state.selectedMatchId = null;
   selectors.detailView.hidden = true;
-  selectors.bracketView.hidden = state.activeView !== "worldcup";
-  selectors.homeView.hidden = state.activeView === "worldcup";
+  selectors.homeView.hidden = false;
   renderFixtureSource();
   renderActiveView();
   if (options.message) setImportStatus(options.message, options.isError);
@@ -1132,9 +987,6 @@ async function loadLiveFixtureFeed(options = {}) {
   return imported;
 }
 
-function getWorldCupBracket() {
-  return buildWorldCupBracket({ userPicks: state.bracketUserPicks });
-}
 
 function loadStoredFixtureData() {
   const raw = localStorage.getItem(FIXTURE_STORAGE_KEY);
@@ -1193,6 +1045,7 @@ function normalizeImportedHistoricalMatch(match, index) {
   if (!match || typeof match !== "object") return null;
 
   const league = normalizeLeague(match.league || match.competition || match.competitionId);
+  if (!isFocusedLeague(league)) return null;
   const date = normalizeDate(match.date || match.kickoffDate || match.utcDate || match.kickoff);
   const time = normalizeTime(match.time || match.kickoffTime || match.utcTime || match.kickoff || match.utcDate);
   const homeTeamId = resolveTeamForMatch(match.homeTeamId || match.homeId, match.homeTeam || match.home || match.homeName, league);
@@ -1238,6 +1091,7 @@ function normalizeImportedTeam(team) {
   if (!name) return null;
 
   const league = normalizeLeague(team.league || team.competition || "EPL");
+  if (!isFocusedLeague(league)) return null;
   const id = normalizeTeamId(team.id || team.teamId || createTeamId(name, league));
   const existingId = findTeamIdByName(name) || id;
   const existingTeam = teams[existingId];
@@ -1280,6 +1134,7 @@ function normalizeImportedMatch(match, index) {
   if (!match || typeof match !== "object") return null;
 
   const league = normalizeLeague(match.league || match.competition);
+  if (!isFocusedLeague(league)) return null;
   const date = normalizeDate(match.date || match.kickoffDate || match.utcDate);
   const time = normalizeTime(match.time || match.kickoffTime || match.utcTime || match.kickoff || match.utcDate);
   ensureLeagueProfile(league);
@@ -1343,17 +1198,17 @@ function normalizeLeague(value) {
     "serie a": "SERIEA",
     "seria a": "SERIEA",
     sa: "SERIEA",
-    bundesliga: "BUNDESLIGA",
-    bl1: "BUNDESLIGA",
-    "1 bundesliga": "BUNDESLIGA",
+    "ligue 1": "LIGUE1",
+    "french league": "LIGUE1",
+    fl1: "LIGUE1",
     "uefa champions league": "UCL",
     "champions league": "UCL",
     cl: "UCL",
     ucl: "UCL",
-    "fifa world cup": "WC",
-    "fifa world cup 2026": "WC",
-    "world cup": "WC",
-    wc: "WC"
+    "uefa europa league": "UEL",
+    "europa league": "UEL",
+    uel: "UEL",
+    el: "UEL"
   };
   return aliases[clean] || raw.toUpperCase();
 }
@@ -1412,7 +1267,7 @@ function normalizeImportedForm(form) {
         goalsAgainst
       };
     })
-    .filter(Boolean)
+    .filter((match) => match && isFocusedLeague(match.competition))
     .slice(0, 5);
   return normalized;
 }
@@ -1602,7 +1457,6 @@ function resultFor(goalsFor, goalsAgainst) {
 
 function renderBoardWithLoading() {
   selectors.homeView.hidden = false;
-  selectors.bracketView.hidden = true;
   selectors.detailView.hidden = true;
   selectors.loadingState.hidden = false;
   selectors.matchGroups.hidden = true;
@@ -1612,24 +1466,26 @@ function renderBoardWithLoading() {
   state.renderTimer = setTimeout(() => {
     renderBoard();
     selectors.loadingState.hidden = true;
-    selectors.matchGroups.hidden = false;
+    selectors.matchGroups.hidden = state.activeView === "picks";
   }, 140);
 }
 
 function renderActiveView() {
-  if (state.activeView === "worldcup") {
-    renderWorldCupView();
-    return;
-  }
   renderBoardWithLoading();
 }
 
 function renderBoard() {
+  if (state.activeView === "picks") {
+    renderTopPicksView();
+    return;
+  }
+
   const allMatches = getMatchesForActiveView();
   const visibleMatches = filterMatches(allMatches);
   selectors.headerMatchCount.textContent = `${visibleMatches.length} ${visibleMatches.length === 1 ? "match" : "matches"}`;
   renderEmptyState(visibleMatches.length, allMatches.length);
-  renderTopPicks(visibleMatches);
+  selectors.topPicksPanel.hidden = true;
+  selectors.topPicksList.innerHTML = "";
 
   if (!visibleMatches.length) {
     selectors.matchGroups.innerHTML = "";
@@ -1680,29 +1536,48 @@ function getEmptyStateCopyForView() {
       body: "Try a later date or refresh the live fixture feed."
     };
   }
+  if (state.activeView === "picks") {
+    return {
+      title: "No top picks available",
+      body: "GoalIQ needs live or upcoming fixtures with enough data before it can rank safer angles."
+    };
+  }
   return {
     title: "No matches on this date",
     body: "Move the date selector or load the latest fixture feed."
   };
 }
 
-function renderTopPicks(visibleMatches) {
-  const picks = getTopPicks(visibleMatches, 4);
-  if (!picks.length || state.activeView === "finished") {
+function renderTopPicksView() {
+  const allMatches = getTopPickCandidateMatches();
+  const visibleMatches = filterMatches(allMatches);
+  const picks = getTopPicks(visibleMatches, 12);
+
+  selectors.headerMatchCount.textContent = `${picks.length} ${picks.length === 1 ? "pick" : "picks"}`;
+  selectors.matchGroups.innerHTML = "";
+  selectors.matchGroups.hidden = true;
+  renderEmptyState(picks.length, allMatches.length);
+
+  if (!picks.length) {
     selectors.topPicksPanel.hidden = true;
     selectors.topPicksList.innerHTML = "";
     return;
   }
 
-  const labels = {
-    today: state.selectedDate === todayKey ? "Top Picks Today" : `Top Picks ${formatShortDate(state.selectedDate)}`,
-    live: "Live Model Reads",
-    upcoming: "Best Upcoming Picks"
-  };
-  selectors.topPicksTitle.textContent = labels[state.activeView] || "Top Picks";
-  selectors.topPicksMeta.textContent = `${picks.length} ranked ${picks.length === 1 ? "signal" : "signals"} from visible matches. Analysis only.`;
+  const horizonEnd = formatDateKey(addDays(parseDateKey(state.selectedDate), 14));
+  selectors.topPicksTitle.textContent = "Top Picks";
+  selectors.topPicksMeta.textContent = `${picks.length} safer ${picks.length === 1 ? "angle" : "angles"} from ${dateLabel(state.selectedDate)} to ${formatShortDate(horizonEnd)}. Analysis only.`;
   selectors.topPicksList.innerHTML = picks.map(renderTopPickCard).join("");
   selectors.topPicksPanel.hidden = false;
+}
+
+function getTopPickCandidateMatches() {
+  const fromDate = state.selectedDate;
+  const toDate = formatDateKey(addDays(parseDateKey(fromDate), 14));
+  return matches
+    .filter((match) => isFocusedMatch(match) && match.status !== "finished" && !isInactiveStatus(match.status))
+    .filter((match) => !match.date || (match.date >= fromDate && match.date <= toDate))
+    .sort(sortMatches);
 }
 
 function getTopPicks(candidateMatches, limit = 4) {
@@ -1804,7 +1679,7 @@ function groupByLeague(list) {
 function renderLeagueGroup(group) {
   const profile = ensureLeagueProfile(group.league);
   return `
-    <section class="league-group">
+    <section class="league-group" data-league="${escapeHtml(group.league)}">
       <header class="league-header">
         <span>${escapeHtml(profile.name)}</span>
         <strong>${group.matches.length}</strong>
@@ -1895,7 +1770,6 @@ function openMatchDetail(matchId) {
   state.selectedMatchId = matchId;
   state.detailTab = "overview";
   selectors.homeView.hidden = true;
-  selectors.bracketView.hidden = true;
   selectors.detailView.hidden = false;
   renderDetail();
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1904,12 +1778,8 @@ function openMatchDetail(matchId) {
 function closeMatchDetail() {
   state.selectedMatchId = null;
   selectors.detailView.hidden = true;
-  if (state.activeView === "worldcup") {
-    renderWorldCupView();
-  } else {
-    selectors.homeView.hidden = false;
-    renderBoardWithLoading();
-  }
+  selectors.homeView.hidden = false;
+  renderBoardWithLoading();
 }
 
 function renderDetail() {
@@ -2258,612 +2128,6 @@ function renderH2H(details, summary) {
   `;
 }
 
-function renderWorldCupView() {
-  clearTimeout(state.renderTimer);
-  const bracket = buildWorldCupBracket({ userPicks: state.bracketUserPicks });
-  const modelBracket = buildWorldCupBracket({ userPicks: {} });
-  const selectedMatch = bracket.matchesById.get(state.selectedBracketMatchId) || bracket.rounds[0]?.matches[0] || null;
-  if (selectedMatch && !state.selectedBracketMatchId) state.selectedBracketMatchId = selectedMatch.id;
-
-  selectors.homeView.hidden = true;
-  selectors.detailView.hidden = true;
-  selectors.bracketView.hidden = false;
-  selectors.headerMatchCount.textContent = "World Cup 2026";
-  selectors.bracketContent.innerHTML = `
-    ${renderWorldCupHero(modelBracket, bracket)}
-    <div class="worldcup-layout">
-      ${bracket.mode === "liveFeed" ? renderWorldCupLiveFeedSummary(bracket) : renderWorldCupGroupStage(bracket)}
-      <section class="worldcup-section bracket-section">
-        <div class="panel-title">
-          <span>${bracket.mode === "liveFeed" ? "Live knockout chart" : "Prediction bracket"}</span>
-          <strong>${bracket.mode === "liveFeed" ? `${bracket.liveFixtureCount} feed fixtures` : "Round of 32 to final"}</strong>
-        </div>
-        <div class="bracket-scroll" aria-label="FIFA World Cup 2026 prediction bracket">
-          <div class="bracket-grid">
-            ${bracket.rounds.map(renderWorldCupRound).join("")}
-          </div>
-        </div>
-      </section>
-      ${renderWorldCupMatchDrawer(selectedMatch, modelBracket.matchesById.get(selectedMatch?.id))}
-    </div>
-  `;
-}
-
-function renderWorldCupHero(modelBracket, userBracket) {
-  const modelChampion = modelBracket.champion;
-  const userChampion = userBracket.champion;
-  const pickCount = Object.keys(state.bracketUserPicks).length;
-  const isLiveFeed = modelBracket.mode === "liveFeed";
-  return `
-    <section class="worldcup-hero">
-      <div>
-        <span class="section-kicker">FIFA World Cup 2026</span>
-        <h2>${isLiveFeed ? "Live knockout bracket" : "GoalIQ prediction bracket"}</h2>
-        <p>${isLiveFeed ? "This chart is built from the current World Cup fixture feed. Finished matches lock in from scores; upcoming matches use the model until results arrive." : "Group tables use live World Cup fixture scores when they exist, then the bracket advances from actual results, your picks, or the model favorite."}</p>
-      </div>
-      <div class="champion-card">
-        <span>${isLiveFeed ? "Bracket leader" : "Model champion"}</span>
-        <strong>${escapeHtml(modelChampion?.name || "TBD")}</strong>
-        <small>${isLiveFeed ? `${modelBracket.liveFixtureCount} live knockout fixture${modelBracket.liveFixtureCount === 1 ? "" : "s"}` : pickCount ? `${pickCount} saved pick${pickCount === 1 ? "" : "s"}` : "No user picks yet"}${!isLiveFeed && userChampion ? ` - Your path: ${escapeHtml(userChampion.name)}` : ""}</small>
-      </div>
-    </section>
-  `;
-}
-
-function renderWorldCupGroupStage(bracket) {
-  return `
-    <section class="worldcup-section">
-      <div class="panel-title">
-        <span>Group stage</span>
-        <strong>12 groups of 4</strong>
-      </div>
-      <div class="worldcup-groups">
-        ${bracket.standings.map(renderWorldCupGroup).join("")}
-      </div>
-    </section>
-  `;
-}
-
-function renderWorldCupLiveFeedSummary(bracket) {
-  return `
-    <section class="worldcup-section">
-      <div class="panel-title">
-        <span>Live feed rounds</span>
-        <strong>${fixtureMeta.updatedAt}</strong>
-      </div>
-      <div class="worldcup-groups">
-        ${bracket.rounds.map(renderWorldCupLiveRoundSummary).join("")}
-      </div>
-    </section>
-  `;
-}
-
-function renderWorldCupLiveRoundSummary(round) {
-  return `
-    <article class="worldcup-group-card">
-      <header>
-        <span>${escapeHtml(round.label)}</span>
-        <strong>${round.matches.length} match${round.matches.length === 1 ? "" : "es"}</strong>
-      </header>
-      <div class="worldcup-table">
-        ${round.matches
-          .map(
-            (match) => `
-              <div class="worldcup-table-row">
-                <span>${match.result ? "FT" : formatShortDate(match.date)}</span>
-                <strong>${escapeHtml(match.home?.shortName || "TBD")} vs ${escapeHtml(match.away?.shortName || "TBD")}</strong>
-                <small>${match.result ? `${match.result.home}-${match.result.away}` : "Upcoming"}</small>
-              </div>
-            `
-          )
-          .join("")}
-      </div>
-    </article>
-  `;
-}
-
-function renderWorldCupGroup(groupStanding) {
-  return `
-    <article class="worldcup-group-card">
-      <header>
-        <span>Group ${escapeHtml(groupStanding.group)}</span>
-        <strong>${groupStanding.table.filter((row) => row.played > 0).length ? "Live table" : "Model seed"}</strong>
-      </header>
-      <div class="worldcup-table">
-        ${groupStanding.table
-          .map(
-            (row, index) => `
-              <div class="worldcup-table-row ${index < 2 ? "qualifier" : index === 2 ? "third-place" : ""}">
-                <span>${index + 1}</span>
-                <strong>${escapeHtml(row.team.name)}</strong>
-                <small>${row.points} pts</small>
-                <small>${row.goalDifference >= 0 ? "+" : ""}${row.goalDifference}</small>
-              </div>
-            `
-          )
-          .join("")}
-      </div>
-    </article>
-  `;
-}
-
-function renderWorldCupRound(round) {
-  return `
-    <div class="bracket-round">
-      <h3>${escapeHtml(round.label)}</h3>
-      <div class="bracket-round-matches">
-        ${round.matches.map(renderWorldCupMatchCard).join("")}
-      </div>
-    </div>
-  `;
-}
-
-function renderWorldCupMatchCard(match) {
-  const difference = match.userPick && match.modelWinner && match.userPick !== match.modelWinner.code;
-  const hasResult = Boolean(match.result);
-  return `
-    <button class="bracket-match ${state.selectedBracketMatchId === match.id ? "active" : ""} ${difference ? "pick-diff" : ""} ${hasResult ? "settled" : ""}" type="button" data-bracket-match-id="${escapeHtml(match.id)}">
-      <span class="bracket-match-meta">${escapeHtml(match.id)} - ${escapeHtml(formatShortDate(match.date))}</span>
-      ${renderWorldCupTeamSlot(match.home, match)}
-      ${renderWorldCupTeamSlot(match.away, match)}
-    </button>
-  `;
-}
-
-function renderWorldCupTeamSlot(teamEntry, match) {
-  const isWinner = teamEntry && match.winner?.code === teamEntry.code;
-  const isUserPick = teamEntry && match.userPick === teamEntry.code;
-  const opponent = getOpponentForSlot(teamEntry, match);
-  const probability = teamEntry && opponent ? formatPercent(getWorldCupWinProbability(teamEntry, opponent)) : "TBD";
-  return `
-    <div class="bracket-team ${isWinner ? "winner" : ""} ${isUserPick ? "user-pick" : ""}">
-      <span>${escapeHtml(teamEntry?.shortName || "TBD")}</span>
-      <strong>${escapeHtml(teamEntry?.name || "To be decided")}</strong>
-      <small>${probability}</small>
-    </div>
-  `;
-}
-
-function renderWorldCupMatchDrawer(match, modelMatch) {
-  if (!match) {
-    return `<section class="worldcup-drawer empty-state inline"><strong>No bracket match selected</strong><span>Select a match to inspect the prediction.</span></section>`;
-  }
-
-  const modelPick = modelMatch?.modelWinner || match.modelWinner;
-  const prediction = getWorldCupMatchPrediction(match.home, match.away);
-  const canPick = match.home && match.away && !match.result;
-  return `
-    <section class="worldcup-drawer">
-      <div class="panel-title">
-        <span>${escapeHtml(match.label)}</span>
-        <strong>${escapeHtml(match.id)}</strong>
-      </div>
-      <div class="drawer-headline">
-        <strong>${escapeHtml(match.home?.name || "TBD")} vs ${escapeHtml(match.away?.name || "TBD")}</strong>
-        <span>${escapeHtml(formatLongDate(match.date))} - ${escapeHtml(match.venue)}</span>
-      </div>
-      <div class="drawer-grid">
-        <div><span>Model pick</span><strong>${escapeHtml(modelPick?.name || "TBD")}</strong></div>
-        <div><span>Expected scoring model</span><strong>${prediction.expectedGoals}</strong></div>
-        <div><span>Result source</span><strong>${match.result ? "Fixture feed" : match.userPick ? "Your pick" : "GoalIQ model"}</strong></div>
-        <div><span>Score</span><strong>${match.result ? `${match.result.home}-${match.result.away}` : "Pending"}</strong></div>
-      </div>
-      <div class="pick-actions">
-        ${[match.home, match.away]
-          .filter(Boolean)
-          .map(
-            (teamEntry) => `
-              <button class="user-pick-button ${match.userPick === teamEntry.code ? "active" : ""}" type="button" data-bracket-pick="${escapeHtml(match.id)}" data-team-code="${escapeHtml(teamEntry.code)}" ${canPick ? "" : "disabled"}>
-                ${escapeHtml(teamEntry.shortName)}
-              </button>
-            `
-          )
-          .join("")}
-        <button class="user-pick-button muted" type="button" data-bracket-clear="${escapeHtml(match.id)}" ${match.userPick ? "" : "disabled"}>Clear</button>
-      </div>
-      <p class="source-note">Predictions are for analysis only. No result is guaranteed.</p>
-    </section>
-  `;
-}
-
-function buildWorldCupBracket({ userPicks = {} } = {}) {
-  return buildLiveWorldCupBracket({ userPicks }) || buildProjectedWorldCupBracket({ userPicks });
-}
-
-function buildProjectedWorldCupBracket({ userPicks = {} } = {}) {
-  const standings = getWorldCupStandings();
-  const slots = getWorldCupSeedSlots(standings);
-  const usedThirdGroups = new Set();
-  const byId = new Map();
-  const rounds = [
-    {
-      key: "round32",
-      label: "Round of 32",
-      matches: worldCupRoundOf32.map((template) => {
-        const home = resolveWorldCupSeed(template.home, slots, usedThirdGroups);
-        const away = resolveWorldCupSeed(template.away, slots, usedThirdGroups);
-        const match = createWorldCupKnockoutMatch(template, home, away, userPicks);
-        byId.set(match.id, match);
-        return match;
-      })
-    }
-  ];
-
-  worldCupLaterRounds.forEach((round) => {
-    const roundMatches = round.matches.map(([id, date, venue, homeSource, awaySource]) => {
-      const template = wcMatch(id, round.label, date, venue, wcPrevious(homeSource), wcPrevious(awaySource));
-      const home = byId.get(homeSource)?.winner || null;
-      const away = byId.get(awaySource)?.winner || null;
-      const match = createWorldCupKnockoutMatch(template, home, away, userPicks);
-      byId.set(match.id, match);
-      return match;
-    });
-    rounds.push({ key: round.key, label: round.label, matches: roundMatches });
-  });
-
-  return {
-    standings,
-    rounds,
-    matchesById: byId,
-    champion: byId.get("M104")?.winner || null,
-    mode: "projection"
-  };
-}
-
-function buildLiveWorldCupBracket({ userPicks = {} } = {}) {
-  const roundBuckets = new Map();
-  const byId = new Map();
-  const knockoutFixtures = getWorldCupFixtures()
-    .filter((fixture) => getLiveWorldCupRound(fixture.stage))
-    .sort(sortMatches);
-
-  if (!knockoutFixtures.length) return null;
-
-  knockoutFixtures.forEach((fixture) => {
-    const roundMeta = getLiveWorldCupRound(fixture.stage);
-    const match = createWorldCupMatchFromFixture(fixture, roundMeta, userPicks);
-    if (!roundBuckets.has(roundMeta.key)) {
-      roundBuckets.set(roundMeta.key, { key: roundMeta.key, label: roundMeta.label, order: roundMeta.order, matches: [] });
-    }
-    roundBuckets.get(roundMeta.key).matches.push(match);
-    byId.set(match.id, match);
-  });
-
-  const rounds = [...roundBuckets.values()]
-    .sort((a, b) => a.order - b.order)
-    .map((round) => ({
-      key: round.key,
-      label: round.label,
-      matches: round.matches.sort(sortWorldCupBracketMatches)
-    }));
-
-  return {
-    standings: getWorldCupStandings(),
-    rounds,
-    matchesById: byId,
-    champion: getLiveWorldCupLeader(rounds),
-    mode: "liveFeed",
-    liveFixtureCount: knockoutFixtures.length
-  };
-}
-
-function getLiveWorldCupRound(stage) {
-  const clean = String(stage || "")
-    .toLowerCase()
-    .replace(/[_-]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-  const rounds = [
-    { key: "round32", label: "Round of 32", order: 1, aliases: ["round of 32", "last 32"] },
-    { key: "round16", label: "Round of 16", order: 2, aliases: ["round of 16", "last 16"] },
-    { key: "quarterfinals", label: "Quarter-finals", order: 3, aliases: ["quarter finals", "quarterfinals", "quarter final"] },
-    { key: "semifinals", label: "Semi-finals", order: 4, aliases: ["semi finals", "semifinals", "semi final"] },
-    { key: "thirdPlace", label: "Third place", order: 5, aliases: ["third place", "third place game"] },
-    { key: "final", label: "Final", order: 6, aliases: ["final"] }
-  ];
-  return rounds.find((round) => round.aliases.includes(clean)) || null;
-}
-
-function createWorldCupMatchFromFixture(fixture, roundMeta, userPicks) {
-  const home = toWorldCupTeamEntry(teams[fixture.homeTeamId], fixture.homeTeamId);
-  const away = toWorldCupTeamEntry(teams[fixture.awayTeamId], fixture.awayTeamId);
-  const result = fixture.score ? { home: fixture.score.home, away: fixture.score.away } : null;
-  const userPick = userPicks[fixture.id] || null;
-  const modelWinner = getWorldCupModelWinner(home, away);
-
-  return {
-    id: fixture.id,
-    label: roundMeta.label,
-    date: fixture.date,
-    venue: fixture.venue || "",
-    home,
-    away,
-    result,
-    userPick,
-    modelWinner,
-    winner: getWorldCupWinner(home, away, result, userPick),
-    source: fixture
-  };
-}
-
-function toWorldCupTeamEntry(team, fallbackId) {
-  if (!team) return null;
-  return {
-    code: team.id || fallbackId,
-    name: team.name || fallbackId,
-    shortName: team.shortName || makeShortName(team.name || fallbackId),
-    rating: team.rating || 1600
-  };
-}
-
-function sortWorldCupBracketMatches(a, b) {
-  return a.date.localeCompare(b.date) || a.id.localeCompare(b.id);
-}
-
-function getLiveWorldCupLeader(rounds) {
-  const final = rounds.find((round) => round.key === "final")?.matches.find((match) => match.winner);
-  if (final?.winner) return final.winner;
-
-  const settledMatches = rounds.flatMap((round) => round.matches).filter((match) => match.result && match.winner);
-  if (settledMatches.length) return settledMatches[settledMatches.length - 1].winner;
-
-  const latestRound = rounds[rounds.length - 1];
-  return latestRound?.matches.find((match) => match.winner)?.winner || null;
-}
-
-function getWorldCupStandings() {
-  return worldCupGroups.map((groupData) => ({
-    group: groupData.name,
-    table: rankWorldCupGroup(groupData, getWorldCupGroupFixtures(groupData))
-  }));
-}
-
-function rankWorldCupGroup(groupData, fixtures) {
-  const rows = groupData.teams.map((teamEntry) => ({
-    team: teamEntry,
-    played: 0,
-    wins: 0,
-    draws: 0,
-    losses: 0,
-    goalsFor: 0,
-    goalsAgainst: 0,
-    goalDifference: 0,
-    points: 0
-  }));
-  const table = new Map(rows.map((row) => [normalizeWorldCupName(row.team.name), row]));
-
-  fixtures.forEach((fixture) => {
-    const home = table.get(normalizeWorldCupName(getFixtureTeamName(fixture, "home")));
-    const away = table.get(normalizeWorldCupName(getFixtureTeamName(fixture, "away")));
-    if (!home || !away || !fixture.score) return;
-    applyWorldCupGroupScore(home, fixture.score.home, fixture.score.away);
-    applyWorldCupGroupScore(away, fixture.score.away, fixture.score.home);
-  });
-
-  return rows.sort((a, b) => {
-    return (
-      b.points - a.points ||
-      b.goalDifference - a.goalDifference ||
-      b.goalsFor - a.goalsFor ||
-      b.team.rating - a.team.rating ||
-      a.team.name.localeCompare(b.team.name)
-    );
-  });
-}
-
-function getWorldCupSeedSlots(standings) {
-  const slots = {};
-  const thirdRows = [];
-  standings.forEach((groupStanding) => {
-    slots[`${groupStanding.group}1`] = groupStanding.table[0]?.team || null;
-    slots[`${groupStanding.group}2`] = groupStanding.table[1]?.team || null;
-    if (groupStanding.table[2]) thirdRows.push({ ...groupStanding.table[2], group: groupStanding.group });
-  });
-
-  thirdRows
-    .sort((a, b) => {
-      return (
-        b.points - a.points ||
-        b.goalDifference - a.goalDifference ||
-        b.goalsFor - a.goalsFor ||
-        b.team.rating - a.team.rating ||
-        a.team.name.localeCompare(b.team.name)
-      );
-    })
-    .slice(0, 8)
-    .forEach((row) => {
-      slots[`${row.group}3`] = row.team;
-    });
-
-  return slots;
-}
-
-function resolveWorldCupSeed(seed, slots, usedThirdGroups) {
-  if (seed.type === "group") return slots[`${seed.group}${seed.rank}`] || null;
-  if (seed.type === "third") {
-    const groupName = seed.groups.find((candidate) => slots[`${candidate}3`] && !usedThirdGroups.has(candidate));
-    if (!groupName) return null;
-    usedThirdGroups.add(groupName);
-    return slots[`${groupName}3`];
-  }
-  return null;
-}
-
-function createWorldCupKnockoutMatch(template, home, away, userPicks) {
-  const fixture = findWorldCupFixtureBetween(home, away, template.date);
-  const result = fixture?.score ? orientWorldCupScore(fixture, home, away) : null;
-  const userPick = userPicks[template.id] || null;
-  const modelWinner = getWorldCupModelWinner(home, away);
-  return {
-    id: template.id,
-    label: template.label,
-    date: fixture?.date || template.date,
-    venue: fixture?.venue || template.venue,
-    home,
-    away,
-    result,
-    userPick,
-    modelWinner,
-    winner: getWorldCupWinner(home, away, result, userPick),
-    source: fixture || template
-  };
-}
-
-function getWorldCupWinner(home, away, result, userPick) {
-  if (!home || !away) return null;
-  if (result) {
-    if (result.home > result.away) return home;
-    if (result.away > result.home) return away;
-  }
-  if (userPick === home.code) return home;
-  if (userPick === away.code) return away;
-  return getWorldCupModelWinner(home, away);
-}
-
-function getWorldCupModelWinner(home, away) {
-  if (!home || !away) return null;
-  return home.rating >= away.rating ? home : away;
-}
-
-function getWorldCupMatchPrediction(home, away) {
-  if (!home || !away) return { expectedGoals: "TBD" };
-  const edge = clamp((home.rating - away.rating) / 500, -0.8, 0.8);
-  const homeGoals = clamp(1.35 + edge * 0.75, 0.55, 2.75);
-  const awayGoals = clamp(1.2 - edge * 0.62, 0.45, 2.6);
-  return {
-    expectedGoals: `${formatNumber(homeGoals)} - ${formatNumber(awayGoals)}`
-  };
-}
-
-function getWorldCupWinProbability(teamEntry, opponent) {
-  if (!teamEntry || !opponent) return 0;
-  return clamp(1 / (1 + Math.pow(10, (opponent.rating - teamEntry.rating) / 420)), 0.12, 0.88);
-}
-
-function getOpponentForSlot(teamEntry, match) {
-  if (!teamEntry) return null;
-  return match.home?.code === teamEntry.code ? match.away : match.home;
-}
-
-function getWorldCupGroupFixtures(groupData) {
-  const groupNames = new Set(groupData.teams.map((teamEntry) => normalizeWorldCupName(teamEntry.name)));
-  return getWorldCupFixtures().filter((fixture) => {
-    const home = normalizeWorldCupName(getFixtureTeamName(fixture, "home"));
-    const away = normalizeWorldCupName(getFixtureTeamName(fixture, "away"));
-    return groupNames.has(home) && groupNames.has(away);
-  });
-}
-
-function getWorldCupFixtures() {
-  return matches.filter((match) => normalizeLeague(match.league) === "WC");
-}
-
-function findWorldCupFixtureBetween(home, away, fallbackDate) {
-  if (!home || !away) return null;
-  const homeName = normalizeWorldCupName(home.name);
-  const awayName = normalizeWorldCupName(away.name);
-  return (
-    getWorldCupFixtures().find((fixture) => {
-      const fixtureHome = normalizeWorldCupName(getFixtureTeamName(fixture, "home"));
-      const fixtureAway = normalizeWorldCupName(getFixtureTeamName(fixture, "away"));
-      const samePair =
-        (fixtureHome === homeName && fixtureAway === awayName) ||
-        (fixtureHome === awayName && fixtureAway === homeName);
-      return samePair && fixture.date >= "2026-06-28";
-    }) || {
-      date: fallbackDate,
-      venue: ""
-    }
-  );
-}
-
-function orientWorldCupScore(fixture, home, away) {
-  const fixtureHome = normalizeWorldCupName(getFixtureTeamName(fixture, "home"));
-  const bracketHome = normalizeWorldCupName(home?.name);
-  if (fixtureHome === bracketHome) return fixture.score;
-  return { home: fixture.score.away, away: fixture.score.home };
-}
-
-function applyWorldCupGroupScore(row, goalsFor, goalsAgainst) {
-  row.played += 1;
-  row.goalsFor += goalsFor;
-  row.goalsAgainst += goalsAgainst;
-  row.goalDifference = row.goalsFor - row.goalsAgainst;
-  if (goalsFor > goalsAgainst) {
-    row.wins += 1;
-    row.points += 3;
-  } else if (goalsFor === goalsAgainst) {
-    row.draws += 1;
-    row.points += 1;
-  } else {
-    row.losses += 1;
-  }
-}
-
-function getFixtureTeamName(fixture, side) {
-  const teamId = side === "home" ? fixture.homeTeamId : fixture.awayTeamId;
-  return teams[teamId]?.name || teamId;
-}
-
-function normalizeWorldCupName(value) {
-  const clean = String(value || "")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/&/g, "and")
-    .replace(/[^a-z0-9]+/g, " ")
-    .trim();
-  const aliases = {
-    "bosnia h": "bosnia and herzegovina",
-    "bosnia herz": "bosnia and herzegovina",
-    "usa": "united states",
-    "united states of america": "united states",
-    "cote d ivoire": "ivory coast"
-  };
-  return aliases[clean] || clean;
-}
-
-function loadWorldCupPicks() {
-  try {
-    const stored = JSON.parse(localStorage.getItem(WORLD_CUP_PICK_STORAGE_KEY) || "{}");
-    return stored && typeof stored === "object" ? stored : {};
-  } catch {
-    return {};
-  }
-}
-
-function saveWorldCupPicks() {
-  localStorage.setItem(WORLD_CUP_PICK_STORAGE_KEY, JSON.stringify(state.bracketUserPicks));
-}
-
-function worldCupGroup(name, groupTeams) {
-  return { name, teams: groupTeams.map((teamEntry, index) => ({ ...teamEntry, group: name, position: index + 1 })) };
-}
-
-function worldCupTeam(code, name, rating) {
-  return { code, name, shortName: code, rating };
-}
-
-function wcSeed(groupName, rank) {
-  return { type: "group", group: groupName, rank };
-}
-
-function wcThird(groups) {
-  return { type: "third", groups };
-}
-
-function wcPrevious(matchId) {
-  return { type: "previous", matchId };
-}
-
-function wcMatch(id, label, date, venue, home, away) {
-  return { id, label, date, venue, home, away };
-}
-
-function wcRound(key, label, roundMatches) {
-  return { key, label, matches: roundMatches };
-}
-
 function renderStatRows(rows) {
   return rows
     .map(
@@ -2930,31 +2194,6 @@ function bindEvents() {
     openMatchDetail(card.dataset.matchId);
   });
 
-  selectors.bracketView.addEventListener("click", (event) => {
-    const pickButton = event.target.closest("[data-bracket-pick]");
-    if (pickButton && !pickButton.disabled) {
-      state.bracketUserPicks[pickButton.dataset.bracketPick] = pickButton.dataset.teamCode;
-      state.selectedBracketMatchId = pickButton.dataset.bracketPick;
-      saveWorldCupPicks();
-      renderWorldCupView();
-      return;
-    }
-
-    const clearButton = event.target.closest("[data-bracket-clear]");
-    if (clearButton && !clearButton.disabled) {
-      delete state.bracketUserPicks[clearButton.dataset.bracketClear];
-      state.selectedBracketMatchId = clearButton.dataset.bracketClear;
-      saveWorldCupPicks();
-      renderWorldCupView();
-      return;
-    }
-
-    const bracketMatch = event.target.closest("[data-bracket-match-id]");
-    if (!bracketMatch) return;
-    state.selectedBracketMatchId = bracketMatch.dataset.bracketMatchId;
-    renderWorldCupView();
-  });
-
   document.querySelector("#backButton").addEventListener("click", closeMatchDetail);
 
   document.querySelectorAll(".detail-tab").forEach((button) => {
@@ -3012,14 +2251,14 @@ function setActiveView(view, updateUrl = true) {
   state.selectedMatchId = null;
   selectors.detailView.hidden = true;
   if (updateUrl) {
-    const nextUrl = view === "worldcup" ? "#worldcup-2026" : `${window.location.pathname}${window.location.search}`;
+    const nextUrl = view === "picks" ? "#top-picks" : `${window.location.pathname}${window.location.search}`;
     history.replaceState(null, "", nextUrl);
   }
   renderActiveView();
 }
 
 function getInitialViewFromLocation() {
-  return ["#worldcup-2026", "#bracket"].includes(window.location.hash) ? "worldcup" : "today";
+  return window.location.hash === "#top-picks" ? "picks" : "today";
 }
 
 function init() {
@@ -3328,8 +2567,7 @@ window.GoalIQServices = {
   resetFixtureData,
   getFixtureDataExport,
   loadFixtureDataFromUrl,
-  loadLiveFixtureFeed,
-  getWorldCupBracket
+  loadLiveFixtureFeed
 };
 window.FootballEdgeServices = window.GoalIQServices;
 

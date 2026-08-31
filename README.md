@@ -1,6 +1,6 @@
 # GoalIQ
 
-A zero-cost static football prediction and analysis app for EPL, La Liga, Serie A, Bundesliga, UEFA Champions League, and FIFA World Cup 2026 matches.
+A zero-cost static football prediction and analysis app for Premier League, La Liga, Serie A, Ligue 1, UEFA Champions League, and UEFA Europa League matches.
 
 ## Run
 
@@ -48,11 +48,11 @@ Android builds require Android Studio. iOS builds require macOS with Xcode and a
 
 ## Current screens
 
-- Today, Live, Upcoming, and Finished match boards.
+- Today, Top Picks, Live, Upcoming, and Finished match boards.
 - Date selector and team or league search.
 - Compact fixture cards with home win, draw, and away win prediction percentages.
 - Match detail pages with overview, winning probability, last five form, attacking stats, defensive stats, head-to-head, and extra goal-market predictions.
-- FIFA World Cup 2026 bracket page at `#worldcup-2026`, including group tables, Round of 32 through Final, model champion, match drawer, and saved user picks.
+- Dedicated Top Picks tab that ranks safer analysis angles without crowding the daily match board.
 - Built-in demo fixture snapshot for offline use.
 - Installable PWA metadata, home-screen icons, and an offline-safe service worker.
 - GitHub-hosted live fixture feed, local JSON import, remote JSON URL import, browser storage, export current fixtures, and reset to the built-in snapshot.
@@ -75,7 +75,6 @@ resetFixtureData()
 getFixtureDataExport()
 loadFixtureDataFromUrl(url)
 loadLiveFixtureFeed()
-getWorldCupBracket()
 ```
 
 ## Refresh fixtures without editing code
@@ -88,7 +87,7 @@ Use the Data source panel in the app:
 - Export the current fixture set as JSON.
 - Reset to the built-in fixture snapshot.
 
-To enable the live feed, add a repository secret named `FOOTBALL_DATA_TOKEN` containing a free football-data.org API token, then run the `Update live fixtures` GitHub Actions workflow. The workflow fetches real fixtures and scores for Premier League, La Liga, Serie A, Bundesliga, UEFA Champions League, and FIFA World Cup, writes `fixtures.live.json`, and commits it back to the repository.
+To enable the live feed, add a repository secret named `FOOTBALL_DATA_TOKEN` containing a free football-data.org API token, then run the `Update live fixtures` GitHub Actions workflow. The workflow fetches real fixtures and scores for Premier League, La Liga, Serie A, Ligue 1, UEFA Champions League, and UEFA Europa League, writes `fixtures.live.json`, and commits it back to the repository. If a competition is unavailable on the active football-data.org plan, the updater skips that competition instead of publishing fake data.
 
 See `fixtures.sample.json` for the supported shape. The simplest format is:
 
@@ -114,16 +113,7 @@ See `fixtures.sample.json` for the supported shape. The simplest format is:
 }
 ```
 
-Accepted league names include `EPL`, `Premier League`, `La Liga`, `Serie A`, `Bundesliga`, `UCL`, `Champions League`, `WC`, `World Cup`, and `FIFA World Cup`. Unknown teams are created automatically with neutral starter ratings.
-
-## World Cup bracket
-
-The World Cup page uses a local 2026 group/knockout model and then overlays any available scores from `fixtures.live.json`.
-
-- Group standings update from World Cup fixture scores when results are present.
-- The top two teams from each group and eight best third-place teams seed the Round of 32.
-- Knockout teams advance from fixture results first, then saved user picks, then the GoalIQ rating model.
-- User picks are stored in browser local storage under `goaliq-worldcup-picks`.
+Accepted league names include `EPL`, `Premier League`, `La Liga`, `Serie A`, `Ligue 1`, `French League`, `UCL`, `Champions League`, `UEL`, and `Europa League`. Unknown teams are created automatically with neutral starter ratings.
 
 ## Prediction logic
 

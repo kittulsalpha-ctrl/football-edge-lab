@@ -1,7 +1,7 @@
 {
   "name": "GoalIQ Football Predictions",
   "short_name": "GoalIQ",
-  "description": "Football fixture analysis, predictions, live scores, and World Cup bracket tracking.",
+  "description": "Football fixture analysis, predictions, live scores, and safer match angles.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 
 const API_BASE = "https://api.football-data.org/v4";
-const COMPETITIONS = ["PL", "PD", "SA", "BL1", "CL", "WC"];
+const COMPETITIONS = ["PL", "PD", "SA", "FL1", "CL", "EL"];
 const OUT_FILE = "fixtures.live.json";
 const DISPLAY_TIME_ZONE = process.env.FIXTURE_TIME_ZONE || "Asia/Kolkata";
 const MAX_WINDOW_DAYS = 10;
@@ -38,26 +38,36 @@ console.log(`Wrote ${converted.matches.length} fixtures to ${OUT_FILE}.`);
 
 async function fetchMatchesInWindows(fromDate, toDate, extraParams = {}) {
   const matches = [];
-  let start = fromDate;
 
-  while (start <= toDate) {
-    const windowEnd = addDays(start, MAX_WINDOW_DAYS - 1);
-    const end = windowEnd > toDate ? toDate : windowEnd;
+  for (const competition of COMPETITIONS) {
+    let start = fromDate;
 
-    const params = new URLSearchParams({
-      competitions: COMPETITIONS.join(","),
-      dateFrom: formatDateKey(start),
-      dateTo: formatDateKey(end),
-      ...extraParams,
-    });
+    while (start <= toDate) {
+      const windowEnd = addDays(start, MAX_WINDOW_DAYS - 1);
+      const end = windowEnd > toDate ? toDate : windowEnd;
 
-    const payload = await fetchFootballData(`${API_BASE}/matches?${params.toString()}`);
+      const params = new URLSearchParams({
+        competitions: competition,
+        dateFrom: formatDateKey(start),
+        dateTo: formatDateKey(end),
+        ...extraParams,
+      });
 
-    const windowMatches = Array.isArray(payload?.matches) ? payload.matches : [];
-    matches.push(...windowMatches);
+      try {
+        const payload = await fetchFootballData(`${API_BASE}/matches?${params.toString()}`);
+        const windowMatches = Array.isArray(payload?.matches) ? payload.matches : [];
+        matches.push(...windowMatches);
+      } catch (error) {
+        if (isCompetitionUnavailable(error)) {
+          console.log(`Skipping ${competition}: ${error.message}`);
+          break;
+        }
+        throw error;
+      }
 
-    start = addDays(end, 1);
-    await delay(REQUEST_PAUSE_MS);
+      start = addDays(end, 1);
+      await delay(REQUEST_PAUSE_MS);
+    }
   }
 
   return matches;
@@ -88,10 +98,16 @@ async function fetchFootballData(url) {
       continue;
     }
 
-    throw new Error(`football-data.org request failed: ${message}`);
+    throw new Error(`football-data.org request failed (${response.status}): ${message}`);
   }
 
   throw new Error("football-data.org request failed after retries.");
+}
+
+function isCompetitionUnavailable(error) {
+  return /football-data\.org request failed \((403|404)\)|restricted resource|not found|subscription|plan/i.test(
+    String(error?.message || "")
+  );
 }
 
 function getRetryDelayMs(response, message) {
@@ -153,7 +169,7 @@ function convertFootballData(payload, fromDate, toDate, existingFeed) {
     meta: {
       source: "football-data.org live feed",
       updatedAt: new Date().toISOString().slice(0, 10),
-      note: `Real fixtures and scores for ${fromDate} to ${toDate}.
+      note: `Real fixtures and scores for Premier League, La Liga, Serie A, Ligue 1, UEFA Champions League, and UEFA Europa League from ${fromDate} to ${toDate}.
 Times shown in ${DISPLAY_TIME_ZONE}.`,
     },
     teams: [...teams.values()].sort((a, b) => a.name.localeCompare(b.name)),
@@ -166,7 +182,7 @@ function mergeRecentFinishedMatches(newMatches, oldMatches, fromDate, teams, exi
   const merged = new Map(newMatches.map((match) => [match.id, match]));
 
   oldMatches
-    .filter((match) => match.status === "finished" && match.date >= fromDate)
+    .filter((match) => isSupportedLeague(match.league) && match.status === "finished" && match.date >= fromDate)
     .forEach((match) => {
       if (merged.has(match.id)) return;
       merged.set(match.id, match);
@@ -178,6 +194,10 @@ function mergeRecentFinishedMatches(newMatches, oldMatches, fromDate, teams, exi
     });
 
   return [...merged.values()].sort(sortMatches);
+}
+
+function isSupportedLeague(league) {
+  return ["EPL", "LALIGA", "SERIEA", "LIGUE1", "UCL", "UEL"].includes(league);
 }
 
 function convertMatch(match, index, teams) {
@@ -330,7 +350,6 @@ function appendFormMatch(teamForms, teams, seen, teamId, matchId, formMatch) {
   const team = teams.get(teamId);
   const form = teamForms.get(teamId);
   if (!team || !form || form.length >= MAX_FORM_MATCHES) return;
-  if (team.league === "WC" && formMatch.competition !== "WC") return;
   const key = `${teamId}:${matchId || `${formMatch.date}:${formMatch.opponent}`}`;
   if (seen.has(key)) return;
   seen.add(key);
@@ -491,9 +510,9 @@ function normalizeLeague(value) {
     PL: "EPL",
     PD: "LALIGA",
     SA: "SERIEA",
-    BL1: "BUNDESLIGA",
+    FL1: "LIGUE1",
     CL: "UCL",
-    WC: "WC",
+    EL: "UEL",
   };
 
   return aliases[String(value || "").toUpperCase()] || "";

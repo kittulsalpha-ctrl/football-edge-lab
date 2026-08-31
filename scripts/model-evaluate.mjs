@@ -38,8 +38,8 @@ function getLeagueProfiles() {
     EPL: { avgGoals: 2.82, homeAdvantage: 0.12 },
     LALIGA: { avgGoals: 2.58, homeAdvantage: 0.13 },
     SERIEA: { avgGoals: 2.62, homeAdvantage: 0.11 },
-    BUNDESLIGA: { avgGoals: 3.08, homeAdvantage: 0.1 },
+    LIGUE1: { avgGoals: 2.74, homeAdvantage: 0.11 },
     UCL: { avgGoals: 2.96, homeAdvantage: 0.08 },
-    WC: { avgGoals: 2.65, homeAdvantage: 0.04 }
+    UEL: { avgGoals: 2.78, homeAdvantage: 0.08 }
   };
 }

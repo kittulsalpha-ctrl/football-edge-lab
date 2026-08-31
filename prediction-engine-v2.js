@@ -33,9 +33,9 @@
       EPL: 1.08,
       LALIGA: 1.02,
       SERIEA: 1,
-      BUNDESLIGA: 1.08,
+      LIGUE1: 1.01,
       UCL: 1.1,
-      WC: 1,
+      UEL: 1.04,
       DEFAULT: 1
     }
   };
@@ -1566,16 +1566,17 @@
       sa: "SERIEA",
       "serie a": "SERIEA",
       "seria a": "SERIEA",
-      bl1: "BUNDESLIGA",
-      bundesliga: "BUNDESLIGA",
+      fl1: "LIGUE1",
+      "ligue 1": "LIGUE1",
+      "french league": "LIGUE1",
       cl: "UCL",
       ucl: "UCL",
       "champions league": "UCL",
       "uefa champions league": "UCL",
-      wc: "WC",
-      "world cup": "WC",
-      "fifa world cup": "WC",
-      "fifa world cup 2026": "WC"
+      el: "UEL",
+      uel: "UEL",
+      "europa league": "UEL",
+      "uefa europa league": "UEL"
     };
     return aliases[clean] || raw.toUpperCase() || "DEFAULT";
   }
