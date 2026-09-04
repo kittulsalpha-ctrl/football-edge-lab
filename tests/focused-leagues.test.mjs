@@ -38,4 +38,21 @@ describe("GoalIQ focused competition scope", () => {
       );
     }
   });
+
+  it("keeps Upcoming scoped to one selected matchday instead of the full future schedule", async () => {
+    const appSource = await readFile("app.js", "utf8");
+    const getUpcomingMatchesSource = extractFunction(appSource, "getUpcomingMatches");
+
+    assert.match(getUpcomingMatchesSource, /match\.date === state\.selectedDate/);
+    assert.doesNotMatch(getUpcomingMatchesSource, /match\.date >= state\.selectedDate/);
+    assert.match(appSource, /function moveToUpcomingMatchday\(/);
+    assert.match(appSource, /getNextUpcomingMatchDate\(fromDate, \{ includeSelectedDate \}\)/);
+  });
 });
+
+function extractFunction(source, name) {
+  const start = source.indexOf(`function ${name}(`);
+  assert.notEqual(start, -1, `${name} was not found`);
+  const nextFunction = source.indexOf("\nfunction ", start + 1);
+  return source.slice(start, nextFunction === -1 ? undefined : nextFunction);
+}

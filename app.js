@@ -856,13 +856,39 @@ function getLiveMatches() {
 
 function getUpcomingMatches() {
   return matches
-    .filter(
-      (match) =>
-        isFocusedMatch(match) &&
-        ["upcoming", "postponed", "suspended", "cancelled"].includes(match.status) &&
-        match.date >= state.selectedDate
-    )
+    .filter((match) => isFocusedMatch(match) && isUpcomingStatus(match.status) && match.date === state.selectedDate)
     .sort(sortMatches);
+}
+
+function isUpcomingStatus(status) {
+  return ["upcoming", "postponed", "suspended", "cancelled"].includes(status);
+}
+
+function getNextUpcomingMatchDate(fromDate = state.selectedDate, options = {}) {
+  const includeSelectedDate = options.includeSelectedDate !== false;
+  const sortedDates = [
+    ...new Set(
+      matches
+        .filter((match) => isFocusedMatch(match) && isUpcomingStatus(match.status) && match.date)
+        .map((match) => match.date)
+    )
+  ].sort();
+
+  return (
+    sortedDates.find((date) => (includeSelectedDate ? date >= fromDate : date > fromDate)) ||
+    sortedDates[0] ||
+    null
+  );
+}
+
+function moveToUpcomingMatchday() {
+  if (state.activeView !== "upcoming") return;
+  const fromDate = state.selectedDate <= todayKey ? todayKey : state.selectedDate;
+  const includeSelectedDate = state.selectedDate > todayKey;
+  const nextDate = getNextUpcomingMatchDate(fromDate, { includeSelectedDate });
+  if (!nextDate || nextDate === state.selectedDate) return;
+  state.selectedDate = nextDate;
+  selectors.dateInput.value = nextDate;
 }
 
 function getFinishedMatches() {
@@ -913,6 +939,7 @@ function importFixtureData(payload, options = {}) {
   selectors.detailView.hidden = true;
   selectors.homeView.hidden = false;
   renderFixtureSource();
+  moveToUpcomingMatchday();
   renderActiveView();
   setImportStatus(`Loaded ${matches.length} fixtures from ${fixtureMeta.source}.`);
   return getFixtureDataExport();
@@ -930,6 +957,7 @@ function resetFixtureData() {
   selectors.detailView.hidden = true;
   selectors.homeView.hidden = false;
   renderFixtureSource();
+  moveToUpcomingMatchday();
   renderActiveView();
   setImportStatus("Loaded demo fixtures for testing only. Use the live feed before sharing predictions.");
 }
@@ -944,6 +972,7 @@ function clearFixtureBoard(meta = liveFeedUnavailableMeta, options = {}) {
   selectors.detailView.hidden = true;
   selectors.homeView.hidden = false;
   renderFixtureSource();
+  moveToUpcomingMatchday();
   renderActiveView();
   if (options.message) setImportStatus(options.message, options.isError);
 }
@@ -1531,9 +1560,12 @@ function getEmptyStateCopyForView() {
     };
   }
   if (state.activeView === "upcoming") {
+    const nextDate = getNextUpcomingMatchDate(state.selectedDate, { includeSelectedDate: false });
     return {
-      title: "No upcoming fixtures found",
-      body: "Try a later date or refresh the live fixture feed."
+      title: `No upcoming fixtures on ${dateLabel(state.selectedDate)}`,
+      body: nextDate
+        ? `Next available matchday is ${formatLongDate(nextDate)}.`
+        : "Try a later date or refresh the live fixture feed."
     };
   }
   if (state.activeView === "picks") {
@@ -2249,6 +2281,7 @@ function setActiveView(view, updateUrl = true) {
   document.querySelectorAll(".nav-tab").forEach((tab) => tab.classList.toggle("active", tab.dataset.view === view));
   state.selectedMatchId = null;
   selectors.detailView.hidden = true;
+  moveToUpcomingMatchday();
   if (updateUrl) {
     const nextUrl = view === "picks" ? "#top-picks" : `${window.location.pathname}${window.location.search}`;
     history.replaceState(null, "", nextUrl);
@@ -2558,6 +2591,7 @@ window.GoalIQServices = {
   getMatchesByDate,
   getLiveMatches,
   getUpcomingMatches,
+  getNextUpcomingMatchDate,
   getFinishedMatches,
   getMatchDetails,
   getTeamLastFiveMatches,
