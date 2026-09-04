@@ -1706,24 +1706,24 @@ function renderMatchCard(match) {
   const status = getStatusLabel(match.status);
   const scoreLabel = match.score ? `${match.score.home}-${match.score.away}` : "vs";
   const contextLabel = formatMatchContext(match, details);
+  const matchLabel = `${details.homeTeam.name} vs ${details.awayTeam.name}`;
 
   return `
-    <button class="match-card" type="button" data-match-id="${match.id}">
+    <button class="match-card" type="button" data-match-id="${escapeHtml(match.id)}" aria-label="${escapeHtml(matchLabel)}">
       <div class="match-meta">
-        <span>${formatMatchTime(match)}</span>
-        <span class="status-chip ${match.status}">${status}</span>
+        <span class="match-time">${formatMatchTime(match)}</span>
+        <span class="status-chip ${escapeHtml(match.status)}">${status}</span>
       </div>
-      <div class="team-lines">
-        <div class="team-row">
+      <div class="match-teams">
+        <span class="team-side home">
           <span class="team-badge">${escapeHtml(details.homeTeam.shortName)}</span>
           <strong>${escapeHtml(details.homeTeam.name)}</strong>
-          <span class="team-score">${match.score ? match.score.home : ""}</span>
-        </div>
-        <div class="team-row">
-          <span class="team-badge away">${escapeHtml(details.awayTeam.shortName)}</span>
+        </span>
+        <span class="match-score">${scoreLabel}</span>
+        <span class="team-side away">
           <strong>${escapeHtml(details.awayTeam.name)}</strong>
-          <span class="team-score">${match.score ? match.score.away : ""}</span>
-        </div>
+          <span class="team-badge away">${escapeHtml(details.awayTeam.shortName)}</span>
+        </span>
       </div>
       <div class="board-picks" aria-label="Prediction percentages">
         ${renderPick("Home", prediction.probabilities.home)}
@@ -1733,7 +1733,6 @@ function renderMatchCard(match) {
       ${renderCardRecommendation(prediction)}
       <div class="card-footer">
         <span>${escapeHtml(contextLabel)}</span>
-        <strong>${scoreLabel}</strong>
       </div>
     </button>
   `;

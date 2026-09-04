@@ -1,10 +1,10 @@
-const CACHE_NAME = "goaliq-shell-v2-league-focus-b";
+const CACHE_NAME = "goaliq-shell-v2-compact-fixtures-b";
 const APP_SHELL = [
   "./",
   "./index.html",
-  "./styles.css?v=20260831-league-focus-b",
-  "./prediction-engine-v2.js?v=20260831-league-focus-b",
-  "./app.js?v=20260831-league-focus-b",
+  "./styles.css?v=20260904-compact-fixtures-b",
+  "./prediction-engine-v2.js?v=20260904-compact-fixtures-b",
+  "./app.js?v=20260904-compact-fixtures-b",
   "./manifest.webmanifest",
   "./fixtures.live.json",
   "./assets/match-pitch.svg",
